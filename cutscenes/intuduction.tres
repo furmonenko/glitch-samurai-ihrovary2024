@@ -1,0 +1,6 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b33p2yrnnwkeq"]
+
+[ext_resource type="FontFile" uid="uid://rn2vgoht588t" path="res://assets/lunchtime-doubly-so.regular.ttf" id="1_mglqr"]
+
+[resource]
+font = ExtResource("1_mglqr")
