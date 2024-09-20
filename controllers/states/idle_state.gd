@@ -1,0 +1,10 @@
+extends State
+
+@export var air_state: AirState
+
+func _enter() -> void:
+	state_machine.switch_state(StateMachine.STATE.IDLE)
+
+func _update(delta: float) -> void:
+	if !character.is_on_floor():
+		state_machine.change_active_state(air_state)
