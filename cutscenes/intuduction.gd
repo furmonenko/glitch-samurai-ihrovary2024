@@ -22,6 +22,7 @@ func _process(delta):
 		how_to_skip_container.visible = false
 		step += 1
 		intro_text.visible_characters = 0
+		audio_stream_player.play()
 		advance_text(step)
 		
 
@@ -30,28 +31,34 @@ func advance_text(step: int):
 	
 	match step:
 		0:
-			intro_text.text = "Greetings, my old friend."
+			intro_text.text = "Greetings, my old friend"
 		1:
-			intro_text.text = "I'm glad you made it here so fast."
+			intro_text.text = "I'm glad you made it here so fast"
 		2:
-			intro_text.text = "Now you need to make your way to the surface."
+			intro_text.text = "Now you need to make your way to the surface"
 		3:
-			intro_text.text = "Be careful and remember what I teach you."
+			intro_text.text = "Be careful and remember what I teach you"
 		4:
 			intro_text.text = "[SPACE] - jump, [ARROWS] - move, [F] - attack, [G] - change form"
 		5:
-			intro_text.text = "Good luck, Samurai."
+			intro_text.text = "Good luck, Samurai"
 			animation_player.play("fade_in")
 func _on_text_timer_timeout():
 	if intro_text.visible_characters < intro_text.text.length():
 		intro_text.visible_characters += 1
-		audio_stream_player.play()
+	elif step == 5:
+		how_to_skip_container.visible = false
+		how_to_skip_container.process_mode = Node.PROCESS_MODE_DISABLED
+		text_timer.stop()
+		audio_stream_player.stop()
 	else:
 		how_to_skip_container.visible = true
 		text_timer.stop()
+		audio_stream_player.stop()
 		
 func faded_out():
 	advance_text(0)
+	audio_stream_player.play()
 
 func faded_in():
 	pass

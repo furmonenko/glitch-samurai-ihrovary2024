@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bhyuh07gpfnjf" path="res://assets/NPC/Senator/Senator 64x41.png" id="2_r6mht"]
 [ext_resource type="LabelSettings" uid="uid://b33p2yrnnwkeq" path="res://cutscenes/intuduction.tres" id="4_3ixfk"]
 [ext_resource type="Texture2D" uid="uid://bh8fqx2dxwere" path="res://assets/UI/UI - Words/Words With BG/UI - Words15.png" id="5_1ckbk"]
-[ext_resource type="AudioStream" uid="uid://7aosikuub2he" path="res://assets/sounds/380138__yottasounds__typewriter-single-key-type-1.wav" id="6_qst7u"]
+[ext_resource type="AudioStream" uid="uid://b8vi3bnevfcr3" path="res://assets/sounds/447566__a_guy_1__robot-gibberish.wav" id="6_5tc76"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gtkc3"]
 texture = ExtResource("1_0w8ib")
@@ -443,7 +443,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_hsm4b"]
 resource_name = "fade_in"
-length = 2.0
+length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -451,7 +451,7 @@ tracks/0/path = NodePath("ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0666667, 1.96667),
+"times": PackedFloat32Array(2.16667, 4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
@@ -463,7 +463,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(2),
+"times": PackedFloat32Array(3.96667),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -498,7 +498,7 @@ tile_set = SubResource("TileSet_iktmx")
 position = Vector2(120, 76)
 sprite_frames = SubResource("SpriteFrames_o2nok")
 autoplay = "default"
-frame_progress = 0.952861
+frame_progress = 0.438586
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -506,7 +506,7 @@ libraries = {
 }
 
 [node name="TextTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.05
 
 [node name="IntroText" type="Label" parent="."]
 layout_mode = 1
@@ -581,8 +581,9 @@ offset_bottom = 135.0
 color = Color(0, 0, 0, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_qst7u")
+stream = ExtResource("6_5tc76")
 volume_db = -30.0
+pitch_scale = 0.5
 bus = &"SFX"
 
 [connection signal="timeout" from="TextTimer" to="." method="_on_text_timer_timeout"]
