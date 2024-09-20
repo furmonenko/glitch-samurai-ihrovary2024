@@ -4,7 +4,7 @@ class_name StateMachine
 @export var animation_tree: AnimationTree
 @export var character: CharacterBody2D
 
-enum STATE {IDLE, RUN, ATTACK, AIR, DEFAULT}
+enum STATE {IDLE, RUN, ATTACK, AIR, DEAD, DEFAULT}
 
 var state_conditions: Dictionary = {}
 var current_state: STATE = STATE.DEFAULT
@@ -15,6 +15,7 @@ func _ready() -> void:
 	state_conditions[STATE.RUN] = "parameters/conditions/running"
 	state_conditions[STATE.AIR] = "parameters/conditions/jumping"
 	state_conditions[STATE.ATTACK] = "parameters/conditions/attacking"
+	state_conditions[STATE.DEAD] = "parameters/conditions/dead"
 
 func switch_state(target_state: STATE):
 	for state in state_conditions.keys():

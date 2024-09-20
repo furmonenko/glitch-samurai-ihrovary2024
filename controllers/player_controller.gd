@@ -5,8 +5,9 @@ extends Node2D
 @onready var move_state: LimboState = %Run
 @onready var air_state: AirState = %Air
 @onready var attack_state: AttackState = %Attack  # Додаємо стан атаки
+@onready var death_state :DeathState = %Death
 
-@onready var character: CharacterBody2D = %GlitchSamurai
+@onready var character: Character = %GlitchSamurai
 
 # Параметри для контролю руху
 @export var speed: float = 150.0
@@ -21,6 +22,11 @@ extends Node2D
 @onready var velocity = character.velocity
 
 func _ready() -> void:
+	character.died.connect(func(dead_character: Character):
+		dead_character.is_dead = true
+		if dead_character.is_on_floor():
+			hsm.change_active_state(death_state)
+		)
 	_init_state_machine()
 
 func _init_state_machine() -> void:
@@ -29,11 +35,19 @@ func _init_state_machine() -> void:
 	hsm.add_transition(air_state, idle_state, air_state.EVENT_FINISHED)
 	
 	hsm.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
+	hsm.add_transition(air_state, death_state, &"die_after_falling")
 
 	hsm.initialize(self)
 	hsm.set_active(true)
 
 func _process(delta: float) -> void:
+	if character.is_dead:
+		return
+	
+	if Input.is_action_just_pressed("interact"):
+		character.died.emit(character)
+		return
+	
 	# Перевірка на стрибок (входження в стан AirState)
 	if Input.is_action_just_pressed("jump") and character.is_on_floor():
 		hsm.change_active_state(air_state)

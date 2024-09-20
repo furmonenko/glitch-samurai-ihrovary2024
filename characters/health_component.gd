@@ -1,7 +1,7 @@
 extends Node
 class_name HealthComponent
 
-@export var agent :Node2D
+@export var agent :Character
 @export var max_hp :float = 100.0
 
 @onready var current_hp = max_hp
@@ -15,10 +15,10 @@ func apply_damage(damage_component :DamageComponent):
 	print(current_hp)
 	
 	if current_hp <= 0:
-		if !agent.has_method("die"):
+		if !agent.has_signal("died"):
 			return
 
-		agent.call_deferred("die")
+		agent.died.emit(agent)
 		return
 	
 func heal(heal_amount :float):

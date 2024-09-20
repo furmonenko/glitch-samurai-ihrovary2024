@@ -42,17 +42,6 @@ func start_attack() -> void:
 	animation_tree.set("parameters/Attack/blend_position", current_attack_anim)
 	attack_pressed_during_animation = false  # Скидаємо стан після запуску нової анімації
 
-func slow_motion_start() -> void:
-	# Задаємо слоу-моушн
-	Engine.time_scale = slow_motion_scale
-	# Запускаємо таймер для відновлення швидкості
-	await get_tree().create_timer(slow_motion_duration).timeout
-	slow_motion_stop()
-
-func slow_motion_stop() -> void:
-	# Повертаємо звичайну швидкість
-	Engine.time_scale = 1.0
-
 func _on_animation_finished(animation_name: String) -> void:
 	if attack_pressed_during_animation:
 		# Якщо гравець натиснув атаку під час анімації, продовжуємо комбо

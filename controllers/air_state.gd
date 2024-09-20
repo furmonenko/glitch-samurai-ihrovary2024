@@ -21,21 +21,23 @@ func _update(delta: float) -> void:
 
 func handle_air_movement(delta: float) -> void:
 	# Рух по горизонталі в повітрі
-	var input_direction = 0
+	
+	if !character.is_dead:
+		var input_direction = 0
 
-	if Input.is_action_pressed("move_right"):
-		input_direction = 1
-	elif Input.is_action_pressed("move_left"):
-		input_direction = -1
+		if Input.is_action_pressed("move_right"):
+			input_direction = 1
+		elif Input.is_action_pressed("move_left"):
+			input_direction = -1
 
 	# Оброт персонажа на основі напрямку
-	if input_direction > 0:
-		character.transform.x.x = 1
-	elif input_direction < 0:
-		character.transform.x.x = -1
+		if input_direction > 0:
+			character.transform.x.x = 1
+		elif input_direction < 0:
+			character.transform.x.x = -1
 
 	# Максимальна швидкість у повітрі
-	velocity.x = input_direction * max_air_speed
+		velocity.x = input_direction * max_air_speed
 
 	# Гравітація
 	velocity.y += gravity
@@ -51,6 +53,9 @@ func handle_air_movement(delta: float) -> void:
 	# Перевірка приземлення
 	if character.is_on_floor():
 		# Завершуємо стейт повітря
+		if character.is_dead:
+			dispatch("die_after_falling")
+			return
 		dispatch(EVENT_FINISHED)
 
 	# Застосування швидкості до персонажа
