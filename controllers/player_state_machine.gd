@@ -14,7 +14,7 @@ func _ready() -> void:
 	state_conditions[STATE.IDLE] = "parameters/conditions/idle"
 	state_conditions[STATE.RUN] = "parameters/conditions/running"
 	state_conditions[STATE.AIR] = "parameters/conditions/jumping"
-	# state_conditions[STATE.ATTACK] = "parameters/conditions/attack" (якщо додасте)
+	state_conditions[STATE.ATTACK] = "parameters/conditions/attacking"
 
 func switch_state(target_state: STATE):
 	for state in state_conditions.keys():
