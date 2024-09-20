@@ -498,7 +498,7 @@ tile_set = SubResource("TileSet_iktmx")
 position = Vector2(120, 76)
 sprite_frames = SubResource("SpriteFrames_o2nok")
 autoplay = "default"
-frame_progress = 0.438586
+frame_progress = 0.0769472
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,4 +1,5 @@
 extends Control
+class_name Cutscene
 
 @onready var intro_text = $IntroText
 @onready var text_timer = $TextTimer
@@ -46,7 +47,7 @@ func advance_text(step: int):
 func _on_text_timer_timeout():
 	if intro_text.visible_characters < intro_text.text.length():
 		intro_text.visible_characters += 1
-	elif step == 5:
+	elif animation_player.is_playing():
 		how_to_skip_container.visible = false
 		how_to_skip_container.process_mode = Node.PROCESS_MODE_DISABLED
 		text_timer.stop()
