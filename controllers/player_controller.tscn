@@ -1,12 +1,16 @@
-[gd_scene load_steps=39 format=3 uid="uid://b6xhp64emqkwx"]
+[gd_scene load_steps=40 format=3 uid="uid://b6xhp64emqkwx"]
 
 [ext_resource type="Script" path="res://controllers/player_controller.gd" id="1_4w8h7"]
 [ext_resource type="PackedScene" uid="uid://dhi2kxhketyav" path="res://characters/glitch_samurai.tscn" id="1_i3e4p"]
 [ext_resource type="Script" path="res://controllers/states/idle_state.gd" id="3_5luov"]
 [ext_resource type="Script" path="res://controllers/player_state_machine.gd" id="3_w71w5"]
+[ext_resource type="Script" path="res://controllers/hit_box.gd" id="3_yj3g0"]
 [ext_resource type="Script" path="res://controllers/states/run_state.gd" id="4_8c444"]
 [ext_resource type="Script" path="res://controllers/air_state.gd" id="6_sphbd"]
 [ext_resource type="Script" path="res://controllers/attack_state.gd" id="7_ojbny"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vxyst"]
+size = Vector2(18, 19)
 
 [sub_resource type="Animation" id="Animation_tmyob"]
 resource_name = "Glitch Idle"
@@ -37,6 +41,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"Glitch Idle"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GlitchSamurai/CollisionShape2D/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_evy42"]
 resource_name = "Glitch Run"
@@ -66,6 +82,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"Glitch Run"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GlitchSamurai/CollisionShape2D/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_ihnkr"]
@@ -118,6 +146,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GlitchSamurai/CollisionShape2D/HitBox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GlitchSamurai/CollisionShape2D/HitBox/CollisionShape2D:shape:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(18, 19)]
+}
 
 [sub_resource type="Animation" id="Animation_gws6b"]
 resource_name = "Glitch Fall"
@@ -148,6 +200,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"Glitch Fall"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GlitchSamurai/CollisionShape2D/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_sfv4s"]
 resource_name = "Glitch Jump"
@@ -177,6 +241,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GlitchSamurai/CollisionShape2D/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_h4e0f"]
@@ -214,10 +290,34 @@ tracks/2/path = NodePath("GlitchSamurai/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.25),
+"times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0.5, -9.5), Vector2(17, -10), Vector2(0.5, -9.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GlitchSamurai/CollisionShape2D/HitBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GlitchSamurai/CollisionShape2D/HitBox/CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(40, 19)]
 }
 
 [sub_resource type="Animation" id="Animation_j0y6d"]
@@ -260,6 +360,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(0.5, -9.5), Vector2(22, -10)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GlitchSamurai/CollisionShape2D/HitBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
 
 [sub_resource type="Animation" id="Animation_sxgav"]
 resource_name = "Glitch Attack 3"
@@ -296,10 +408,46 @@ tracks/2/path = NodePath("GlitchSamurai/AnimatedSprite2D:flip_h")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GlitchSamurai/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(25, -9)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GlitchSamurai/CollisionShape2D/HitBox/CollisionShape2D:shape:size")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(38, 19), Vector2(20, 19)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GlitchSamurai/CollisionShape2D/HitBox/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k0255"]
@@ -412,20 +560,31 @@ states/Start/position = Vector2(180.667, 92.01)
 transitions = ["Glitch Idle", "Glitch Run", SubResource("AnimationNodeStateMachineTransition_dodwu"), "Glitch Run", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_yi4ib"), "Start", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_elv5c"), "Glitch Idle", "Air", SubResource("AnimationNodeStateMachineTransition_oyt8w"), "Air", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_ihl66"), "Glitch Run", "Air", SubResource("AnimationNodeStateMachineTransition_odl3e"), "Air", "Glitch Run", SubResource("AnimationNodeStateMachineTransition_n704i"), "Glitch Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_0ylcr"), "Attack", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_cc3xi"), "Attack", "Glitch Run", SubResource("AnimationNodeStateMachineTransition_xxe1e"), "Glitch Run", "Attack", SubResource("AnimationNodeStateMachineTransition_whu6p")]
 graph_offset = Vector2(75.5695, -102.585)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3akr"]
-size = Vector2(246, 30)
-
 [node name="PlayerController" type="Node2D"]
 script = ExtResource("1_4w8h7")
 
 [node name="GlitchSamurai" parent="." instance=ExtResource("1_i3e4p")]
 unique_name_in_owner = true
-position = Vector2(50, 120)
 
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="0"]
 animation = &"Glitch Run"
 frame = 0
 frame_progress = 0.0
+
+[node name="HitBox" type="Area2D" parent="GlitchSamurai/CollisionShape2D" index="0" node_paths=PackedStringArray("agent", "damage_component")]
+position = Vector2(-0.5, 9.5)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("3_yj3g0")
+agent = NodePath("../..")
+damage_component = NodePath("../../DamageComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GlitchSamurai/CollisionShape2D/HitBox"]
+position = Vector2(28.5, -9.5)
+shape = SubResource("RectangleShape2D_vxyst")
+debug_color = Color(0.997427, 0, 0.166181, 0.42)
+
+[node name="Node" type="Node" parent="GlitchSamurai"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -478,12 +637,5 @@ script = ExtResource("7_ojbny")
 animation_tree = NodePath("../../AnimationTree")
 state_machine = NodePath("..")
 character = NodePath("../../GlitchSamurai")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(9, 61)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(114, 82)
-shape = SubResource("RectangleShape2D_x3akr")
 
 [editable path="GlitchSamurai"]

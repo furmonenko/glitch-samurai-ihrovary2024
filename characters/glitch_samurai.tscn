@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://dhi2kxhketyav"]
+[gd_scene load_steps=77 format=3 uid="uid://dhi2kxhketyav"]
 
 [ext_resource type="Texture2D" uid="uid://vqfv2vmv7mis" path="res://assets/Glitch Samurai/Glitch Samurai-Slash 1.png" id="1_7glec"]
 [ext_resource type="Texture2D" uid="uid://dujc2hk0h6t54" path="res://assets/Glitch Samurai/Glitch Samurai-Fall.png" id="1_vqgps"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://d15qk28kxqgum" path="res://assets/Glitch Samurai/Glitch Samurai-Jump.png" id="3_00awu"]
 [ext_resource type="Texture2D" uid="uid://c8ueya320w5ql" path="res://assets/Glitch Samurai/Glitch Samurai-Glitch Sweep.png" id="3_16rkk"]
 [ext_resource type="Texture2D" uid="uid://c6l8txrf2y18c" path="res://assets/Glitch Samurai/Glitch Samurai-Land.png" id="4_bfj15"]
+[ext_resource type="Script" path="res://characters/health_component.gd" id="10_cexi5"]
+[ext_resource type="Script" path="res://characters/damage_component.gd" id="11_uilkj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_otpp3"]
 atlas = ExtResource("1_7glec")
@@ -514,3 +516,11 @@ frame_progress = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -9.5)
 shape = SubResource("RectangleShape2D_8yxu0")
+
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("agent")]
+script = ExtResource("10_cexi5")
+agent = NodePath("..")
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("damage_causer")]
+script = ExtResource("11_uilkj")
+damage_causer = NodePath("..")
