@@ -1,327 +1,324 @@
-[gd_scene load_steps=135 format=3 uid="uid://dhi2kxhketyav"]
+[gd_scene load_steps=131 format=3 uid="uid://ti57wti5jlrd"]
 
-[ext_resource type="Texture2D" uid="uid://vqfv2vmv7mis" path="res://assets/Glitch Samurai/Glitch Samurai-Slash 1.png" id="1_7glec"]
-[ext_resource type="Script" path="res://characters/character.gd" id="1_3327c"]
-[ext_resource type="Texture2D" uid="uid://mnf2n5eifupv" path="res://assets/Glitch Samurai/Glitch Samurai-Death.png" id="1_rw4bt"]
-[ext_resource type="Texture2D" uid="uid://dujc2hk0h6t54" path="res://assets/Glitch Samurai/Glitch Samurai-Fall.png" id="1_vqgps"]
-[ext_resource type="Texture2D" uid="uid://dx3ssd5ey74b4" path="res://assets/Glitch Samurai/Glitch Samurai-Idle.png" id="1_xs52l"]
-[ext_resource type="Texture2D" uid="uid://wrxlk1daq2l2" path="res://assets/Glitch Samurai/Glitch Samurai-Idle Gltich.png" id="2_46s16"]
-[ext_resource type="Texture2D" uid="uid://clfptvd4nfqj4" path="res://assets/Glitch Samurai/Glitch Samurai-Slash 2.png" id="2_tycsg"]
-[ext_resource type="Texture2D" uid="uid://oyc3c1va727t" path="res://assets/Glitch Samurai/Glitch Samurai-Run.png" id="2_uc6rd"]
-[ext_resource type="Texture2D" uid="uid://d15qk28kxqgum" path="res://assets/Glitch Samurai/Glitch Samurai-Jump.png" id="3_00awu"]
-[ext_resource type="Texture2D" uid="uid://c8ueya320w5ql" path="res://assets/Glitch Samurai/Glitch Samurai-Glitch Sweep.png" id="3_16rkk"]
-[ext_resource type="Texture2D" uid="uid://c6l8txrf2y18c" path="res://assets/Glitch Samurai/Glitch Samurai-Land.png" id="4_bfj15"]
-[ext_resource type="Script" path="res://characters/health_component.gd" id="10_cexi5"]
-[ext_resource type="Script" path="res://characters/damage_component.gd" id="11_uilkj"]
-[ext_resource type="Script" path="res://controllers/hit_box.gd" id="12_h46qx"]
-[ext_resource type="Script" path="res://controllers/player_state_machine.gd" id="14_u5jdr"]
-[ext_resource type="Script" path="res://controllers/states/idle_state.gd" id="15_6k7j8"]
-[ext_resource type="Script" path="res://controllers/states/run_state.gd" id="16_txu5b"]
-[ext_resource type="Script" path="res://controllers/air_state.gd" id="17_j2knq"]
-[ext_resource type="Script" path="res://controllers/attack_state.gd" id="18_yxxl8"]
-[ext_resource type="Script" path="res://controllers/states/death_state.gd" id="19_kqu2o"]
+[ext_resource type="Script" path="res://characters/character.gd" id="1_xnkm2"]
+[ext_resource type="Texture2D" uid="uid://mnf2n5eifupv" path="res://assets/Glitch Samurai/Glitch Samurai-Death.png" id="2_wi82d"]
+[ext_resource type="Texture2D" uid="uid://vqfv2vmv7mis" path="res://assets/Glitch Samurai/Glitch Samurai-Slash 1.png" id="3_iydf0"]
+[ext_resource type="Texture2D" uid="uid://clfptvd4nfqj4" path="res://assets/Glitch Samurai/Glitch Samurai-Slash 2.png" id="4_b08tt"]
+[ext_resource type="Texture2D" uid="uid://c8ueya320w5ql" path="res://assets/Glitch Samurai/Glitch Samurai-Glitch Sweep.png" id="5_j2jbb"]
+[ext_resource type="Texture2D" uid="uid://dujc2hk0h6t54" path="res://assets/Glitch Samurai/Glitch Samurai-Fall.png" id="6_ytffr"]
+[ext_resource type="Texture2D" uid="uid://wrxlk1daq2l2" path="res://assets/Glitch Samurai/Glitch Samurai-Idle Gltich.png" id="7_3tjee"]
+[ext_resource type="Texture2D" uid="uid://d15qk28kxqgum" path="res://assets/Glitch Samurai/Glitch Samurai-Jump.png" id="8_qr2ql"]
+[ext_resource type="Texture2D" uid="uid://c6l8txrf2y18c" path="res://assets/Glitch Samurai/Glitch Samurai-Land.png" id="9_6jocf"]
+[ext_resource type="Texture2D" uid="uid://oyc3c1va727t" path="res://assets/Glitch Samurai/Glitch Samurai-Run.png" id="10_foxim"]
+[ext_resource type="Texture2D" uid="uid://dx3ssd5ey74b4" path="res://assets/Glitch Samurai/Glitch Samurai-Idle.png" id="11_2pitn"]
+[ext_resource type="Script" path="res://controllers/hit_box.gd" id="12_usf0d"]
+[ext_resource type="Script" path="res://characters/health_component.gd" id="13_watnl"]
+[ext_resource type="Script" path="res://characters/damage_component.gd" id="14_0p2lj"]
+[ext_resource type="Animation" uid="uid://ivkalm0fea6n" path="res://animations/Glitch Samurai/Death.res" id="15_1deig"]
+[ext_resource type="Script" path="res://controllers/player_state_machine.gd" id="15_xa0rb"]
+[ext_resource type="AnimationLibrary" uid="uid://frlgtji173ra" path="res://animations/Glitch Samurai/Glitch Samurai.res" id="16_8pdvn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3xbjt"]
-atlas = ExtResource("1_rw4bt")
+atlas = ExtResource("2_wi82d")
 region = Rect2(0, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_om82p"]
-atlas = ExtResource("1_rw4bt")
+atlas = ExtResource("2_wi82d")
 region = Rect2(140, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i3a00"]
-atlas = ExtResource("1_rw4bt")
+atlas = ExtResource("2_wi82d")
 region = Rect2(280, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rq44u"]
-atlas = ExtResource("1_rw4bt")
+atlas = ExtResource("2_wi82d")
 region = Rect2(420, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_usdu8"]
-atlas = ExtResource("1_rw4bt")
+atlas = ExtResource("2_wi82d")
 region = Rect2(560, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a4yxv"]
-atlas = ExtResource("1_rw4bt")
+atlas = ExtResource("2_wi82d")
 region = Rect2(700, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_grrxo"]
-atlas = ExtResource("1_rw4bt")
+atlas = ExtResource("2_wi82d")
 region = Rect2(840, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_06oma"]
-atlas = ExtResource("1_rw4bt")
+atlas = ExtResource("2_wi82d")
 region = Rect2(980, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_slq8c"]
-atlas = ExtResource("1_rw4bt")
+atlas = ExtResource("2_wi82d")
 region = Rect2(1120, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_18lvk"]
-atlas = ExtResource("1_rw4bt")
+atlas = ExtResource("2_wi82d")
 region = Rect2(1260, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_enh3v"]
-atlas = ExtResource("1_rw4bt")
+atlas = ExtResource("2_wi82d")
 region = Rect2(1400, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p31mx"]
-atlas = ExtResource("1_rw4bt")
+atlas = ExtResource("2_wi82d")
 region = Rect2(1540, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_otpp3"]
-atlas = ExtResource("1_7glec")
+atlas = ExtResource("3_iydf0")
 region = Rect2(0, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m77aj"]
-atlas = ExtResource("1_7glec")
+atlas = ExtResource("3_iydf0")
 region = Rect2(140, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kfo0y"]
-atlas = ExtResource("1_7glec")
+atlas = ExtResource("3_iydf0")
 region = Rect2(280, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_56b6o"]
-atlas = ExtResource("1_7glec")
+atlas = ExtResource("3_iydf0")
 region = Rect2(420, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d4fkd"]
-atlas = ExtResource("1_7glec")
+atlas = ExtResource("3_iydf0")
 region = Rect2(560, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wncko"]
-atlas = ExtResource("1_7glec")
+atlas = ExtResource("3_iydf0")
 region = Rect2(700, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4yfgg"]
-atlas = ExtResource("1_7glec")
+atlas = ExtResource("3_iydf0")
 region = Rect2(840, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_deid7"]
-atlas = ExtResource("2_tycsg")
+atlas = ExtResource("4_b08tt")
 region = Rect2(0, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ebon"]
-atlas = ExtResource("2_tycsg")
+atlas = ExtResource("4_b08tt")
 region = Rect2(140, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ob8e"]
-atlas = ExtResource("2_tycsg")
+atlas = ExtResource("4_b08tt")
 region = Rect2(280, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k31tv"]
-atlas = ExtResource("2_tycsg")
+atlas = ExtResource("4_b08tt")
 region = Rect2(420, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6neir"]
-atlas = ExtResource("2_tycsg")
+atlas = ExtResource("4_b08tt")
 region = Rect2(560, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_at52o"]
-atlas = ExtResource("3_16rkk")
+atlas = ExtResource("5_j2jbb")
 region = Rect2(0, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ybye"]
-atlas = ExtResource("3_16rkk")
+atlas = ExtResource("5_j2jbb")
 region = Rect2(140, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ondy"]
-atlas = ExtResource("3_16rkk")
+atlas = ExtResource("5_j2jbb")
 region = Rect2(280, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n3ifc"]
-atlas = ExtResource("3_16rkk")
+atlas = ExtResource("5_j2jbb")
 region = Rect2(420, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ensm4"]
-atlas = ExtResource("3_16rkk")
+atlas = ExtResource("5_j2jbb")
 region = Rect2(560, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jtpii"]
-atlas = ExtResource("3_16rkk")
+atlas = ExtResource("5_j2jbb")
 region = Rect2(700, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eemyy"]
-atlas = ExtResource("1_vqgps")
+atlas = ExtResource("6_ytffr")
 region = Rect2(0, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xihiq"]
-atlas = ExtResource("1_vqgps")
+atlas = ExtResource("6_ytffr")
 region = Rect2(140, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5pt12"]
-atlas = ExtResource("1_vqgps")
+atlas = ExtResource("6_ytffr")
 region = Rect2(280, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0qc6p"]
-atlas = ExtResource("1_vqgps")
+atlas = ExtResource("6_ytffr")
 region = Rect2(420, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dntww"]
-atlas = ExtResource("2_46s16")
+atlas = ExtResource("7_3tjee")
 region = Rect2(0, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nivf3"]
-atlas = ExtResource("2_46s16")
+atlas = ExtResource("7_3tjee")
 region = Rect2(140, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75v5g"]
-atlas = ExtResource("2_46s16")
+atlas = ExtResource("7_3tjee")
 region = Rect2(280, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5slom"]
-atlas = ExtResource("2_46s16")
+atlas = ExtResource("7_3tjee")
 region = Rect2(420, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gweaq"]
-atlas = ExtResource("2_46s16")
+atlas = ExtResource("7_3tjee")
 region = Rect2(560, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_krayk"]
-atlas = ExtResource("2_46s16")
+atlas = ExtResource("7_3tjee")
 region = Rect2(700, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f2dpj"]
-atlas = ExtResource("2_46s16")
+atlas = ExtResource("7_3tjee")
 region = Rect2(840, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hrmgm"]
-atlas = ExtResource("2_46s16")
+atlas = ExtResource("7_3tjee")
 region = Rect2(980, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ds4m"]
-atlas = ExtResource("2_46s16")
+atlas = ExtResource("7_3tjee")
 region = Rect2(1120, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x7vv4"]
-atlas = ExtResource("2_46s16")
+atlas = ExtResource("7_3tjee")
 region = Rect2(1260, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jm0gj"]
-atlas = ExtResource("2_46s16")
+atlas = ExtResource("7_3tjee")
 region = Rect2(1400, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h81kr"]
-atlas = ExtResource("3_00awu")
+atlas = ExtResource("8_qr2ql")
 region = Rect2(0, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dktnw"]
-atlas = ExtResource("3_00awu")
+atlas = ExtResource("8_qr2ql")
 region = Rect2(140, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cd3ua"]
-atlas = ExtResource("3_00awu")
+atlas = ExtResource("8_qr2ql")
 region = Rect2(280, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xq603"]
-atlas = ExtResource("3_00awu")
+atlas = ExtResource("8_qr2ql")
 region = Rect2(420, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pxhwv"]
-atlas = ExtResource("4_bfj15")
+atlas = ExtResource("9_6jocf")
 region = Rect2(0, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n8jnx"]
-atlas = ExtResource("4_bfj15")
+atlas = ExtResource("9_6jocf")
 region = Rect2(140, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i1c6n"]
-atlas = ExtResource("4_bfj15")
+atlas = ExtResource("9_6jocf")
 region = Rect2(280, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yxcvy"]
-atlas = ExtResource("2_uc6rd")
+atlas = ExtResource("10_foxim")
 region = Rect2(0, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_01e6e"]
-atlas = ExtResource("2_uc6rd")
+atlas = ExtResource("10_foxim")
 region = Rect2(140, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g0xkb"]
-atlas = ExtResource("2_uc6rd")
+atlas = ExtResource("10_foxim")
 region = Rect2(280, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_osibk"]
-atlas = ExtResource("2_uc6rd")
+atlas = ExtResource("10_foxim")
 region = Rect2(420, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f4mdu"]
-atlas = ExtResource("2_uc6rd")
+atlas = ExtResource("10_foxim")
 region = Rect2(560, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w32k7"]
-atlas = ExtResource("2_uc6rd")
+atlas = ExtResource("10_foxim")
 region = Rect2(700, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ywyug"]
-atlas = ExtResource("2_uc6rd")
+atlas = ExtResource("10_foxim")
 region = Rect2(840, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3jh4e"]
-atlas = ExtResource("2_uc6rd")
+atlas = ExtResource("10_foxim")
 region = Rect2(980, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1gw43"]
-atlas = ExtResource("2_uc6rd")
+atlas = ExtResource("10_foxim")
 region = Rect2(1120, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jvnme"]
-atlas = ExtResource("2_uc6rd")
+atlas = ExtResource("10_foxim")
 region = Rect2(1260, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fp01c"]
-atlas = ExtResource("2_uc6rd")
+atlas = ExtResource("10_foxim")
 region = Rect2(1400, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2i2uc"]
-atlas = ExtResource("2_uc6rd")
+atlas = ExtResource("10_foxim")
 region = Rect2(1540, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_va1mx"]
-atlas = ExtResource("1_xs52l")
+atlas = ExtResource("11_2pitn")
 region = Rect2(0, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fwpxe"]
-atlas = ExtResource("1_xs52l")
+atlas = ExtResource("11_2pitn")
 region = Rect2(140, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kp1ef"]
-atlas = ExtResource("1_xs52l")
+atlas = ExtResource("11_2pitn")
 region = Rect2(280, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n42ho"]
-atlas = ExtResource("1_xs52l")
+atlas = ExtResource("11_2pitn")
 region = Rect2(420, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6813s"]
-atlas = ExtResource("1_xs52l")
+atlas = ExtResource("11_2pitn")
 region = Rect2(560, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4onsk"]
-atlas = ExtResource("1_xs52l")
+atlas = ExtResource("11_2pitn")
 region = Rect2(700, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m4vix"]
-atlas = ExtResource("1_xs52l")
+atlas = ExtResource("11_2pitn")
 region = Rect2(840, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0q65"]
-atlas = ExtResource("1_xs52l")
+atlas = ExtResource("11_2pitn")
 region = Rect2(980, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l0k2a"]
-atlas = ExtResource("1_xs52l")
+atlas = ExtResource("11_2pitn")
 region = Rect2(1120, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_exumc"]
-atlas = ExtResource("1_xs52l")
+atlas = ExtResource("11_2pitn")
 region = Rect2(1260, 0, 140, 46)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yg8dt"]
-atlas = ExtResource("1_xs52l")
+atlas = ExtResource("11_2pitn")
 region = Rect2(1400, 0, 140, 46)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_c7wg3"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_rf16h"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -599,52 +596,11 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8yxu0"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5rgr"]
 size = Vector2(13, 19)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_umrlb"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ey2cn"]
 size = Vector2(18, 19)
-
-[sub_resource type="Animation" id="Animation_cl1it"]
-resource_name = "Death"
-length = 0.8
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GlitchSamurai/AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Death"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GlitchSamurai/AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GlitchSamurai/CollisionShape2D/HitBox/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_h4e0f"]
 resource_name = "Glitch Attack 1"
@@ -1010,6 +966,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_ihnkr"]
+resource_name = "RESET"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1086,7 +1043,7 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k0255"]
 _data = {
-"Death": SubResource("Animation_cl1it"),
+"Death": ExtResource("15_1deig"),
 "Glitch Attack 1": SubResource("Animation_h4e0f"),
 "Glitch Attack 2": SubResource("Animation_j0y6d"),
 "Glitch Attack 3": SubResource("Animation_sxgav"),
@@ -1097,34 +1054,34 @@ _data = {
 "RESET": SubResource("Animation_ihnkr")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8guvw"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qq4kt"]
 animation = &"Glitch Fall"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ku1um"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_30vbj"]
 animation = &"Glitch Jump"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ufbgd"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_8guvw")
+blend_point_0/node = SubResource("AnimationNodeAnimation_qq4kt")
 blend_point_0/pos = -1.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_ku1um")
+blend_point_1/node = SubResource("AnimationNodeAnimation_30vbj")
 blend_point_1/pos = 1.0
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ovwqg"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2hu61"]
 animation = &"Glitch Attack 1"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_umkmg"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qwyca"]
 animation = &"Glitch Attack 2"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yfktv"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4rdc7"]
 animation = &"Glitch Attack 3"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_smf6y"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_ovwqg")
+blend_point_0/node = SubResource("AnimationNodeAnimation_2hu61")
 blend_point_0/pos = 0.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_umkmg")
+blend_point_1/node = SubResource("AnimationNodeAnimation_qwyca")
 blend_point_1/pos = 1.0
-blend_point_2/node = SubResource("AnimationNodeAnimation_yfktv")
+blend_point_2/node = SubResource("AnimationNodeAnimation_4rdc7")
 blend_point_2/pos = 2.0
 min_space = 0.0
 max_space = 3.0
@@ -1200,7 +1157,7 @@ advance_condition = &"dead"
 advance_mode = 2
 advance_condition = &"dead"
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7mos6"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qvbqa"]
 states/Air/node = SubResource("AnimationNodeBlendSpace1D_ufbgd")
 states/Air/position = Vector2(513.524, 410.748)
 states/Attack/node = SubResource("AnimationNodeBlendSpace1D_smf6y")
@@ -1216,46 +1173,50 @@ states/Start/position = Vector2(177.333, 53.3628)
 transitions = ["Glitch Idle", "Glitch Run", SubResource("AnimationNodeStateMachineTransition_dodwu"), "Glitch Run", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_yi4ib"), "Start", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_elv5c"), "Glitch Idle", "Air", SubResource("AnimationNodeStateMachineTransition_oyt8w"), "Air", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_ihl66"), "Glitch Run", "Air", SubResource("AnimationNodeStateMachineTransition_odl3e"), "Air", "Glitch Run", SubResource("AnimationNodeStateMachineTransition_n704i"), "Glitch Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_0ylcr"), "Attack", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_cc3xi"), "Attack", "Glitch Run", SubResource("AnimationNodeStateMachineTransition_xxe1e"), "Glitch Run", "Attack", SubResource("AnimationNodeStateMachineTransition_whu6p"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_jj7n7"), "Glitch Run", "Death", SubResource("AnimationNodeStateMachineTransition_1recr"), "Glitch Idle", "Death", SubResource("AnimationNodeStateMachineTransition_tsaxn"), "Air", "Death", SubResource("AnimationNodeStateMachineTransition_fcn63")]
 graph_offset = Vector2(11.2646, 14.9849)
 
-[node name="GlitchSamurai" type="CharacterBody2D"]
-script = ExtResource("1_3327c")
+[node name="Character" type="CharacterBody2D"]
+script = ExtResource("1_xnkm2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(6, -23)
-sprite_frames = SubResource("SpriteFrames_c7wg3")
-animation = &"Glitch Run"
+sprite_frames = SubResource("SpriteFrames_rf16h")
+animation = &"Glitch Idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -9.5)
-shape = SubResource("RectangleShape2D_8yxu0")
+shape = SubResource("RectangleShape2D_n5rgr")
 
-[node name="HitBox" type="Area2D" parent="CollisionShape2D"]
+[node name="HitBox" type="Area2D" parent="CollisionShape2D2"]
 position = Vector2(-0.5, 9.5)
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("12_h46qx")
+script = ExtResource("12_usf0d")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D2/HitBox"]
 position = Vector2(28.5, -9.5)
-shape = SubResource("RectangleShape2D_umrlb")
+shape = SubResource("RectangleShape2D_ey2cn")
+disabled = true
 debug_color = Color(0.997427, 0, 0.166181, 0.42)
 
 [node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("agent")]
-script = ExtResource("10_cexi5")
-agent = NodePath("..")
+script = ExtResource("13_watnl")
+agent = NodePath("")
 
 [node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("damage_causer")]
-script = ExtResource("11_uilkj")
-damage_causer = NodePath("..")
+script = ExtResource("14_0p2lj")
+damage_causer = NodePath("")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_k0255")
+"": SubResource("AnimationLibrary_k0255"),
+"Glitch Samurai": ExtResource("16_8pdvn")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../..")
-tree_root = SubResource("AnimationNodeStateMachine_7mos6")
+tree_root = SubResource("AnimationNodeStateMachine_qvbqa")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/attacking = false
 parameters/conditions/dead = false
@@ -1267,44 +1228,6 @@ parameters/Attack/blend_position = 0.0968436
 
 [node name="LimboHSM" type="LimboHSM" parent="." node_paths=PackedStringArray("animation_tree", "character")]
 unique_name_in_owner = true
-script = ExtResource("14_u5jdr")
-animation_tree = NodePath("../AnimationTree")
-character = NodePath("..")
-
-[node name="Idle" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("air_state", "animation_tree", "state_machine", "character")]
-unique_name_in_owner = true
-script = ExtResource("15_6k7j8")
-air_state = NodePath("../Air")
-animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-state_enum = 0
-character = NodePath("../..")
-
-[node name="Run" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("animation_tree", "state_machine", "character")]
-unique_name_in_owner = true
-script = ExtResource("16_txu5b")
-animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-state_enum = 1
-character = NodePath("../..")
-
-[node name="Air" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("animation_tree", "state_machine", "character")]
-unique_name_in_owner = true
-script = ExtResource("17_j2knq")
-animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
-
-[node name="Attack" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("animation_tree", "state_machine", "character")]
-unique_name_in_owner = true
-script = ExtResource("18_yxxl8")
-animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
-
-[node name="Death" type="LimboState" parent="LimboHSM" node_paths=PackedStringArray("animation_tree", "state_machine", "character")]
-unique_name_in_owner = true
-script = ExtResource("19_kqu2o")
-animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
+script = ExtResource("15_xa0rb")
+animation_tree = NodePath("")
+character = NodePath("")
