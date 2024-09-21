@@ -1,48 +1,32 @@
-extends Node2D
+extends Controller
+class_name PlayerController
 
-@onready var character: Character = %GlitchSamurai
-
-@onready var hsm: StateMachine = %GlitchSamurai/%LimboHSM
 @onready var idle_state: LimboState = %GlitchSamurai/%Idle
-@onready var run_state: RunState =%GlitchSamurai/%Run
-@onready var air_state: AirState =%GlitchSamurai/%Air
-@onready var attack_state: AttackState =%GlitchSamurai/%Attack
+@onready var run_state: RunState = %GlitchSamurai/%Run
+@onready var air_state: AirState = %GlitchSamurai/%Air
+@onready var attack_state: AttackState = %GlitchSamurai/%Attack
 @onready var death_state: DeathState = %GlitchSamurai/%Death
-
-# Параметри для контролю руху
-@export var speed: float = 150.0
-@export var jump_force: float = 500.0
-@export var gravity: float = 50.0
-
-# Параметри для акселерації та децелерації
-@export var acceleration: float = 25.0
-@export var deceleration: float = 100.0
-@export var max_speed: float = 200.0
-
-@onready var velocity = character.velocity
 
 func _ready() -> void:
 	character.died.connect(func(dead_character: Character):
 		dead_character.is_dead = true
 		if dead_character.is_on_floor():
-			hsm.change_active_state(death_state)
+			state_machine.change_active_state(death_state)
 		)
 	_init_state_machine()
 
 func _init_state_machine() -> void:
-	hsm.add_transition(idle_state, run_state, idle_state.EVENT_FINISHED)
-	hsm.add_transition(run_state, idle_state, run_state.EVENT_FINISHED)
-	hsm.add_transition(air_state, idle_state, air_state.EVENT_FINISHED)
+	super()
 	
-	hsm.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
-	hsm.add_transition(air_state, death_state, &"die_after_falling")
+	state_machine.add_transition(idle_state, run_state, idle_state.EVENT_FINISHED)
+	state_machine.add_transition(run_state, idle_state, run_state.EVENT_FINISHED)
+	state_machine.add_transition(air_state, idle_state, air_state.EVENT_FINISHED)
+	
+	state_machine.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
+	state_machine.add_transition(air_state, death_state, &"die_after_falling")
 
-	hsm.initialize(self)
-	hsm.set_active(true)
-
-func _process(delta: float) -> void:
-	if character.is_dead:
-		return
+func handle_states():
+	super()
 	
 	if Input.is_action_just_pressed("interact"):
 		character.died.emit(character)
@@ -50,20 +34,20 @@ func _process(delta: float) -> void:
 	
 	# Перевірка на стрибок (входження в стан AirState)
 	if Input.is_action_just_pressed("jump") and character.is_on_floor():
-		hsm.change_active_state(air_state)
+		state_machine.change_active_state(air_state)
 
 	# Перевірка на атаку (входження в стан AttackState)
-	elif Input.is_action_just_pressed("attack") and hsm.get_active_state() != attack_state:
-		if hsm.is_active() and character.is_on_floor():
-			hsm.change_active_state(attack_state)
+	elif Input.is_action_just_pressed("attack") and state_machine.get_active_state() != attack_state:
+		if state_machine.is_active() and character.is_on_floor():
+			state_machine.change_active_state(attack_state)
 
 	# Перевірка на переміщення (входження в стан MoveState)
-	elif Input.get_axis("move_left", "move_right") != 0 and hsm.get_active_state() != air_state and hsm.get_active_state() != attack_state:
+	elif Input.get_axis("move_left", "move_right") != 0 and state_machine.get_active_state() != air_state and state_machine.get_active_state() != attack_state:
 		# Переходимо в стан руху, тільки якщо персонаж не в повітрі
-		if hsm.get_active_state() != run_state and character.is_on_floor():
-			if hsm.is_active():
-				hsm.change_active_state(run_state)
+		if state_machine.get_active_state() != run_state and character.is_on_floor():
+			if state_machine.is_active():
+				state_machine.change_active_state(run_state)
 	
 	# Перевірка на повернення в IdleState, якщо персонаж не рухається
-	elif hsm.get_active_state() == run_state and Input.get_axis("move_left", "move_right") == 0 and character.is_on_floor():
-		hsm.change_active_state(idle_state)
+	elif state_machine.get_active_state() == run_state and Input.get_axis("move_left", "move_right") == 0 and character.is_on_floor():
+		state_machine.change_active_state(idle_state)

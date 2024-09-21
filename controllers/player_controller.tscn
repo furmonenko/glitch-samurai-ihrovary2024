@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://controllers/player_controller.gd" id="1_4w8h7"]
 [ext_resource type="PackedScene" uid="uid://be6bki722mg1g" path="res://characters/glitch_samurai/glitch_samurai.tscn" id="2_iihpn"]
 
-[node name="PlayerController" type="Node2D"]
+[node name="PlayerController" type="Node2D" node_paths=PackedStringArray("character")]
 script = ExtResource("1_4w8h7")
+character = NodePath("GlitchSamurai")
 
 [node name="GlitchSamurai" parent="." instance=ExtResource("2_iihpn")]
 unique_name_in_owner = true
@@ -13,10 +14,7 @@ unique_name_in_owner = true
 position = Vector2(0, 0)
 
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="1"]
-frame = 10
-
-[node name="AnimationTree" parent="GlitchSamurai" index="5"]
-root_node = NodePath("%AnimationTree/../..")
+frame = 5
 
 [node name="LimboHSM" parent="GlitchSamurai" index="6"]
 state_conditions = {
