@@ -26,6 +26,7 @@ script = ExtResource("14_0p2lj")
 root_node = NodePath("../..")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+unique_name_in_owner = true
 root_node = NodePath("../..")
 anim_player = NodePath("../AnimationPlayer")
 

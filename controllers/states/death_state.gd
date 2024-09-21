@@ -12,7 +12,7 @@ func _update(delta: float) -> void:
 		character.move_and_slide()
 	
 func die():
-	state_machine.switch_state(StateMachine.STATE.DEAD)
+	state_machine.switch_state("death")
 	
 	if player_camera:
 		Helpers.slow_motion_start(2, 0.2)

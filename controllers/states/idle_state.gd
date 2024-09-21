@@ -3,7 +3,7 @@ extends State
 @export var air_state: AirState
 
 func _enter() -> void:
-	state_machine.switch_state(StateMachine.STATE.IDLE)
+	state_machine.switch_state("idle")
 
 func _update(delta: float) -> void:
 	if !character.is_on_floor():

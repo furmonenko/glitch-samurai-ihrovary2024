@@ -10,7 +10,7 @@ class_name AirState
 
 func _enter() -> void:
 	# Перехід у стан повітря
-	state_machine.switch_state(StateMachine.STATE.AIR)
+	state_machine.switch_state("air")
 	
 	# Якщо персонаж тільки стрибає
 	if character.is_on_floor():

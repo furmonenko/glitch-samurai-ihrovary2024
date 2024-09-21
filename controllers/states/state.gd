@@ -3,7 +3,7 @@ class_name State
 
 @export var animation_tree: AnimationTree
 @export var state_machine :StateMachine
-@export var state_enum: StateMachine.STATE = StateMachine.STATE.DEFAULT
+# @export var state_enum: StateMachine.STATE = StateMachine.STATE.DEFAULT
 @export var character :CharacterBody2D
 
 @onready var playback :AnimationNodeStateMachinePlayback

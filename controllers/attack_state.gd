@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _enter() -> void:
 	# Перехід у стан атаки
-	state_machine.switch_state(StateMachine.STATE.ATTACK)
+	state_machine.switch_state("attack")
 	start_attack()
 
 func _update(_delta: float) -> void:

@@ -15,7 +15,7 @@ class_name RunState
 
 func _enter() -> void:
 	# Перемикаємо стан на RUN
-	state_machine.switch_state(StateMachine.STATE.RUN)
+	state_machine.switch_state("run")
 
 func _update(_delta: float) -> void:
 	handle_movement(_delta)
