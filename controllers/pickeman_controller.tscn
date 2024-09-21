@@ -33,7 +33,7 @@ state_machine = NodePath("Pickeman/LimboHSM")
 [node name="Pickeman" parent="." instance=ExtResource("2_pwd3m")]
 
 [node name="AnimatedSprite2D" parent="Pickeman" index="2"]
-animation = &"Idle"
+frame = 1
 
 [node name="AnimationPlayer" parent="Pickeman" index="5"]
 libraries = {

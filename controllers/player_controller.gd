@@ -28,6 +28,9 @@ func _init_state_machine() -> void:
 func handle_states(delta :float):
 	super(delta)
 	
+	if character.is_dead:
+		return
+	
 	if Input.is_action_just_pressed("interact"):
 		character.died.emit(character)
 		return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://be6bki722mg1g"]
+[gd_scene load_steps=17 format=3 uid="uid://be6bki722mg1g"]
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_qqsig"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_g3u8v"]
@@ -18,8 +18,23 @@ size = Vector2(16, 23)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7kmft"]
 size = Vector2(12, 8)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d51cn"]
+size = Vector2(64, 19)
+
 [sub_resource type="Animation" id="Animation_a5pgh"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GlitchSamurai/CollisionShape2D/HitBox/CollisionShape2D:shape:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(64, 19)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cemkp"]
 _data = {
@@ -47,15 +62,16 @@ shape = SubResource("RectangleShape2D_7kmft")
 [node name="HitBox" parent="CollisionShape2D" index="0" instance=ExtResource("2_ygpfr")]
 position = Vector2(0, 0)
 
-[node name="CollisionShape2D" parent="CollisionShape2D/HitBox" index="0"]
-position = Vector2(31.0054, -6)
-scale = Vector2(4.09892, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/HitBox" index="0"]
+position = Vector2(31, -7)
+shape = SubResource("RectangleShape2D_d51cn")
+disabled = true
 
 [node name="AnimatedSprite2D" parent="." index="2"]
 position = Vector2(6, -23)
 sprite_frames = ExtResource("3_3qiti")
 animation = &"Glitch Idle"
-frame = 6
+frame = 10
 metadata/_edit_lock_ = true
 
 [node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("agent")]
