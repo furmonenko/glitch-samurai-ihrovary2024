@@ -329,7 +329,7 @@ tile_map_data = PackedByteArray("AAD5/wIAAAAJAAIAAAD9/wgAAAACAAQAAAD+/wgAAAADAAQ
 tile_set = ExtResource("2_lo2p1")
 
 [node name="GlitchSamurai-idle" type="Sprite2D" parent="."]
-position = Vector2(179, 104)
+position = Vector2(185, 104)
 texture = ExtResource("1_6spja")
 hframes = 11
 

@@ -5,8 +5,10 @@ class_name Cutscene
 @onready var text_timer = $TextTimer
 @onready var how_to_skip_container = $HowToSkipContainer
 @onready var animation_player = $AnimationPlayer
-@onready var audio_stream_player = $AudioStreamPlayer
+@onready var audio_stream_player = $SpeakSound
 
+
+@export var next_scene: PackedScene
 
 var step: int = 0
 
@@ -32,17 +34,21 @@ func advance_text(step: int):
 	
 	match step:
 		0:
-			intro_text.text = "Greetings, my old friend"
+			intro_text.text = "Finally... I've done it"
 		1:
-			intro_text.text = "I'm glad you made it here so fast"
+			intro_text.text = "You are my final creation, my last chance to reclaim Victoria"
 		2:
-			intro_text.text = "Now you need to make your way to the surface"
+			intro_text.text = "I have given you powers even the gods don’t possess"
 		3:
-			intro_text.text = "Be careful and remember what I teach you"
+			intro_text.text = "The Reds have no idea—you are the glitch in their system, their undoing"
 		4:
-			intro_text.text = "[SPACE] - jump, [ARROWS] - move, [F] - attack, [G] - change form"
+			intro_text.text = "You are immortal. No wound can kill you"
 		5:
-			intro_text.text = "Good luck, Samurai"
+			intro_text.text = "You will always return to the Engineer, who will restore you, again and again"
+		6:
+			intro_text.text = "But remember, your life is mine. I control every step you take, and I can shut you down at any moment"
+		7:
+			intro_text.text = "Now, go to the Engineer. Recharge and prepare for what’s to come"
 			animation_player.play("fade_in")
 func _on_text_timer_timeout():
 	if intro_text.visible_characters < intro_text.text.length():
@@ -62,4 +68,5 @@ func faded_out():
 	audio_stream_player.play()
 
 func faded_in():
-	pass
+	if next_scene:
+		get_tree().change_scene_to_packed(next_scene)

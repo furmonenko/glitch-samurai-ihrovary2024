@@ -1,14 +1,16 @@
-[gd_scene load_steps=33 format=4 uid="uid://bolgm34rsyatv"]
+[gd_scene load_steps=36 format=4 uid="uid://bolgm34rsyatv"]
 
-[ext_resource type="Script" path="res://cutscenes/shop.gd" id="1_tsh4w"]
-[ext_resource type="Texture2D" uid="uid://cyc6y3aarjcgx" path="res://assets/Basic Assets/Tileset/DARK Edition Tileset with background.png" id="2_c483w"]
-[ext_resource type="Texture2D" uid="uid://cfhbl54wcj223" path="res://assets/PortalsAndShops/Shops/Tech Shop.png" id="3_omtyl"]
-[ext_resource type="LabelSettings" uid="uid://b33p2yrnnwkeq" path="res://cutscenes/intuduction.tres" id="4_ymune"]
-[ext_resource type="Texture2D" uid="uid://bh8fqx2dxwere" path="res://assets/UI/UI - Words/Words With BG/UI - Words15.png" id="5_t0u43"]
-[ext_resource type="AudioStream" uid="uid://b8vi3bnevfcr3" path="res://assets/sounds/447566__a_guy_1__robot-gibberish.wav" id="6_x4w70"]
+[ext_resource type="Script" path="res://cutscenes/engineer_shop.gd" id="1_1f11w"]
+[ext_resource type="Texture2D" uid="uid://cyc6y3aarjcgx" path="res://assets/Basic Assets/Tileset/DARK Edition Tileset with background.png" id="2_bdd62"]
+[ext_resource type="Texture2D" uid="uid://cfhbl54wcj223" path="res://assets/PortalsAndShops/Shops/Tech Shop.png" id="3_tbkjc"]
+[ext_resource type="LabelSettings" uid="uid://b33p2yrnnwkeq" path="res://cutscenes/intuduction.tres" id="4_5mm7d"]
+[ext_resource type="Texture2D" uid="uid://bh8fqx2dxwere" path="res://assets/UI/UI - Words/Words With BG/UI - Words15.png" id="5_fsv2r"]
+[ext_resource type="AudioStream" uid="uid://b8vi3bnevfcr3" path="res://assets/sounds/447566__a_guy_1__robot-gibberish.wav" id="6_nqgil"]
+[ext_resource type="Shader" path="res://glitch.gdshader" id="7_7nt2g"]
+[ext_resource type="PackedScene" uid="uid://co7l6yh7o66lw" path="res://glitch_effects.tscn" id="7_rrnd0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gtkc3"]
-texture = ExtResource("2_c483w")
+texture = ExtResource("2_bdd62")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -302,75 +304,75 @@ texture = ExtResource("2_c483w")
 sources/0 = SubResource("TileSetAtlasSource_gtkc3")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qbvpg"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(0, 0, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2cqvf"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(108, 0, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kd2a8"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(216, 0, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_62ctl"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(324, 0, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tysc2"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(432, 0, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rw6ol"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(0, 108, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a8n3h"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(108, 108, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rmjb7"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(216, 108, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h26s7"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(324, 108, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tikxo"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(432, 108, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hny44"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(0, 216, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wgbkq"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(108, 216, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ijybf"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(216, 216, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pi5eu"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(324, 216, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hyxk1"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(432, 216, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gv4t4"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(0, 324, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m0qwi"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(108, 324, 108, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l78mj"]
-atlas = ExtResource("3_omtyl")
+atlas = ExtResource("3_tbkjc")
 region = Rect2(216, 324, 108, 108)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tdsdq"]
@@ -435,12 +437,20 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xua0i"]
+shader = ExtResource("7_7nt2g")
+shader_parameter/shake_power = 0.0
+shader_parameter/shake_rate = 1.0
+shader_parameter/shake_speed = 20.57
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.0
+
 [sub_resource type="Animation" id="Animation_3uiik"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
+tracks/0/path = NodePath("GlitchEffects/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -449,6 +459,42 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GlitchEffects/ColorRect:material:shader_parameter/shake_power")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GlitchEffects/ColorRect:material")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_xua0i")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GlitchEffects/GlitchSound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_b52vt"]
 resource_name = "advance_text"
@@ -456,31 +502,43 @@ resource_name = "advance_text"
 [sub_resource type="Animation" id="Animation_hsm4b"]
 resource_name = "fade_in"
 length = 4.0
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(2.16667, 4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(3.96667),
+"times": PackedFloat32Array(4),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"faded_in"
 }]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GlitchEffects/ColorRect:material:shader_parameter/shake_power")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3.13333, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.01, 0.3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GlitchEffects/GlitchSound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3.16667, 3.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_88qpm"]
@@ -489,7 +547,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
+tracks/0/path = NodePath("GlitchEffects/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -512,6 +570,30 @@ tracks/1/keys = {
 "method": &"faded_out"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GlitchEffects/ColorRect:material:shader_parameter/shake_power")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GlitchEffects/GlitchSound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.86667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuftd"]
 _data = {
@@ -521,14 +603,14 @@ _data = {
 "fade_out": SubResource("Animation_88qpm")
 }
 
-[node name="Intuduction" type="Control"]
+[node name="Engineer_Shop" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_tsh4w")
+script = ExtResource("1_1f11w")
 
 [node name="Tileset" type="Node2D" parent="."]
 
@@ -541,11 +623,6 @@ position = Vector2(120, 60)
 sprite_frames = SubResource("SpriteFrames_tdsdq")
 autoplay = "default"
 frame_progress = 0.326406
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_cuftd")
-}
 
 [node name="TextTimer" type="Timer" parent="."]
 wait_time = 0.05
@@ -565,7 +642,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.35, 0.35)
 text = "Greetings, my old friend!"
-label_settings = ExtResource("4_ymune")
+label_settings = ExtResource("4_5mm7d")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -589,12 +666,12 @@ scale = Vector2(0.35, 0.35)
 [node name="PressLabel" type="Label" parent="HowToSkipContainer"]
 layout_mode = 2
 text = "Press"
-label_settings = ExtResource("4_ymune")
+label_settings = ExtResource("4_5mm7d")
 uppercase = true
 
 [node name="TextureRect" type="TextureRect" parent="HowToSkipContainer"]
 layout_mode = 2
-texture = ExtResource("5_t0u43")
+texture = ExtResource("5_fsv2r")
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="HowToSkipContainer/TextureRect"]
@@ -605,7 +682,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Space"
-label_settings = ExtResource("4_ymune")
+label_settings = ExtResource("4_5mm7d")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -613,19 +690,26 @@ uppercase = true
 [node name="ToContinueLabel" type="Label" parent="HowToSkipContainer"]
 layout_mode = 2
 text = "To continue"
-label_settings = ExtResource("4_ymune")
+label_settings = ExtResource("4_5mm7d")
 uppercase = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_right = 240.0
-offset_bottom = 135.0
-color = Color(0, 0, 0, 1)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_x4w70")
+[node name="SpeakSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_nqgil")
 volume_db = -30.0
 pitch_scale = 0.9
 bus = &"SFX"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cuftd")
+}
+
+[node name="GlitchEffects" parent="." instance=ExtResource("7_rrnd0")]
+visible = false
+
+[node name="ColorRect" parent="GlitchEffects" index="0"]
+material = SubResource("ShaderMaterial_xua0i")
+
 [connection signal="timeout" from="TextTimer" to="." method="_on_text_timer_timeout"]
+
+[editable path="GlitchEffects"]
