@@ -1,0 +1,29 @@
+extends Node
+class_name HealthComponent
+
+signal got_hit
+
+@export var agent :Character
+@export var max_hp :float = 100.0
+
+@onready var current_hp = max_hp
+
+func apply_damage(damage_component :DamageComponent):
+	var damage =  damage_component.get_damage_amount()
+	var damage_causer = damage_component.get_damage_causer()
+	
+	current_hp = clampf(current_hp - damage, 0, max_hp)
+	
+	got_hit.emit()
+	
+	print(current_hp)
+	
+	if current_hp <= 0:
+		if !agent.has_signal("died"):
+			return
+
+		agent.died.emit(agent)
+		return
+	
+func heal(heal_amount :float):
+	current_hp = clampf(current_hp + heal_amount, current_hp, heal_amount)

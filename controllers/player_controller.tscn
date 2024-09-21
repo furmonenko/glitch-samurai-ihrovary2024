@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6xhp64emqkwx"]
+
+[ext_resource type="Script" path="res://controllers/player_controller.gd" id="1_4w8h7"]
+[ext_resource type="PackedScene" uid="uid://be6bki722mg1g" path="res://characters/glitch_samurai/glitch_samurai.tscn" id="2_iihpn"]
+[ext_resource type="Script" path="res://player_attack_state.gd" id="3_a7hi3"]
+
+[node name="PlayerController" type="Node2D" node_paths=PackedStringArray("character", "state_machine")]
+script = ExtResource("1_4w8h7")
+character = NodePath("GlitchSamurai")
+state_machine = NodePath("GlitchSamurai/LimboHSM")
+
+[node name="GlitchSamurai" parent="." instance=ExtResource("2_iihpn")]
+unique_name_in_owner = true
+
+[node name="HitBox" parent="GlitchSamurai/CollisionShape2D" index="0" node_paths=PackedStringArray("agent", "damage_component")]
+agent = NodePath("../..")
+damage_component = NodePath("../../DamageComponent")
+
+[node name="AnimatedSprite2D" parent="GlitchSamurai" index="1"]
+frame = 8
+
+[node name="LimboHSM" parent="GlitchSamurai" index="6"]
+state_conditions = {
+"air": "parameters/conditions/jumping"
+}
+
+[node name="Attack" parent="GlitchSamurai/LimboHSM" index="3" node_paths=PackedStringArray("state_machine", "character")]
+script = ExtResource("3_a7hi3")
+slow_motion_scale = 0.2
+slow_motion_duration = 0.3
+state_machine = NodePath("..")
+character = NodePath("../..")
+
+[node name="Death" parent="GlitchSamurai/LimboHSM" index="4" node_paths=PackedStringArray("player_camera", "state_machine", "character")]
+player_camera = NodePath("../../Camera2D")
+state_machine = NodePath("..")
+character = NodePath("../..")
+
+[node name="Camera2D" type="Camera2D" parent="GlitchSamurai"]
+offset = Vector2(0, -40)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+
+[editable path="GlitchSamurai"]
+[editable path="GlitchSamurai/CollisionShape2D/HitBox"]

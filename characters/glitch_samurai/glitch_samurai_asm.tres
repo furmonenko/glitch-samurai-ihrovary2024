@@ -1,0 +1,120 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=26 format=3 uid="uid://7v73u3mnppp7"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_30vbj"]
+animation = &"Glitch Samurai/Glitch Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3xio0"]
+animation = &"Glitch Samurai/Glitch Fall"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ufbgd"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_30vbj")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_3xio0")
+blend_point_1/pos = -1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2hu61"]
+animation = &"Glitch Samurai/Glitch Attack 1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qwyca"]
+animation = &"Glitch Samurai/Glitch Attack 2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4rdc7"]
+animation = &"Glitch Samurai/Glitch Attack 3"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_smf6y"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_2hu61")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_qwyca")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_4rdc7")
+blend_point_2/pos = 2.0
+min_space = 0.0
+max_space = 3.0
+snap = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gvocc"]
+animation = &"Glitch Samurai/Death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2qolq"]
+animation = &"Glitch Samurai/Glitch Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_44pnm"]
+animation = &"Glitch Samurai/Glitch Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dodwu"]
+advance_mode = 2
+advance_condition = &"running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yi4ib"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_elv5c"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oyt8w"]
+advance_mode = 2
+advance_condition = &"jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ihl66"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_odl3e"]
+advance_mode = 2
+advance_condition = &"jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n704i"]
+advance_mode = 2
+advance_condition = &"running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0ylcr"]
+advance_mode = 2
+advance_condition = &"attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cc3xi"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xxe1e"]
+advance_mode = 2
+advance_condition = &"running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_whu6p"]
+advance_mode = 2
+advance_condition = &"attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jj7n7"]
+advance_mode = 2
+advance_condition = &"dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1recr"]
+advance_mode = 2
+advance_condition = &"dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tsaxn"]
+advance_mode = 2
+advance_condition = &"dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fcn63"]
+advance_mode = 2
+advance_condition = &"dead"
+
+[resource]
+states/Air/node = SubResource("AnimationNodeBlendSpace1D_ufbgd")
+states/Air/position = Vector2(513.164, 410.748)
+states/Attack/node = SubResource("AnimationNodeBlendSpace1D_smf6y")
+states/Attack/position = Vector2(513.317, 152.082)
+states/Death/node = SubResource("AnimationNodeAnimation_gvocc")
+states/Death/position = Vector2(512.762, -121.094)
+states/End/position = Vector2(866, 53.9772)
+"states/Glitch Idle/node" = SubResource("AnimationNodeAnimation_2qolq")
+"states/Glitch Idle/position" = Vector2(382.236, 54.0056)
+"states/Glitch Run/node" = SubResource("AnimationNodeAnimation_44pnm")
+"states/Glitch Run/position" = Vector2(650.903, 53.8382)
+states/Start/position = Vector2(177.333, 53.3628)
+transitions = ["Glitch Idle", "Glitch Run", SubResource("AnimationNodeStateMachineTransition_dodwu"), "Glitch Run", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_yi4ib"), "Start", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_elv5c"), "Glitch Idle", "Air", SubResource("AnimationNodeStateMachineTransition_oyt8w"), "Air", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_ihl66"), "Glitch Run", "Air", SubResource("AnimationNodeStateMachineTransition_odl3e"), "Air", "Glitch Run", SubResource("AnimationNodeStateMachineTransition_n704i"), "Glitch Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_0ylcr"), "Attack", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_cc3xi"), "Attack", "Glitch Run", SubResource("AnimationNodeStateMachineTransition_xxe1e"), "Glitch Run", "Attack", SubResource("AnimationNodeStateMachineTransition_whu6p"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_jj7n7"), "Glitch Run", "Death", SubResource("AnimationNodeStateMachineTransition_1recr"), "Glitch Idle", "Death", SubResource("AnimationNodeStateMachineTransition_tsaxn"), "Air", "Death", SubResource("AnimationNodeStateMachineTransition_fcn63")]
+graph_offset = Vector2(0.547192, 138.69)

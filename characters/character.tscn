@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://ti57wti5jlrd"]
+
+[ext_resource type="Script" path="res://characters/character.gd" id="1_xnkm2"]
+[ext_resource type="Script" path="res://characters/health_component.gd" id="13_watnl"]
+[ext_resource type="Script" path="res://characters/damage_component.gd" id="14_0p2lj"]
+[ext_resource type="Script" path="res://controllers/state_machine.gd" id="15_xa0rb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rf16h"]
+animations = []
+
+[node name="Character" type="CharacterBody2D"]
+script = ExtResource("1_xnkm2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -23)
+sprite_frames = SubResource("SpriteFrames_rf16h")
+animation = &""
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("13_watnl")
+
+[node name="DamageComponent" type="Node" parent="."]
+script = ExtResource("14_0p2lj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/../..")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="LimboHSM" type="LimboHSM" parent="."]
+unique_name_in_owner = true
+script = ExtResource("15_xa0rb")

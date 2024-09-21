@@ -1,3 +1,31 @@
-[gd_scene format=3 uid="uid://b4g3465k1cads"]
+[gd_scene load_steps=6 format=3 uid="uid://b4g3465k1cads"]
+
+[ext_resource type="PackedScene" uid="uid://b6xhp64emqkwx" path="res://controllers/player_controller.tscn" id="1_hfi8l"]
+[ext_resource type="PackedScene" uid="uid://b5u0w2acs4euo" path="res://characters/target.tscn" id="2_ru632"]
+[ext_resource type="PackedScene" uid="uid://ctg5ppxcodivj" path="res://controllers/hellbot_controller.tscn" id="3_qdd5q"]
+[ext_resource type="Texture2D" uid="uid://nwhuhqcm76m" path="res://assets/Basic Assets/Sprites/Hell Bot DARK/hit 92x36.png" id="3_uegqb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ffeq7"]
+size = Vector2(512, 20)
 
 [node name="Main" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(237, 135)
+shape = SubResource("RectangleShape2D_ffeq7")
+
+[node name="HellbotController" parent="StaticBody2D" instance=ExtResource("3_qdd5q")]
+position = Vector2(402, 125)
+
+[node name="StandingTarget" parent="." instance=ExtResource("2_ru632")]
+position = Vector2(131, 125)
+
+[node name="Hit92x36" type="Sprite2D" parent="."]
+position = Vector2(397, 147)
+scale = Vector2(11.8152, 1)
+texture = ExtResource("3_uegqb")
+
+[node name="PlayerController" parent="." instance=ExtResource("1_hfi8l")]
+position = Vector2(65, 54)

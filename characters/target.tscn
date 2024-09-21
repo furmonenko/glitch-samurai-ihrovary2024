@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5u0w2acs4euo"]
+
+[ext_resource type="Script" path="res://components/hurt_box.gd" id="1_6v67k"]
+[ext_resource type="Script" path="res://characters/health_component.gd" id="2_rvrkg"]
+[ext_resource type="Script" path="res://characters/damage_component.gd" id="3_pmwpq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r1sx8"]
+size = Vector2(16, 26)
+
+[node name="StandingTarget" type="Node2D"]
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("agent", "health_component")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_6v67k")
+agent = NodePath("..")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_r1sx8")
+debug_color = Color(0.495843, 0.476793, 0.873487, 0.42)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_rvrkg")
+max_hp = 10000.0
+
+[node name="DamageComponent" type="Node" parent="."]
+script = ExtResource("3_pmwpq")
