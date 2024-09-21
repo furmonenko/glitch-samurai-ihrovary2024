@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://characters/character.gd" id="1_xnkm2"]
 [ext_resource type="Script" path="res://characters/health_component.gd" id="13_watnl"]
 [ext_resource type="Script" path="res://characters/damage_component.gd" id="14_0p2lj"]
-[ext_resource type="Script" path="res://controllers/player_state_machine.gd" id="15_xa0rb"]
+[ext_resource type="Script" path="res://controllers/state_machine.gd" id="15_xa0rb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rf16h"]
 animations = []
@@ -27,7 +27,7 @@ root_node = NodePath("../..")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 unique_name_in_owner = true
-root_node = NodePath("../..")
+root_node = NodePath("%AnimationTree/../..")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="LimboHSM" type="LimboHSM" parent="."]
