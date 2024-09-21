@@ -1,4 +1,4 @@
-extends Controller
+extends AIController
 class_name HellbotController
 
 # Налаштування для бота
@@ -6,18 +6,23 @@ class_name HellbotController
 @export var attack_range: float = 20.0  # Дальність атаки
 @export var cooldown_duration: float = 2.0  # Кулдаун атаки
 
+@onready var hit_state: HitState = $HellBot/LimboHSM/Hit
 @onready var idle_state: IdleState = $HellBot/LimboHSM/Idle
 @onready var run_state: RunState = $HellBot/LimboHSM/Run
 @onready var attack_state: HellbotAttackState = $HellBot/LimboHSM/Attack
+@onready var health_component: HealthComponent = $HellBot/HealthComponent
 
 var target: Character = null  # Ворог, на якого бот націлюється
 var cooldown_timer: Timer = Timer.new()  # Таймер для кулдауна атаки
+var last_state: State = null  # Останній стан перед отриманням удару
 
 func _ready() -> void:
 	# Додаємо таймер для кулдауна атаки
 	add_child(cooldown_timer)
 	cooldown_timer.one_shot = true
 	cooldown_timer.wait_time = cooldown_duration
+	
+	health_component.got_hit.connect(_on_got_hit)
 	
 	_init_state_machine()
 
@@ -27,10 +32,21 @@ func _init_state_machine() -> void:
 	state_machine.add_transition(idle_state, run_state, idle_state.EVENT_FINISHED)
 	state_machine.add_transition(run_state, idle_state, run_state.EVENT_FINISHED)
 	state_machine.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
+	state_machine.add_transition(hit_state, idle_state, hit_state.EVENT_FINISHED)
+
+func _on_got_hit() -> void:
+	# Запам'ятовуємо останній стан перед отриманням удару
+	last_state = state_machine.get_active_state()
+
+	# Переходимо в стан удару
+	state_machine.change_active_state(hit_state)
 
 func handle_states(delta: float) -> void:
 	super(delta)
 	
+	if state_machine.get_active_state() == hit_state:
+		return
+		
 	if not target:
 		find_target()  # Якщо цілі немає, шукаємо ворога
 

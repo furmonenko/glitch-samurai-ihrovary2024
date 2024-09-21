@@ -1,6 +1,8 @@
 extends Node
 class_name HealthComponent
 
+signal got_hit
+
 @export var agent :Character
 @export var max_hp :float = 100.0
 
@@ -11,6 +13,8 @@ func apply_damage(damage_component :DamageComponent):
 	var damage_causer = damage_component.get_damage_causer()
 	
 	current_hp = clampf(current_hp - damage, 0, max_hp)
+	
+	got_hit.emit()
 	
 	print(current_hp)
 	

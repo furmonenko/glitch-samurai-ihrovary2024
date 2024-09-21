@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://c07cjxqrn0swb"]
+[gd_scene load_steps=86 format=3 uid="uid://c07cjxqrn0swb"]
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_ei3b4"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_58pe2"]
@@ -13,9 +13,10 @@
 [ext_resource type="Script" path="res://controllers/states/idle_state.gd" id="9_nlia4"]
 [ext_resource type="Script" path="res://controllers/states/run_state.gd" id="10_2ll76"]
 [ext_resource type="Script" path="res://characters/hell_bot/hellbot_attack_state.gd" id="11_m0olb"]
+[ext_resource type="Script" path="res://characters/hell_bot/hit_state.gd" id="14_hkabi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljkjx"]
-size = Vector2(17, 25)
+size = Vector2(31, 31)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yn8ym"]
 size = Vector2(10, 10)
@@ -441,7 +442,7 @@ advance_condition = &"got_hit"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6xwgm"]
 advance_mode = 2
-advance_condition = &"hit"
+advance_condition = &"got_hit"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ux23c"]
 advance_mode = 2
@@ -458,6 +459,19 @@ advance_condition = &"idle"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a1yu2"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a3nn6"]
+advance_mode = 2
+advance_condition = &"got_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8hau1"]
+advance_mode = 2
+advance_condition = &"running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2nq4s"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"attacking"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7bety"]
 states/Attack/node = SubResource("AnimationNodeAnimation_f7iag")
 states/Attack/position = Vector2(609.264, 355.091)
@@ -473,8 +487,8 @@ states/Run/position = Vector2(608.893, 155.744)
 states/Shoot/node = SubResource("AnimationNodeAnimation_lsawd")
 states/Shoot/position = Vector2(609.461, -39.6146)
 states/Start/position = Vector2(-24, -38.0745)
-transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_u7ly2"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_fc6ll"), "Idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_qe7e2"), "Run", "Shoot", SubResource("AnimationNodeStateMachineTransition_qfn61"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_6rhnc"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_i27gm"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_1ut5o"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_dv41m"), "Shoot", "Idle", SubResource("AnimationNodeStateMachineTransition_2wuwm"), "Shoot", "Run", SubResource("AnimationNodeStateMachineTransition_ioucn"), "Shoot", "Hit", SubResource("AnimationNodeStateMachineTransition_qmt3u"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_6xwgm"), "Attack", "Hit", SubResource("AnimationNodeStateMachineTransition_ux23c"), "Hit", "Death", SubResource("AnimationNodeStateMachineTransition_bff3f"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_c6oqc"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a1yu2")]
-graph_offset = Vector2(-96.4575, -71.333)
+transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_u7ly2"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_fc6ll"), "Idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_qe7e2"), "Run", "Shoot", SubResource("AnimationNodeStateMachineTransition_qfn61"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_6rhnc"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_i27gm"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_1ut5o"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_dv41m"), "Shoot", "Idle", SubResource("AnimationNodeStateMachineTransition_2wuwm"), "Shoot", "Run", SubResource("AnimationNodeStateMachineTransition_ioucn"), "Shoot", "Hit", SubResource("AnimationNodeStateMachineTransition_qmt3u"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_6xwgm"), "Attack", "Hit", SubResource("AnimationNodeStateMachineTransition_ux23c"), "Hit", "Death", SubResource("AnimationNodeStateMachineTransition_bff3f"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_c6oqc"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a1yu2"), "Run", "Hit", SubResource("AnimationNodeStateMachineTransition_a3nn6"), "Hit", "Run", SubResource("AnimationNodeStateMachineTransition_8hau1"), "Hit", "Attack", SubResource("AnimationNodeStateMachineTransition_2nq4s")]
+graph_offset = Vector2(-214.35, -98.4155)
 
 [node name="HellBot" instance=ExtResource("1_ei3b4")]
 
@@ -486,7 +500,7 @@ agent = NodePath("..")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2(0.5, -12.5)
+position = Vector2(0.5, -15.5)
 shape = SubResource("RectangleShape2D_ljkjx")
 debug_color = Color(6.73831e-07, 0.633822, 0.436113, 0.42)
 
@@ -508,7 +522,7 @@ disabled = true
 position = Vector2(27, -18)
 sprite_frames = SubResource("SpriteFrames_ayjfh")
 animation = &"Idle"
-frame = 5
+frame = 4
 metadata/_edit_lock_ = true
 
 [node name="DamageComponent" parent="." index="4" node_paths=PackedStringArray("damage_causer")]
@@ -525,7 +539,6 @@ tree_root = SubResource("AnimationNodeStateMachine_7bety")
 parameters/conditions/attacking = false
 parameters/conditions/dead = false
 parameters/conditions/got_hit = false
-parameters/conditions/hit = false
 parameters/conditions/idle = false
 parameters/conditions/running = false
 parameters/conditions/shooting = false
@@ -533,6 +546,9 @@ parameters/conditions/shooting = false
 [node name="LimboHSM" parent="." index="7" node_paths=PackedStringArray("character", "animation_tree")]
 character = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
+state_conditions = {
+"got_hit": "parameters/conditions/got_hit"
+}
 
 [node name="Idle" type="LimboState" parent="LimboHSM" index="0"]
 script = ExtResource("9_nlia4")
@@ -543,3 +559,6 @@ script = ExtResource("10_2ll76")
 [node name="Attack" type="LimboState" parent="LimboHSM" index="2"]
 script = ExtResource("11_m0olb")
 max_combo_attacks = 1
+
+[node name="Hit" type="LimboState" parent="LimboHSM" index="3"]
+script = ExtResource("14_hkabi")

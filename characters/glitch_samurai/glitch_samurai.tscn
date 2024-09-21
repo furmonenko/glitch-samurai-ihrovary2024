@@ -41,7 +41,7 @@ shape = SubResource("RectangleShape2D_l8nin")
 position = Vector2(6, -23)
 sprite_frames = ExtResource("3_3qiti")
 animation = &"Glitch Idle"
-frame = 3
+frame = 2
 
 [node name="HealthComponent" parent="." index="2" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")

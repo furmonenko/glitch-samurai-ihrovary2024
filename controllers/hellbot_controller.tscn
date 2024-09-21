@@ -10,7 +10,10 @@ state_machine = NodePath("HellBot/LimboHSM")
 
 [node name="HellBot" parent="." instance=ExtResource("2_bo1rh")]
 
-[node name="HealthComponent" parent="HellBot" index="5" node_paths=PackedStringArray("agent")]
+[node name="AnimatedSprite2D" parent="HellBot" index="2"]
+frame = 5
+
+[node name="HealthComponent" parent="HellBot" index="3" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
 
 [node name="Run" parent="HellBot/LimboHSM" index="1"]

@@ -17,7 +17,7 @@ agent = NodePath("../..")
 damage_component = NodePath("../../DamageComponent")
 
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="1"]
-frame = 1
+frame = 8
 
 [node name="LimboHSM" parent="GlitchSamurai" index="6"]
 state_conditions = {
