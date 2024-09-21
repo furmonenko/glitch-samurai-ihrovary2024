@@ -20,10 +20,7 @@ func _enter() -> void:
 	
 func attack():
 	is_attack_finished = false
-	pass
 	
-func start_attack():
-	pass
 	
 func _on_animation_finished(animation_name: String) -> void:
 	is_attack_finished = true

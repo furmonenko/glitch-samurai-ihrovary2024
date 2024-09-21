@@ -11,7 +11,7 @@ func _ready() -> void:
 	character.died.connect(func(dead_character: Character):
 		dead_character.is_dead = true
 		if dead_character.is_on_floor():
-			state_machine.playback
+			state_machine.change_active_state(death_state)
 		)
 	_init_state_machine()
 

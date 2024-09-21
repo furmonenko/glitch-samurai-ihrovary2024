@@ -9,6 +9,7 @@ func _ready() -> void:
 	connect("area_exited", on_hurtbox_exited)
 
 func on_hurtbox_entered(area :Area2D):
+	print("ENTERED")
 	if area is HitBox:
 		var enemy_hitbox :HitBox = area
 		

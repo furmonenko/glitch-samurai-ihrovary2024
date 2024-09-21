@@ -501,7 +501,7 @@ states/Shoot/node = SubResource("AnimationNodeAnimation_lsawd")
 states/Shoot/position = Vector2(609.461, -39.6146)
 states/Start/position = Vector2(-24, -38.0745)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_u7ly2"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_fc6ll"), "Idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_qe7e2"), "Run", "Shoot", SubResource("AnimationNodeStateMachineTransition_qfn61"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_6rhnc"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_i27gm"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_1ut5o"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_dv41m"), "Shoot", "Idle", SubResource("AnimationNodeStateMachineTransition_2wuwm"), "Shoot", "Run", SubResource("AnimationNodeStateMachineTransition_ioucn"), "Shoot", "Hit", SubResource("AnimationNodeStateMachineTransition_qmt3u"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_6xwgm"), "Attack", "Hit", SubResource("AnimationNodeStateMachineTransition_ux23c"), "Hit", "Death", SubResource("AnimationNodeStateMachineTransition_bff3f"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_c6oqc"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a1yu2"), "Run", "Hit", SubResource("AnimationNodeStateMachineTransition_a3nn6"), "Hit", "Run", SubResource("AnimationNodeStateMachineTransition_8hau1"), "Hit", "Attack", SubResource("AnimationNodeStateMachineTransition_2nq4s"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_j8cq0"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_vcecx"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_a2pp8")]
-graph_offset = Vector2(-42.8701, -98.4154)
+graph_offset = Vector2(-61.8701, 141.585)
 
 [node name="HellBot" instance=ExtResource("1_ei3b4")]
 
@@ -522,6 +522,8 @@ position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_yn8ym")
 
 [node name="HitBox" type="Area2D" parent="CollisionShape2D" index="0" node_paths=PackedStringArray("agent", "damage_component")]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("2_cy2f7")
 agent = NodePath("../..")
 damage_component = NodePath("../../DamageComponent")
@@ -534,8 +536,7 @@ disabled = true
 [node name="AnimatedSprite2D" parent="." index="2"]
 position = Vector2(27, -18)
 sprite_frames = SubResource("SpriteFrames_ayjfh")
-animation = &"Death"
-frame = 10
+animation = &"Attack"
 metadata/_edit_lock_ = true
 
 [node name="DamageComponent" parent="." index="4" node_paths=PackedStringArray("damage_causer")]

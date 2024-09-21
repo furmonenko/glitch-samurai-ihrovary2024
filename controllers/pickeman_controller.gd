@@ -1,23 +1,26 @@
 extends AIController
-class_name HellbotController
+class_name PickemanController
 
 # Налаштування для бота
 @export var spot_range: float = 100.0  # Дальність, на якій бот бачить ворога
 @export var attack_range: float = 20.0  # Дальність атаки
-@export var cooldown_duration: float = 1.0  # Кулдаун атаки
+@export var cooldown_duration: float = 2.0  # Кулдаун атаки
 
-@onready var hit_state: HitState = $HellBot/LimboHSM/Hit
-@onready var idle_state: IdleState = $HellBot/LimboHSM/Idle
-@onready var run_state: RunState = $HellBot/LimboHSM/Run
-@onready var attack_state: HellbotAttackState = $HellBot/LimboHSM/Attack
-@onready var health_component: HealthComponent = $HellBot/HealthComponent
-@onready var death_state: DeathState = $HellBot/LimboHSM/Death
+
+@onready var idle_state = $Pickeman/LimboHSM/Idle
+@onready var run_state = $Pickeman/LimboHSM/Run
+@onready var attack_state = $Pickeman/LimboHSM/Attack
+@onready var hit_state = $Pickeman/LimboHSM/Hit
+@onready var death_state = $Pickeman/LimboHSM/Death
+@onready var health_component = $Pickeman/HealthComponent
+
 
 var target: Character = null  # Ворог, на якого бот націлюється
 var cooldown_timer: Timer = Timer.new()  # Таймер для кулдауна атаки
 var last_state: State = null  # Останній стан перед отриманням удару
 
 func _ready() -> void:
+	
 	# Додаємо таймер для кулдауна атаки
 	add_child(cooldown_timer)
 	cooldown_timer.one_shot = true
@@ -60,7 +63,10 @@ func handle_states(delta: float) -> void:
 	if not target:
 		find_target()  # Якщо цілі немає, шукаємо ворога
 
-	if target and is_target_in_range(spot_range):
+	# Перевірка на стан кулдауна
+	if cooldown_timer.is_stopped():
+		
+		if target and is_target_in_range(spot_range):
 			# Якщо ворог в зоні видимості, йдемо до нього
 			if not is_target_in_range(attack_range):
 				# Переходимо в стан бігу
@@ -68,22 +74,20 @@ func handle_states(delta: float) -> void:
 					state_machine.change_active_state(run_state)
 				else:
 					move_to_target(delta)
-	else:
+			else:
+				# Якщо ворог у зоні атаки, атакуємо
+				if state_machine.get_active_state() != attack_state and !attack_state.is_attack_finished:
+					print(attack_state.is_attack_finished)
+					state_machine.change_active_state(attack_state)
+				elif attack_state.is_attack_finished:  # Перевірка, чи завершилася атака
+					print(attack_state.is_attack_finished)
+					# Після атаки чекаємо на кулдаун
+					state_machine.change_active_state(idle_state)
+					cooldown_timer.start()
+		else:
 			# Якщо ворог вийшов із зони видимості, повертаємося до Idle
 			state_machine.change_active_state(idle_state)
-			
-	# Перевірка на стан кулдауна
-	if cooldown_timer.is_stopped() and is_target_in_range(attack_range):
-		character.velocity = Vector2.ZERO
-				# Якщо ворог у зоні атаки, атакуємо
-		if state_machine.get_active_state() != attack_state and !attack_state.is_attack_finished:
-			print(attack_state.is_attack_finished)
-			state_machine.change_active_state(attack_state)
-		elif attack_state.is_attack_finished:  # Перевірка, чи завершилася атака
-			print(attack_state.is_attack_finished)
-			# Після атаки чекаємо на кулдаун
-			state_machine.change_active_state(idle_state)
-			cooldown_timer.start()
+		
 		attack_state.is_attack_finished = false
 
 func find_target() -> void:
