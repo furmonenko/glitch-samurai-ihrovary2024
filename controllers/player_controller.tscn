@@ -1,23 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://b6xhp64emqkwx"]
 
 [ext_resource type="Script" path="res://controllers/player_controller.gd" id="1_4w8h7"]
-[ext_resource type="PackedScene" uid="uid://dhi2kxhketyav" path="res://characters/glitch_samurai.tscn" id="1_i3e4p"]
+[ext_resource type="PackedScene" uid="uid://be6bki722mg1g" path="res://characters/glitch_samurai/glitch_samurai.tscn" id="2_iihpn"]
 
 [node name="PlayerController" type="Node2D"]
 script = ExtResource("1_4w8h7")
 
-[node name="GlitchSamurai" parent="." instance=ExtResource("1_i3e4p")]
+[node name="GlitchSamurai" parent="." instance=ExtResource("2_iihpn")]
 unique_name_in_owner = true
 
-[node name="HitBox" parent="GlitchSamurai/CollisionShape2D" index="0" node_paths=PackedStringArray("agent", "damage_component")]
-agent = NodePath("../..")
-damage_component = NodePath("../../DamageComponent")
+[node name="CollisionShape2D" parent="GlitchSamurai" index="0"]
+position = Vector2(0, 0)
 
-[node name="Camera2D" type="Camera2D" parent="GlitchSamurai"]
-unique_name_in_owner = true
-offset = Vector2(0, -40)
-process_callback = 0
-position_smoothing_enabled = true
-position_smoothing_speed = 2.0
+[node name="AnimatedSprite2D" parent="GlitchSamurai" index="1"]
+animation = &"Death"
+frame = 0
 
 [editable path="GlitchSamurai"]

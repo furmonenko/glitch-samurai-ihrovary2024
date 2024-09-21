@@ -1,0 +1,117 @@
+[gd_scene load_steps=15 format=3 uid="uid://be6bki722mg1g"]
+
+[ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_qqsig"]
+[ext_resource type="Script" path="res://controllers/hit_box.gd" id="2_sfauw"]
+[ext_resource type="SpriteFrames" uid="uid://d35ynlov1jxoh" path="res://characters/glitch_samurai/sf_glitch_samurai.tres" id="3_3qiti"]
+[ext_resource type="AnimationLibrary" uid="uid://frlgtji173ra" path="res://animations/Glitch Samurai/Glitch Samurai.res" id="4_0n567"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://7v73u3mnppp7" path="res://characters/glitch_samurai/glitch_samurai_asm.tres" id="5_5brxq"]
+[ext_resource type="Script" path="res://controllers/states/idle_state.gd" id="6_n2i03"]
+[ext_resource type="Script" path="res://controllers/states/run_state.gd" id="7_06roi"]
+[ext_resource type="Script" path="res://controllers/air_state.gd" id="8_4e76a"]
+[ext_resource type="Script" path="res://controllers/attack_state.gd" id="9_h62e8"]
+[ext_resource type="Script" path="res://controllers/states/death_state.gd" id="10_4na0u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7kmft"]
+size = Vector2(12, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_re5sq"]
+size = Vector2(0, 0)
+
+[sub_resource type="Animation" id="Animation_a5pgh"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cemkp"]
+_data = {
+"RESET": SubResource("Animation_a5pgh")
+}
+
+[node name="GlitchSamurai" instance=ExtResource("1_qqsig")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_7kmft")
+
+[node name="HitBox" type="Area2D" parent="CollisionShape2D" index="0" node_paths=PackedStringArray("agent", "damage_component")]
+position = Vector2(0, 14)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_sfauw")
+agent = NodePath("../..")
+damage_component = NodePath("../../DamageComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/HitBox" index="0"]
+position = Vector2(28.5, -9.5)
+shape = SubResource("RectangleShape2D_re5sq")
+disabled = true
+debug_color = Color(0.997427, 0, 0.166181, 0.42)
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(6, -23)
+sprite_frames = ExtResource("3_3qiti")
+animation = &"Glitch Idle"
+frame = 6
+
+[node name="HealthComponent" parent="." index="2" node_paths=PackedStringArray("agent")]
+agent = NodePath("..")
+
+[node name="DamageComponent" parent="." index="3" node_paths=PackedStringArray("damage_causer")]
+damage_causer = NodePath("..")
+
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_cemkp"),
+"Glitch Samurai": ExtResource("4_0n567")
+}
+
+[node name="AnimationTree" parent="." index="5"]
+tree_root = ExtResource("5_5brxq")
+parameters/conditions/attacking = false
+parameters/conditions/dead = false
+parameters/conditions/idle = false
+parameters/conditions/jumping = false
+parameters/conditions/running = false
+parameters/Air/blend_position = 0
+parameters/Attack/blend_position = 0
+
+[node name="LimboHSM" parent="." index="6" node_paths=PackedStringArray("animation_tree", "character")]
+animation_tree = NodePath("../AnimationTree")
+character = NodePath("..")
+
+[node name="Idle" type="LimboState" parent="LimboHSM" index="0" node_paths=PackedStringArray("air_state", "animation_tree", "state_machine", "character")]
+unique_name_in_owner = true
+script = ExtResource("6_n2i03")
+air_state = NodePath("../Air")
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+state_enum = 0
+character = NodePath("../..")
+
+[node name="Run" type="LimboState" parent="LimboHSM" index="1" node_paths=PackedStringArray("animation_tree", "state_machine", "character")]
+unique_name_in_owner = true
+script = ExtResource("7_06roi")
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+state_enum = 1
+character = NodePath("../..")
+
+[node name="Air" type="LimboState" parent="LimboHSM" index="2" node_paths=PackedStringArray("animation_tree", "state_machine", "character")]
+unique_name_in_owner = true
+script = ExtResource("8_4e76a")
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
+
+[node name="Attack" type="LimboState" parent="LimboHSM" index="3" node_paths=PackedStringArray("animation_tree", "state_machine", "character")]
+unique_name_in_owner = true
+script = ExtResource("9_h62e8")
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
+
+[node name="Death" type="LimboState" parent="LimboHSM" index="4" node_paths=PackedStringArray("animation_tree", "state_machine", "character")]
+unique_name_in_owner = true
+script = ExtResource("10_4na0u")
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+state_enum = 4
+character = NodePath("../..")
