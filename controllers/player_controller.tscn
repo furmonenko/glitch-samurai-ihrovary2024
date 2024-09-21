@@ -9,11 +9,19 @@ script = ExtResource("1_4w8h7")
 [node name="GlitchSamurai" parent="." instance=ExtResource("2_iihpn")]
 unique_name_in_owner = true
 
-[node name="CollisionShape2D" parent="GlitchSamurai" index="0"]
+[node name="Camera2D" type="Camera2D" parent="GlitchSamurai"]
+offset = Vector2(0, -40)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+
+[node name="CollisionShape2D" parent="GlitchSamurai" index="1"]
 position = Vector2(0, 0)
 
-[node name="AnimatedSprite2D" parent="GlitchSamurai" index="1"]
-animation = &"Death"
-frame = 0
+[node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
+frame = 1
+
+[node name="Death" parent="GlitchSamurai/LimboHSM" index="4" node_paths=PackedStringArray("player_camera")]
+player_camera = NodePath("../../Camera2D")
 
 [editable path="GlitchSamurai"]

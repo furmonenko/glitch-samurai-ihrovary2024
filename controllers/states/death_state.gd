@@ -1,8 +1,9 @@
 extends State
 class_name DeathState
 
+@export var player_camera :Camera2D
+
 func _enter() -> void:
-	state_machine.switch_state(StateMachine.STATE.DEAD)
 	die()
 
 func _update(delta: float) -> void:
@@ -11,6 +12,9 @@ func _update(delta: float) -> void:
 		character.move_and_slide()
 	
 func die():
-	Helpers.slow_motion_start(2, 0.2)
-	var tween = get_tree().create_tween()
-	tween.tween_property(%Camera2D, "zoom", Vector2(0.4, 0.4), 2)
+	state_machine.switch_state(StateMachine.STATE.DEAD)
+	
+	if player_camera:
+		Helpers.slow_motion_start(2, 0.2)
+		var tween = get_tree().create_tween()
+		tween.tween_property(player_camera, "zoom", Vector2(0.4, 0.4), 2)
