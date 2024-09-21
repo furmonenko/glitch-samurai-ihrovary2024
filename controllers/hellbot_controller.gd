@@ -11,6 +11,7 @@ class_name HellbotController
 @onready var run_state: RunState = $HellBot/LimboHSM/Run
 @onready var attack_state: HellbotAttackState = $HellBot/LimboHSM/Attack
 @onready var health_component: HealthComponent = $HellBot/HealthComponent
+@onready var death_state: DeathState = $HellBot/LimboHSM/Death
 
 var target: Character = null  # Ворог, на якого бот націлюється
 var cooldown_timer: Timer = Timer.new()  # Таймер для кулдауна атаки
@@ -22,6 +23,9 @@ func _ready() -> void:
 	cooldown_timer.one_shot = true
 	cooldown_timer.wait_time = cooldown_duration
 	
+	character.died.connect(func(character):
+		character.is_dead = true
+		)
 	health_component.got_hit.connect(_on_got_hit)
 	
 	_init_state_machine()
@@ -43,8 +47,14 @@ func _on_got_hit() -> void:
 
 func handle_states(delta: float) -> void:
 	super(delta)
+	if !state_machine.is_active():
+		return
 	
-	if state_machine.get_active_state() == hit_state:
+	if state_machine.get_active_state() != death_state && character.is_dead:
+		state_machine.change_active_state(death_state)
+		return
+		
+	if state_machine.get_active_state() == hit_state || character.is_dead:
 		return
 		
 	if not target:
