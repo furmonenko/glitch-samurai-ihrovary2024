@@ -2,15 +2,12 @@ extends LimboState
 class_name State
 
 @export var animation_tree: AnimationTree
-@export var state_machine :StateMachine
-# @export var state_enum: StateMachine.STATE = StateMachine.STATE.DEFAULT
-@export var character :CharacterBody2D
+var state_machine :StateMachine
+var character :CharacterBody2D
 
 @onready var playback :AnimationNodeStateMachinePlayback
 
 func _ready() -> void:
-	# if !state_enum:
-		# Helpers.throw_error("No state enum in ", name)
 	if !animation_tree:
 		Helpers.throw_error("No animation tree in ", name)
 		

@@ -19,6 +19,8 @@ func _enter() -> void:
 func _update(delta: float) -> void:
 	handle_air_movement(delta)
 
+@export var max_fall_speed: float = 300.0  # Максимальна швидкість падіння
+
 func handle_air_movement(delta: float) -> void:
 	# Рух по горизонталі в повітрі
 	
@@ -30,18 +32,22 @@ func handle_air_movement(delta: float) -> void:
 		elif Input.is_action_pressed("move_left"):
 			input_direction = -1
 
-	# Оброт персонажа на основі напрямку
+		# Оброт персонажа на основі напрямку
 		if input_direction > 0:
 			character.transform.x.x = 1
 		elif input_direction < 0:
 			character.transform.x.x = -1
 
-	# Максимальна швидкість у повітрі
+		# Максимальна швидкість у повітрі
 		velocity.x = input_direction * max_air_speed
 
 	# Гравітація
 	velocity.y += gravity
-	
+
+	# Обмеження швидкості падіння
+	if velocity.y > max_fall_speed:
+		velocity.y = max_fall_speed
+
 	# Задаємо параметр blend_position для падіння або стрибка
 	if velocity.y > 0:
 		# Персонаж падає

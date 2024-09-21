@@ -19,7 +19,7 @@ class_name Controller
 func _process(delta: float) -> void:
 	if !character || character.is_dead:
 		Helpers.throw_error("No character controlled by ", name)
-	handle_states()
+	handle_states(delta)
 
 """
 	Функція в якій ініціалізуєм стейт машину.
@@ -36,5 +36,5 @@ func _init_state_machine() -> void:
 	Функція в якій відбувається переключення між стейтами.
 	Основна функція, яка відповідає за поведінку керованого юніта.
 """
-func handle_states():
+func handle_states(delta: float):
 	pass

@@ -1,0 +1,2 @@
+extends Controller
+class_name AIController

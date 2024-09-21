@@ -25,8 +25,8 @@ func _init_state_machine() -> void:
 	state_machine.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
 	state_machine.add_transition(air_state, death_state, &"die_after_falling")
 
-func handle_states():
-	super()
+func handle_states(delta :float):
+	super(delta)
 	
 	if Input.is_action_just_pressed("interact"):
 		character.died.emit(character)
@@ -37,17 +37,25 @@ func handle_states():
 		state_machine.change_active_state(air_state)
 
 	# Перевірка на атаку (входження в стан AttackState)
-	elif Input.is_action_just_pressed("attack") and state_machine.get_active_state() != attack_state:
-		if state_machine.is_active() and character.is_on_floor():
+	elif Input.is_action_just_pressed("attack"):
+		if state_machine.is_active() and character.is_on_floor() and state_machine.get_active_state() != attack_state:
 			state_machine.change_active_state(attack_state)
+		elif state_machine.get_active_state() == attack_state:
+			attack_state.attack()
 
+	# Перевірка на переміщення (входження в стан MoveState)
 	# Перевірка на переміщення (входження в стан MoveState)
 	elif Input.get_axis("move_left", "move_right") != 0 and state_machine.get_active_state() != air_state and state_machine.get_active_state() != attack_state:
 		# Переходимо в стан руху, тільки якщо персонаж не в повітрі
-		if state_machine.get_active_state() != run_state and character.is_on_floor():
-			if state_machine.is_active():
+		if character.is_on_floor():
+			if state_machine.is_active() and state_machine.get_active_state() != run_state:
 				state_machine.change_active_state(run_state)
-	
-	# Перевірка на повернення в IdleState, якщо персонаж не рухається
-	elif state_machine.get_active_state() == run_state and Input.get_axis("move_left", "move_right") == 0 and character.is_on_floor():
-		state_machine.change_active_state(idle_state)
+			elif state_machine.get_active_state() == run_state:
+				run_state.handle_movement(Input.get_axis("move_left", "move_right"), delta)
+
+# Якщо персонаж у RunState, але axis = 0, повертаємо його в IdleState
+	elif state_machine.get_active_state() == run_state:
+		if Input.get_axis("move_left", "move_right") == 0 and character.is_on_floor():
+			state_machine.change_active_state(idle_state)
+		elif !character.is_on_floor():
+			state_machine.change_active_state(air_state)

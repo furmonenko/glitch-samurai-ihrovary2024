@@ -7,7 +7,7 @@ class_name HealthComponent
 @onready var current_hp = max_hp
 
 func apply_damage(damage_component :DamageComponent):
-	var damage = damage_component.get_damage_amount()
+	var damage =  damage_component.get_damage_amount()
 	var damage_causer = damage_component.get_damage_causer()
 	
 	current_hp = clampf(current_hp - damage, 0, max_hp)
