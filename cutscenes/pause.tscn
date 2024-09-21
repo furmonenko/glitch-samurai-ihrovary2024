@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://cg1tfs1bu3fy3"]
+
+[ext_resource type="LabelSettings" uid="uid://b33p2yrnnwkeq" path="res://cutscenes/intuduction.tres" id="1_kvugt"]
+[ext_resource type="Texture2D" uid="uid://cri8i5jhgpde6" path="res://assets/UI/UI - Words/Words With BG/UI - Words3.png" id="2_a6mb7"]
+[ext_resource type="Texture2D" uid="uid://c1sf3jkuxmlug" path="res://assets/UI/UI - Words/Words With BG/UI - Words1.png" id="2_h3enk"]
+
+[node name="Pause" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.337255)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -27.0
+offset_right = 27.0
+offset_bottom = 24.0
+grow_horizontal = 2
+text = "PAUSED"
+label_settings = ExtResource("1_kvugt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 6.0
+offset_top = 94.0
+offset_right = 99.0
+offset_bottom = 164.0
+scale = Vector2(0.5, 0.5)
+
+[node name="TextureButton2" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_h3enk")
+stretch_mode = 0
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_a6mb7")
+stretch_mode = 0
