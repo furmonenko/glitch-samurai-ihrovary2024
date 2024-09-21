@@ -2,12 +2,15 @@ extends LimboState
 class_name State
 
 @export var animation_tree: AnimationTree
-var state_machine :StateMachine
-var character :CharacterBody2D
+@export var state_machine :StateMachine
+@export var character :CharacterBody2D
 
 @onready var playback :AnimationNodeStateMachinePlayback
 
-func _ready() -> void:
+func _ready():
+	pass
+
+func initialize_state():
 	if !animation_tree:
 		Helpers.throw_error("No animation tree in ", name)
 		

@@ -17,18 +17,24 @@ agent = NodePath("../..")
 damage_component = NodePath("../../DamageComponent")
 
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="1"]
-frame = 3
+frame = 1
 
 [node name="LimboHSM" parent="GlitchSamurai" index="6"]
 state_conditions = {
 "air": "parameters/conditions/jumping"
 }
 
-[node name="Attack" parent="GlitchSamurai/LimboHSM" index="3"]
+[node name="Attack" parent="GlitchSamurai/LimboHSM" index="3" node_paths=PackedStringArray("state_machine", "character")]
 script = ExtResource("3_a7hi3")
+slow_motion_scale = 0.2
+slow_motion_duration = 0.3
+state_machine = NodePath("..")
+character = NodePath("../..")
 
-[node name="Death" parent="GlitchSamurai/LimboHSM" index="4" node_paths=PackedStringArray("player_camera")]
+[node name="Death" parent="GlitchSamurai/LimboHSM" index="4" node_paths=PackedStringArray("player_camera", "state_machine", "character")]
 player_camera = NodePath("../../Camera2D")
+state_machine = NodePath("..")
+character = NodePath("../..")
 
 [node name="Camera2D" type="Camera2D" parent="GlitchSamurai"]
 offset = Vector2(0, -40)

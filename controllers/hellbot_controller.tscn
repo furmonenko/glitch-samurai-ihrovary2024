@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctg5ppxcodivj"]
+
+[ext_resource type="Script" path="res://controllers/hellbot_controller.gd" id="1_ltet1"]
+[ext_resource type="PackedScene" uid="uid://c07cjxqrn0swb" path="res://characters/hell_bot/hell_bot.tscn" id="2_bo1rh"]
+
+[node name="HellbotController" type="Node2D" node_paths=PackedStringArray("character", "state_machine")]
+script = ExtResource("1_ltet1")
+character = NodePath("HellBot")
+state_machine = NodePath("HellBot/LimboHSM")
+
+[node name="HellBot" parent="." instance=ExtResource("2_bo1rh")]
+
+[node name="HealthComponent" parent="HellBot" index="5" node_paths=PackedStringArray("agent")]
+agent = NodePath("..")
+
+[node name="Run" parent="HellBot/LimboHSM" index="1"]
+speed = 20.0
+acceleration = 2.0
+max_speed = 40.0
+
+[editable path="HellBot"]

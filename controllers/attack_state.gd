@@ -2,16 +2,14 @@ extends State
 class_name AttackState
 
 @export var max_combo_attacks: int = 6
-@export var slow_motion_scale: float = 0.2
-@export var slow_motion_duration: float = 0.3 
 
 var attack_count: int = 0
 var current_animation: String = ""  # Поточна анімація
-var attack_pressed_during_animation: bool = false  # Відстежуємо, чи була натиснута кнопка під час анімації
 
-func _ready() -> void:
+var is_attack_finished :bool
+
+func initialize_state():
 	super()
-	# Підписуємось на завершення анімації
 	animation_tree.animation_finished.connect(_on_animation_finished)
 
 func _enter() -> void:
@@ -21,10 +19,11 @@ func _enter() -> void:
 	attack()
 	
 func attack():
+	is_attack_finished = false
 	pass
 	
 func start_attack():
 	pass
 	
 func _on_animation_finished(animation_name: String) -> void:
-	pass
+	is_attack_finished = true

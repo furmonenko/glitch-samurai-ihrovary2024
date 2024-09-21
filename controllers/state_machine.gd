@@ -1,8 +1,8 @@
 extends LimboHSM
 class_name StateMachine
 
-var character: CharacterBody2D
-var animation_tree: AnimationTree
+@export var character: CharacterBody2D
+@export var animation_tree: AnimationTree
 
 @export var state_conditions: Dictionary = {}
 
@@ -13,7 +13,7 @@ func _ready() -> void:
 	create_state_conditions()
 
 func init_state_machine():
-	if get_parent() is Character:
+	if character is Character:
 		character = get_parent()
 		
 	if character.get_anim_tree():
@@ -23,6 +23,7 @@ func init_state_machine():
 		if state is State:
 			state.character = character
 			state.animation_tree = animation_tree
+			state.initialize_state()
 
 func create_state_conditions():
 	state_conditions["idle"] = "parameters/conditions/idle"

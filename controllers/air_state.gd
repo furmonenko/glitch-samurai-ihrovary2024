@@ -6,10 +6,11 @@ class_name AirState
 @export var gravity: float = 50.0
 @export var max_air_speed: float = 150.0
 
-@onready var velocity = character.velocity
+var velocity :Vector2
 
 func _enter() -> void:
 	# Перехід у стан повітря
+	velocity = character.velocity
 	state_machine.switch_state("air")
 	
 	# Якщо персонаж тільки стрибає

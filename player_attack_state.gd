@@ -1,6 +1,11 @@
 extends AttackState
 class_name PlayerAttackState
 
+@export var slow_motion_scale: float = 0.2
+@export var slow_motion_duration: float = 0.3 
+
+var attack_pressed_during_animation: bool = false  # Відстежуємо, чи була натиснута кнопка під час анімації
+
 func attack() -> void:
 	# Оновлюємо логіку для обробки комбо атак
 	attack_pressed_during_animation = true  # Відзначаємо, що атака була викликана

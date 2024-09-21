@@ -11,10 +11,11 @@ class_name RunState
 @export var deceleration: float = 1.0
 @export var max_speed: float = 200.0
 
-@onready var velocity = character.velocity
+var velocity :Vector2
 
 func _enter() -> void:
 	# Перемикаємо стан на RUN
+	velocity = character.velocity
 	state_machine.switch_state("run")
 
 func handle_movement(input_direction: int, delta: float) -> void:

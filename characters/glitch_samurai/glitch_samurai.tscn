@@ -25,7 +25,7 @@ _data = {
 "RESET": SubResource("Animation_a5pgh")
 }
 
-[node name="GlitchSamurai" instance=ExtResource("1_qqsig")]
+[node name="GlitchSamurai" groups=["player"] instance=ExtResource("1_qqsig")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 position = Vector2(0, -4)
@@ -41,7 +41,7 @@ shape = SubResource("RectangleShape2D_l8nin")
 position = Vector2(6, -23)
 sprite_frames = ExtResource("3_3qiti")
 animation = &"Glitch Idle"
-frame = 2
+frame = 3
 
 [node name="HealthComponent" parent="." index="2" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
@@ -65,40 +65,34 @@ parameters/conditions/running = false
 parameters/Air/blend_position = 0
 parameters/Attack/blend_position = 0
 
-[node name="Idle" type="LimboState" parent="LimboHSM" index="0" node_paths=PackedStringArray("air_state", "animation_tree", "state_machine", "character")]
+[node name="LimboHSM" parent="." index="6" node_paths=PackedStringArray("character", "animation_tree")]
+character = NodePath("..")
+animation_tree = NodePath("../AnimationTree")
+
+[node name="Idle" type="LimboState" parent="LimboHSM" index="0" node_paths=PackedStringArray("air_state", "animation_tree")]
 unique_name_in_owner = true
 script = ExtResource("6_n2i03")
 air_state = NodePath("../Air")
 animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
 
-[node name="Run" type="LimboState" parent="LimboHSM" index="1" node_paths=PackedStringArray("animation_tree", "state_machine", "character")]
+[node name="Run" type="LimboState" parent="LimboHSM" index="1" node_paths=PackedStringArray("animation_tree")]
 unique_name_in_owner = true
 script = ExtResource("7_06roi")
 animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
 
-[node name="Air" type="LimboState" parent="LimboHSM" index="2" node_paths=PackedStringArray("animation_tree", "state_machine", "character")]
+[node name="Air" type="LimboState" parent="LimboHSM" index="2" node_paths=PackedStringArray("animation_tree")]
 unique_name_in_owner = true
 script = ExtResource("8_4e76a")
 animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
 
-[node name="Attack" type="LimboState" parent="LimboHSM" index="3" node_paths=PackedStringArray("animation_tree", "state_machine", "character")]
+[node name="Attack" type="LimboState" parent="LimboHSM" index="3" node_paths=PackedStringArray("animation_tree")]
 unique_name_in_owner = true
 script = ExtResource("9_h62e8")
 animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
 
-[node name="Death" type="LimboState" parent="LimboHSM" index="4" node_paths=PackedStringArray("animation_tree", "state_machine", "character")]
+[node name="Death" type="LimboState" parent="LimboHSM" index="4" node_paths=PackedStringArray("animation_tree")]
 unique_name_in_owner = true
 script = ExtResource("10_4na0u")
 animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
 
 [editable path="CollisionShape2D/HitBox"]
