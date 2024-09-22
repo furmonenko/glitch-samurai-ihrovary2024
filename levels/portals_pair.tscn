@@ -1,0 +1,115 @@
+[gd_scene load_steps=14 format=3 uid="uid://bug500hmryx5d"]
+
+[ext_resource type="Script" path="res://levels/portals_pair.gd" id="1_5kaqo"]
+[ext_resource type="Texture2D" uid="uid://bv1crtlqumklu" path="res://assets/Basic Assets/Animated objects/Portal/idle 28x41.png" id="1_t4r4j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubep4"]
+atlas = ExtResource("1_t4r4j")
+region = Rect2(0, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnh6k"]
+atlas = ExtResource("1_t4r4j")
+region = Rect2(28, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rw0su"]
+atlas = ExtResource("1_t4r4j")
+region = Rect2(56, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyifd"]
+atlas = ExtResource("1_t4r4j")
+region = Rect2(84, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mavcr"]
+atlas = ExtResource("1_t4r4j")
+region = Rect2(112, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcxb1"]
+atlas = ExtResource("1_t4r4j")
+region = Rect2(140, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gulw6"]
+atlas = ExtResource("1_t4r4j")
+region = Rect2(168, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obeie"]
+atlas = ExtResource("1_t4r4j")
+region = Rect2(196, 0, 28, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfjqo"]
+atlas = ExtResource("1_t4r4j")
+region = Rect2(224, 0, 28, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nex42"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubep4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnh6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw0su")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyifd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mavcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcxb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gulw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obeie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfjqo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6qk5u"]
+size = Vector2(16, 11)
+
+[node name="PortalsPair" type="Node2D"]
+script = ExtResource("1_5kaqo")
+
+[node name="Portal1" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Portal1"]
+sprite_frames = SubResource("SpriteFrames_nex42")
+autoplay = "default"
+frame_progress = 0.403336
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal1"]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_6qk5u")
+
+[node name="portal1spawn" type="Marker2D" parent="Portal1"]
+position = Vector2(-60, 19)
+
+[node name="Portal2" type="Area2D" parent="."]
+position = Vector2(98, 0)
+collision_layer = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Portal2"]
+sprite_frames = SubResource("SpriteFrames_nex42")
+autoplay = "default"
+frame_progress = 0.202902
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal2"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_6qk5u")
+
+[node name="portal2spawn" type="Marker2D" parent="Portal2"]
+position = Vector2(-41, 19)
+
+[connection signal="body_entered" from="Portal1" to="." method="_on_portal_1_body_entered"]
+[connection signal="body_entered" from="Portal2" to="." method="_on_portal_2_body_entered"]
