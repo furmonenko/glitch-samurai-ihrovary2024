@@ -56,7 +56,7 @@ agent = NodePath("../..")
 damage_component = NodePath("../../DamageComponent")
 
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
-frame = 1
+frame = 0
 
 [node name="HealthComponent" parent="GlitchSamurai" index="3"]
 max_hp = 1.0
@@ -76,6 +76,12 @@ character = NodePath("../..")
 player_camera = NodePath("../../PlayerCamera")
 state_machine = NodePath("..")
 character = NodePath("../..")
+
+[node name="Glitch" parent="GlitchSamurai/LimboHSM" index="5" node_paths=PackedStringArray("player_controller")]
+player_controller = NodePath("../../..")
+
+[node name="RunSound" parent="GlitchSamurai/Sounds" index="1"]
+volume_db = 0.0
 
 [node name="PlayerCamera" type="Camera2D" parent="GlitchSamurai"]
 unique_name_in_owner = true

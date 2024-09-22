@@ -1,12 +1,14 @@
-[gd_scene load_steps=11 format=4 uid="uid://i4dd3g6ng1bf"]
+[gd_scene load_steps=14 format=4 uid="uid://i4dd3g6ng1bf"]
 
 [ext_resource type="Texture2D" uid="uid://cyc6y3aarjcgx" path="res://assets/Basic Assets/Tileset/DARK Edition Tileset with background.png" id="1_gejdq"]
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_obi71"]
 [ext_resource type="PackedScene" uid="uid://dk43eaf601nlv" path="res://cutscenes/engineer_shop.tscn" id="2_8skmk"]
 [ext_resource type="TileSet" uid="uid://dr11iq10t2uak" path="res://levels/tileset.tres" id="2_lo2p1"]
 [ext_resource type="PackedScene" uid="uid://b6xhp64emqkwx" path="res://controllers/player_controller.tscn" id="3_045fn"]
+[ext_resource type="PackedScene" uid="uid://bs62ms5pta6a4" path="res://cutscenes/last_demo_scene.tscn" id="3_oi5uh"]
 [ext_resource type="PackedScene" uid="uid://bop2xmo4jtij8" path="res://scene_glitch_effect.tscn" id="5_th13b"]
-[ext_resource type="PackedScene" uid="uid://ctg5ppxcodivj" path="res://controllers/hellbot_controller.tscn" id="8_ibbhl"]
+[ext_resource type="PackedScene" uid="uid://bja6jn57nw1vy" path="res://controllers/pickeman_controller.tscn" id="7_80x3b"]
+[ext_resource type="PackedScene" uid="uid://ctg5ppxcodivj" path="res://controllers/hellbot_controller.tscn" id="8_30c12"]
 [ext_resource type="PackedScene" uid="uid://bug500hmryx5d" path="res://levels/portals_pair.tscn" id="9_4f378"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6u5f"]
@@ -303,10 +305,13 @@ texture = ExtResource("1_gejdq")
 [sub_resource type="TileSet" id="TileSet_xeclc"]
 sources/0 = SubResource("TileSetAtlasSource_k6u5f")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gigda"]
+
 [node name="BaseLevel" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_obi71")
 death_scene = ExtResource("2_8skmk")
+next_scene = ExtResource("3_oi5uh")
 
 [node name="PortalsPair" parent="." instance=ExtResource("9_4f378")]
 z_index = 30
@@ -337,12 +342,23 @@ tile_set = ExtResource("2_lo2p1")
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="PlayerController" parent="Characters" instance=ExtResource("3_045fn")]
-position = Vector2(251, 112)
+position = Vector2(263, 120)
+
+[node name="PickemanController" parent="Characters" instance=ExtResource("7_80x3b")]
+position = Vector2(-78, 128)
+
+[node name="HellbotController" parent="Characters" instance=ExtResource("8_30c12")]
+position = Vector2(-287, 128)
+
+[node name="LastDoor" type="Area2D" parent="."]
+position = Vector2(304, -863)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LastDoor"]
+shape = SubResource("RectangleShape2D_gigda")
 
 [node name="SceneGlitch" parent="." instance=ExtResource("5_th13b")]
 
-[node name="HellbotController" parent="." instance=ExtResource("8_ibbhl")]
-position = Vector2(47, 128)
+[connection signal="body_entered" from="LastDoor" to="." method="_on_last_door_body_entered"]
 
 [editable path="PortalsPair"]
 [editable path="SceneGlitch"]

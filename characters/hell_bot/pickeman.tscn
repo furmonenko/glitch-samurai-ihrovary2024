@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://ckxkkjgb4u2yi"]
+[gd_scene load_steps=86 format=3 uid="uid://ckxkkjgb4u2yi"]
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_qnami"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_mlw8g"]
@@ -15,6 +15,8 @@
 [ext_resource type="Script" path="res://characters/hell_bot/hellbot_attack_state.gd" id="13_o42yb"]
 [ext_resource type="Script" path="res://characters/hell_bot/hit_state.gd" id="14_8sqk8"]
 [ext_resource type="Script" path="res://controllers/states/death_state.gd" id="15_5it3f"]
+[ext_resource type="AudioStream" uid="uid://dloxn3aaqe67p" path="res://assets/sounds/Pickeman_attack.wav" id="16_0htuf"]
+[ext_resource type="AudioStream" uid="uid://b2gaphqyox35u" path="res://assets/sounds/hitsound.wav" id="17_jdjmv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljkjx"]
 size = Vector2(22, 20)
@@ -458,6 +460,7 @@ material = SubResource("ShaderMaterial_rd8ul")
 position = Vector2(16, -15)
 sprite_frames = SubResource("SpriteFrames_vvi4k")
 animation = &"Idle"
+frame = 2
 metadata/_edit_lock_ = true
 
 [node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("agent")]
@@ -506,3 +509,16 @@ script = ExtResource("14_8sqk8")
 
 [node name="Death" type="LimboState" parent="LimboHSM" index="4"]
 script = ExtResource("15_5it3f")
+
+[node name="Sounds" type="Node2D" parent="." index="8"]
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
+stream = ExtResource("16_0htuf")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+stream = ExtResource("17_jdjmv")
+volume_db = -20.0
+pitch_scale = 0.7
+bus = &"SFX"

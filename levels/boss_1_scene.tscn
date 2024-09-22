@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://7bmga7stwol4" path="res://assets/VIctorianParalax/Assets/tree03.png" id="14_vuvyx"]
 [ext_resource type="Texture2D" uid="uid://b4iqi86rsp1ul" path="res://assets/VIctorianParalax/Assets/tomb.png" id="15_gitxx"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kyhol"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_028v2"]
 texture = ExtResource("6_8o5he")
 0:0/0 = 0
 1:0/0 = 0
@@ -308,7 +308,7 @@ texture = ExtResource("6_8o5he")
 17:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_gw0dx"]
-sources/0 = SubResource("TileSetAtlasSource_kyhol")
+sources/0 = SubResource("TileSetAtlasSource_028v2")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nyibt"]
 

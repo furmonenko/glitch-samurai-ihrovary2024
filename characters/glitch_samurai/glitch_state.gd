@@ -1,6 +1,7 @@
 extends State
 class_name GlitchState
 
+@export var player_controller: PlayerController
 @onready var idle_state: IdleState = %Idle
 
 var move_speed: float = 500.0  # Максимальна швидкість пересування
@@ -24,6 +25,7 @@ func _enter() -> void:
 	glitch_time = randf_range(0.1, 0.3)  # Встановлюємо випадковий інтервал для першого ривка
 
 func _exit() -> void:
+	player_controller.glitch_exited.emit()
 	character.set_collision_mask_value(1, true)
 	character.is_glitched = false
 
