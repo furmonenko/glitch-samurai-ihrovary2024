@@ -458,6 +458,7 @@ material = SubResource("ShaderMaterial_rd8ul")
 position = Vector2(16, -15)
 sprite_frames = SubResource("SpriteFrames_vvi4k")
 animation = &"Idle"
+frame = 5
 metadata/_edit_lock_ = true
 
 [node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("agent")]

@@ -21,6 +21,8 @@ func apply_damage(damage_component :DamageComponent):
 	print(current_hp)
 	
 	if current_hp <= 0:
+		Helpers.slow_motion_start(0.2, 0.2)
+		
 		if !agent.has_signal("died"):
 			return
 

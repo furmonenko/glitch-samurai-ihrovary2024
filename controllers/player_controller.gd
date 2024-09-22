@@ -21,8 +21,11 @@ func _ready() -> void:
 		)
 	
 	if character.hitbox:
-		character.hitbox.hit_target.connect(func():
+		character.hitbox.hit_target.connect(func(damaged_character: Character):
 			%PlayerCamera.start_screen_shake()
+			if damaged_character.is_dead:
+				pass
+				# Helpers.slow_motion_start(0.5)
 			)
 	_init_state_machine()
 
