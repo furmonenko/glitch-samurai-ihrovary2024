@@ -9,6 +9,9 @@ signal dead
 @onready var attack_state: AttackState = %GlitchSamurai/%Attack
 @onready var death_state: DeathState = %GlitchSamurai/%Death
 
+var combo_count: int = 0  # Лічильник комбо-атак
+var max_combo_attacks: int = 3  # Максимальна кількість атак у комбо
+
 func _ready() -> void:
 	character.died.connect(func(dead_character: Character):
 		dead_character.is_dead = true
@@ -33,7 +36,7 @@ func _init_state_machine() -> void:
 	state_machine.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
 	state_machine.add_transition(air_state, death_state, &"die_after_falling")
 
-func handle_states(delta :float):
+func handle_states(delta: float) -> void:
 	super(delta)
 	
 	if character.is_dead:
@@ -49,12 +52,16 @@ func handle_states(delta :float):
 
 	# Перевірка на атаку (входження в стан AttackState)
 	elif Input.is_action_just_pressed("attack"):
-		if state_machine.is_active() and character.is_on_floor() and state_machine.get_active_state() != attack_state:
+		if state_machine.get_active_state() != attack_state and character.is_on_floor():
+			# Починаємо атаку, якщо персонаж на землі і не атакує
+			combo_count = 1
 			state_machine.change_active_state(attack_state)
-		elif state_machine.get_active_state() == attack_state:
-			attack_state.attack()
+			# attack_state.attack()  # Початок першої атаки
+		elif state_machine.get_active_state() == attack_state and combo_count < max_combo_attacks:
+			# Якщо ми в стані атаки і комбо не закінчилось, викликаємо наступну атаку
+			combo_count += 1
+			attack_state.attack()  # Продовжуємо атаку
 
-	# Перевірка на переміщення (входження в стан MoveState)
 	# Перевірка на переміщення (входження в стан MoveState)
 	elif Input.get_axis("move_left", "move_right") != 0 and state_machine.get_active_state() != air_state and state_machine.get_active_state() != attack_state:
 		# Переходимо в стан руху, тільки якщо персонаж не в повітрі
@@ -64,9 +71,13 @@ func handle_states(delta :float):
 			elif state_machine.get_active_state() == run_state:
 				run_state.handle_movement(Input.get_axis("move_left", "move_right"), delta)
 
-# Якщо персонаж у RunState, але axis = 0, повертаємо його в IdleState
+	# Якщо персонаж у RunState, але axis = 0, повертаємо його в IdleState
 	elif state_machine.get_active_state() == run_state:
 		if Input.get_axis("move_left", "move_right") == 0 and character.is_on_floor():
 			state_machine.change_active_state(idle_state)
 		elif !character.is_on_floor():
 			state_machine.change_active_state(air_state)
+
+	# Скидання комбо після завершення атаки
+	if state_machine.get_active_state() != attack_state:
+		combo_count = 0  # Скидаємо лічильник комбо, якщо персонаж не в стані атаки
