@@ -35,7 +35,7 @@ func advance_text(step: int):
 		0:
 			intro_text.text = "Finally... I've done it"
 		1:
-			intro_text.text = "You are my final creation, my last chance to reclaim Victoria"
+			intro_text.text = "You are my final creation, my last chance to reclaim the city of Victoria"
 		2:
 			intro_text.text = "I have given you powers even the gods don’t possess"
 		3:

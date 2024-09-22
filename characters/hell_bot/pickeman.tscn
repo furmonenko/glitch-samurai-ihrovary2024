@@ -289,6 +289,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pickeman/CollisionShape2D/HitBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_veo0l"]
 _data = {
@@ -454,13 +466,14 @@ damage_component = NodePath("../../DamageComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/HitBox" index="0"]
 position = Vector2(12, -7.5)
 shape = SubResource("RectangleShape2D_f7cnd")
+disabled = true
 
 [node name="AnimatedSprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_rd8ul")
 position = Vector2(16, -15)
 sprite_frames = SubResource("SpriteFrames_vvi4k")
 animation = &"Idle"
-frame = 2
+frame = 3
 metadata/_edit_lock_ = true
 
 [node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("agent")]
