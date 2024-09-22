@@ -7,7 +7,6 @@ class_name Cutscene
 @onready var how_to_skip_container = $HowToSkipContainer
 @onready var intro_text = $IntroText
 
-
 @export var next_scene: PackedScene
 
 var step: int = 0

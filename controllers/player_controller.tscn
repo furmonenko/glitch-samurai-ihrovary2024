@@ -1,14 +1,52 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6xhp64emqkwx"]
+[gd_scene load_steps=7 format=3 uid="uid://b6xhp64emqkwx"]
 
 [ext_resource type="Script" path="res://controllers/player_controller.gd" id="1_4w8h7"]
 [ext_resource type="PackedScene" uid="uid://be6bki722mg1g" path="res://characters/glitch_samurai/glitch_samurai.tscn" id="2_iihpn"]
+[ext_resource type="Texture2D" uid="uid://cjf46ncc5xta2" path="res://assets/UI/UI - Borders and HP/UI - 16x16 UI Tileset.png" id="2_ycpiq"]
 [ext_resource type="Script" path="res://player_attack_state.gd" id="3_a7hi3"]
 [ext_resource type="Script" path="res://controllers/player_camera.gd" id="4_eijum"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_br1yc"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = ExtResource("2_ycpiq")
+region_rect = Rect2(175, 134, 13, 4)
 
 [node name="PlayerController" type="Node2D" node_paths=PackedStringArray("character", "state_machine")]
 script = ExtResource("1_4w8h7")
 character = NodePath("GlitchSamurai")
 state_machine = NodePath("GlitchSamurai/LimboHSM")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -26.0
+offset_top = -11.0
+offset_right = 80.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.25)
+theme_override_styles/fill = SubResource("StyleBoxTexture_br1yc")
+max_value = 200.0
+value = 200.0
+show_percentage = false
 
 [node name="GlitchSamurai" parent="." instance=ExtResource("2_iihpn")]
 unique_name_in_owner = true
@@ -17,11 +55,8 @@ unique_name_in_owner = true
 agent = NodePath("../..")
 damage_component = NodePath("../../DamageComponent")
 
-[node name="CollisionShape2D" parent="GlitchSamurai/CollisionShape2D/HitBox" index="0"]
-position = Vector2(20, -7)
-
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
-frame = 3
+frame = 1
 
 [node name="HealthComponent" parent="GlitchSamurai" index="3"]
 max_hp = 1.0

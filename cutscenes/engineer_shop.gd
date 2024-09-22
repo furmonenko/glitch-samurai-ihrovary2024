@@ -1,5 +1,8 @@
 extends Cutscene
 
+func faded_in():
+	next_scene = load("res://levels/base_level.tscn")
+	super()
 
 func advance_text(step: int):
 	text_timer.start()

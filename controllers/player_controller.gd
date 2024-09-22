@@ -10,13 +10,16 @@ signal dead
 @onready var death_state: DeathState = %GlitchSamurai/%Death
 @onready var glitch_state: GlitchState = $GlitchSamurai/LimboHSM/Glitch
 
+@export var energy: float = 400.0  # Максимальна енергія
+@export var energy_decrease_rate: float = 20.0  # Скільки енергії зменшувати за секунду
+
 var combo_count: int = 0  # Лічильник комбо-атак
 var max_combo_attacks: int = 3  # Максимальна кількість атак у комбо
 
 func _ready() -> void:
 	character.died.connect(func(dead_character: Character):
 		dead_character.is_dead = true
-		if dead_character.is_on_floor():
+		if dead_character.is_on_floor() || state_machine.get_active_state() == glitch_state:
 			state_machine.change_active_state(death_state)
 			dead.emit()
 		)
@@ -47,16 +50,28 @@ func handle_states(delta: float) -> void:
 		return
 
 	# Перевірка на глітч
-	if Input.is_action_just_pressed("interact") && state_machine.get_active_state() != glitch_state:
+	if Input.is_action_just_pressed("interact") and state_machine.get_active_state() != glitch_state:
 		state_machine.change_active_state(glitch_state)
 		return
 		
 	if state_machine.get_active_state() == glitch_state:
-		if Input.is_action_just_pressed("interact"):
+		# Зменшуємо енергію, поки персонаж у глітч-стані
+		energy -= energy_decrease_rate * delta
+
+		# Якщо енергія закінчилася, виходимо з глітч-стану
+		if energy <= 0:
+			dead.emit()
 			glitch_state._exit()
 			state_machine.change_active_state(idle_state)
 			return
 			
+		$HUD/Control/ProgressBar.value = energy
+		
+		if Input.is_action_just_pressed("interact"):
+			glitch_state._exit()
+			state_machine.change_active_state(idle_state)
+			return
+
 		glitch_state.handle_glitch_movement(delta)
 	
 	# Перевірка на стрибок (входження в стан AirState)
