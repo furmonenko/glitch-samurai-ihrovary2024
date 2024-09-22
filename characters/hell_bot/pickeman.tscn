@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://c4nbq61fn4r38" path="res://assets/ThreeEnemies/Shock Sweeper/death.png" id="5_hjh2a"]
 [ext_resource type="Texture2D" uid="uid://c4cf1acyjg5ck" path="res://assets/ThreeEnemies/Shock Sweeper/hit.png" id="5_sgdd8"]
 [ext_resource type="AnimationLibrary" uid="uid://co8bi35r5sp1c" path="res://characters/pickeman/pickeman_anims.res" id="9_q01do"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://jyyyp1mh6mw3" path="res://characters/hell_bot/default_enemy.tres" id="11_k3dqt"]
 [ext_resource type="Script" path="res://controllers/states/idle_state.gd" id="11_q2mts"]
 [ext_resource type="Script" path="res://controllers/states/run_state.gd" id="12_wqtk0"]
 [ext_resource type="Script" path="res://characters/hell_bot/hellbot_attack_state.gd" id="13_o42yb"]
@@ -296,6 +295,137 @@ _data = {
 "RESET": SubResource("Animation_xr8h5")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f7iag"]
+animation = &"pickeman_anims/Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gtd8y"]
+animation = &"pickeman_anims/Death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gu5el"]
+animation = &"pickeman_anims/Hit"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pmx5x"]
+animation = &"pickeman_anims/Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gwmc4"]
+animation = &"pickeman_anims/Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lsawd"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u7ly2"]
+advance_mode = 2
+advance_condition = &"running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fc6ll"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qe7e2"]
+advance_mode = 2
+advance_condition = &"shooting"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qfn61"]
+advance_mode = 2
+advance_condition = &"shooting"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6rhnc"]
+advance_mode = 2
+advance_condition = &"attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i27gm"]
+advance_mode = 2
+advance_condition = &"attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1ut5o"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dv41m"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2wuwm"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ioucn"]
+advance_mode = 2
+advance_condition = &"running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qmt3u"]
+advance_mode = 2
+advance_condition = &"got_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6xwgm"]
+advance_mode = 2
+advance_condition = &"got_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ux23c"]
+advance_mode = 2
+advance_condition = &"got_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bff3f"]
+advance_mode = 2
+advance_condition = &"dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c6oqc"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a1yu2"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a3nn6"]
+advance_mode = 2
+advance_condition = &"got_hit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8hau1"]
+advance_mode = 2
+advance_condition = &"running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2nq4s"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j8cq0"]
+advance_mode = 2
+advance_condition = &"dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vcecx"]
+advance_mode = 2
+advance_condition = &"dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a2pp8"]
+advance_mode = 2
+advance_condition = &"dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5xl6u"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"shooting"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7bety"]
+states/Attack/node = SubResource("AnimationNodeAnimation_f7iag")
+states/Attack/position = Vector2(611.017, 553.758)
+states/Death/node = SubResource("AnimationNodeAnimation_gtd8y")
+states/Death/position = Vector2(-17.1808, 353.196)
+states/End/position = Vector2(964, 126)
+states/Hit/node = SubResource("AnimationNodeAnimation_gu5el")
+states/Hit/position = Vector2(180.375, 356.11)
+states/Idle/node = SubResource("AnimationNodeAnimation_pmx5x")
+states/Idle/position = Vector2(180.268, -39.3181)
+states/Run/node = SubResource("AnimationNodeAnimation_gwmc4")
+states/Run/position = Vector2(608.893, 155.744)
+states/Shoot/node = SubResource("AnimationNodeAnimation_lsawd")
+states/Shoot/position = Vector2(609.461, -39.6146)
+states/Start/position = Vector2(-24, -38.0745)
+transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_u7ly2"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_fc6ll"), "Idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_qe7e2"), "Run", "Shoot", SubResource("AnimationNodeStateMachineTransition_qfn61"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_6rhnc"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_i27gm"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_1ut5o"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_dv41m"), "Shoot", "Idle", SubResource("AnimationNodeStateMachineTransition_2wuwm"), "Shoot", "Run", SubResource("AnimationNodeStateMachineTransition_ioucn"), "Shoot", "Hit", SubResource("AnimationNodeStateMachineTransition_qmt3u"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_6xwgm"), "Attack", "Hit", SubResource("AnimationNodeStateMachineTransition_ux23c"), "Hit", "Death", SubResource("AnimationNodeStateMachineTransition_bff3f"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_c6oqc"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a1yu2"), "Run", "Hit", SubResource("AnimationNodeStateMachineTransition_a3nn6"), "Hit", "Run", SubResource("AnimationNodeStateMachineTransition_8hau1"), "Hit", "Attack", SubResource("AnimationNodeStateMachineTransition_2nq4s"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_j8cq0"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_vcecx"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_a2pp8"), "Hit", "Shoot", SubResource("AnimationNodeStateMachineTransition_5xl6u")]
+graph_offset = Vector2(-306.87, -102.415)
+
 [node name="Pickeman" instance=ExtResource("1_qnami")]
 
 [node name="Hurtbox" type="Area2D" parent="." index="0" node_paths=PackedStringArray("agent", "health_component")]
@@ -346,7 +476,7 @@ libraries = {
 }
 
 [node name="AnimationTree" parent="." index="6"]
-tree_root = ExtResource("11_k3dqt")
+tree_root = SubResource("AnimationNodeStateMachine_7bety")
 parameters/conditions/attacking = false
 parameters/conditions/dead = false
 parameters/conditions/got_hit = false
