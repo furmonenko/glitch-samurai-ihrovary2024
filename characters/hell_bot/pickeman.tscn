@@ -1,8 +1,9 @@
-[gd_scene load_steps=80 format=3 uid="uid://ckxkkjgb4u2yi"]
+[gd_scene load_steps=82 format=3 uid="uid://ckxkkjgb4u2yi"]
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_qnami"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_mlw8g"]
 [ext_resource type="Script" path="res://controllers/hit_box.gd" id="3_xy7vw"]
+[ext_resource type="Shader" path="res://blue_to_red.gdshader" id="4_62llk"]
 [ext_resource type="Texture2D" uid="uid://cs076rvdbivw" path="res://assets/ThreeEnemies/Shock Sweeper/slam with VFX.png" id="4_fmdim"]
 [ext_resource type="Texture2D" uid="uid://uepq3xg8psdo" path="res://assets/ThreeEnemies/Shock Sweeper/wake.png" id="4_vche0"]
 [ext_resource type="Texture2D" uid="uid://br6lvfpwemaqe" path="res://assets/ThreeEnemies/Shock Sweeper/shuffe(move).png" id="5_gg8yt"]
@@ -23,6 +24,9 @@ size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7cnd"]
 size = Vector2(44, 25)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rd8ul"]
+shader = ExtResource("4_62llk")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_06yt3"]
 atlas = ExtResource("4_fmdim")
@@ -428,13 +432,13 @@ damage_component = NodePath("../../DamageComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/HitBox" index="0"]
 position = Vector2(12, -7.5)
 shape = SubResource("RectangleShape2D_f7cnd")
-disabled = true
 
 [node name="AnimatedSprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_rd8ul")
 position = Vector2(16, -15)
 sprite_frames = SubResource("SpriteFrames_vvi4k")
-animation = &"Attack"
-frame = 5
+animation = &"Idle"
+frame = 3
 metadata/_edit_lock_ = true
 
 [node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("agent")]

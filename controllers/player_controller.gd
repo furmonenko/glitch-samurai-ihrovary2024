@@ -1,6 +1,8 @@
 extends Controller
 class_name PlayerController
 
+signal dead
+
 @onready var idle_state: LimboState = %GlitchSamurai/%Idle
 @onready var run_state: RunState = %GlitchSamurai/%Run
 @onready var air_state: AirState = %GlitchSamurai/%Air
@@ -12,6 +14,7 @@ func _ready() -> void:
 		dead_character.is_dead = true
 		if dead_character.is_on_floor():
 			state_machine.change_active_state(death_state)
+			dead.emit()
 		)
 	_init_state_machine()
 

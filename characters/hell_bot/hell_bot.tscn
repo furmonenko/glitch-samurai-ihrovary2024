@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://c07cjxqrn0swb"]
+[gd_scene load_steps=92 format=3 uid="uid://c07cjxqrn0swb"]
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_ei3b4"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_58pe2"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://yu4offyq555g" path="res://assets/Basic Assets/Sprites/Hell Bot DARK/attack 92x36.png" id="2_qrhfr"]
 [ext_resource type="Texture2D" uid="uid://nwhuhqcm76m" path="res://assets/Basic Assets/Sprites/Hell Bot DARK/hit 92x36.png" id="3_3106u"]
 [ext_resource type="Texture2D" uid="uid://d1bqxw3u08l25" path="res://assets/Basic Assets/Sprites/Hell Bot DARK/run 92x36.png" id="3_cgav5"]
+[ext_resource type="Shader" path="res://blue_to_red.gdshader" id="4_6ceyn"]
 [ext_resource type="Texture2D" uid="uid://dg8vfv7l4urvs" path="res://assets/Basic Assets/Sprites/Hell Bot DARK/shoot 92x36.png" id="6_gm7tv"]
 [ext_resource type="Texture2D" uid="uid://cdxsqhgssrbsy" path="res://assets/Basic Assets/Sprites/Hell Bot DARK/death 92x36.png" id="7_wb28y"]
 [ext_resource type="AnimationLibrary" uid="uid://df45sv6frwlxw" path="res://characters/hell_bot/hell_bot_anims.res" id="8_drwa7"]
@@ -24,6 +25,9 @@ size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d6b2p"]
 size = Vector2(13.25, 22)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hiecp"]
+shader = ExtResource("4_6ceyn")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_32gsa"]
 atlas = ExtResource("2_qrhfr")
@@ -534,9 +538,11 @@ shape = SubResource("RectangleShape2D_d6b2p")
 disabled = true
 
 [node name="AnimatedSprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_hiecp")
 position = Vector2(27, -18)
 sprite_frames = SubResource("SpriteFrames_ayjfh")
-animation = &"Attack"
+animation = &"Idle"
+frame = 4
 metadata/_edit_lock_ = true
 
 [node name="DamageComponent" parent="." index="4" node_paths=PackedStringArray("damage_causer")]

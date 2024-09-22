@@ -7,3 +7,4 @@ var is_dead :bool = false
 
 func get_anim_tree():
 	return %AnimationTree
+	

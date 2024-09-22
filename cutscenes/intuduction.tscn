@@ -562,13 +562,7 @@ _data = {
 "fade_out": SubResource("Animation_88qpm")
 }
 
-[node name="Intuduction" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Intuduction" type="CanvasLayer"]
 script = ExtResource("1_d1qu3")
 next_scene = ExtResource("2_po54o")
 
@@ -588,7 +582,6 @@ frame_progress = 0.449061
 wait_time = 0.05
 
 [node name="IntroText" type="Label" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -609,7 +602,6 @@ autowrap_mode = 2
 uppercase = true
 
 [node name="HowToSkipContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

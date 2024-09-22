@@ -1,5 +1,6 @@
 extends Cutscene
 
+
 func advance_text(step: int):
 	text_timer.start()
 	

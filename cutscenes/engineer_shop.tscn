@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://bolgm34rsyatv"]
+[gd_scene load_steps=36 format=4 uid="uid://dk43eaf601nlv"]
 
 [ext_resource type="Script" path="res://cutscenes/engineer_shop.gd" id="1_1f11w"]
 [ext_resource type="Texture2D" uid="uid://cyc6y3aarjcgx" path="res://assets/Basic Assets/Tileset/DARK Edition Tileset with background.png" id="2_bdd62"]
@@ -603,13 +603,7 @@ _data = {
 "fade_out": SubResource("Animation_88qpm")
 }
 
-[node name="Engineer_Shop" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Engineer_Shop" type="CanvasLayer"]
 script = ExtResource("1_1f11w")
 
 [node name="Tileset" type="Node2D" parent="."]
@@ -628,7 +622,6 @@ frame_progress = 0.326406
 wait_time = 0.05
 
 [node name="IntroText" type="Label" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -649,7 +642,6 @@ autowrap_mode = 2
 uppercase = true
 
 [node name="HowToSkipContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -705,7 +697,6 @@ libraries = {
 }
 
 [node name="GlitchEffects" parent="." instance=ExtResource("7_rrnd0")]
-visible = false
 
 [node name="ColorRect" parent="GlitchEffects" index="0"]
 material = SubResource("ShaderMaterial_xua0i")

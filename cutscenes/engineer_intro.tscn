@@ -1,6 +1,7 @@
-[gd_scene load_steps=36 format=4 uid="uid://dkxr37rpuvtmc"]
+[gd_scene load_steps=37 format=4 uid="uid://dkxr37rpuvtmc"]
 
 [ext_resource type="Script" path="res://cutscenes/engineer_intro.gd" id="1_ngsvq"]
+[ext_resource type="PackedScene" uid="uid://i4dd3g6ng1bf" path="res://levels/base_level.tscn" id="2_fe3py"]
 [ext_resource type="Texture2D" uid="uid://cyc6y3aarjcgx" path="res://assets/Basic Assets/Tileset/DARK Edition Tileset with background.png" id="2_vrwpo"]
 [ext_resource type="Texture2D" uid="uid://cfhbl54wcj223" path="res://assets/PortalsAndShops/Shops/Tech Shop.png" id="3_jb7f8"]
 [ext_resource type="LabelSettings" uid="uid://b33p2yrnnwkeq" path="res://cutscenes/intuduction.tres" id="4_vq7ic"]
@@ -603,14 +604,9 @@ _data = {
 "fade_out": SubResource("Animation_88qpm")
 }
 
-[node name="Engineer_Shop" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Engineer_Shop" type="CanvasLayer"]
 script = ExtResource("1_ngsvq")
+next_scene = ExtResource("2_fe3py")
 
 [node name="Tileset" type="Node2D" parent="."]
 
@@ -628,7 +624,6 @@ frame_progress = 0.326406
 wait_time = 0.05
 
 [node name="IntroText" type="Label" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -649,7 +644,6 @@ autowrap_mode = 2
 uppercase = true
 
 [node name="HowToSkipContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

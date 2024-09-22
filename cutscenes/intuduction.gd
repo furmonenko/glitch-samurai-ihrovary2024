@@ -1,11 +1,11 @@
-extends Control
+extends CanvasLayer
 class_name Cutscene
 
-@onready var intro_text = $IntroText
 @onready var text_timer = $TextTimer
-@onready var how_to_skip_container = $HowToSkipContainer
 @onready var animation_player = $AnimationPlayer
 @onready var audio_stream_player = $SpeakSound
+@onready var how_to_skip_container = $HowToSkipContainer
+@onready var intro_text = $IntroText
 
 
 @export var next_scene: PackedScene
@@ -21,7 +21,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("attack"):
 		how_to_skip_container.visible = false
 		step += 1
 		intro_text.visible_characters = 0
@@ -50,6 +50,7 @@ func advance_text(step: int):
 		7:
 			intro_text.text = "Now, go to the Engineer. Recharge and prepare for what’s to come"
 			animation_player.play("fade_in")
+
 func _on_text_timer_timeout():
 	if intro_text.visible_characters < intro_text.text.length():
 		intro_text.visible_characters += 1
@@ -69,4 +70,6 @@ func faded_out():
 
 func faded_in():
 	if next_scene:
-		get_tree().change_scene_to_packed(next_scene)
+		var instance = next_scene.instantiate()
+		get_parent().add_child(instance)
+		queue_free()
