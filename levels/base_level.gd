@@ -5,9 +5,18 @@ extends Node2D
 @onready var scene_glitch = $SceneGlitch
 @onready var player_controller: PlayerController = $Characters/PlayerController
 @onready var glitch: ColorRect = $SceneGlitch/%Glitch
+@onready var glitch_sound = $SceneGlitch/GlitchSound
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	if player_controller:
+		player_controller.glitch_exited.connect(func():
+			scene_glitch.animation_player.stop()
+			scene_glitch.visible = false
+			glitch_sound.playing = false
+			)
+	
 	scene_glitch.animation_player.play("scene_glitch")
 	
 	player_controller.dead.connect(func():
@@ -21,11 +30,9 @@ func _process(delta):
 		pass
 	
 	if player_controller.character.is_glitched:
-		glitch.material.set("shader_parameter/shake_power", 0.05)
-		glitch.material.set("shader_parameter/shake_rate", 0.7)
-	else:
-		glitch.material.set("shader_parameter/shake_power", 0)
-		glitch.material.set("shader_parameter/shake_rate", 0)
+		scene_glitch.animation_player.play("player_glitched")
+		scene_glitch.visible = true
+
 func on_player_died():
 	if death_scene:
 		await get_tree().create_timer(0.5).timeout

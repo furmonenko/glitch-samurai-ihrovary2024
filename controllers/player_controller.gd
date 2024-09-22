@@ -2,6 +2,7 @@ extends Controller
 class_name PlayerController
 
 signal dead
+signal glitch_exited
 
 @onready var idle_state: LimboState = %GlitchSamurai/%Idle
 @onready var run_state: RunState = %GlitchSamurai/%Run
@@ -12,6 +13,7 @@ signal dead
 
 @export var energy: float = 400.0  # Максимальна енергія
 @export var energy_decrease_rate: float = 20.0  # Скільки енергії зменшувати за секунду
+@onready var attack_sound = $GlitchSamurai/Sounds/AttackSound
 
 var combo_count: int = 0  # Лічильник комбо-атак
 var max_combo_attacks: int = 3  # Максимальна кількість атак у комбо
@@ -80,6 +82,7 @@ func handle_states(delta: float) -> void:
 
 	# Перевірка на атаку (входження в стан AttackState)
 	elif Input.is_action_just_pressed("attack"):
+		attack_sound.play()
 		if state_machine.get_active_state() != attack_state and character.is_on_floor():
 			# Починаємо атаку, якщо персонаж на землі і не атакує
 			combo_count = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://be6bki722mg1g"]
+[gd_scene load_steps=19 format=3 uid="uid://be6bki722mg1g"]
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_qqsig"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_g3u8v"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://controllers/attack_state.gd" id="9_h62e8"]
 [ext_resource type="Script" path="res://controllers/states/death_state.gd" id="10_4na0u"]
 [ext_resource type="Script" path="res://characters/glitch_samurai/glitch_state.gd" id="12_htikg"]
+[ext_resource type="AudioStream" uid="uid://b3ay1u7aaf5dq" path="res://assets/sounds/Samurai_attack.wav" id="13_daib1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sfjx0"]
 size = Vector2(16, 23)
@@ -86,7 +87,7 @@ disabled = true
 position = Vector2(6, -23)
 sprite_frames = ExtResource("3_3qiti")
 animation = &"Glitch Idle"
-frame = 7
+frame = 5
 metadata/_edit_lock_ = true
 
 [node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("agent")]
@@ -96,7 +97,6 @@ agent = NodePath("..")
 damage_causer = NodePath("..")
 
 [node name="AnimationPlayer" parent="." index="5"]
-active = false
 libraries = {
 "": SubResource("AnimationLibrary_aqjjs"),
 "Glitch Samurai": ExtResource("4_0n567")
@@ -145,5 +145,12 @@ animation_tree = NodePath("../../AnimationTree")
 
 [node name="Glitch" type="LimboState" parent="LimboHSM" index="5"]
 script = ExtResource("12_htikg")
+
+[node name="Sounds" type="Node2D" parent="." index="8"]
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
+stream = ExtResource("13_daib1")
+volume_db = -10.0
+bus = &"SFX"
 
 [editable path="CollisionShape2D/HitBox"]

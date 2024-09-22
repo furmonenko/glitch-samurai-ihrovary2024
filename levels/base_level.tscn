@@ -341,8 +341,5 @@ position = Vector2(251, 112)
 
 [node name="SceneGlitch" parent="." instance=ExtResource("5_th13b")]
 
-[node name="HellbotController" parent="." instance=ExtResource("8_ibbhl")]
-position = Vector2(47, 128)
-
 [editable path="PortalsPair"]
 [editable path="SceneGlitch"]

@@ -77,6 +77,9 @@ player_camera = NodePath("../../PlayerCamera")
 state_machine = NodePath("..")
 character = NodePath("../..")
 
+[node name="Glitch" parent="GlitchSamurai/LimboHSM" index="5" node_paths=PackedStringArray("player_controller")]
+player_controller = NodePath("../../..")
+
 [node name="PlayerCamera" type="Camera2D" parent="GlitchSamurai"]
 unique_name_in_owner = true
 offset = Vector2(0, -40)
