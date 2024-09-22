@@ -13,4 +13,5 @@ func _enter() -> void:
 
 func _on_hit_finished(anim_name) -> void:
 	# Завершуємо стан удару і повідомляємо стейт машину
-	dispatch(EVENT_FINISHED)
+	if state_machine.get_active_state() != null:
+		dispatch(EVENT_FINISHED)

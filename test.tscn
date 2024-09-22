@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7dwmu7r7vqoc"]
+
+[ext_resource type="PackedScene" uid="uid://b6xhp64emqkwx" path="res://controllers/player_controller.tscn" id="1_w6it2"]
+[ext_resource type="PackedScene" uid="uid://unqj071j3se0" path="res://controllers/shieldman_controller.tscn" id="2_smajd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twiou"]
+size = Vector2(842, 20)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(42, 10)
+shape = SubResource("RectangleShape2D_twiou")
+
+[node name="PlayerController" parent="StaticBody2D" instance=ExtResource("1_w6it2")]
+position = Vector2(63, 0)
+
+[node name="ShieldmanController" parent="." instance=ExtResource("2_smajd")]
+position = Vector2(-51, 0)

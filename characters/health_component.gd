@@ -21,8 +21,6 @@ func apply_damage(damage_component :DamageComponent):
 	
 	got_hit.emit(damage_causer)
 	
-	print(current_hp)
-	
 	if current_hp <= 0:
 		Helpers.slow_motion_start(0.2, 0.2)
 		

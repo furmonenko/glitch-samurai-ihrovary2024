@@ -2,6 +2,7 @@ extends State
 class_name DeathState
 
 @export var player_camera :Camera2D
+@export var controller: Controller
 
 func _enter() -> void:
 	die()
@@ -10,7 +11,7 @@ func _update(delta: float) -> void:
 	if !character.is_on_floor():
 		character.velocity.y = 40
 		character.move_and_slide()
-	
+	 
 func die():
 	state_machine.switch_state("death")
 	
