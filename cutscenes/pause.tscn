@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cg1tfs1bu3fy3"]
+[gd_scene load_steps=5 format=3 uid="uid://cg1tfs1bu3fy3"]
 
 [ext_resource type="LabelSettings" uid="uid://b33p2yrnnwkeq" path="res://cutscenes/intuduction.tres" id="1_kvugt"]
+[ext_resource type="Script" path="res://cutscenes/pause.gd" id="1_w6bir"]
 [ext_resource type="Texture2D" uid="uid://cri8i5jhgpde6" path="res://assets/UI/UI - Words/Words With BG/UI - Words3.png" id="2_a6mb7"]
 [ext_resource type="Texture2D" uid="uid://c1sf3jkuxmlug" path="res://assets/UI/UI - Words/Words With BG/UI - Words1.png" id="2_h3enk"]
 
 [node name="Pause" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_w6bir")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -43,3 +46,6 @@ stretch_mode = 0
 layout_mode = 2
 texture_normal = ExtResource("2_a6mb7")
 stretch_mode = 0
+
+[connection signal="pressed" from="VBoxContainer/TextureButton2" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]

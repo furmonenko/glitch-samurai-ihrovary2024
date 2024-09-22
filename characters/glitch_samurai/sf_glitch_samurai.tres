@@ -1,15 +1,32 @@
-[gd_resource type="SpriteFrames" load_steps=86 format=3 uid="uid://d35ynlov1jxoh"]
+[gd_resource type="SpriteFrames" load_steps=103 format=3 uid="uid://d35ynlov1jxoh"]
 
 [ext_resource type="Texture2D" uid="uid://mnf2n5eifupv" path="res://assets/Glitch Samurai/Glitch Samurai-Death.png" id="1_mlg4g"]
+[ext_resource type="Texture2D" uid="uid://dof30da0y66c5" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai1.png" id="2_jskbg"]
 [ext_resource type="Texture2D" uid="uid://vqfv2vmv7mis" path="res://assets/Glitch Samurai/Glitch Samurai-Slash 1.png" id="2_pgs3x"]
 [ext_resource type="Texture2D" uid="uid://clfptvd4nfqj4" path="res://assets/Glitch Samurai/Glitch Samurai-Slash 2.png" id="3_b27b7"]
+[ext_resource type="Texture2D" uid="uid://dhes0uf7bkwfp" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai2.png" id="3_rsvsh"]
+[ext_resource type="Texture2D" uid="uid://bptcq5fkhdodi" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai3.png" id="4_4s8n4"]
 [ext_resource type="Texture2D" uid="uid://c8ueya320w5ql" path="res://assets/Glitch Samurai/Glitch Samurai-Glitch Sweep.png" id="4_46owu"]
+[ext_resource type="Texture2D" uid="uid://cvxnraoctftpn" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai4.png" id="5_got8w"]
 [ext_resource type="Texture2D" uid="uid://dujc2hk0h6t54" path="res://assets/Glitch Samurai/Glitch Samurai-Fall.png" id="5_v811i"]
+[ext_resource type="Texture2D" uid="uid://mil72815wbyf" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai5.png" id="6_06wpn"]
 [ext_resource type="Texture2D" uid="uid://wrxlk1daq2l2" path="res://assets/Glitch Samurai/Glitch Samurai-Idle Gltich.png" id="6_c2h18"]
+[ext_resource type="Texture2D" uid="uid://ccx8k8d87agf1" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai6.png" id="7_lncmf"]
 [ext_resource type="Texture2D" uid="uid://d15qk28kxqgum" path="res://assets/Glitch Samurai/Glitch Samurai-Jump.png" id="7_qsybm"]
+[ext_resource type="Texture2D" uid="uid://dyhqpee1hg54y" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai7.png" id="8_cje4c"]
 [ext_resource type="Texture2D" uid="uid://c6l8txrf2y18c" path="res://assets/Glitch Samurai/Glitch Samurai-Land.png" id="8_qyvro"]
+[ext_resource type="Texture2D" uid="uid://c8bfaa2fwvwwe" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai8.png" id="9_nqryp"]
 [ext_resource type="Texture2D" uid="uid://oyc3c1va727t" path="res://assets/Glitch Samurai/Glitch Samurai-Run.png" id="9_wnrto"]
 [ext_resource type="Texture2D" uid="uid://dx3ssd5ey74b4" path="res://assets/Glitch Samurai/Glitch Samurai-Idle.png" id="10_kqdcg"]
+[ext_resource type="Texture2D" uid="uid://703eaqam84dv" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai9.png" id="10_nogce"]
+[ext_resource type="Texture2D" uid="uid://bmts80hrsnaw6" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai10.png" id="11_c8kyx"]
+[ext_resource type="Texture2D" uid="uid://t15x172qchsg" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai11.png" id="12_lbjsc"]
+[ext_resource type="Texture2D" uid="uid://bnd61hyknpbdr" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai12.png" id="13_64o3l"]
+[ext_resource type="Texture2D" uid="uid://dn62bebvvsjc3" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai13.png" id="14_cjk2x"]
+[ext_resource type="Texture2D" uid="uid://dc0aqps8qhpws" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai14.png" id="15_rt40e"]
+[ext_resource type="Texture2D" uid="uid://e7j48sh07ap6" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai15.png" id="16_u3hy1"]
+[ext_resource type="Texture2D" uid="uid://61wu5bxoeoex" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai16.png" id="17_0ffal"]
+[ext_resource type="Texture2D" uid="uid://bd3geqejehxvb" path="res://assets/Glitch Samurai/Glitch FX/Glitch Samurai17.png" id="18_ogn54"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3xbjt"]
 atlas = ExtResource("1_mlg4g")
@@ -352,6 +369,62 @@ animations = [{
 }],
 "loop": true,
 "name": &"Death",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jskbg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rsvsh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4s8n4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_got8w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_06wpn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lncmf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_cje4c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_nqryp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nogce")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_c8kyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_lbjsc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_64o3l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_cjk2x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_rt40e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_u3hy1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_0ffal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ogn54")
+}],
+"loop": true,
+"name": &"Glitch",
 "speed": 15.0
 }, {
 "frames": [{

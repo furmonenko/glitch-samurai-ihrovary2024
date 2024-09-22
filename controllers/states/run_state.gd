@@ -1,12 +1,9 @@
 extends State
 class_name RunState
 
-# Параметри для контролю руху
 @export var speed: float = 150.0
 @export var jump_force: float = 400.0
 @export var gravity: float = 50.0
-
-# Параметри для акселерації та децелерації
 @export var acceleration: float = 20.0
 @export var deceleration: float = 1.0
 @export var max_speed: float = 200.0
@@ -14,11 +11,13 @@ class_name RunState
 var velocity :Vector2
 
 func _enter() -> void:
-	# Перемикаємо стан на RUN
 	velocity = character.velocity
 	state_machine.switch_state("run")
 
 func handle_movement(input_direction: int, delta: float) -> void:
+	# Додаємо гравітацію
+	velocity.y += gravity * delta
+	
 	# Якщо персонаж змінює напрямок, обнуляємо швидкість
 	if (input_direction > 0 and velocity.x < 0) or (input_direction < 0 and velocity.x > 0):
 		velocity.x = 0
@@ -41,6 +40,10 @@ func handle_movement(input_direction: int, delta: float) -> void:
 		velocity.x = 0
 		dispatch(EVENT_FINISHED)
 
-	# Застосування швидкості до персонажа
+	# Переміщення персонажа і застосування гравітації
 	character.velocity = velocity
 	character.move_and_slide()
+
+	# Перевірка, чи персонаж на землі, і перехід в air_state
+	if !character.is_on_floor() and %Air:
+		state_machine.change_active_state(%Air)

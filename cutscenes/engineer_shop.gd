@@ -1,5 +1,11 @@
 extends Cutscene
 
+@onready var base_level_scene = load("res://levels/base_level.tscn")
+
+func _ready() -> void:
+	super()
+	next_scene = base_level_scene
+
 func advance_text(step: int):
 	text_timer.start()
 	

@@ -1,17 +1,17 @@
 extends AIController
-class_name HellbotController
+class_name PickemanController
 
 # Налаштування для бота
 @export var spot_range: float = 100.0  # Дальність, на якій бот бачить ворога
 @export var attack_range: float = 20.0  # Дальність атаки
-@export var cooldown_duration: float = 0.5  # Кулдаун атаки
+@export var cooldown_duration: float = 1.0  # Кулдаун атаки
 
-@onready var hit_state: HitState = $HellBot/LimboHSM/Hit
-@onready var idle_state: IdleState = $HellBot/LimboHSM/Idle
-@onready var run_state: RunState = $HellBot/LimboHSM/Run
-@onready var attack_state: HellbotAttackState = $HellBot/LimboHSM/Attack
-@onready var health_component: HealthComponent = $HellBot/HealthComponent
-@onready var death_state: DeathState = $HellBot/LimboHSM/Death
+@onready var idle_state = $Pickeman/LimboHSM/Idle
+@onready var run_state = $Pickeman/LimboHSM/Run
+@onready var attack_state = $Pickeman/LimboHSM/Attack
+@onready var hit_state = $Pickeman/LimboHSM/Hit
+@onready var death_state = $Pickeman/LimboHSM/Death
+@onready var health_component = $Pickeman/HealthComponent
 
 var target: Character = null  # Ворог, на якого бот націлюється
 var cooldown_timer: Timer = Timer.new()  # Таймер для кулдауна атаки
@@ -38,11 +38,7 @@ func _init_state_machine() -> void:
 	state_machine.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
 	state_machine.add_transition(hit_state, idle_state, hit_state.EVENT_FINISHED)
 
-var direction_to_enemy: Vector2
 func _on_got_hit(damage_causer) -> void:
-	direction_to_enemy = character.global_position.direction_to(damage_causer.global_position)
-	
-	# Переходимо в стан удару
 	state_machine.change_active_state(hit_state)
 
 func handle_states(delta: float) -> void:

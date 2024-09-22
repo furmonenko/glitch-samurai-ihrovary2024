@@ -14,3 +14,8 @@ func slow_motion_start(slow_motion_duration = 0.5, slow_motion_scale = 0.5) -> v
 func slow_motion_stop() -> void:
 	# Повертаємо звичайну швидкість
 	Engine.time_scale = 1.0
+
+func trigger_hitstop(duration: float = 0.1):
+	get_tree().paused = true
+	await get_tree().create_timer(duration).timeout
+	get_tree().paused = false

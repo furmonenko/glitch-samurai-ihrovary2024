@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://bja6jn57nw1vy"]
+
+[ext_resource type="Script" path="res://controllers/pickeman_controller.gd" id="1_001x7"]
+[ext_resource type="PackedScene" uid="uid://ckxkkjgb4u2yi" path="res://characters/hell_bot/pickeman.tscn" id="2_pwd3m"]
+[ext_resource type="AnimationLibrary" uid="uid://co8bi35r5sp1c" path="res://characters/pickeman/pickeman_anims.res" id="3_jv7dd"]
+
+[sub_resource type="Animation" id="Animation_ie62u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pickeman/CollisionShape2D/HitBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hh2o6"]
+_data = {
+"RESET": SubResource("Animation_ie62u")
+}
+
+[node name="PickemanController" type="Node2D" node_paths=PackedStringArray("character", "state_machine")]
+script = ExtResource("1_001x7")
+attack_range = 30.0
+character = NodePath("Pickeman")
+state_machine = NodePath("Pickeman/LimboHSM")
+
+[node name="Pickeman" parent="." instance=ExtResource("2_pwd3m")]
+
+[node name="Hurtbox" parent="Pickeman" index="0"]
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="Pickeman/CollisionShape2D/HitBox" index="0"]
+disabled = true
+
+[node name="AnimatedSprite2D" parent="Pickeman" index="2"]
+frame = 2
+
+[node name="AnimationPlayer" parent="Pickeman" index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_hh2o6"),
+"pickeman_anims": ExtResource("3_jv7dd")
+}
+
+[editable path="Pickeman"]

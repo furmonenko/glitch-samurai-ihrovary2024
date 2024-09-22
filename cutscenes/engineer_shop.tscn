@@ -1,7 +1,8 @@
-[gd_scene load_steps=36 format=4 uid="uid://bolgm34rsyatv"]
+[gd_scene load_steps=37 format=4 uid="uid://dk43eaf601nlv"]
 
 [ext_resource type="Script" path="res://cutscenes/engineer_shop.gd" id="1_1f11w"]
 [ext_resource type="Texture2D" uid="uid://cyc6y3aarjcgx" path="res://assets/Basic Assets/Tileset/DARK Edition Tileset with background.png" id="2_bdd62"]
+[ext_resource type="PackedScene" uid="uid://i4dd3g6ng1bf" path="res://levels/base_level.tscn" id="2_dtde7"]
 [ext_resource type="Texture2D" uid="uid://cfhbl54wcj223" path="res://assets/PortalsAndShops/Shops/Tech Shop.png" id="3_tbkjc"]
 [ext_resource type="LabelSettings" uid="uid://b33p2yrnnwkeq" path="res://cutscenes/intuduction.tres" id="4_5mm7d"]
 [ext_resource type="Texture2D" uid="uid://bh8fqx2dxwere" path="res://assets/UI/UI - Words/Words With BG/UI - Words15.png" id="5_fsv2r"]
@@ -603,14 +604,9 @@ _data = {
 "fade_out": SubResource("Animation_88qpm")
 }
 
-[node name="Engineer_Shop" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Engineer_Shop" type="CanvasLayer"]
 script = ExtResource("1_1f11w")
+next_scene = ExtResource("2_dtde7")
 
 [node name="Tileset" type="Node2D" parent="."]
 
@@ -628,7 +624,6 @@ frame_progress = 0.326406
 wait_time = 0.05
 
 [node name="IntroText" type="Label" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -649,7 +644,6 @@ autowrap_mode = 2
 uppercase = true
 
 [node name="HowToSkipContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -705,7 +699,6 @@ libraries = {
 }
 
 [node name="GlitchEffects" parent="." instance=ExtResource("7_rrnd0")]
-visible = false
 
 [node name="ColorRect" parent="GlitchEffects" index="0"]
 material = SubResource("ShaderMaterial_xua0i")

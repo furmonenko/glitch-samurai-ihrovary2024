@@ -18,12 +18,8 @@ func _enter() -> void:
 	# Викликаємо атаку при вході у стан, якщо це необхідно
 	attack()
 	
-func attack():
+func attack(combo_count: int = 0):
 	is_attack_finished = false
-	pass
-	
-func start_attack():
-	pass
 	
 func _on_animation_finished(animation_name: String) -> void:
 	is_attack_finished = true
