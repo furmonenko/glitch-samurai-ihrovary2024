@@ -553,7 +553,8 @@ disabled = true
 material = SubResource("ShaderMaterial_hiecp")
 position = Vector2(27, -18)
 sprite_frames = SubResource("SpriteFrames_ayjfh")
-animation = &"Death"
+animation = &"Idle"
+frame = 2
 metadata/_edit_lock_ = true
 
 [node name="DamageComponent" parent="." index="4" node_paths=PackedStringArray("damage_causer")]

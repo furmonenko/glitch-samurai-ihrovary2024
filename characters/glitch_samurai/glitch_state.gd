@@ -1,0 +1,67 @@
+extends State
+class_name GlitchState
+
+@onready var idle_state: IdleState = %Idle
+
+var move_speed: float = 500.0  # Максимальна швидкість пересування
+var acceleration: float = 2000.0  # Швидкість акселерації
+var deceleration: float = 200.0  # Швидкість децелерації
+var velocity: Vector2 = Vector2.ZERO  # Поточна швидкість персонажа
+
+var glitch_time: float = 0.4  # Час до наступного ривка
+var glitch_pause_time: float = 0.1  # Тривалість паузи між ривками
+var glitch_duration: float = 0.2  # Тривалість самого ривка
+var glitch_active: bool = false  # Чи активний зараз глітч
+
+var walls_to_ignore = ["WallType1", "WallType2"]  # Назви типів стін, через які персонаж може проходити
+
+func _enter() -> void:
+	state_machine.switch_state("glitch")
+	character.set_collision_mask_value(1, false)
+	character.is_glitched = true
+	glitch_time = randf_range(0.1, 0.3)  # Встановлюємо випадковий інтервал для першого ривка
+
+func _exit() -> void:
+	character.set_collision_mask_value(1, true)
+	character.is_glitched = false
+
+# Функція для обробки вільного руху з ефектом глітча
+func handle_glitch_movement(delta: float) -> void:
+	# Відлік до наступного ривка або паузи
+	glitch_time -= delta
+
+	if glitch_time <= 0:
+		if glitch_active:
+			# Якщо був активний ривок, переходимо в паузу
+			glitch_active = false
+			glitch_time = glitch_pause_time
+		else:
+			# Якщо був період паузи, робимо ривок
+			glitch_active = true
+			glitch_time = glitch_duration
+
+	# Тільки під час активного ривка рухаємо персонажа
+	if glitch_active:
+		var input_vector = Vector2(
+			Input.get_axis("move_left", "move_right"),
+			Input.get_axis("move_up", "move_down")
+		).normalized()
+
+		if input_vector != Vector2.ZERO:
+			# Під час ривка збільшуємо швидкість різко
+			velocity = velocity.move_toward(input_vector * move_speed, acceleration * delta)
+		else:
+			# Якщо гравець не рухається, зменшуємо швидкість
+			velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
+	else:
+		# Під час паузи швидкість падає до нуля
+		velocity = Vector2.ZERO
+
+	# Переміщення персонажа
+	character.velocity = velocity
+	character.move_and_slide()
+
+	# Ігнорування стін
+	for wall in get_tree().get_nodes_in_group("walls"):
+		if wall.name in walls_to_ignore:
+			wall.set_deferred("collision_layer", 0)  # Вимикаємо колізію з певними стінами

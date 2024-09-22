@@ -12,6 +12,9 @@ func apply_damage(damage_component :DamageComponent):
 	var damage =  damage_component.get_damage_amount()
 	var damage_causer = damage_component.get_damage_causer()
 	
+	if agent.is_glitched:
+		return
+	
 	agent.direction_to_enemy = agent.global_position.direction_to(damage_causer.global_position)
 	
 	current_hp = clampf(current_hp - damage, 0, max_hp)

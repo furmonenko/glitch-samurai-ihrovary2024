@@ -64,39 +64,47 @@ func handle_states(delta: float) -> void:
 	if not target:
 		find_target()  # Якщо цілі немає, шукаємо ворога
 
-	if target and is_target_in_range(spot_range):
-		# Якщо ворог в зоні видимості, йдемо до нього
-		if not is_target_in_range(attack_range):
-			# Переходимо в стан бігу
-			if state_machine.get_active_state() != run_state and state_machine.get_active_state() != attack_state:
-				state_machine.change_active_state(run_state)
+	if target:
+		# Якщо ціль перебуває в глітч-стані, ворог має зупинитися
+		if target.is_glitched:
+			state_machine.change_active_state(idle_state)
+			target = null  # Забуваємо ціль
+			return
+
+		# Якщо ворог у зоні видимості та не в глітчі, ворог намагається переслідувати або атакувати
+		if is_target_in_range(spot_range):
+			# Якщо ворог в зоні видимості, йдемо до нього
+			if not is_target_in_range(attack_range):
+				# Переходимо в стан бігу
+				if state_machine.get_active_state() != run_state and state_machine.get_active_state() != attack_state:
+					state_machine.change_active_state(run_state)
+				else:
+					# Визначаємо напрямок до ворога
+					var direction = target.global_position.x - character.global_position.x
+					var input_direction = 1 if direction > 0 else -1
+					# Викликаємо handle_movement з RunState для обробки руху в потрібному напрямку
+					run_state.handle_movement(input_direction, delta)
 			else:
-				# Визначаємо напрямок до ворога
-				var direction = target.global_position.x - character.global_position.x
-				var input_direction = 1 if direction > 0 else -1
-				# Викликаємо handle_movement з RunState для обробки руху в потрібному напрямку
-				run_state.handle_movement(input_direction, delta)
+				# Якщо ворог в зоні атаки
+				if cooldown_timer.is_stopped() and is_target_in_range(attack_range):
+					character.velocity = Vector2.ZERO  # Зупиняємо рух
+					if state_machine.get_active_state() != attack_state and !attack_state.is_attack_finished:
+						print(attack_state.is_attack_finished)
+						state_machine.change_active_state(attack_state)
+					elif attack_state.is_attack_finished:  # Перевірка, чи завершилася атака
+						print(attack_state.is_attack_finished)
+						# Після атаки чекаємо на кулдаун
+						state_machine.change_active_state(idle_state)
+						cooldown_timer.start()
+					attack_state.is_attack_finished = false
 		else:
 			# Якщо ворог вийшов із зони видимості, повертаємося до Idle
 			state_machine.change_active_state(idle_state)
-		# Перевірка на стан кулдауна
-		if cooldown_timer.is_stopped() and is_target_in_range(attack_range):
-			character.velocity = Vector2.ZERO
-				# Якщо ворог у зоні атаки, атакуємо
-			if state_machine.get_active_state() != attack_state and !attack_state.is_attack_finished:
-				print(attack_state.is_attack_finished)
-				state_machine.change_active_state(attack_state)
-			elif attack_state.is_attack_finished:  # Перевірка, чи завершилася атака
-				print(attack_state.is_attack_finished)
-				# Після атаки чекаємо на кулдаун
-				state_machine.change_active_state(idle_state)
-				cooldown_timer.start()
-			attack_state.is_attack_finished = false
 
 func find_target() -> void:
 	# Ти можеш використовувати свою логіку для пошуку ворога. Наприклад, використовуй зону або отримуй список ворогів
 	for enemy in get_tree().get_nodes_in_group("player"):
-		if is_instance_valid(enemy) and not enemy.is_dead:
+		if is_instance_valid(enemy) and not enemy.is_dead and not enemy.is_glitched:
 			target = enemy
 			break
 

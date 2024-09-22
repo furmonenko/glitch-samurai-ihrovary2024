@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Character
 
 @export var hitbox: HitBox
+var is_glitched :bool = false
 
 signal died(character :Character)
 
