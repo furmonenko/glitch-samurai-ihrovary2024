@@ -12,6 +12,8 @@ class_name HellbotController
 @onready var attack_state: HellbotAttackState = $HellBot/LimboHSM/Attack
 @onready var health_component: HealthComponent = $HellBot/HealthComponent
 @onready var death_state: DeathState = $HellBot/LimboHSM/Death
+@onready var attack_sound = $HellBot/Sounds/AttackSound
+@onready var hit_sound = $HellBot/Sounds/HitSound
 
 var target: Character = null  # Ворог, на якого бот націлюється
 var cooldown_timer: Timer = Timer.new()  # Таймер для кулдауна атаки
@@ -41,7 +43,7 @@ func _init_state_machine() -> void:
 var direction_to_enemy: Vector2
 func _on_got_hit(damage_causer) -> void:
 	direction_to_enemy = character.global_position.direction_to(damage_causer.global_position)
-	
+	hit_sound.play()
 	# Переходимо в стан удару
 	state_machine.change_active_state(hit_state)
 
@@ -89,10 +91,9 @@ func handle_states(delta: float) -> void:
 				if cooldown_timer.is_stopped() and is_target_in_range(attack_range):
 					character.velocity = Vector2.ZERO  # Зупиняємо рух
 					if state_machine.get_active_state() != attack_state and !attack_state.is_attack_finished:
-						print(attack_state.is_attack_finished)
 						state_machine.change_active_state(attack_state)
+						attack_sound.play()
 					elif attack_state.is_attack_finished:  # Перевірка, чи завершилася атака
-						print(attack_state.is_attack_finished)
 						# Після атаки чекаємо на кулдаун
 						state_machine.change_active_state(idle_state)
 						cooldown_timer.start()

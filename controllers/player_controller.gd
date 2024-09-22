@@ -10,6 +10,8 @@ signal glitch_exited
 @onready var attack_state: AttackState = %GlitchSamurai/%Attack
 @onready var death_state: DeathState = %GlitchSamurai/%Death
 @onready var glitch_state: GlitchState = $GlitchSamurai/LimboHSM/Glitch
+@onready var run_sound = $GlitchSamurai/Sounds/RunSound
+@onready var jump_sound = $GlitchSamurai/Sounds/JumpSound
 
 @export var energy: float = 400.0  # Максимальна енергія
 @export var energy_decrease_rate: float = 20.0  # Скільки енергії зменшувати за секунду
@@ -51,6 +53,8 @@ func handle_states(delta: float) -> void:
 	if character.is_dead:
 		return
 
+	if state_machine.get_active_state() != run_state:
+		run_sound.stop()
 	# Перевірка на глітч
 	if Input.is_action_just_pressed("interact") and state_machine.get_active_state() != glitch_state:
 		state_machine.change_active_state(glitch_state)
@@ -79,10 +83,15 @@ func handle_states(delta: float) -> void:
 	# Перевірка на стрибок (входження в стан AirState)
 	if Input.is_action_just_pressed("jump") and character.is_on_floor():
 		state_machine.change_active_state(air_state)
+		jump_sound.play()
+		
 
 	# Перевірка на атаку (входження в стан AttackState)
 	elif Input.is_action_just_pressed("attack"):
+		var attack_sound_pitch = randf_range(0.9, 1.1)
+		attack_sound.pitch_scale = attack_sound_pitch
 		attack_sound.play()
+		
 		if state_machine.get_active_state() != attack_state and character.is_on_floor():
 			# Починаємо атаку, якщо персонаж на землі і не атакує
 			combo_count = 1
@@ -102,13 +111,18 @@ func handle_states(delta: float) -> void:
 				state_machine.change_active_state(run_state)
 			elif state_machine.get_active_state() == run_state:
 				run_state.handle_movement(Input.get_axis("move_left", "move_right"), delta)
+		if !run_sound.playing:
+			run_sound.play()
 
 	elif state_machine.get_active_state() == run_state:
 		# Якщо персонаж біжить, але зупинився на краю, переконайтеся, що ми перевіряємо стан підлоги кожного кадру
 		if Input.get_axis("move_left", "move_right") == 0 or not character.is_on_floor():
 			state_machine.change_active_state(idle_state)
+			run_sound.stop()
 		elif !character.is_on_floor():
 			state_machine.change_active_state(air_state)
+			run_sound.stop()
+		
 
 	# Скидання комбо після завершення атаки
 	if state_machine.get_active_state() != attack_state:

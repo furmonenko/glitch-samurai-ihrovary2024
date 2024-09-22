@@ -39,7 +39,7 @@ collision_layer = 4
 disabled = true
 
 [node name="AnimatedSprite2D" parent="Pickeman" index="2"]
-frame = 2
+frame = 0
 
 [node name="AnimationPlayer" parent="Pickeman" index="5"]
 libraries = {

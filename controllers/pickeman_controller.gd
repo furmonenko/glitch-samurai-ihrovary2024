@@ -12,6 +12,9 @@ class_name PickemanController
 @onready var hit_state = $Pickeman/LimboHSM/Hit
 @onready var death_state = $Pickeman/LimboHSM/Death
 @onready var health_component = $Pickeman/HealthComponent
+@onready var attack_sound = $Pickeman/Sounds/AttackSound
+@onready var hit_sound = $Pickeman/Sounds/HitSound
+
 
 var target: Character = null  # Ворог, на якого бот націлюється
 var cooldown_timer: Timer = Timer.new()  # Таймер для кулдауна атаки
@@ -39,6 +42,7 @@ func _init_state_machine() -> void:
 	state_machine.add_transition(hit_state, idle_state, hit_state.EVENT_FINISHED)
 
 func _on_got_hit(damage_causer) -> void:
+	hit_sound.play()
 	state_machine.change_active_state(hit_state)
 
 func handle_states(delta: float) -> void:
@@ -85,10 +89,11 @@ func handle_states(delta: float) -> void:
 				if cooldown_timer.is_stopped() and is_target_in_range(attack_range):
 					character.velocity = Vector2.ZERO  # Зупиняємо рух
 					if state_machine.get_active_state() != attack_state and !attack_state.is_attack_finished:
-						print(attack_state.is_attack_finished)
 						state_machine.change_active_state(attack_state)
+						var attack_sound_pitch = randf_range(0.9, 1.1)
+						attack_sound.pitch_scale = attack_sound_pitch
+						attack_sound.play()
 					elif attack_state.is_attack_finished:  # Перевірка, чи завершилася атака
-						print(attack_state.is_attack_finished)
 						# Після атаки чекаємо на кулдаун
 						state_machine.change_active_state(idle_state)
 						cooldown_timer.start()

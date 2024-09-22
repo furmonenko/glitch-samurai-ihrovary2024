@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://c07cjxqrn0swb"]
+[gd_scene load_steps=94 format=3 uid="uid://c07cjxqrn0swb"]
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_ei3b4"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_58pe2"]
@@ -16,6 +16,8 @@
 [ext_resource type="Script" path="res://characters/hell_bot/hellbot_attack_state.gd" id="11_m0olb"]
 [ext_resource type="Script" path="res://characters/hell_bot/hit_state.gd" id="14_hkabi"]
 [ext_resource type="Script" path="res://controllers/states/death_state.gd" id="15_ddfut"]
+[ext_resource type="AudioStream" uid="uid://clho3xa5v501a" path="res://assets/sounds/Hellbot_attack.wav" id="17_y8wag"]
+[ext_resource type="AudioStream" uid="uid://b2gaphqyox35u" path="res://assets/sounds/hitsound.wav" id="18_mvesk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljkjx"]
 size = Vector2(31, 31)
@@ -598,3 +600,16 @@ script = ExtResource("14_hkabi")
 
 [node name="Death" type="LimboState" parent="LimboHSM" index="4"]
 script = ExtResource("15_ddfut")
+
+[node name="Sounds" type="Node2D" parent="." index="8"]
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
+stream = ExtResource("17_y8wag")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+stream = ExtResource("18_mvesk")
+volume_db = -20.0
+pitch_scale = 0.7
+bus = &"SFX"
