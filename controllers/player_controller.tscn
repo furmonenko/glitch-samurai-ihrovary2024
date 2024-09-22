@@ -19,7 +19,7 @@ damage_component = NodePath("../../DamageComponent")
 
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
 animation = &"Glitch Idle"
-frame = 3
+frame = 1
 
 [node name="HealthComponent" parent="GlitchSamurai" index="3"]
 max_hp = 1.0
@@ -31,8 +31,6 @@ state_conditions = {
 
 [node name="Attack" parent="GlitchSamurai/LimboHSM" index="3" node_paths=PackedStringArray("state_machine", "character")]
 script = ExtResource("3_a7hi3")
-slow_motion_scale = 0.2
-slow_motion_duration = 0.3
 state_machine = NodePath("..")
 character = NodePath("../..")
 

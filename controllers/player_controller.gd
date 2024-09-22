@@ -56,11 +56,12 @@ func handle_states(delta: float) -> void:
 			# Починаємо атаку, якщо персонаж на землі і не атакує
 			combo_count = 1
 			state_machine.change_active_state(attack_state)
-			# attack_state.attack()  # Початок першої атаки
+			attack_state.start_attack(combo_count)
 		elif state_machine.get_active_state() == attack_state and combo_count < max_combo_attacks:
-			# Якщо ми в стані атаки і комбо не закінчилось, викликаємо наступну атаку
+			# Якщо атака вже триває, але гравець натискає знову, зберігаємо це
+			attack_state.attack_pressed_during_animation = true
+			# Збільшуємо комбо-лічильник відразу після натискання
 			combo_count += 1
-			attack_state.attack()  # Продовжуємо атаку
 
 	# Перевірка на переміщення (входження в стан MoveState)
 	elif Input.get_axis("move_left", "move_right") != 0 and state_machine.get_active_state() != air_state and state_machine.get_active_state() != attack_state:
