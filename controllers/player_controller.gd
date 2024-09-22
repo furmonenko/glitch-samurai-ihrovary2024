@@ -45,7 +45,8 @@ func handle_states(delta: float) -> void:
 	
 	if character.is_dead:
 		return
-	
+
+	# Перевірка на глітч
 	if Input.is_action_just_pressed("interact") && state_machine.get_active_state() != glitch_state:
 		state_machine.change_active_state(glitch_state)
 		return
@@ -84,9 +85,9 @@ func handle_states(delta: float) -> void:
 			elif state_machine.get_active_state() == run_state:
 				run_state.handle_movement(Input.get_axis("move_left", "move_right"), delta)
 
-	# Якщо персонаж у RunState, але axis = 0, повертаємо його в IdleState
 	elif state_machine.get_active_state() == run_state:
-		if Input.get_axis("move_left", "move_right") == 0 and character.is_on_floor():
+		# Якщо персонаж біжить, але зупинився на краю, переконайтеся, що ми перевіряємо стан підлоги кожного кадру
+		if Input.get_axis("move_left", "move_right") == 0 or not character.is_on_floor():
 			state_machine.change_active_state(idle_state)
 		elif !character.is_on_floor():
 			state_machine.change_active_state(air_state)

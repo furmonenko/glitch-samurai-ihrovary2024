@@ -17,7 +17,9 @@ var walls_to_ignore = ["WallType1", "WallType2"]  # Назви типів сті
 
 func _enter() -> void:
 	state_machine.switch_state("glitch")
-	character.set_collision_mask_value(1, false)
+	character.set_collision_mask_value(1, true)
+	character.velocity.y -= 100
+	character.move_and_slide()
 	character.is_glitched = true
 	glitch_time = randf_range(0.1, 0.3)  # Встановлюємо випадковий інтервал для першого ривка
 

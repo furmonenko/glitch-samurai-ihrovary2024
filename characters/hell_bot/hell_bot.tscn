@@ -520,6 +520,7 @@ transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_u
 graph_offset = Vector2(-61.8701, 141.585)
 
 [node name="HellBot" instance=ExtResource("1_ei3b4")]
+collision_layer = 16
 
 [node name="Hurtbox" type="Area2D" parent="." index="0" node_paths=PackedStringArray("agent", "health_component")]
 collision_layer = 4
@@ -554,7 +555,7 @@ material = SubResource("ShaderMaterial_hiecp")
 position = Vector2(27, -18)
 sprite_frames = SubResource("SpriteFrames_ayjfh")
 animation = &"Idle"
-frame = 2
+frame = 1
 metadata/_edit_lock_ = true
 
 [node name="DamageComponent" parent="." index="4" node_paths=PackedStringArray("damage_causer")]

@@ -332,15 +332,15 @@ tile_set = ExtResource("2_lo2p1")
 
 [node name="Characters" type="Node2D" parent="."]
 
+[node name="PlayerController" parent="Characters" instance=ExtResource("3_045fn")]
+position = Vector2(268, 102)
+
 [node name="HellbotController" parent="Characters" instance=ExtResource("4_jpbr8")]
 position = Vector2(21, 126)
 
 [node name="PickemanController" parent="Characters" instance=ExtResource("8_6ds1m")]
-position = Vector2(-286, 126)
-
-[node name="PlayerController" parent="Characters" instance=ExtResource("3_045fn")]
 unique_name_in_owner = true
-position = Vector2(235, 126)
+position = Vector2(-286, 126)
 
 [node name="SceneGlitch" parent="." instance=ExtResource("5_th13b")]
 

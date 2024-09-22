@@ -4,6 +4,9 @@ class_name PlayerAttackState
 var attack_pressed_during_animation: bool = false  # Відстежуємо, чи була натиснута кнопка під час анімації
 var combo_count: int
 
+func _enter() -> void:
+	state_machine.switch_state("attack")
+
 func start_attack(_combo_count: int) -> void:
 	combo_count = _combo_count
 	var current_attack_anim = combo_count % 2  # Чередуємо анімації між 0 і 1
