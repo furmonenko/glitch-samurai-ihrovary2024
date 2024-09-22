@@ -10,12 +10,12 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	if player_controller:
 		player_controller.glitch_exited.connect(func():
-			scene_glitch.animation_player.stop()
-			scene_glitch.visible = false
-			glitch_sound.playing = false
+			if scene_glitch:
+				scene_glitch.animation_player.stop()
+				scene_glitch.visible = false
+				glitch_sound.playing = false
 			)
 	
 	scene_glitch.animation_player.play("scene_glitch")

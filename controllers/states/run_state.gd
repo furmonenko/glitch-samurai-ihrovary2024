@@ -24,6 +24,9 @@ func handle_movement(input_direction: int, delta: float) -> void:
 
 	# Оброт персонажа на основі напрямку
 	if input_direction != 0:
+		if character is Shieldman:
+			await get_tree().create_timer(0.5).timeout
+			
 		if input_direction > 0:
 			character.transform.x.x = 1
 		elif input_direction < 0:

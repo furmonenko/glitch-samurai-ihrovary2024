@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://unqj071j3se0"]
+
+[ext_resource type="PackedScene" uid="uid://jc4g732lmltx" path="res://characters/shieldman/shieldman.tscn" id="1_hr5cw"]
+[ext_resource type="Script" path="res://controllers/shieldman_controller.gd" id="1_tj5ih"]
+[ext_resource type="Script" path="res://controllers/attack_state.gd" id="3_8dwhn"]
+[ext_resource type="AudioStream" uid="uid://caoioobyllef2" path="res://assets/sounds/Shield 3.wav" id="4_cwrvx"]
+
+[node name="ShieldmanController" type="Node2D" node_paths=PackedStringArray("character", "state_machine")]
+position = Vector2(-3, 0)
+script = ExtResource("1_tj5ih")
+character = NodePath("Shieldman")
+state_machine = NodePath("Shieldman/LimboHSM")
+
+[node name="Shieldman" parent="." node_paths=PackedStringArray("hitbox") instance=ExtResource("1_hr5cw")]
+hitbox = NodePath("HitBox")
+
+[node name="AnimatedSprite2D" parent="Shieldman" index="1"]
+position = Vector2(0, -23)
+frame = 2
+
+[node name="HealthComponent" parent="Shieldman" index="2"]
+max_hp = 100.0
+
+[node name="AnimationPlayer" parent="Shieldman" index="4"]
+active = false
+
+[node name="LimboHSM" parent="Shieldman" index="6"]
+state_conditions = {
+"got_hit": "parameters/conditions/got_hit"
+}
+
+[node name="Attack" parent="Shieldman/LimboHSM" index="2"]
+script = ExtResource("3_8dwhn")
+
+[node name="Death" parent="Shieldman/LimboHSM" index="4" node_paths=PackedStringArray("controller")]
+controller = NodePath("../../..")
+
+[node name="HitBox" parent="Shieldman" index="8" node_paths=PackedStringArray("agent", "damage_component")]
+agent = NodePath("..")
+damage_component = NodePath("../DamageComponent")
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="Shieldman/Node2D" index="2"]
+stream = ExtResource("4_cwrvx")
+volume_db = -15.0
+
+[editable path="Shieldman"]
