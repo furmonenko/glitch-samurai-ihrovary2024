@@ -32,9 +32,14 @@ state_machine = NodePath("Pickeman/LimboHSM")
 
 [node name="Pickeman" parent="." instance=ExtResource("2_pwd3m")]
 
+[node name="Hurtbox" parent="Pickeman" index="0"]
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="Pickeman/CollisionShape2D/HitBox" index="0"]
+disabled = true
+
 [node name="AnimatedSprite2D" parent="Pickeman" index="2"]
-animation = &"Idle"
-frame = 3
+frame = 4
 
 [node name="AnimationPlayer" parent="Pickeman" index="5"]
 libraries = {

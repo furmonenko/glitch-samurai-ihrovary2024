@@ -16,6 +16,11 @@ func _ready() -> void:
 			state_machine.change_active_state(death_state)
 			dead.emit()
 		)
+	
+	if character.hitbox:
+		character.hitbox.hit_target.connect(func():
+			%PlayerCamera.start_screen_shake()
+			)
 	_init_state_machine()
 
 func _init_state_machine() -> void:

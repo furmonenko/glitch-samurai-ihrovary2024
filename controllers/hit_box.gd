@@ -1,7 +1,7 @@
 extends Area2D
 class_name HitBox
 
-signal hit_target(agent :Node2D)
+signal hit_target()
 
 @export var agent :Node2D
 @export var damage_component :DamageComponent
@@ -11,7 +11,7 @@ func _ready() -> void:
 	connect("area_exited", on_hitbox_exited)
 
 func on_hitbox_entered(area :Hurtbox):
-	pass
+	hit_target.emit()
 
 func on_hitbox_exited(area :Area2D):
 	pass

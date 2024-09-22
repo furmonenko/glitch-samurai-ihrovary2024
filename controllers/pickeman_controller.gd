@@ -38,11 +38,7 @@ func _init_state_machine() -> void:
 	state_machine.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
 	state_machine.add_transition(hit_state, idle_state, hit_state.EVENT_FINISHED)
 
-func _on_got_hit() -> void:
-	# Запам'ятовуємо останній стан перед отриманням удару
-	last_state = state_machine.get_active_state()
-
-	# Переходимо в стан удару
+func _on_got_hit(damage_causer) -> void:
 	state_machine.change_active_state(hit_state)
 
 func handle_states(delta: float) -> void:

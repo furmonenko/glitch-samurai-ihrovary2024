@@ -38,10 +38,10 @@ func _init_state_machine() -> void:
 	state_machine.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
 	state_machine.add_transition(hit_state, idle_state, hit_state.EVENT_FINISHED)
 
-func _on_got_hit() -> void:
-	# Запам'ятовуємо останній стан перед отриманням удару
-	last_state = state_machine.get_active_state()
-
+var direction_to_enemy: Vector2
+func _on_got_hit(damage_causer) -> void:
+	direction_to_enemy = character.global_position.direction_to(damage_causer.global_position)
+	
 	# Переходимо в стан удару
 	state_machine.change_active_state(hit_state)
 
@@ -51,6 +51,7 @@ func handle_states(delta: float) -> void:
 		return
 	
 	if state_machine.get_active_state() != death_state and character.is_dead:
+		await get_tree().create_timer(0.2).timeout
 		state_machine.change_active_state(death_state)
 		return
 		

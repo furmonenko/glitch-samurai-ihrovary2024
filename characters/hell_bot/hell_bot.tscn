@@ -373,6 +373,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(16.375, -12)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HellBot/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n4hjx"]
 _data = {
@@ -510,7 +522,7 @@ graph_offset = Vector2(-61.8701, 141.585)
 [node name="HellBot" instance=ExtResource("1_ei3b4")]
 
 [node name="Hurtbox" type="Area2D" parent="." index="0" node_paths=PackedStringArray("agent", "health_component")]
-collision_layer = 0
+collision_layer = 4
 collision_mask = 2
 script = ExtResource("2_58pe2")
 agent = NodePath("..")
@@ -541,8 +553,7 @@ disabled = true
 material = SubResource("ShaderMaterial_hiecp")
 position = Vector2(27, -18)
 sprite_frames = SubResource("SpriteFrames_ayjfh")
-animation = &"Idle"
-frame = 4
+animation = &"Death"
 metadata/_edit_lock_ = true
 
 [node name="DamageComponent" parent="." index="4" node_paths=PackedStringArray("damage_causer")]

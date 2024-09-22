@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4g3465k1cads"]
+[gd_scene load_steps=4 format=3 uid="uid://b4g3465k1cads"]
 
 [ext_resource type="PackedScene" uid="uid://dyj55qoijhuvi" path="res://cutscenes/intuduction.tscn" id="1_15ovn"]
 [ext_resource type="Script" path="res://main.gd" id="1_hdhc5"]
 [ext_resource type="PackedScene" uid="uid://cg1tfs1bu3fy3" path="res://cutscenes/pause.tscn" id="2_hxex0"]
-[ext_resource type="Script" path="res://cutscenes/pause.gd" id="4_85328"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_hdhc5")
@@ -14,4 +13,3 @@ transform = Transform2D(1, 0, 0, 1.07528, 0, 0)
 
 [node name="Pause" parent="." instance=ExtResource("2_hxex0")]
 visible = false
-script = ExtResource("4_85328")

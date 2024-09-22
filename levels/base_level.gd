@@ -3,7 +3,7 @@ extends Node2D
 @export var death_scene: PackedScene
 
 @onready var scene_glitch = $SceneGlitch
-@onready var player_controller = $PlayerController
+@onready var player_controller = %PlayerController
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,7 +13,6 @@ func _ready():
 		scene_glitch.animation_player.play("scene_glitch")
 		on_player_died()
 		)
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -9,7 +9,6 @@ func initialize_state() -> void:
 	animation_tree.animation_finished.connect(_on_hit_finished)
 
 func _enter() -> void:
-	# Перемикаємо стан на отримання удару
 	state_machine.switch_state("got_hit")
 
 func _on_hit_finished(anim_name) -> void:
