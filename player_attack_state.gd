@@ -30,4 +30,5 @@ func _on_animation_finished(animation_name: String) -> void:
 		start_attack(combo_count)  # Запускаємо наступну атаку
 	else:
 		# Якщо гравець не натиснув атаку, завершуємо стан
+		is_attack_finished = true
 		dispatch(EVENT_FINISHED)

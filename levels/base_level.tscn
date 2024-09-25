@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dk43eaf601nlv" path="res://cutscenes/engineer_shop.tscn" id="2_8skmk"]
 [ext_resource type="TileSet" uid="uid://dr11iq10t2uak" path="res://levels/tileset.tres" id="2_lo2p1"]
 [ext_resource type="PackedScene" uid="uid://b6xhp64emqkwx" path="res://controllers/player_controller.tscn" id="3_045fn"]
-[ext_resource type="PackedScene" path="res://cutscenes/last_demo_scene.tscn" id="3_oi5uh"]
+[ext_resource type="PackedScene" uid="uid://bs62ms5pta6a4" path="res://cutscenes/last_demo_scene.tscn" id="3_oi5uh"]
 [ext_resource type="PackedScene" uid="uid://bop2xmo4jtij8" path="res://scene_glitch_effect.tscn" id="5_th13b"]
 [ext_resource type="PackedScene" uid="uid://bja6jn57nw1vy" path="res://controllers/pickeman_controller.tscn" id="7_80x3b"]
 [ext_resource type="PackedScene" uid="uid://ctg5ppxcodivj" path="res://controllers/hellbot_controller.tscn" id="8_30c12"]
@@ -342,59 +342,19 @@ tile_set = ExtResource("2_lo2p1")
 
 [node name="Characters" type="Node2D" parent="."]
 
-[node name="HellbotController" parent="Characters" instance=ExtResource("8_30c12")]
-position = Vector2(-287, 128)
-
-[node name="HellbotController2" parent="Characters" instance=ExtResource("8_30c12")]
-position = Vector2(-23, -80)
-
-[node name="HellbotController3" parent="Characters" instance=ExtResource("8_30c12")]
-position = Vector2(89, -224)
-
-[node name="ShieldmanController" parent="Characters" instance=ExtResource("10_0e0l6")]
-position = Vector2(-71, -849)
-
-[node name="PickemanController" parent="Characters" instance=ExtResource("7_80x3b")]
-position = Vector2(-93, 128)
-
-[node name="Pickeman" parent="Characters/PickemanController" index="0" node_paths=PackedStringArray("hitbox")]
-hitbox = NodePath("CollisionShape2D/HitBox")
-
-[node name="CollisionShape2D" parent="Characters/PickemanController/Pickeman/CollisionShape2D/HitBox" index="0"]
-disabled = true
-
-[node name="AnimatedSprite2D" parent="Characters/PickemanController/Pickeman" index="2"]
-frame = 1
-
-[node name="PickemanController2" parent="Characters" instance=ExtResource("7_80x3b")]
-position = Vector2(-250, -80)
-metadata/_edit_group_ = true
-
-[node name="Pickeman" parent="Characters/PickemanController2" index="0" node_paths=PackedStringArray("hitbox")]
-hitbox = NodePath("CollisionShape2D/HitBox")
-
-[node name="AnimatedSprite2D" parent="Characters/PickemanController2/Pickeman" index="2"]
-frame = 1
-
-[node name="PickemanController3" parent="Characters" instance=ExtResource("7_80x3b")]
-position = Vector2(84, -432)
-metadata/_edit_group_ = true
-
-[node name="Pickeman" parent="Characters/PickemanController3" index="0" node_paths=PackedStringArray("hitbox")]
-hitbox = NodePath("CollisionShape2D/HitBox")
-
-[node name="PickemanController4" parent="Characters" instance=ExtResource("7_80x3b")]
-position = Vector2(-305, -432)
-metadata/_edit_group_ = true
-
-[node name="Pickeman" parent="Characters/PickemanController4" index="0" node_paths=PackedStringArray("hitbox")]
-hitbox = NodePath("CollisionShape2D/HitBox")
-
-[node name="AnimatedSprite2D" parent="Characters/PickemanController4/Pickeman" index="2"]
-frame = 5
-
 [node name="PlayerController" parent="Characters" instance=ExtResource("3_045fn")]
-position = Vector2(255, 128)
+position = Vector2(251, 103)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="PickemanController" parent="Enemies" instance=ExtResource("7_80x3b")]
+position = Vector2(-218, -80)
+
+[node name="ShieldmanController" parent="Enemies" instance=ExtResource("10_0e0l6")]
+position = Vector2(48, -80)
+
+[node name="HellbotController" parent="Enemies" instance=ExtResource("8_30c12")]
+position = Vector2(151, 128)
 
 [node name="LastDoor" type="Area2D" parent="."]
 position = Vector2(304, -863)
@@ -413,12 +373,4 @@ offset_bottom = 134.0
 [connection signal="body_entered" from="LastDoor" to="." method="_on_last_door_body_entered"]
 
 [editable path="PortalsPair"]
-[editable path="Characters/PickemanController"]
-[editable path="Characters/PickemanController/Pickeman"]
-[editable path="Characters/PickemanController2"]
-[editable path="Characters/PickemanController2/Pickeman"]
-[editable path="Characters/PickemanController3"]
-[editable path="Characters/PickemanController3/Pickeman"]
-[editable path="Characters/PickemanController4"]
-[editable path="Characters/PickemanController4/Pickeman"]
 [editable path="SceneGlitch"]

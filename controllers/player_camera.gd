@@ -1,6 +1,6 @@
 extends Camera2D
 
-var shake_intensity = 2  # Інтенсивність трясу
+var shake_intensity = 1.5 # Інтенсивність трясу
 var shake_duration = 0.2  # Тривалість трясу
 var shake_timer = 0.0
 var original_offset = Vector2.ZERO  # Початковий зсув камери

@@ -532,6 +532,9 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_b52vt"]
 resource_name = "advance_text"
 
+[sub_resource type="Animation" id="Animation_hfowg"]
+resource_name = "end_game"
+
 [sub_resource type="Animation" id="Animation_hsm4b"]
 resource_name = "fade_in"
 length = 4.0
@@ -627,9 +630,6 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, false]
 }
-
-[sub_resource type="Animation" id="Animation_hfowg"]
-resource_name = "end_game"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cuftd"]
 _data = {

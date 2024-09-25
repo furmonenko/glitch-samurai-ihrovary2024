@@ -1,21 +1,22 @@
 [gd_resource type="AnimationNodeStateMachine" load_steps=30 format=3 uid="uid://jyyyp1mh6mw3"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f7iag"]
-animation = &"Attack"
+animation = &"shieldman_anim/Attack"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gtd8y"]
-animation = &"Death"
+animation = &"shieldman_anim/Death"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gu5el"]
-animation = &"Hit"
+animation = &"shieldman_anim/Hit"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pmx5x"]
-animation = &"Idle"
+animation = &"shieldman_anim/Idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gwmc4"]
-animation = &"Walk"
+animation = &"shieldman_anim/Walk"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lsawd"]
+animation = &"shieldman_anim/Range Attack"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u7ly2"]
 advance_mode = 2
@@ -128,4 +129,4 @@ states/Shoot/node = SubResource("AnimationNodeAnimation_lsawd")
 states/Shoot/position = Vector2(610.12, -39.6392)
 states/Start/position = Vector2(-24, -38.0745)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_u7ly2"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_fc6ll"), "Idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_qe7e2"), "Run", "Shoot", SubResource("AnimationNodeStateMachineTransition_qfn61"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_6rhnc"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_i27gm"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_1ut5o"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_dv41m"), "Shoot", "Idle", SubResource("AnimationNodeStateMachineTransition_2wuwm"), "Shoot", "Run", SubResource("AnimationNodeStateMachineTransition_ioucn"), "Shoot", "Hit", SubResource("AnimationNodeStateMachineTransition_qmt3u"), "Idle", "Hit", SubResource("AnimationNodeStateMachineTransition_6xwgm"), "Attack", "Hit", SubResource("AnimationNodeStateMachineTransition_ux23c"), "Hit", "Death", SubResource("AnimationNodeStateMachineTransition_bff3f"), "Hit", "Idle", SubResource("AnimationNodeStateMachineTransition_c6oqc"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a1yu2"), "Run", "Hit", SubResource("AnimationNodeStateMachineTransition_a3nn6"), "Hit", "Run", SubResource("AnimationNodeStateMachineTransition_8hau1"), "Hit", "Attack", SubResource("AnimationNodeStateMachineTransition_2nq4s"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_j8cq0"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_vcecx"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_a2pp8"), "Hit", "Shoot", SubResource("AnimationNodeStateMachineTransition_5xl6u")]
-graph_offset = Vector2(-167.543, 255.568)
+graph_offset = Vector2(-421.543, -0.432007)

@@ -3,6 +3,7 @@ class_name PlayerController
 
 signal dead
 signal glitch_exited
+signal play_glitch_once
 
 @onready var idle_state: LimboState = %GlitchSamurai/%Idle
 @onready var run_state: RunState = %GlitchSamurai/%Run
@@ -31,11 +32,13 @@ func _ready() -> void:
 	if character.hitbox:
 		character.hitbox.hit_target.connect(func(damaged_character: Character):
 			%PlayerCamera.start_screen_shake()
+			play_glitch_once.emit()
 			if damaged_character.is_dead:
 				pass
 				# Helpers.slow_motion_start(0.5)
 			)
 	_init_state_machine()
+	
 
 func _init_state_machine() -> void:
 	super()
@@ -90,16 +93,18 @@ func handle_states(delta: float) -> void:
 	elif Input.is_action_just_pressed("attack"):
 		var attack_sound_pitch = randf_range(0.9, 1.1)
 		attack_sound.pitch_scale = attack_sound_pitch
-		attack_sound.play()
 		
 		if state_machine.get_active_state() != attack_state and character.is_on_floor():
 			# Починаємо атаку, якщо персонаж на землі і не атакує
 			combo_count = 1
 			state_machine.change_active_state(attack_state)
 			attack_state.start_attack(combo_count)
+			
+			attack_sound.play()
 		elif state_machine.get_active_state() == attack_state and combo_count < max_combo_attacks:
 			# Якщо атака вже триває, але гравець натискає знову, зберігаємо це
 			attack_state.attack_pressed_during_animation = true
+			attack_sound.play()
 			# Збільшуємо комбо-лічильник відразу після натискання
 			combo_count += 1
 

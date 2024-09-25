@@ -7,10 +7,18 @@ extends Node2D
 @onready var player_controller: PlayerController = $Characters/PlayerController
 @onready var glitch: ColorRect = $SceneGlitch/%Glitch
 @onready var glitch_sound = $SceneGlitch/GlitchSound
+@onready var enemies = $Enemies
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if player_controller:
+		player_controller.play_glitch_once.connect(func():
+			print("afafaa")
+			scene_glitch.visible = true
+			scene_glitch.animation_player.play("hit_glitch")
+			)
+			
 		player_controller.glitch_exited.connect(func():
 			if scene_glitch:
 				scene_glitch.animation_player.stop()
