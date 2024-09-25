@@ -12,6 +12,9 @@ var velocity :Vector2
 
 func _enter() -> void:
 	velocity = character.velocity
+	
+	# Міняємо умови в animation_tree. Переключаємо анімацію.
+	# TODO: зробити з "run" @export var яка відповідатиме за назву умови в animation_tree.
 	state_machine.switch_state("run")
 
 func handle_movement(input_direction: int, delta: float) -> void:

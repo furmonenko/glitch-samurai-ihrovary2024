@@ -26,7 +26,7 @@ state_machine = NodePath("Pickeman/LimboHSM")
 collision_layer = 4
 
 [node name="AnimatedSprite2D" parent="Pickeman" index="2"]
-frame = 5
+frame = 2
 
 [node name="AnimationPlayer" parent="Pickeman" index="5"]
 libraries = {

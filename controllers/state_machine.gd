@@ -6,6 +6,9 @@ class_name StateMachine
 
 @export var state_conditions: Dictionary = {}
 
+# Or uose &"character_died"
+var CHARACTER_DIED :StringName = "character_died"
+
 var current_state: String = "idle"
 
 func _ready() -> void:
@@ -31,6 +34,8 @@ func create_state_conditions():
 	state_conditions["attack"] = "parameters/conditions/attacking"
 	state_conditions["death"] = "parameters/conditions/dead"
 	
+# Ця функція сетитів всі умови в animation_tree на false, а умову анімаціїї,
+# яку потрібно зараз програвати на true
 func switch_state(target_state: String):
 	for state in state_conditions.keys():
 		# Отримуємо шлях до параметра анімації

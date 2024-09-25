@@ -40,7 +40,10 @@ func _ready() -> void:
 func _init_state_machine() -> void:
 	super()
 	
+	state_machine.add_transition(state_machine.ANYSTATE, death_state, state_machine.CHARACTER_DIED)
 	state_machine.add_transition(idle_state, run_state, idle_state.EVENT_FINISHED)
+	state_machine.add_transition(idle_state, death_state, idle_state.CHARACTER_DIED)
+	
 	state_machine.add_transition(run_state, idle_state, run_state.EVENT_FINISHED)
 	state_machine.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
 	state_machine.add_transition(hit_state, idle_state, hit_state.EVENT_FINISHED)
@@ -59,15 +62,15 @@ func handle_states(delta: float) -> void:
 	if !state_machine.is_active():
 		return
 	
-	if state_machine.get_active_state() != death_state and character.is_dead:
-		state_machine.change_active_state(death_state)
-		return
+	#if state_machine.get_active_state() != death_state and character.is_dead:
+		#state_machine.change_active_state(death_state)
+		#return
 		
-	if state_machine.get_active_state() == hit_state or character.is_dead:
-		return
+	#if state_machine.get_active_state() == hit_state or character.is_dead:
+		#return
 		
-	if state_machine.get_active_state() == attack_state:
-		return
+	#if state_machine.get_active_state() == attack_state:
+		#return
 		
 	if not target:
 		find_target()  # Якщо цілі немає, шукаємо ворога
@@ -75,19 +78,23 @@ func handle_states(delta: float) -> void:
 	if target:
 		# Якщо ціль перебуває в глітч-стані, ворог має зупинитися
 		if target.is_glitched:
-			state_machine.change_active_state(idle_state)
+			# TODO: змінити на сигнали "entered_glitch" i "exited_glitch"
 			target = null  # Забуваємо ціль
 			return
 
 		# Якщо ворог у зоні видимості та не в глітчі, ворог намагається переслідувати або атакувати
+		# TODO: перенести логіку в idle_state
 		if is_target_in_range(spot_range):
 			# Якщо ворог в зоні видимості, йдемо до нього
 			if not is_target_in_range(attack_range):
 				# Переходимо в стан бігу
+				# тут ми знаходимося в idle_state. треба створити сигнал, який відповідатиме за переключання в ран стейт.
+				# dispatch(FOUND_ENEMY) в коді idle_state
 				if state_machine.get_active_state() != run_state and state_machine.get_active_state() != attack_state:
 					state_machine.change_active_state(run_state)
 				else:
 					# Визначаємо напрямок до ворога
+					# Це вже run_state. Додати в _update() ран стейта.
 					var direction = target.global_position.x - character.global_position.x
 					var input_direction = 1 if direction > 0 else -1
 					# Викликаємо handle_movement з RunState для обробки руху в потрібному напрямку
