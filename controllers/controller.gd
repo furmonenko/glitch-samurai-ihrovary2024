@@ -16,6 +16,8 @@ class_name Controller
 
 @onready var velocity = character.velocity
 
+
+
 func _process(delta: float) -> void:
 	if !character:
 		Helpers.throw_error("No character controlled by ", name)

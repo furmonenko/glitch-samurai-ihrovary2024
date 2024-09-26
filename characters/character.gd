@@ -1,6 +1,9 @@
 extends CharacterBody2D
 class_name Character
 
+@onready var animated_sprite = $AnimatedSprite2D
+
+
 @export var hitbox: HitBox
 var is_glitched :bool = false
 

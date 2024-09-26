@@ -56,10 +56,13 @@ agent = NodePath("../..")
 damage_component = NodePath("../../DamageComponent")
 
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
-frame = 9
+frame = 10
 
 [node name="HealthComponent" parent="GlitchSamurai" index="3"]
 max_hp = 1.0
+
+[node name="AnimationTree" parent="GlitchSamurai" index="6"]
+parameters/Attack/blend_position = 1.32617
 
 [node name="LimboHSM" parent="GlitchSamurai" index="7"]
 state_conditions = {

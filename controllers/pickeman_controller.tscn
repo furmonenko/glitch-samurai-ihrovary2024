@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://bja6jn57nw1vy"]
+[gd_scene load_steps=8 format=3 uid="uid://bja6jn57nw1vy"]
 
-[ext_resource type="Script" path="res://controllers/pickeman_controller.gd" id="1_001x7"]
+[ext_resource type="Script" path="res://ai_controller.gd" id="1_wc86j"]
 [ext_resource type="PackedScene" uid="uid://ckxkkjgb4u2yi" path="res://characters/hell_bot/pickeman.tscn" id="2_pwd3m"]
-[ext_resource type="AnimationLibrary" uid="uid://co8bi35r5sp1c" path="res://characters/pickeman/pickeman_anims.res" id="3_jv7dd"]
+[ext_resource type="Script" path="res://controllers/idle_ai.gd" id="4_fos1i"]
 [ext_resource type="AudioStream" uid="uid://blxnlx1q5027h" path="res://assets/sounds/Hurt_v2_wav.wav" id="4_p712c"]
+[ext_resource type="Script" path="res://controllers/run_ai.gd" id="5_y70g1"]
+[ext_resource type="Script" path="res://controllers/attack_ai.gd" id="6_impqp"]
+[ext_resource type="Script" path="res://controllers/death_ai.gd" id="8_trc5y"]
 
-[node name="PickemanController" type="Node2D" node_paths=PackedStringArray("hit_state", "idle_state", "run_state", "attack_state", "health_component", "death_state", "hurt_box_collision", "attack_sound", "hit_sound", "character", "state_machine")]
-script = ExtResource("1_001x7")
-attack_range = 30.0
-hit_state = NodePath("Pickeman/LimboHSM/Hit")
+[node name="PickemanController" type="Node2D" node_paths=PackedStringArray("idle_state", "run_state", "attack_state", "health_component", "death_state", "hurt_box_collision", "attack_sound", "hit_sound", "character", "state_machine")]
+script = ExtResource("1_wc86j")
+cooldown_duration = 2.0
 idle_state = NodePath("Pickeman/LimboHSM/Idle")
 run_state = NodePath("Pickeman/LimboHSM/Run")
 attack_state = NodePath("Pickeman/LimboHSM/Attack")
@@ -28,10 +30,24 @@ collision_layer = 4
 [node name="AnimatedSprite2D" parent="Pickeman" index="2"]
 frame = 2
 
-[node name="AnimationPlayer" parent="Pickeman" index="5"]
-libraries = {
-"pickeman_anims": ExtResource("3_jv7dd")
-}
+[node name="DamageComponent" parent="Pickeman" index="4"]
+damage_amount = 0.0
+
+[node name="Idle" parent="Pickeman/LimboHSM" index="0" node_paths=PackedStringArray("controller")]
+script = ExtResource("4_fos1i")
+controller = NodePath("../../..")
+
+[node name="Run" parent="Pickeman/LimboHSM" index="1" node_paths=PackedStringArray("controller")]
+script = ExtResource("5_y70g1")
+controller = NodePath("../../..")
+
+[node name="Attack" parent="Pickeman/LimboHSM" index="2" node_paths=PackedStringArray("animation_tree", "controller")]
+script = ExtResource("6_impqp")
+animation_tree = NodePath("../../AnimationTree")
+controller = NodePath("../../..")
+
+[node name="Death" parent="Pickeman/LimboHSM" index="3"]
+script = ExtResource("8_trc5y")
 
 [node name="HitSound" parent="Pickeman/Sounds" index="1"]
 stream = ExtResource("4_p712c")

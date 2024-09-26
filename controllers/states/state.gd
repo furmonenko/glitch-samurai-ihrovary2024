@@ -4,9 +4,13 @@ class_name State
 @export var animation_tree: AnimationTree
 @export var state_machine :StateMachine
 @export var character :CharacterBody2D
+@export var controller: Controller
 @export var animation_name :String
 
 @onready var playback :AnimationNodeStateMachinePlayback
+
+var START_ATTACK :StringName = "start_attack"
+var START_SHOOT :StringName = "start_shoot"
 
 func _ready():
 	pass

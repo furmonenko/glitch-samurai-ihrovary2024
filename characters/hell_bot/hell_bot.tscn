@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://c07cjxqrn0swb"]
+[gd_scene load_steps=92 format=3 uid="uid://c07cjxqrn0swb"]
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_ei3b4"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_58pe2"]
@@ -14,7 +14,6 @@
 [ext_resource type="Script" path="res://controllers/states/idle_state.gd" id="9_nlia4"]
 [ext_resource type="Script" path="res://controllers/states/run_state.gd" id="10_2ll76"]
 [ext_resource type="Script" path="res://characters/hell_bot/hellbot_attack_state.gd" id="11_m0olb"]
-[ext_resource type="Script" path="res://characters/hell_bot/hit_state.gd" id="14_hkabi"]
 [ext_resource type="Script" path="res://controllers/states/death_state.gd" id="15_ddfut"]
 [ext_resource type="AudioStream" uid="uid://clho3xa5v501a" path="res://assets/sounds/Hellbot_attack.wav" id="17_y8wag"]
 [ext_resource type="AudioStream" uid="uid://blxnlx1q5027h" path="res://assets/sounds/Hurt_v2_wav.wav" id="18_3bjv4"]
@@ -30,6 +29,7 @@ size = Vector2(62.625, 22)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hiecp"]
 shader = ExtResource("4_6ceyn")
+shader_parameter/is_hurt = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_32gsa"]
 atlas = ExtResource("2_qrhfr")
@@ -568,16 +568,16 @@ agent = NodePath("../..")
 damage_component = NodePath("../../DamageComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/HitBox" index="0"]
-position = Vector2(17, -7)
+position = Vector2(42.6875, -10)
 shape = SubResource("RectangleShape2D_d6b2p")
 disabled = true
 
 [node name="AnimatedSprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_hiecp")
-position = Vector2(27, -18)
+position = Vector2(27, -17)
 sprite_frames = SubResource("SpriteFrames_ayjfh")
-animation = &"Shoot"
-frame = 5
+animation = &"Idle"
+frame = 1
 metadata/_edit_lock_ = true
 
 [node name="DamageComponent" parent="." index="4" node_paths=PackedStringArray("damage_causer")]
@@ -615,10 +615,7 @@ script = ExtResource("10_2ll76")
 script = ExtResource("11_m0olb")
 max_combo_attacks = 1
 
-[node name="Hit" type="LimboState" parent="LimboHSM" index="3"]
-script = ExtResource("14_hkabi")
-
-[node name="Death" type="LimboState" parent="LimboHSM" index="4"]
+[node name="Death" type="LimboState" parent="LimboHSM" index="3"]
 script = ExtResource("15_ddfut")
 
 [node name="Sounds" type="Node2D" parent="." index="8"]

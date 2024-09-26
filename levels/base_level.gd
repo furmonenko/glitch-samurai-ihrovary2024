@@ -14,7 +14,6 @@ extends Node2D
 func _ready():
 	if player_controller:
 		player_controller.play_glitch_once.connect(func():
-			print("afafaa")
 			scene_glitch.visible = true
 			scene_glitch.animation_player.play("hit_glitch")
 			)
@@ -35,9 +34,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if !player_controller.character:
-		pass
-	
 	if player_controller.character.is_glitched:
 		scene_glitch.animation_player.play("player_glitched")
 		scene_glitch.visible = true

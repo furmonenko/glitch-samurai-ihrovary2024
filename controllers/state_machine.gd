@@ -7,7 +7,8 @@ class_name StateMachine
 @export var state_conditions: Dictionary = {}
 
 # Or uose &"character_died"
-var CHARACTER_DIED :StringName = "character_died"
+var GOT_HIT: StringName = "got_hit"
+var CHARACTER_DIED: StringName = "character_died"
 
 var current_state: String = "idle"
 

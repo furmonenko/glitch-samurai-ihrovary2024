@@ -7,12 +7,12 @@ signal hit_glitch
 @export var attack_range: float = 20.0  # Дальність атаки
 @export var cooldown_duration: float = 0.5  # Кулдаун атаки
 
-@export var hit_state: HitState
-@export var idle_state: IdleState
-@export var run_state: RunState
-@export var attack_state: AttackState
+@export var shoot_state: ShootStateAI
+@export var idle_state: IdleStateAI
+@export var run_state: RunStateAI
+@export var attack_state: AttackStateAI
 @export var health_component: HealthComponent
-@export var death_state: DeathState
+@export var death_state: DeathStateAI
 @export var hurt_box_collision: CollisionShape2D
 
 @export var attack_sound: AudioStreamPlayer2D
@@ -29,9 +29,10 @@ func _ready() -> void:
 	cooldown_timer.wait_time = cooldown_duration
 	
 	character.died.connect(func(character):
-		
 		character_died.call_deferred()
+		state_machine.dispatch(state_machine.CHARACTER_DIED)
 		)
+		
 		
 	health_component.got_hit.connect(_on_got_hit)
 	
@@ -42,11 +43,12 @@ func _init_state_machine() -> void:
 	
 	state_machine.add_transition(state_machine.ANYSTATE, death_state, state_machine.CHARACTER_DIED)
 	state_machine.add_transition(idle_state, run_state, idle_state.EVENT_FINISHED)
-	state_machine.add_transition(idle_state, death_state, idle_state.CHARACTER_DIED)
-	
 	state_machine.add_transition(run_state, idle_state, run_state.EVENT_FINISHED)
+	
+	state_machine.add_transition(idle_state, attack_state, idle_state.START_ATTACK)
 	state_machine.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
-	state_machine.add_transition(hit_state, idle_state, hit_state.EVENT_FINISHED)
+	
+
 
 var direction_to_enemy: Vector2
 
@@ -54,66 +56,30 @@ func _on_got_hit(damage_causer) -> void:
 	direction_to_enemy = character.global_position.direction_to(damage_causer.global_position)
 	hit_sound.play()
 	hit_glitch.emit()
-	# Переходимо в стан удару
-	state_machine.change_active_state(hit_state)
+	character.animated_sprite.material.set_shader_parameter("is_hurt", true)
+	var tween = get_tree().create_tween()
+	tween.tween_property(character.animated_sprite.material, "shader_parameter/is_hurt", false, 0.2)
+
+func character_died():
+	if hit_sound:
+		hit_sound.play()
+	character.is_dead = true
+	hurt_box_collision.disabled = true
+
 
 func handle_states(delta: float) -> void:
 	super(delta)
 	if !state_machine.is_active():
 		return
-	
-	#if state_machine.get_active_state() != death_state and character.is_dead:
-		#state_machine.change_active_state(death_state)
-		#return
-		
-	#if state_machine.get_active_state() == hit_state or character.is_dead:
-		#return
-		
-	#if state_machine.get_active_state() == attack_state:
-		#return
 		
 	if not target:
-		find_target()  # Якщо цілі немає, шукаємо ворога
-
-	if target:
-		# Якщо ціль перебуває в глітч-стані, ворог має зупинитися
-		if target.is_glitched:
-			# TODO: змінити на сигнали "entered_glitch" i "exited_glitch"
-			target = null  # Забуваємо ціль
-			return
-
-		# Якщо ворог у зоні видимості та не в глітчі, ворог намагається переслідувати або атакувати
-		# TODO: перенести логіку в idle_state
-		if is_target_in_range(spot_range):
-			# Якщо ворог в зоні видимості, йдемо до нього
-			if not is_target_in_range(attack_range):
-				# Переходимо в стан бігу
-				# тут ми знаходимося в idle_state. треба створити сигнал, який відповідатиме за переключання в ран стейт.
-				# dispatch(FOUND_ENEMY) в коді idle_state
-				if state_machine.get_active_state() != run_state and state_machine.get_active_state() != attack_state:
-					state_machine.change_active_state(run_state)
-				else:
-					# Визначаємо напрямок до ворога
-					# Це вже run_state. Додати в _update() ран стейта.
-					var direction = target.global_position.x - character.global_position.x
-					var input_direction = 1 if direction > 0 else -1
-					# Викликаємо handle_movement з RunState для обробки руху в потрібному напрямку
-					run_state.handle_movement(input_direction, delta)
-			else:
-				# Якщо ворог в зоні атаки
-				if cooldown_timer.is_stopped() and is_target_in_range(attack_range):
-					character.velocity = Vector2.ZERO  # Зупиняємо рух
-					if state_machine.get_active_state() != attack_state and !attack_state.is_attack_finished:
-						state_machine.change_active_state(attack_state)
-					elif attack_state.is_attack_finished:  # Перевірка, чи завершилася атака
-						# Після атаки чекаємо на кулдаун
-						state_machine.change_active_state(idle_state)
-						cooldown_timer.start()
-					attack_state.is_attack_finished = false
-		else:
-			# Якщо ворог вийшов із зони видимості, повертаємося до Idle
-			state_machine.change_active_state(idle_state)
-
+		find_target()  # Якщо цілі немає, шукаємо ворог
+	
+	
+func _process(delta):
+	super(delta)
+	print(state_machine.get_active_state())
+	
 func find_target() -> void:
 	# Ти можеш використовувати свою логіку для пошуку ворога. Наприклад, використовуй зону або отримуй список ворогів
 	for enemy in get_tree().get_nodes_in_group("player"):
@@ -126,15 +92,3 @@ func is_target_in_range(range: float) -> bool:
 	if target:
 		return character.global_position.distance_to(target.global_position) <= range
 	return false
-
-func move_to_target(delta: float) -> void:
-	# Рухаємося до ворога
-	if target:
-		var direction = (target.global_position - character.global_position).normalized()
-		run_state.handle_movement(sign(direction.x), delta)
-
-func character_died():
-	if hit_sound:
-		hit_sound.play()
-	character.is_dead = true
-	hurt_box_collision.disabled = true

@@ -10,7 +10,7 @@ func _ready() -> void:
 	connect("area_entered", on_hitbox_entered)
 	connect("area_exited", on_hitbox_exited)
 
-func on_hitbox_entered(area :Hurtbox):
+func on_hitbox_entered(area :Area2D):
 	if area is Hurtbox && area.agent:
 		hit_target.emit(area.agent)
 

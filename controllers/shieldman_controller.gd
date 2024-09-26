@@ -32,7 +32,10 @@ func handle_states(delta: float) -> void:
 func _on_got_hit(damage_causer) -> void:
 	# Специфічна реакція щитовика на удар
 	if is_behind_shield(damage_causer):
-		state_machine.change_active_state(hit_state)
+		hit_glitch.emit()
+		character.animated_sprite.material.set_shader_parameter("is_hurt", true)
+		var tween = get_tree().create_tween()
+		tween.tween_property(character.animated_sprite.material, "shader_parameter/is_hurt", false, 0.2)
 		$Shieldman/Node2D/Hurt.play()
 	else:
 		print("Attack blocked by shield") 

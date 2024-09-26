@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://unqj071j3se0"]
+[gd_scene load_steps=12 format=3 uid="uid://unqj071j3se0"]
 
 [ext_resource type="PackedScene" uid="uid://jc4g732lmltx" path="res://characters/shieldman/shieldman.tscn" id="1_hr5cw"]
 [ext_resource type="Script" path="res://controllers/shieldman_controller.gd" id="1_tj5ih"]
-[ext_resource type="Script" path="res://controllers/attack_state.gd" id="3_8dwhn"]
 [ext_resource type="AnimationLibrary" uid="uid://ikuctx682fxu" path="res://characters/shieldman/shieldman_anim.res" id="3_e6k6w"]
 [ext_resource type="AudioStream" uid="uid://caoioobyllef2" path="res://assets/sounds/Shield 3.wav" id="4_cwrvx"]
+[ext_resource type="Script" path="res://controllers/idle_ai.gd" id="4_waion"]
+[ext_resource type="Script" path="res://controllers/run_ai.gd" id="5_j1g32"]
+[ext_resource type="Script" path="res://controllers/attack_ai.gd" id="6_b2kjb"]
 [ext_resource type="AudioStream" uid="uid://ri23ee4kbtmg" path="res://assets/sounds/medium-explosion-40472.mp3" id="6_uq8nw"]
+[ext_resource type="Script" path="res://controllers/death_ai.gd" id="7_lweav"]
 
 [sub_resource type="Animation" id="Animation_qgwk1"]
 length = 0.001
@@ -39,11 +42,10 @@ _data = {
 "RESET": SubResource("Animation_qgwk1")
 }
 
-[node name="ShieldmanController" type="Node2D" node_paths=PackedStringArray("hit_state", "idle_state", "run_state", "attack_state", "health_component", "death_state", "hurt_box_collision", "attack_sound", "hit_sound", "character", "state_machine")]
+[node name="ShieldmanController" type="Node2D" node_paths=PackedStringArray("idle_state", "run_state", "attack_state", "health_component", "death_state", "hurt_box_collision", "attack_sound", "hit_sound", "character", "state_machine")]
 position = Vector2(-3, 0)
 script = ExtResource("1_tj5ih")
 attack_range = 40.0
-hit_state = NodePath("Shieldman/LimboHSM/Hit")
 idle_state = NodePath("Shieldman/LimboHSM/Idle")
 run_state = NodePath("Shieldman/LimboHSM/Run")
 attack_state = NodePath("Shieldman/LimboHSM/Attack")
@@ -61,6 +63,9 @@ hitbox = NodePath("HitBox")
 [node name="HealthComponent" parent="Shieldman" index="2"]
 max_hp = 100.0
 
+[node name="DamageComponent" parent="Shieldman" index="3"]
+damage_amount = 0.0
+
 [node name="AnimationPlayer" parent="Shieldman" index="4"]
 libraries = {
 "": SubResource("AnimationLibrary_ssjrk"),
@@ -72,10 +77,34 @@ state_conditions = {
 "got_hit": "parameters/conditions/got_hit"
 }
 
-[node name="Attack" parent="Shieldman/LimboHSM" index="2"]
-script = ExtResource("3_8dwhn")
+[node name="Idle" parent="Shieldman/LimboHSM" index="0" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+script = ExtResource("4_waion")
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
+controller = NodePath("../../..")
 
-[node name="Death" parent="Shieldman/LimboHSM" index="4" node_paths=PackedStringArray("controller")]
+[node name="Run" parent="Shieldman/LimboHSM" index="1" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+script = ExtResource("5_j1g32")
+speed = 30.0
+max_speed = 50.0
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
+controller = NodePath("../../..")
+
+[node name="Attack" parent="Shieldman/LimboHSM" index="2" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+script = ExtResource("6_b2kjb")
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
+controller = NodePath("../../..")
+
+[node name="Death" parent="Shieldman/LimboHSM" index="3" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+script = ExtResource("7_lweav")
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
 controller = NodePath("../../..")
 
 [node name="Hurtbox" parent="Shieldman" index="7"]

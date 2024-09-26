@@ -2,7 +2,6 @@ extends State
 class_name DeathState
 
 @export var player_camera :Camera2D
-@export var controller: Controller
 
 func _enter() -> void:
 	die()
