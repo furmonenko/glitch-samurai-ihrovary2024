@@ -28,10 +28,13 @@ state_machine = NodePath("Pickeman/LimboHSM")
 collision_layer = 4
 
 [node name="AnimatedSprite2D" parent="Pickeman" index="2"]
-frame = 2
+frame = 1
 
 [node name="DamageComponent" parent="Pickeman" index="4"]
 damage_amount = 0.0
+
+[node name="AnimationTree" parent="Pickeman" index="6"]
+parameters/Attack/blend_position = 0.0
 
 [node name="Idle" parent="Pickeman/LimboHSM" index="0" node_paths=PackedStringArray("controller")]
 script = ExtResource("4_fos1i")

@@ -75,11 +75,6 @@ func handle_states(delta: float) -> void:
 	if not target:
 		find_target()  # Якщо цілі немає, шукаємо ворог
 	
-	
-func _process(delta):
-	super(delta)
-	print(state_machine.get_active_state())
-	
 func find_target() -> void:
 	# Ти можеш використовувати свою логіку для пошуку ворога. Наприклад, використовуй зону або отримуй список ворогів
 	for enemy in get_tree().get_nodes_in_group("player"):

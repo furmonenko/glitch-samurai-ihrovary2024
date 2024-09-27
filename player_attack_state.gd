@@ -9,14 +9,14 @@ func _enter() -> void:
 
 func start_attack(_combo_count: int) -> void:
 	combo_count = _combo_count
-	var current_attack_anim = combo_count % 2  # Чередуємо анімації між 0 і 1
+	var current_attack_anim = combo_count % 2 
 
-	# Якщо це остання комбо-атака (третя в даному випадку), використовуємо спеціальну анімацію
+	
 	if combo_count == max_combo_attacks:
 		current_attack_anim = 3
 		# TODO: Активувати slow motion, якщо це потрібно
 
-	# Встановлюємо відповідну анімацію в AnimationTree
+
 	animation_tree.set("parameters/Attack/blend_position", current_attack_anim)
 
 	# Скидаємо стан після запуску нової анімації

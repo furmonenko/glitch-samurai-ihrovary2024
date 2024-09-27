@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://i4dd3g6ng1bf"]
+[gd_scene load_steps=14 format=4 uid="uid://i4dd3g6ng1bf"]
 
 [ext_resource type="Texture2D" uid="uid://cyc6y3aarjcgx" path="res://assets/Basic Assets/Tileset/DARK Edition Tileset with background.png" id="1_gejdq"]
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_obi71"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bs62ms5pta6a4" path="res://cutscenes/last_demo_scene.tscn" id="3_oi5uh"]
 [ext_resource type="PackedScene" uid="uid://bop2xmo4jtij8" path="res://scene_glitch_effect.tscn" id="5_th13b"]
 [ext_resource type="PackedScene" uid="uid://bug500hmryx5d" path="res://levels/portals_pair.tscn" id="9_4f378"]
+[ext_resource type="PackedScene" uid="uid://bja6jn57nw1vy" path="res://controllers/pickeman_controller.tscn" id="9_4v2wy"]
 [ext_resource type="PackedScene" uid="uid://unqj071j3se0" path="res://controllers/shieldman_controller.tscn" id="10_0e0l6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6u5f"]
@@ -346,7 +347,10 @@ position = Vector2(251, 103)
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="ShieldmanController" parent="Enemies" instance=ExtResource("10_0e0l6")]
-position = Vector2(-44, 128)
+position = Vector2(-69, -80)
+
+[node name="PickemanController" parent="Enemies" instance=ExtResource("9_4v2wy")]
+position = Vector2(-28, 128)
 
 [node name="LastDoor" type="Area2D" parent="."]
 position = Vector2(304, -863)
