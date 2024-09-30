@@ -5,10 +5,6 @@ class_name GlitchState
 @onready var idle_state: IdleState = %Idle
 
 var move_speed: float = 500.0  # Максимальна швидкість пересування
-var acceleration: float = 2000.0  # Швидкість акселерації
-var deceleration: float = 200.0  # Швидкість децелерації
-var velocity: Vector2 = Vector2.ZERO  # Поточна швидкість персонажа
-
 var glitch_time: float = 0.4  # Час до наступного ривка
 var glitch_pause_time: float = 0.1  # Тривалість паузи між ривками
 var glitch_duration: float = 0.2  # Тривалість самого ривка

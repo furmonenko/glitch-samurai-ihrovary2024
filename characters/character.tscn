@@ -5,14 +5,14 @@
 [ext_resource type="Script" path="res://characters/damage_component.gd" id="14_0p2lj"]
 [ext_resource type="Script" path="res://controllers/state_machine.gd" id="15_xa0rb"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_877qf"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_87ts0"]
 
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_xnkm2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -23)
-sprite_frames = SubResource("SpriteFrames_877qf")
+sprite_frames = SubResource("SpriteFrames_87ts0")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("13_watnl")

@@ -6,7 +6,6 @@ class_name AirState
 @export var gravity: float = 50.0
 @export var max_air_speed: float = 150.0
 
-var velocity :Vector2
 
 func _enter() -> void:
 	# Перехід у стан повітря

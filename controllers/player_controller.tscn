@@ -55,9 +55,6 @@ unique_name_in_owner = true
 agent = NodePath("../..")
 damage_component = NodePath("../../DamageComponent")
 
-[node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
-frame = 7
-
 [node name="HealthComponent" parent="GlitchSamurai" index="3"]
 max_hp = 1.0
 
@@ -69,6 +66,12 @@ state_conditions = {
 "air": "parameters/conditions/jumping",
 "glitch": "parameters/conditions/glitch"
 }
+
+[node name="Run" parent="GlitchSamurai/LimboHSM" index="1"]
+speed = 100.0
+acceleration = 30.0
+deceleration = 30.0
+max_speed = 150.0
 
 [node name="Attack" parent="GlitchSamurai/LimboHSM" index="3" node_paths=PackedStringArray("state_machine", "character")]
 script = ExtResource("3_a7hi3")
@@ -82,6 +85,9 @@ character = NodePath("../..")
 
 [node name="Glitch" parent="GlitchSamurai/LimboHSM" index="5" node_paths=PackedStringArray("player_controller")]
 player_controller = NodePath("../../..")
+speed = 2000.0
+acceleration = 2000.0
+max_speed = 2000.0
 
 [node name="RunSound" parent="GlitchSamurai/Sounds" index="1"]
 volume_db = 0.0
