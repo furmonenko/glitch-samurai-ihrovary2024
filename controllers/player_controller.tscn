@@ -55,6 +55,9 @@ unique_name_in_owner = true
 agent = NodePath("../..")
 damage_component = NodePath("../../DamageComponent")
 
+[node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
+frame = 7
+
 [node name="HealthComponent" parent="GlitchSamurai" index="3"]
 max_hp = 1.0
 

@@ -11,8 +11,8 @@ signal hit_glitch
 
 @export var death_state: DeathStateAI
 @export var patrol_state: PatrolState
-@export var first_stage_state: FirstStageState
-@export var second_stage_state: SecondStageState
+@export var first_stage_state: WidowFirstStageState
+@export var second_stage_state: WidowSecondStageState
 
 @onready var hurt_box_collision = $BossWidow/CollisionShape2D/Hurtbox/CollisionShape2D
 

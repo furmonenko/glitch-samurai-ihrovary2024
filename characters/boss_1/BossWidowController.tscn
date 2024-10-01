@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://characters/boss_1/boss_widow_controller.gd" id="1_fryqj"]
 [ext_resource type="PackedScene" uid="uid://b8i8qn5fvparo" path="res://characters/boss_1/boss_widow.tscn" id="1_yr50n"]
 [ext_resource type="Script" path="res://controllers/death_ai.gd" id="3_i7q1e"]
-[ext_resource type="Script" path="res://characters/boss_1/first_stage_state.gd" id="3_uugga"]
+[ext_resource type="Script" path="res://characters/boss_1/widow_first_stage_state.gd" id="3_uugga"]
 [ext_resource type="AnimationLibrary" uid="uid://blb2gfnybvqry" path="res://characters/boss_1/boss_1.res" id="3_xtcwd"]
 [ext_resource type="Script" path="res://characters/boss_1/widow_boss_hsm.gd" id="4_35uhd"]
-[ext_resource type="Script" path="res://characters/boss_1/second_stage_state.gd" id="4_e1el8"]
+[ext_resource type="Script" path="res://characters/boss_1/widow_second_stage_state.gd" id="4_e1el8"]
 
 [sub_resource type="Animation" id="Animation_47ss2"]
 length = 0.001
@@ -510,7 +510,7 @@ _data = {
 [node name="BossWidowController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "first_stage_state", "second_stage_state", "character", "state_machine")]
 script = ExtResource("1_fryqj")
 spot_range = 120.0
-attack_range = 40.0
+attack_range = 60.0
 cooldown_duration = 2.0
 health_component = NodePath("BossWidow/HealthComponent")
 death_state = NodePath("BossWidow/LimboHSM/Death")
@@ -534,8 +534,7 @@ agent = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
 
 [node name="AnimatedSprite2D" parent="BossWidow" index="2"]
-animation = &"idle"
-frame = 6
+frame = 4
 
 [node name="HealthComponent" parent="BossWidow" index="3" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
@@ -554,6 +553,11 @@ libraries = {
 script = ExtResource("4_35uhd")
 character = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
+state_conditions = {
+"buff": "parameters/conditions/buff",
+"jumping": "parameters/conditions/jumping",
+"landing": "parameters/conditions/landing"
+}
 
 [node name="Patrol" parent="BossWidow/LimboHSM" index="0" node_paths=PackedStringArray("controller")]
 controller = NodePath("../../..")
@@ -566,12 +570,14 @@ animation_tree = NodePath("../../AnimationTree")
 state_machine = NodePath("..")
 character = NodePath("../..")
 controller = NodePath("../../..")
-deceleration = 50.0
+speed = 20.0
+max_speed = 35.0
 
 [node name="SecondStage" parent="BossWidow/LimboHSM" index="2" node_paths=PackedStringArray("controller")]
 script = ExtResource("4_e1el8")
 controller = NodePath("../../..")
-deceleration = 50.0
+speed = 25.0
+max_speed = 40.0
 
 [node name="Death" parent="BossWidow/LimboHSM" index="3"]
 script = ExtResource("3_i7q1e")

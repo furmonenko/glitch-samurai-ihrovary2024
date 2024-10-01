@@ -23,6 +23,7 @@ character = NodePath("Pickeman")
 state_machine = NodePath("Pickeman/LimboHSM")
 
 [node name="Pickeman" parent="." instance=ExtResource("2_pwd3m")]
+collision_layer = 1
 
 [node name="Hurtbox" parent="Pickeman" index="0"]
 collision_layer = 4

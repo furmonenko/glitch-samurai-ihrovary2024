@@ -8,6 +8,7 @@
 [sub_resource type="SpriteFrames" id="SpriteFrames_87ts0"]
 
 [node name="Character" type="CharacterBody2D"]
+collision_layer = 0
 script = ExtResource("1_xnkm2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

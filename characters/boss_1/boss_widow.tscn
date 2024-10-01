@@ -1,4 +1,4 @@
-[gd_scene load_steps=151 format=3 uid="uid://b8i8qn5fvparo"]
+[gd_scene load_steps=157 format=3 uid="uid://b8i8qn5fvparo"]
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_bpvy5"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_pbj0w"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" path="res://controllers/hit_box.gd" id="3_otd1v"]
 [ext_resource type="Shader" path="res://all_to_red.gdshader" id="4_aeq17"]
 [ext_resource type="Script" path="res://characters/boss_1/patrol.gd" id="7_updvt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jpjw"]
+size = Vector2(19.81, 2.745)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o78fq"]
 size = Vector2(19.7573, 16.8498)
@@ -801,6 +804,81 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_xcxub"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossWidow/HitBox/CollisionShape2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(50, -10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BossWidow/HitBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BossWidow/HitBox/CollisionShape2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3.66026, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BossWidow/HitBox/CollisionShape2D:shape:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(14.3713, 20)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BossWidow/CollisionShape2D/Hurtbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BossWidow/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_xgawc"]
 length = 1.8
 tracks/0/type = "value"
@@ -1198,81 +1276,6 @@ tracks/1/keys = {
 "values": ["move"]
 }
 
-[sub_resource type="Animation" id="Animation_xcxub"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BossWidow/HitBox/CollisionShape2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(50, -10)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BossWidow/HitBox/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("BossWidow/HitBox/CollisionShape2D:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(3.66026, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("BossWidow/HitBox/CollisionShape2D:shape:size")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(14.3713, 20)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("BossWidow/CollisionShape2D/Hurtbox/CollisionShape2D:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("BossWidow/CollisionShape2D:disabled")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_elilq"]
 _data = {
 "RESET": SubResource("Animation_xcxub"),
@@ -1301,20 +1304,6 @@ min_space = 0.0
 value_label = "anim"
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xn6bu"]
-animation = &"jump"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a2h0d"]
-animation = &"landing"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_83w2u"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_xn6bu")
-blend_point_0/pos = 0.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_a2h0d")
-blend_point_1/pos = 1.0
-min_space = 0.0
-blend_mode = 1
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_62xu8"]
 animation = &"buff"
 
@@ -1323,6 +1312,12 @@ animation = &"death"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_84voo"]
 animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jjbya"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w57a6"]
+animation = &"landing"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vgptn"]
 animation = &"move"
@@ -1364,45 +1359,75 @@ switch_mode = 2
 advance_mode = 2
 advance_condition = &"idle"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_escm5"]
-advance_mode = 2
-advance_condition = &"attacking_strong"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_chr1n"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_efno3"]
-advance_mode = 2
-advance_condition = &"dead"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kgy38"]
 advance_mode = 2
 advance_condition = &"dead"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x13rq"]
+advance_mode = 2
+advance_condition = &"jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a7vyc"]
+advance_mode = 2
+advance_condition = &"jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_68rq0"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"landing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3bouh"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y2j0k"]
+advance_mode = 2
+advance_condition = &"jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8mr7j"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"running"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7tf1y"]
+advance_mode = 2
+advance_condition = &"buff"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5xp0w"]
+advance_mode = 2
+advance_condition = &"buff"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vwa84"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"jumping"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_75luo"]
 states/AttackFirstStage/node = SubResource("AnimationNodeBlendSpace1D_0fh5x")
 states/AttackFirstStage/position = Vector2(303, 256)
-states/AttackSecondStage/node = SubResource("AnimationNodeBlendSpace1D_83w2u")
-states/AttackSecondStage/position = Vector2(559, 256)
+states/Start/position = Vector2(-16, 100)
 states/buff/node = SubResource("AnimationNodeAnimation_62xu8")
 states/buff/position = Vector2(295, -10)
 states/death/node = SubResource("AnimationNodeAnimation_oxige")
-states/death/position = Vector2(615, 100)
+states/death/position = Vector2(718, 123)
 states/idle/node = SubResource("AnimationNodeAnimation_84voo")
-states/idle/position = Vector2(407, 100)
+states/idle/position = Vector2(160, 100)
+states/jump/node = SubResource("AnimationNodeAnimation_jjbya")
+states/jump/position = Vector2(525, 256)
+states/landing/node = SubResource("AnimationNodeAnimation_w57a6")
+states/landing/position = Vector2(662, 256)
 states/run/node = SubResource("AnimationNodeAnimation_vgptn")
 states/run/position = Vector2(525, -10)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_7uf81"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_ocknk"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_kna6i"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_5jwhx"), "run", "death", SubResource("AnimationNodeStateMachineTransition_mes5x"), "idle", "buff", SubResource("AnimationNodeStateMachineTransition_62b0l"), "buff", "idle", SubResource("AnimationNodeStateMachineTransition_fnafn"), "idle", "AttackFirstStage", SubResource("AnimationNodeStateMachineTransition_cjk4r"), "AttackFirstStage", "idle", SubResource("AnimationNodeStateMachineTransition_egxjg"), "idle", "AttackSecondStage", SubResource("AnimationNodeStateMachineTransition_escm5"), "AttackSecondStage", "idle", SubResource("AnimationNodeStateMachineTransition_chr1n"), "AttackSecondStage", "death", SubResource("AnimationNodeStateMachineTransition_efno3"), "AttackFirstStage", "death", SubResource("AnimationNodeStateMachineTransition_kgy38")]
-graph_offset = Vector2(-59, 59)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_7uf81"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_ocknk"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_kna6i"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_5jwhx"), "run", "death", SubResource("AnimationNodeStateMachineTransition_mes5x"), "idle", "buff", SubResource("AnimationNodeStateMachineTransition_62b0l"), "buff", "idle", SubResource("AnimationNodeStateMachineTransition_fnafn"), "idle", "AttackFirstStage", SubResource("AnimationNodeStateMachineTransition_cjk4r"), "AttackFirstStage", "idle", SubResource("AnimationNodeStateMachineTransition_egxjg"), "AttackFirstStage", "death", SubResource("AnimationNodeStateMachineTransition_kgy38"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_x13rq"), "AttackFirstStage", "jump", SubResource("AnimationNodeStateMachineTransition_a7vyc"), "jump", "landing", SubResource("AnimationNodeStateMachineTransition_68rq0"), "landing", "idle", SubResource("AnimationNodeStateMachineTransition_3bouh"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_y2j0k"), "landing", "run", SubResource("AnimationNodeStateMachineTransition_8mr7j"), "AttackFirstStage", "buff", SubResource("AnimationNodeStateMachineTransition_7tf1y"), "run", "buff", SubResource("AnimationNodeStateMachineTransition_5xp0w"), "buff", "jump", SubResource("AnimationNodeStateMachineTransition_vwa84")]
+graph_offset = Vector2(-79, -142)
 
 [node name="BossWidow" instance=ExtResource("1_bpvy5")]
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="." index="0"]
-position = Vector2(-3, -15)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+position = Vector2(-4, -3)
 scale = Vector2(2.07518, 2.19587)
-polygon = PackedVector2Array(-8.19206, 6.83099, -7.22829, 5.4648, -5.78263, 2.277, -0.481886, -10.4742, 5.78263, 1.8216, 8.67395, 6.83099)
+shape = SubResource("RectangleShape2D_1jpjw")
 
 [node name="Hurtbox" type="Area2D" parent="CollisionShape2D" index="0"]
 collision_layer = 0
@@ -1410,7 +1435,8 @@ collision_mask = 2
 script = ExtResource("2_pbj0w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/Hurtbox" index="0"]
-position = Vector2(-0.240944, -1.1385)
+position = Vector2(8.9407e-08, -7.28641)
+scale = Vector2(1.19496, 1)
 shape = SubResource("RectangleShape2D_o78fq")
 debug_color = Color(0.998109, 0, 0.150301, 0.42)
 
@@ -1432,8 +1458,8 @@ debug_color = Color(0, 0.645105, 0.267229, 0.42)
 material = SubResource("ShaderMaterial_gn3hk")
 position = Vector2(4, -45)
 sprite_frames = SubResource("SpriteFrames_1h5p2")
-animation = &"landing"
-frame = 9
+animation = &"idle"
+frame = 2
 
 [node name="AnimationPlayer" parent="." index="5"]
 libraries = {
@@ -1444,13 +1470,13 @@ libraries = {
 [node name="AnimationTree" parent="." index="6"]
 tree_root = SubResource("AnimationNodeStateMachine_75luo")
 parameters/conditions/attacking = false
-parameters/conditions/attacking_strong = false
 parameters/conditions/buff = false
 parameters/conditions/dead = false
 parameters/conditions/idle = false
+parameters/conditions/jumping = false
+parameters/conditions/landing = false
 parameters/conditions/running = false
 parameters/AttackFirstStage/blend_position = 0.00238095
-parameters/AttackSecondStage/blend_position = 1.0
 
 [node name="Patrol" type="LimboState" parent="LimboHSM" index="0"]
 script = ExtResource("7_updvt")

@@ -1,7 +1,7 @@
-extends FirstStageState
-class_name SecondStageState
+extends WidowFirstStageState
+class_name WidowSecondStageState
 
-@export var landing_time: float = 2.0
+@export var landing_time: float = 4.0
 @export var jump_cooldown: float = 7.0
 
 var is_about_to_jump: bool = false
@@ -15,17 +15,19 @@ func initialize_state():
 
 func _enter():
 	init_timers()
-	jump_cooldown_timer.start()
+	
+	jump()
 
 func _update(delta):
 	if is_about_to_jump:
 		return
-	elif controller.is_target_in_range(controller.attack_range) and controller.cooldown_timer.is_stopped():
-		attack()
-	elif controller.is_target_in_range(controller.spot_range) and !controller.is_target_in_range(controller.attack_range):
-		move_to_enemy(delta)
 	else:
-		state_machine.switch_state("idle")
+		if controller.is_target_in_range(controller.attack_range) and controller.cooldown_timer.is_stopped() and animation_tree.get("parameters/playback").get_current_node() == "idle":
+			attack()
+		elif !controller.is_target_in_range(controller.attack_range) and controller.cooldown_timer.is_stopped():
+			move_to_enemy(delta)
+		else:
+			state_machine.switch_state("idle")
 
 func init_timers():
 	# Ініціалізація таймера очікування
@@ -44,29 +46,33 @@ func init_timers():
 
 func _on_animation_finished(anim_name: String):
 	if anim_name == "jump":
-		controller.visible = false
+		character.visible = false
 	
 	if anim_name == "landing":
-		state_machine.switch_state("idle")
+		is_about_to_jump = false
 
 func _on_jump_cooldown_timeout():
-	is_about_to_jump = true
+	if animation_tree.get("parameters/playback").get_current_node() == "AttackFirstStage":
+		await get_tree().create_timer(0.8).timeout
 	jump()
 	
 func _on_landing_timeout():
 	land()
-	is_about_to_jump = false
+	
 
 func jump():
-	animation_tree.set("parameters/AttackSecondStage/blend_position", 0)
-	landing_timer.start()
-	state_machine.switch_state("attack_strong")
+	is_about_to_jump = true
+	
+	state_machine.switch_state("jumping")
+	
+	landing_timer.start() 
 	
 
 func land():
-	controller.global_position = controller.target.global_position
-	animation_tree.set("parameters/AttackSecondStage/blend_position", 1)
+	character.global_position = controller.target.global_position
+	
+	state_machine.switch_state("landing")
+	
 	jump_cooldown_timer.start()
-	controller.visible = true
-	state_machine.switch_state("attack_strong")
+	character.visible = true
 	
