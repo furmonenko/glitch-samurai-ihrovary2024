@@ -1,12 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://c4ilsmhyd8try"]
+[gd_scene load_steps=21 format=3 uid="uid://c4ilsmhyd8try"]
 
 [ext_resource type="Script" path="res://characters/boss_1/boss_widow_controller.gd" id="1_fryqj"]
 [ext_resource type="PackedScene" uid="uid://b8i8qn5fvparo" path="res://characters/boss_1/boss_widow.tscn" id="1_yr50n"]
+[ext_resource type="LabelSettings" uid="uid://b33p2yrnnwkeq" path="res://cutscenes/intuduction.tres" id="2_ob2a1"]
 [ext_resource type="Script" path="res://controllers/death_ai.gd" id="3_i7q1e"]
 [ext_resource type="Script" path="res://characters/boss_1/widow_first_stage_state.gd" id="3_uugga"]
+[ext_resource type="Texture2D" uid="uid://crw0gq2ho1txp" path="res://assets/UI/UI - Borders and HP/red_hp_under.png" id="3_v38p2"]
 [ext_resource type="AnimationLibrary" uid="uid://blb2gfnybvqry" path="res://characters/boss_1/boss_1.res" id="3_xtcwd"]
 [ext_resource type="Script" path="res://characters/boss_1/widow_boss_hsm.gd" id="4_35uhd"]
 [ext_resource type="Script" path="res://characters/boss_1/widow_second_stage_state.gd" id="4_e1el8"]
+[ext_resource type="Texture2D" uid="uid://dm81c8iqomujf" path="res://assets/UI/UI - Borders and HP/red_hp_progress.png" id="4_jeptp"]
 
 [sub_resource type="Animation" id="Animation_47ss2"]
 length = 0.001
@@ -526,6 +529,29 @@ acceleration = 2.0
 deceleration = 1.0
 max_speed = 40.0
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "The Red Widow"
+label_settings = ExtResource("2_ob2a1")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_under = ExtResource("3_v38p2")
+texture_progress = ExtResource("4_jeptp")
+
 [node name="BossWidow" parent="." node_paths=PackedStringArray("hitbox") instance=ExtResource("1_yr50n")]
 hitbox = NodePath("HitBox")
 
@@ -534,7 +560,7 @@ agent = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
 
 [node name="AnimatedSprite2D" parent="BossWidow" index="2"]
-frame = 4
+frame = 5
 
 [node name="HealthComponent" parent="BossWidow" index="3" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")

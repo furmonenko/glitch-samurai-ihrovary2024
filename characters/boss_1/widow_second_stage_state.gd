@@ -3,6 +3,7 @@ class_name WidowSecondStageState
 
 @export var landing_time: float = 4.0
 @export var jump_cooldown: float = 7.0
+@export var updated_cooldown: float = 1.5
 
 var is_about_to_jump: bool = false
 
@@ -17,17 +18,21 @@ func _enter():
 	init_timers()
 	
 	jump()
+	
+	controller.cooldown_timer.wait_time = updated_cooldown
 
 func _update(delta):
 	if is_about_to_jump:
 		return
+	elif controller.is_target_in_range(controller.attack_range) and controller.cooldown_timer.is_stopped() and animation_tree.get("parameters/playback").get_current_node() == "idle":
+		#він чогось першу тичку не наносить, а одразу встає в кулдаун ( бо він одразу з руху заходе в кд без тички )
+		turn_towards_target()
+		attack()
+	elif !controller.is_target_in_range(controller.attack_range) and controller.cooldown_timer.is_stopped():
+		move_to_enemy(delta)
 	else:
-		if controller.is_target_in_range(controller.attack_range) and controller.cooldown_timer.is_stopped() and animation_tree.get("parameters/playback").get_current_node() == "idle":
-			attack()
-		elif !controller.is_target_in_range(controller.attack_range) and controller.cooldown_timer.is_stopped():
-			move_to_enemy(delta)
-		else:
-			state_machine.switch_state("idle")
+		state_machine.switch_state("idle")
+		turn_towards_target()
 
 func init_timers():
 	# Ініціалізація таймера очікування
@@ -50,6 +55,7 @@ func _on_animation_finished(anim_name: String):
 	
 	if anim_name == "landing":
 		is_about_to_jump = false
+		
 
 func _on_jump_cooldown_timeout():
 	if animation_tree.get("parameters/playback").get_current_node() == "AttackFirstStage":

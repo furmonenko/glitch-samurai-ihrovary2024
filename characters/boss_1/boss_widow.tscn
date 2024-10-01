@@ -1,4 +1,4 @@
-[gd_scene load_steps=157 format=3 uid="uid://b8i8qn5fvparo"]
+[gd_scene load_steps=158 format=3 uid="uid://b8i8qn5fvparo"]
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_bpvy5"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_pbj0w"]
@@ -915,7 +915,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(50, -10)]
+"values": [Vector2(34, -10)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -951,7 +951,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(18.5779, 20)]
+"values": [Vector2(27.3205, 20)]
 }
 
 [sub_resource type="Animation" id="Animation_kwupj"]
@@ -990,7 +990,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(14.3713, 20)]
+"values": [Vector2(31.0499, 20)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1002,7 +1002,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(57, -19)]
+"values": [Vector2(47.1747, -19)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -1403,6 +1403,11 @@ switch_mode = 2
 advance_mode = 2
 advance_condition = &"jumping"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_04ygk"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"running"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_75luo"]
 states/AttackFirstStage/node = SubResource("AnimationNodeBlendSpace1D_0fh5x")
 states/AttackFirstStage/position = Vector2(303, 256)
@@ -1419,8 +1424,8 @@ states/landing/node = SubResource("AnimationNodeAnimation_w57a6")
 states/landing/position = Vector2(662, 256)
 states/run/node = SubResource("AnimationNodeAnimation_vgptn")
 states/run/position = Vector2(525, -10)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_7uf81"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_ocknk"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_kna6i"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_5jwhx"), "run", "death", SubResource("AnimationNodeStateMachineTransition_mes5x"), "idle", "buff", SubResource("AnimationNodeStateMachineTransition_62b0l"), "buff", "idle", SubResource("AnimationNodeStateMachineTransition_fnafn"), "idle", "AttackFirstStage", SubResource("AnimationNodeStateMachineTransition_cjk4r"), "AttackFirstStage", "idle", SubResource("AnimationNodeStateMachineTransition_egxjg"), "AttackFirstStage", "death", SubResource("AnimationNodeStateMachineTransition_kgy38"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_x13rq"), "AttackFirstStage", "jump", SubResource("AnimationNodeStateMachineTransition_a7vyc"), "jump", "landing", SubResource("AnimationNodeStateMachineTransition_68rq0"), "landing", "idle", SubResource("AnimationNodeStateMachineTransition_3bouh"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_y2j0k"), "landing", "run", SubResource("AnimationNodeStateMachineTransition_8mr7j"), "AttackFirstStage", "buff", SubResource("AnimationNodeStateMachineTransition_7tf1y"), "run", "buff", SubResource("AnimationNodeStateMachineTransition_5xp0w"), "buff", "jump", SubResource("AnimationNodeStateMachineTransition_vwa84")]
-graph_offset = Vector2(-79, -142)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_7uf81"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_ocknk"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_kna6i"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_5jwhx"), "run", "death", SubResource("AnimationNodeStateMachineTransition_mes5x"), "idle", "buff", SubResource("AnimationNodeStateMachineTransition_62b0l"), "buff", "idle", SubResource("AnimationNodeStateMachineTransition_fnafn"), "idle", "AttackFirstStage", SubResource("AnimationNodeStateMachineTransition_cjk4r"), "AttackFirstStage", "idle", SubResource("AnimationNodeStateMachineTransition_egxjg"), "AttackFirstStage", "death", SubResource("AnimationNodeStateMachineTransition_kgy38"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_x13rq"), "AttackFirstStage", "jump", SubResource("AnimationNodeStateMachineTransition_a7vyc"), "jump", "landing", SubResource("AnimationNodeStateMachineTransition_68rq0"), "landing", "idle", SubResource("AnimationNodeStateMachineTransition_3bouh"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_y2j0k"), "landing", "run", SubResource("AnimationNodeStateMachineTransition_8mr7j"), "AttackFirstStage", "buff", SubResource("AnimationNodeStateMachineTransition_7tf1y"), "run", "buff", SubResource("AnimationNodeStateMachineTransition_5xp0w"), "buff", "jump", SubResource("AnimationNodeStateMachineTransition_vwa84"), "AttackFirstStage", "run", SubResource("AnimationNodeStateMachineTransition_04ygk")]
+graph_offset = Vector2(-134, 100)
 
 [node name="BossWidow" instance=ExtResource("1_bpvy5")]
 

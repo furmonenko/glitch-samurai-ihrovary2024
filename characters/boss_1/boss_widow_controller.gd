@@ -15,12 +15,21 @@ signal hit_glitch
 @export var second_stage_state: WidowSecondStageState
 
 @onready var hurt_box_collision = $BossWidow/CollisionShape2D/Hurtbox/CollisionShape2D
+@onready var hp_bar = $CanvasLayer/VBoxContainer/TextureProgressBar
+@onready var canvas_layer = $CanvasLayer
+
 
 var target: Character = null  # Ворог, на якого бот націлюється
 var cooldown_timer: Timer = Timer.new()  # Таймер для кулдауна атаки
 var last_state: State = null  # Останній стан перед отриманням удару
 
+signal character_is_behind
+
 func _ready() -> void:
+	hp_bar.max_value = health_component.max_hp
+	hp_bar.value = health_component.max_hp
+	
+	canvas_layer.visible = false
 	# Додаємо таймер для кулдауна атаки
 	add_child(cooldown_timer)
 	cooldown_timer.one_shot = true
@@ -36,6 +45,12 @@ func _ready() -> void:
 	
 	_init_state_machine()
 
+func _process(delta):
+	super(delta)
+	
+	if is_target_in_range(spot_range + 100.0):
+		canvas_layer.visible = true
+	
 func _init_state_machine() -> void:
 	super()
 	
@@ -52,6 +67,7 @@ var direction_to_enemy: Vector2
 func _on_got_hit(damage_causer) -> void:
 	direction_to_enemy = character.global_position.direction_to(damage_causer.global_position)
 	hit_glitch.emit()
+	hp_bar.value = health_component.current_hp
 	character.animated_sprite.material.set_shader_parameter("is_hurt", true)
 	var tween = get_tree().create_tween()
 	tween.tween_property(character.animated_sprite.material, "shader_parameter/is_hurt", false, 0.2)

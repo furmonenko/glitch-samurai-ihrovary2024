@@ -9,9 +9,8 @@ var should_attack: bool = false
 func _update(delta):
 	if controller.health_component.current_hp <= controller.health_component.max_hp * 0.5:
 		state_machine.switch_state("buff")
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(0.2).timeout
 		dispatch(SWITCH_STAGE)
-		
 		return
 
 	
@@ -22,6 +21,7 @@ func _update(delta):
 		move_to_enemy(delta)
 	else:
 		state_machine.switch_state("idle")
+		turn_towards_target()
 		
 
 
@@ -45,3 +45,12 @@ func move_to_enemy(delta):
 	var direction = controller.target.global_position.x - character.global_position.x
 	var input_direction = 1 if direction > 0 else -1
 	handle_movement_patrol(input_direction, delta)
+
+func turn_towards_target() -> void:
+	# Порівнюємо позиції персонажа та цілі (героя)
+	if controller.target.global_position.x < character.global_position.x and !animation_tree.get("parameters/playback").get_current_node() == "AttackFirstStage":
+		 # Якщо ціль ліворуч від персонажа, персонаж повинен дивитися вліво
+		character.transform.x.x = -abs(character.transform.x.x)
+	elif controller.target.global_position.x > character.global_position.x and !animation_tree.get("parameters/playback").get_current_node() == "AttackFirstStage":
+		# Якщо ціль праворуч від персонажа, персонаж повинен дивитися вправо
+		character.transform.x.x = abs(character.transform.x.x)
