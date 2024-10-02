@@ -28,6 +28,9 @@ collision_layer = 1
 [node name="Hurtbox" parent="Pickeman" index="0"]
 collision_layer = 4
 
+[node name="AnimatedSprite2D" parent="Pickeman" index="2"]
+frame = 2
+
 [node name="DamageComponent" parent="Pickeman" index="4"]
 damage_amount = 0.0
 

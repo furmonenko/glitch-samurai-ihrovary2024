@@ -3,40 +3,13 @@ extends Node2D
 @export var death_scene: PackedScene
 @export var next_scene: PackedScene
 
-@onready var scene_glitch = $SceneGlitch
 @onready var player_controller: PlayerController = $Characters/PlayerController
-@onready var glitch: ColorRect = $SceneGlitch/%Glitch
-@onready var glitch_sound = $SceneGlitch/GlitchSound
 @onready var enemies = $Enemies
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	if player_controller:
-		player_controller.play_glitch_once.connect(func():
-			scene_glitch.visible = true
-			scene_glitch.animation_player.play("hit_glitch")
-			)
-			
-		player_controller.glitch_exited.connect(func():
-			if scene_glitch:
-				scene_glitch.animation_player.stop()
-				scene_glitch.visible = false
-				glitch_sound.playing = false
-			)
-	
-	scene_glitch.animation_player.play("scene_glitch")
-	
-	player_controller.dead.connect(func():
-		scene_glitch.animation_player.play("scene_glitch")
-		on_player_died()
-		)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if player_controller.character.is_glitched:
-		scene_glitch.animation_player.play("player_glitched")
-		scene_glitch.visible = true
+
 
 func on_player_died():
 	if death_scene:

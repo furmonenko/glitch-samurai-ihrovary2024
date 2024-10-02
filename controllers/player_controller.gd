@@ -16,15 +16,22 @@ signal play_glitch_once
 
 @export var energy: float = 400.0  # Максимальна енергія
 @export var energy_decrease_rate: float = 20.0  # Скільки енергії зменшувати за секунду
+
 @onready var attack_sound = $GlitchSamurai/Sounds/AttackSound
 @onready var glitch_bar = $HUD/Control/ProgressBar
+@onready var cooldown = $GlitchSamurai/Timers/Cooldown
+@onready var combo_reset = $GlitchSamurai/Timers/ComboReset
+
 
 var combo_count: int = 0  # Лічильник комбо-атак
 var max_combo_attacks: int = 3  # Максимальна кількість атак у комбо
 
+@onready var scene_glitch = $HUD/SceneGlitch
+
 func _ready() -> void:
 	
-
+	scene_glitch.animation_player.play("scene_glitch")
+	
 	glitch_bar.max_value = energy
 	glitch_bar.value = energy
 	glitch_bar.step = energy_decrease_rate
@@ -39,11 +46,14 @@ func _ready() -> void:
 	if character.hitbox:
 		character.hitbox.hit_target.connect(func(damaged_character: Character):
 			%PlayerCamera.start_screen_shake()
-			play_glitch_once.emit()
+			scene_glitch.glitch.visible = true
+			scene_glitch.animation_player.play("hit_glitch")
 			if damaged_character.is_dead:
 				pass
 				# Helpers.slow_motion_start(0.5)
 			)
+			
+	
 	_init_state_machine()
 	
 
@@ -65,7 +75,13 @@ func handle_states(delta: float) -> void:
 
 	if state_machine.get_active_state() != run_state:
 		run_sound.stop()
+		
 	# Перевірка на глітч
+	if state_machine.get_active_state() != attack_state and combo_reset.is_stopped():
+		combo_reset.start()
+		combo_count = 0
+	
+	
 	if Input.is_action_just_pressed("interact") and state_machine.get_active_state() != glitch_state:
 		state_machine.change_active_state(glitch_state)
 		return
@@ -87,6 +103,7 @@ func handle_states(delta: float) -> void:
 			glitch_state._exit()
 			state_machine.change_active_state(idle_state)
 			return
+		
 
 		glitch_state.handle_glitch_movement(delta)
 	
@@ -97,23 +114,18 @@ func handle_states(delta: float) -> void:
 		
 
 	# Перевірка на атаку (входження в стан AttackState)
-	elif Input.is_action_just_pressed("attack"):
+	elif Input.is_action_just_pressed("attack") and cooldown.is_stopped():
 		var attack_sound_pitch = randf_range(0.9, 1.1)
 		attack_sound.pitch_scale = attack_sound_pitch
 		
 		if state_machine.get_active_state() != attack_state and character.is_on_floor():
-			# Починаємо атаку, якщо персонаж на землі і не атакує
-			combo_count = 1
 			state_machine.change_active_state(attack_state)
-			attack_state.start_attack(combo_count)
-			
+			cooldown.start()
 			attack_sound.play()
-		elif state_machine.get_active_state() == attack_state and combo_count < max_combo_attacks:
-			# Якщо атака вже триває, але гравець натискає знову, зберігаємо це
-			attack_state.attack_pressed_during_animation = true
-			attack_sound.play()
-			# Збільшуємо комбо-лічильник відразу після натискання
 			combo_count += 1
+			
+			if attack_state.get_blendspace_animations_count() <= combo_count:
+				combo_count = 0
 
 	# Перевірка на переміщення (входження в стан MoveState)
 	elif Input.get_axis("move_left", "move_right") != 0 and state_machine.get_active_state() != air_state and state_machine.get_active_state() != attack_state:
@@ -135,7 +147,3 @@ func handle_states(delta: float) -> void:
 			state_machine.change_active_state(air_state)
 			run_sound.stop()
 		
-
-	# Скидання комбо після завершення атаки
-	if state_machine.get_active_state() != attack_state:
-		combo_count = 0  # Скидаємо лічильник комбо, якщо персонаж не в стані атаки

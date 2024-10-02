@@ -10,11 +10,20 @@ var glitch_pause_time: float = 0.1  # Тривалість паузи між р�
 var glitch_duration: float = 0.2  # Тривалість самого ривка
 var glitch_active: bool = false  # Чи активний зараз глітч
 
+@export var scene_glitch: GlitchEffect
+
+
+
+
 var walls_to_ignore = ["WallType1", "WallType2"]  # Назви типів стін, через які персонаж може проходити
 
 func _enter() -> void:
 	state_machine.switch_state("glitch")
 	character.set_collision_mask_value(1, true)
+	
+	scene_glitch.animation_player.play("player_glitched")
+	scene_glitch.glitch.visible = true
+	
 	character.velocity.y -= 100
 	character.move_and_slide()
 	character.is_glitched = true
@@ -23,6 +32,11 @@ func _enter() -> void:
 func _exit() -> void:
 	player_controller.glitch_exited.emit()
 	character.set_collision_mask_value(1, true)
+	
+	scene_glitch.animation_player.stop()
+	scene_glitch.glitch.visible = false
+	scene_glitch.glitch_sound.playing = false
+	
 	character.is_glitched = false
 
 # Функція для обробки вільного руху з ефектом глітча

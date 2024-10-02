@@ -390,7 +390,7 @@ position = Vector2(562, 63)
 [node name="PlayerController" parent="." instance=ExtResource("14_3r7js")]
 
 [node name="AnimatedSprite2D" parent="PlayerController/GlitchSamurai" index="2"]
-frame = 5
+frame = 9
 
 [node name="Elevator" type="StaticBody2D" parent="."]
 position = Vector2(366, 7)

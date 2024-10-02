@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://i4dd3g6ng1bf"]
+[gd_scene load_steps=13 format=4 uid="uid://i4dd3g6ng1bf"]
 
 [ext_resource type="Texture2D" uid="uid://cyc6y3aarjcgx" path="res://assets/Basic Assets/Tileset/DARK Edition Tileset with background.png" id="1_gejdq"]
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_obi71"]
@@ -6,7 +6,6 @@
 [ext_resource type="TileSet" uid="uid://dr11iq10t2uak" path="res://levels/tileset.tres" id="2_lo2p1"]
 [ext_resource type="PackedScene" uid="uid://b6xhp64emqkwx" path="res://controllers/player_controller.tscn" id="3_045fn"]
 [ext_resource type="PackedScene" uid="uid://bs62ms5pta6a4" path="res://cutscenes/last_demo_scene.tscn" id="3_oi5uh"]
-[ext_resource type="PackedScene" uid="uid://bop2xmo4jtij8" path="res://scene_glitch_effect.tscn" id="5_th13b"]
 [ext_resource type="PackedScene" uid="uid://bug500hmryx5d" path="res://levels/portals_pair.tscn" id="9_4f378"]
 [ext_resource type="PackedScene" uid="uid://bja6jn57nw1vy" path="res://controllers/pickeman_controller.tscn" id="9_4v2wy"]
 [ext_resource type="PackedScene" uid="uid://unqj071j3se0" path="res://controllers/shieldman_controller.tscn" id="10_0e0l6"]
@@ -358,15 +357,6 @@ position = Vector2(304, -863)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LastDoor"]
 shape = SubResource("RectangleShape2D_gigda")
 
-[node name="SceneGlitch" parent="." instance=ExtResource("5_th13b")]
-
-[node name="Glitch" parent="SceneGlitch" index="0"]
-offset_left = 1.0
-offset_top = -1.0
-offset_right = 241.0
-offset_bottom = 134.0
-
 [connection signal="body_entered" from="LastDoor" to="." method="_on_last_door_body_entered"]
 
 [editable path="PortalsPair"]
-[editable path="SceneGlitch"]

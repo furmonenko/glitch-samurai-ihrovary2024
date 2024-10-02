@@ -1,34 +1,23 @@
 extends AttackState
 class_name PlayerAttackState
 
-var attack_pressed_during_animation: bool = false  # Відстежуємо, чи була натиснута кнопка під час анімації
-var combo_count: int
 
 func _enter() -> void:
-	state_machine.switch_state("attack")
+	print(controller.combo_count)
+	start_attack(controller.combo_count) 
 
 func start_attack(_combo_count: int) -> void:
-	combo_count = _combo_count
-	var current_attack_anim = combo_count % 2 
+		
+	state_machine.switch_state("attack")
+	animation_tree.set("parameters/Attack/blend_position", _combo_count)
 
-	
-	if combo_count == max_combo_attacks:
-		current_attack_anim = 3
-		# TODO: Активувати slow motion, якщо це потрібно
-
-
-	animation_tree.set("parameters/Attack/blend_position", current_attack_anim)
-
-	# Скидаємо стан після запуску нової анімації
-	attack_pressed_during_animation = false
 
 func _on_animation_finished(animation_name: String) -> void:
-	if attack_pressed_during_animation:
-		# Якщо гравець натиснув атаку під час анімації, продовжуємо комбо
-		attack_pressed_during_animation = false
-		combo_count += 1  # Переходимо до наступної атаки
-		start_attack(combo_count)  # Запускаємо наступну атаку
+	dispatch(EVENT_FINISHED)
+
+func get_blendspace_animations_count():
+	var blend_space = animation_tree.tree_root.get_node("Attack")
+	if blend_space is AnimationNodeBlendSpace1D:
+		return blend_space.get_blend_point_count()
 	else:
-		# Якщо гравець не натиснув атаку, завершуємо стан
-		is_attack_finished = true
-		dispatch(EVENT_FINISHED)
+		return 1

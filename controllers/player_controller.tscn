@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6xhp64emqkwx"]
+[gd_scene load_steps=8 format=3 uid="uid://b6xhp64emqkwx"]
 
 [ext_resource type="Script" path="res://controllers/player_controller.gd" id="1_4w8h7"]
 [ext_resource type="Texture2D" uid="uid://dp4h72v4hf3fh" path="res://assets/UI/UI - Borders and HP/glitch_under.png" id="2_2eno6"]
+[ext_resource type="PackedScene" uid="uid://bop2xmo4jtij8" path="res://scene_glitch_effect.tscn" id="2_i7ffc"]
 [ext_resource type="PackedScene" uid="uid://be6bki722mg1g" path="res://characters/glitch_samurai/glitch_samurai.tscn" id="2_iihpn"]
 [ext_resource type="Script" path="res://player_attack_state.gd" id="3_a7hi3"]
 [ext_resource type="Texture2D" uid="uid://bgli0683ro8ye" path="res://assets/UI/UI - Borders and HP/glitch_progress.png" id="3_eiyp6"]
@@ -16,6 +17,9 @@ jump_force = 200.0
 deceleration = 5.0
 
 [node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="SceneGlitch" parent="HUD" instance=ExtResource("2_i7ffc")]
+unique_name_in_owner = true
 
 [node name="Control" type="Control" parent="HUD"]
 layout_mode = 3
@@ -52,9 +56,6 @@ unique_name_in_owner = true
 agent = NodePath("../..")
 damage_component = NodePath("../../DamageComponent")
 
-[node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
-frame = 10
-
 [node name="HealthComponent" parent="GlitchSamurai" index="3"]
 max_hp = 1.0
 
@@ -72,24 +73,29 @@ speed = 100.0
 acceleration = 100.0
 max_speed = 100.0
 
-[node name="Attack" parent="GlitchSamurai/LimboHSM" index="3" node_paths=PackedStringArray("state_machine", "character")]
+[node name="Attack" parent="GlitchSamurai/LimboHSM" index="3" node_paths=PackedStringArray("state_machine", "character", "controller")]
 script = ExtResource("3_a7hi3")
 state_machine = NodePath("..")
 character = NodePath("../..")
+controller = NodePath("../../..")
 
 [node name="Death" parent="GlitchSamurai/LimboHSM" index="4" node_paths=PackedStringArray("player_camera", "state_machine", "character")]
 player_camera = NodePath("../../PlayerCamera")
 state_machine = NodePath("..")
 character = NodePath("../..")
 
-[node name="Glitch" parent="GlitchSamurai/LimboHSM" index="5" node_paths=PackedStringArray("player_controller")]
+[node name="Glitch" parent="GlitchSamurai/LimboHSM" index="5" node_paths=PackedStringArray("player_controller", "scene_glitch")]
 player_controller = NodePath("../../..")
+scene_glitch = NodePath("../../../HUD/SceneGlitch")
 speed = 2000.0
 acceleration = 2000.0
 max_speed = 2000.0
 
 [node name="RunSound" parent="GlitchSamurai/Sounds" index="1"]
 volume_db = 0.0
+
+[node name="ComboReset" parent="GlitchSamurai/Timers" index="1"]
+wait_time = 4.0
 
 [node name="PlayerCamera" type="Camera2D" parent="GlitchSamurai"]
 unique_name_in_owner = true
@@ -100,5 +106,6 @@ position_smoothing_enabled = true
 position_smoothing_speed = 3.0
 script = ExtResource("4_eijum")
 
+[editable path="HUD/SceneGlitch"]
 [editable path="GlitchSamurai"]
 [editable path="GlitchSamurai/CollisionShape2D/HitBox"]

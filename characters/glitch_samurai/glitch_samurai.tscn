@@ -165,4 +165,13 @@ stream = ExtResource("15_wpeqh")
 volume_db = -10.0
 bus = &"SFX"
 
+[node name="Timers" type="Node" parent="." index="9"]
+
+[node name="Cooldown" type="Timer" parent="Timers" index="0"]
+one_shot = true
+
+[node name="ComboReset" type="Timer" parent="Timers" index="1"]
+wait_time = 3.0
+one_shot = true
+
 [editable path="CollisionShape2D/HitBox"]
