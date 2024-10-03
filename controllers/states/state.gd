@@ -5,7 +5,6 @@ class_name State
 @export var state_machine :StateMachine
 @export var character :CharacterBody2D
 @export var controller: Controller
-@export var animation_name :String
 
 @onready var playback :AnimationNodeStateMachinePlayback
 

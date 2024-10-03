@@ -4,18 +4,8 @@ class_name Controller
 @export var character: Character
 @export var state_machine: StateMachine
 
-# Параметри для контролю руху
-@export var speed: float = 150.0
-@export var jump_force: float = 500.0
-@export var gravity: float = 50.0
-
-# Параметри для акселерації та децелерації
-@export var acceleration: float = 25.0
-@export var deceleration: float = 100.0
-@export var max_speed: float = 200.0
 
 @onready var velocity = character.velocity
-
 
 
 func _process(delta: float) -> void:

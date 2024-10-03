@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://c07cjxqrn0swb"]
+[gd_scene load_steps=91 format=3 uid="uid://c07cjxqrn0swb"]
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_ei3b4"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_58pe2"]
@@ -11,9 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://dg8vfv7l4urvs" path="res://assets/Basic Assets/Sprites/Hell Bot DARK/shoot 92x36.png" id="6_gm7tv"]
 [ext_resource type="Texture2D" uid="uid://cdxsqhgssrbsy" path="res://assets/Basic Assets/Sprites/Hell Bot DARK/death 92x36.png" id="7_wb28y"]
 [ext_resource type="AnimationLibrary" uid="uid://df45sv6frwlxw" path="res://characters/hell_bot/hell_bot_anims.res" id="8_drwa7"]
-[ext_resource type="Script" path="res://controllers/states/idle_state.gd" id="9_nlia4"]
-[ext_resource type="Script" path="res://controllers/states/run_state.gd" id="10_2ll76"]
-[ext_resource type="Script" path="res://characters/hell_bot/hellbot_attack_state.gd" id="11_m0olb"]
+[ext_resource type="Script" path="res://characters/boss_1/patrol.gd" id="13_7qjtv"]
+[ext_resource type="Script" path="res://controllers/combat_state_melee.gd" id="14_brrxc"]
 [ext_resource type="Script" path="res://controllers/states/death_state.gd" id="15_ddfut"]
 [ext_resource type="AudioStream" uid="uid://clho3xa5v501a" path="res://assets/sounds/Hellbot_attack.wav" id="17_y8wag"]
 [ext_resource type="AudioStream" uid="uid://blxnlx1q5027h" path="res://assets/sounds/Hurt_v2_wav.wav" id="18_3bjv4"]
@@ -577,7 +576,7 @@ material = SubResource("ShaderMaterial_hiecp")
 position = Vector2(27, -17)
 sprite_frames = SubResource("SpriteFrames_ayjfh")
 animation = &"Idle"
-frame = 1
+frame = 5
 metadata/_edit_lock_ = true
 
 [node name="DamageComponent" parent="." index="4" node_paths=PackedStringArray("damage_causer")]
@@ -605,18 +604,14 @@ state_conditions = {
 "got_hit": "parameters/conditions/got_hit"
 }
 
-[node name="Idle" type="LimboState" parent="LimboHSM" index="0"]
-script = ExtResource("9_nlia4")
-
-[node name="Run" type="LimboState" parent="LimboHSM" index="1"]
-script = ExtResource("10_2ll76")
-
-[node name="Attack" type="LimboState" parent="LimboHSM" index="2"]
-script = ExtResource("11_m0olb")
-max_combo_attacks = 1
-
-[node name="Death" type="LimboState" parent="LimboHSM" index="3"]
+[node name="Death" type="LimboState" parent="LimboHSM" index="0"]
 script = ExtResource("15_ddfut")
+
+[node name="Patrol" type="LimboState" parent="LimboHSM" index="1"]
+script = ExtResource("13_7qjtv")
+
+[node name="Combat" type="LimboState" parent="LimboHSM" index="2"]
+script = ExtResource("14_brrxc")
 
 [node name="Sounds" type="Node2D" parent="." index="8"]
 

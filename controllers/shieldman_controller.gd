@@ -11,24 +11,8 @@ func _ready() -> void:
 	add_child(shield_idle_timer)
 	shield_idle_timer.one_shot = true
 	shield_idle_timer.wait_time = shield_cooldown
-	
-	# Викликаємо базовий метод _ready() з AIController
 	super._ready()
-
-func handle_states(delta: float) -> void:
-	# Викликаємо базовий метод handle_states() з AIController для стандартної поведінки
-	super.handle_states(delta)
-
-	# Унікальна логіка для щитовика:
-	if state_machine.get_active_state() == attack_state and !shield_idle_timer.is_stopped():
-		# Після атаки щитовик залишається на місці
-		character.velocity = Vector2.ZERO  # Зупиняємо рух
-		if !shield_idle_timer.is_started():
-			shield_idle_timer.start()
-
-		if shield_idle_timer.is_stopped():
-			state_machine.change_active_state(idle_state)  # Повертаємося до idle після часу очікування
-
+	
 func _on_got_hit(damage_causer) -> void:
 	# Специфічна реакція щитовика на удар
 	if is_behind_shield(damage_causer):

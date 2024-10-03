@@ -463,7 +463,7 @@ states/Shoot/node = SubResource("AnimationNodeAnimation_lsawd")
 states/Shoot/position = Vector2(609.461, -39.6146)
 states/Start/position = Vector2(-24, -38.0745)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_u7ly2"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_fc6ll"), "Idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_qe7e2"), "Run", "Shoot", SubResource("AnimationNodeStateMachineTransition_qfn61"), "Shoot", "Idle", SubResource("AnimationNodeStateMachineTransition_2wuwm"), "Shoot", "Run", SubResource("AnimationNodeStateMachineTransition_ioucn"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a1yu2"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_j8cq0"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_vcecx"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_h0qak"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_xa2qm"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_0xqq1"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_mbgac"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_hmrvg")]
-graph_offset = Vector2(-238.87, 218.585)
+graph_offset = Vector2(-226.87, -98.415)
 
 [node name="Pickeman" instance=ExtResource("1_qnami")]
 
@@ -530,14 +530,6 @@ animation_tree = NodePath("../AnimationTree")
 state_conditions = {
 "got_hit": "parameters/conditions/got_hit"
 }
-
-[node name="Idle" type="LimboState" parent="LimboHSM" index="0"]
-
-[node name="Run" type="LimboState" parent="LimboHSM" index="1"]
-
-[node name="Attack" type="LimboState" parent="LimboHSM" index="2"]
-
-[node name="Death" type="LimboState" parent="LimboHSM" index="3"]
 
 [node name="Sounds" type="Node2D" parent="." index="8"]
 

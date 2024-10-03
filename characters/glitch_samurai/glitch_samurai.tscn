@@ -58,6 +58,7 @@ _data = {
 }
 
 [node name="GlitchSamurai" node_paths=PackedStringArray("hitbox") groups=["player"] instance=ExtResource("1_qqsig")]
+collision_layer = 4
 hitbox = NodePath("CollisionShape2D/HitBox")
 
 [node name="Hurtbox" type="Area2D" parent="." index="0" node_paths=PackedStringArray("agent", "health_component")]
@@ -89,7 +90,7 @@ disabled = true
 position = Vector2(6, -23)
 sprite_frames = ExtResource("3_3qiti")
 animation = &"Glitch Idle"
-frame = 1
+frame = 4
 metadata/_edit_lock_ = true
 
 [node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("agent")]

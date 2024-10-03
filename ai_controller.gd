@@ -5,14 +5,14 @@ signal hit_glitch
 # Налаштування для бота
 @export var spot_range: float = 100.0  # Дальність, на якій бот бачить ворога
 @export var attack_range: float = 20.0  # Дальність атаки
-@export var cooldown_duration: float = 0.5  # Кулдаун атаки
+@export var cooldown_duration: float = 0.5  # Кулдаун ата
 
-@export var shoot_state: ShootStateAI
-@export var idle_state: IdleStateAI
-@export var run_state: RunStateAI
-@export var attack_state: AttackStateAI
 @export var health_component: HealthComponent
+
 @export var death_state: DeathStateAI
+@export var patrol_state: PatrolState
+@export var combat_state: CombatStateMelee
+
 @export var hurt_box_collision: CollisionShape2D
 
 @export var attack_sound: AudioStreamPlayer2D
@@ -21,6 +21,7 @@ signal hit_glitch
 var target: Character = null  # Ворог, на якого бот націлюється
 var cooldown_timer: Timer = Timer.new()  # Таймер для кулдауна атаки
 var last_state: State = null  # Останній стан перед отриманням удару
+var direction_to_enemy: Vector2
 
 func _ready() -> void:
 	# Додаємо таймер для кулдауна атаки
@@ -33,24 +34,15 @@ func _ready() -> void:
 		state_machine.dispatch(state_machine.CHARACTER_DIED)
 		)
 		
-		
 	health_component.got_hit.connect(_on_got_hit)
 	
 	_init_state_machine()
 
 func _init_state_machine() -> void:
 	super()
-	
 	state_machine.add_transition(state_machine.ANYSTATE, death_state, state_machine.CHARACTER_DIED)
-	state_machine.add_transition(idle_state, run_state, idle_state.EVENT_FINISHED)
-	state_machine.add_transition(run_state, idle_state, run_state.EVENT_FINISHED)
-	
-	state_machine.add_transition(idle_state, attack_state, idle_state.START_ATTACK)
-	state_machine.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
-	
+	state_machine.add_transition(patrol_state, combat_state, patrol_state.SWITCH_STAGE)
 
-
-var direction_to_enemy: Vector2
 
 func _on_got_hit(damage_causer) -> void:
 	direction_to_enemy = character.global_position.direction_to(damage_causer.global_position)

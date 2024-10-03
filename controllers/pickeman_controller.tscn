@@ -1,21 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://bja6jn57nw1vy"]
+[gd_scene load_steps=7 format=3 uid="uid://bja6jn57nw1vy"]
 
 [ext_resource type="Script" path="res://ai_controller.gd" id="1_wc86j"]
 [ext_resource type="PackedScene" uid="uid://ckxkkjgb4u2yi" path="res://characters/hell_bot/pickeman.tscn" id="2_pwd3m"]
-[ext_resource type="Script" path="res://controllers/idle_ai.gd" id="4_fos1i"]
+[ext_resource type="Script" path="res://controllers/combat_state_melee.gd" id="3_nrvrk"]
+[ext_resource type="Script" path="res://characters/boss_1/patrol.gd" id="4_mqisl"]
 [ext_resource type="AudioStream" uid="uid://blxnlx1q5027h" path="res://assets/sounds/Hurt_v2_wav.wav" id="4_p712c"]
-[ext_resource type="Script" path="res://controllers/run_ai.gd" id="5_y70g1"]
-[ext_resource type="Script" path="res://controllers/attack_ai.gd" id="6_impqp"]
 [ext_resource type="Script" path="res://controllers/death_ai.gd" id="8_trc5y"]
 
-[node name="PickemanController" type="Node2D" node_paths=PackedStringArray("idle_state", "run_state", "attack_state", "health_component", "death_state", "hurt_box_collision", "attack_sound", "hit_sound", "character", "state_machine")]
+[node name="PickemanController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "combat_state", "hurt_box_collision", "attack_sound", "hit_sound", "character", "state_machine")]
 script = ExtResource("1_wc86j")
 cooldown_duration = 2.0
-idle_state = NodePath("Pickeman/LimboHSM/Idle")
-run_state = NodePath("Pickeman/LimboHSM/Run")
-attack_state = NodePath("Pickeman/LimboHSM/Attack")
 health_component = NodePath("Pickeman/HealthComponent")
-death_state = NodePath("Pickeman/LimboHSM/Death")
+death_state = NodePath("Pickeman/LimboHSM/DeathState")
+patrol_state = NodePath("Pickeman/LimboHSM/PatrolState")
+combat_state = NodePath("Pickeman/LimboHSM/CombatStateMelee")
 hurt_box_collision = NodePath("Pickeman/Hurtbox/CollisionShape2D")
 attack_sound = NodePath("Pickeman/Sounds/AttackSound")
 hit_sound = NodePath("Pickeman/Sounds/HitSound")
@@ -28,8 +26,11 @@ collision_layer = 1
 [node name="Hurtbox" parent="Pickeman" index="0"]
 collision_layer = 4
 
+[node name="CollisionShape2D" parent="Pickeman/CollisionShape2D/HitBox" index="0"]
+disabled = true
+
 [node name="AnimatedSprite2D" parent="Pickeman" index="2"]
-frame = 2
+animation = &"Idle"
 
 [node name="DamageComponent" parent="Pickeman" index="4"]
 damage_amount = 0.0
@@ -37,20 +38,24 @@ damage_amount = 0.0
 [node name="AnimationTree" parent="Pickeman" index="6"]
 parameters/Attack/blend_position = 0.0
 
-[node name="Idle" parent="Pickeman/LimboHSM" index="0" node_paths=PackedStringArray("controller")]
-script = ExtResource("4_fos1i")
-controller = NodePath("../../..")
-
-[node name="Run" parent="Pickeman/LimboHSM" index="1" node_paths=PackedStringArray("controller")]
-script = ExtResource("5_y70g1")
-controller = NodePath("../../..")
-
-[node name="Attack" parent="Pickeman/LimboHSM" index="2" node_paths=PackedStringArray("animation_tree", "controller")]
-script = ExtResource("6_impqp")
+[node name="PatrolState" type="LimboState" parent="Pickeman/LimboHSM" index="0" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+script = ExtResource("4_mqisl")
 animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
+controller = NodePath("../../..")
+speed = 20.0
+acceleration = 20.0
+max_speed = 20.0
+
+[node name="CombatStateMelee" type="LimboState" parent="Pickeman/LimboHSM" index="1" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+script = ExtResource("3_nrvrk")
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
 controller = NodePath("../../..")
 
-[node name="Death" parent="Pickeman/LimboHSM" index="3"]
+[node name="DeathState" type="LimboState" parent="Pickeman/LimboHSM" index="2"]
 script = ExtResource("8_trc5y")
 
 [node name="HitSound" parent="Pickeman/Sounds" index="1"]

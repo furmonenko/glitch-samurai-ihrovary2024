@@ -7,10 +7,6 @@ extends Node2D
 @onready var enemies = $Enemies
 
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-
-
 func on_player_died():
 	if death_scene:
 		await get_tree().create_timer(0.5).timeout

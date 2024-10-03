@@ -1,22 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctg5ppxcodivj"]
+[gd_scene load_steps=5 format=3 uid="uid://ctg5ppxcodivj"]
 
 [ext_resource type="Script" path="res://controllers/hellbot_controller.gd" id="1_ltet1"]
 [ext_resource type="PackedScene" uid="uid://c07cjxqrn0swb" path="res://characters/hell_bot/hell_bot.tscn" id="2_bo1rh"]
 [ext_resource type="Script" path="res://controllers/hellbot_hsm.gd" id="3_30eb7"]
-[ext_resource type="Script" path="res://controllers/shoot_ai.gd" id="3_f3fca"]
-[ext_resource type="Script" path="res://controllers/idle_ai.gd" id="4_bmri2"]
-[ext_resource type="Script" path="res://controllers/run_ai.gd" id="5_fbev0"]
-[ext_resource type="Script" path="res://controllers/attack_ai.gd" id="6_kf7je"]
 [ext_resource type="Script" path="res://controllers/death_ai.gd" id="7_1qppw"]
 
-[node name="HellbotController" type="Node2D" node_paths=PackedStringArray("shoot_state", "idle_state", "run_state", "attack_state", "health_component", "death_state", "hurt_box_collision", "attack_sound", "hit_sound", "character", "state_machine")]
+[node name="HellbotController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "hurt_box_collision", "attack_sound", "hit_sound", "character", "state_machine")]
 script = ExtResource("1_ltet1")
 spot_range = 200.0
 cooldown_duration = 2.0
-shoot_state = NodePath("HellBot/LimboHSM/Shoot")
-idle_state = NodePath("HellBot/LimboHSM/Idle")
-run_state = NodePath("HellBot/LimboHSM/Run")
-attack_state = NodePath("HellBot/LimboHSM/Attack")
 health_component = NodePath("HellBot/HealthComponent")
 death_state = NodePath("HellBot/LimboHSM/Death")
 hurt_box_collision = NodePath("HellBot/Hurtbox/CollisionShape2D")
@@ -30,9 +22,6 @@ state_machine = NodePath("HellBot/LimboHSM")
 [node name="HitBox" parent="HellBot/CollisionShape2D" index="0"]
 position = Vector2(1, -1)
 
-[node name="AnimatedSprite2D" parent="HellBot" index="2"]
-frame = 5
-
 [node name="HealthComponent" parent="HellBot" index="3" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
 
@@ -43,39 +32,8 @@ damage_amount = 0.0
 script = ExtResource("3_30eb7")
 state_conditions = {}
 
-[node name="Idle" parent="HellBot/LimboHSM" index="0" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
-script = ExtResource("4_bmri2")
-animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
-controller = NodePath("../../..")
-
-[node name="Run" parent="HellBot/LimboHSM" index="1" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
-script = ExtResource("5_fbev0")
-speed = 30.0
-acceleration = 1.0
-max_speed = 50.0
-animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
-controller = NodePath("../../..")
-
-[node name="Attack" parent="HellBot/LimboHSM" index="2" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
-script = ExtResource("6_kf7je")
-animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
-controller = NodePath("../../..")
-
-[node name="Death" parent="HellBot/LimboHSM" index="3" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+[node name="Death" parent="HellBot/LimboHSM" index="0" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
 script = ExtResource("7_1qppw")
-animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
-controller = NodePath("../../..")
-
-[node name="Shoot" type="LimboState" parent="HellBot/LimboHSM" index="4" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
-script = ExtResource("3_f3fca")
 animation_tree = NodePath("../../AnimationTree")
 state_machine = NodePath("..")
 character = NodePath("../..")
