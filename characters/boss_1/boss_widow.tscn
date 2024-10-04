@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_pbj0w"]
 [ext_resource type="Texture2D" uid="uid://blv8mctwvldlj" path="res://assets/TarnishedWidowBoss/The Tarnished Widow 188x90.png" id="2_uxmm0"]
 [ext_resource type="AnimationLibrary" uid="uid://blb2gfnybvqry" path="res://characters/boss_1/boss_1.res" id="2_yly0j"]
-[ext_resource type="Script" path="res://controllers/hit_box.gd" id="3_otd1v"]
+[ext_resource type="Script" path="res://components/hit_box.gd" id="3_otd1v"]
 [ext_resource type="Shader" path="res://all_to_red.gdshader" id="4_aeq17"]
 [ext_resource type="Script" path="res://characters/boss_1/patrol.gd" id="7_updvt"]
 

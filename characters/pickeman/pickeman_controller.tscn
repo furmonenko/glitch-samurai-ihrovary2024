@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://bja6jn57nw1vy"]
 
-[ext_resource type="Script" path="res://ai_controller.gd" id="1_wc86j"]
-[ext_resource type="PackedScene" uid="uid://ckxkkjgb4u2yi" path="res://characters/hell_bot/pickeman.tscn" id="2_pwd3m"]
-[ext_resource type="Script" path="res://controllers/combat_state_melee.gd" id="3_nrvrk"]
+[ext_resource type="Script" path="res://controllers/ai_controller.gd" id="1_wc86j"]
+[ext_resource type="PackedScene" uid="uid://ckxkkjgb4u2yi" path="res://characters/pickeman/pickeman.tscn" id="2_pwd3m"]
+[ext_resource type="Script" path="res://controllers/states/combat_state_melee.gd" id="3_nrvrk"]
 [ext_resource type="Script" path="res://characters/boss_1/patrol.gd" id="4_mqisl"]
 [ext_resource type="AudioStream" uid="uid://blxnlx1q5027h" path="res://assets/sounds/Hurt_v2_wav.wav" id="4_p712c"]
-[ext_resource type="Script" path="res://controllers/death_ai.gd" id="8_trc5y"]
+[ext_resource type="Script" path="res://controllers/states/death_ai.gd" id="8_trc5y"]
 
 [node name="PickemanController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "combat_state", "hurt_box_collision", "attack_sound", "hit_sound", "character", "state_machine")]
 script = ExtResource("1_wc86j")
@@ -21,22 +21,22 @@ character = NodePath("Pickeman")
 state_machine = NodePath("Pickeman/LimboHSM")
 
 [node name="Pickeman" parent="." instance=ExtResource("2_pwd3m")]
-collision_layer = 1
+collision_mask = 9
 
 [node name="Hurtbox" parent="Pickeman" index="0"]
 collision_layer = 4
 
-[node name="CollisionShape2D" parent="Pickeman/CollisionShape2D/HitBox" index="0"]
-disabled = true
-
 [node name="AnimatedSprite2D" parent="Pickeman" index="2"]
-animation = &"Idle"
+frame = 5
 
 [node name="DamageComponent" parent="Pickeman" index="4"]
 damage_amount = 0.0
 
 [node name="AnimationTree" parent="Pickeman" index="6"]
 parameters/Attack/blend_position = 0.0
+
+[node name="LimboHSM" parent="Pickeman" index="7"]
+state_conditions = {}
 
 [node name="PatrolState" type="LimboState" parent="Pickeman/LimboHSM" index="0" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
 script = ExtResource("4_mqisl")

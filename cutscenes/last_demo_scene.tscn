@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bnparuclaplci" path="res://assets/VIctorianParalax/Assets/tree01.png" id="8_ivppt"]
 [ext_resource type="Shader" path="res://glitch.gdshader" id="8_tu1mg"]
 [ext_resource type="Texture2D" uid="uid://b8r44il16bkuj" path="res://assets/VIctorianParalax/Assets/tree02.png" id="9_25mke"]
-[ext_resource type="PackedScene" uid="uid://co7l6yh7o66lw" path="res://glitch_effects.tscn" id="9_55vkb"]
+[ext_resource type="PackedScene" uid="uid://co7l6yh7o66lw" path="res://cutscenes/glitch_effects.tscn" id="9_55vkb"]
 [ext_resource type="Texture2D" uid="uid://7bmga7stwol4" path="res://assets/VIctorianParalax/Assets/tree03.png" id="10_jvi4l"]
 [ext_resource type="Texture2D" uid="uid://b4iqi86rsp1ul" path="res://assets/VIctorianParalax/Assets/tomb.png" id="11_h45c3"]
 

@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bh8fqx2dxwere" path="res://assets/UI/UI - Words/Words With BG/UI - Words15.png" id="5_iahm1"]
 [ext_resource type="AudioStream" uid="uid://b8vi3bnevfcr3" path="res://assets/sounds/447566__a_guy_1__robot-gibberish.wav" id="6_7aq4m"]
 [ext_resource type="Shader" path="res://glitch.gdshader" id="7_fmf6t"]
-[ext_resource type="PackedScene" uid="uid://co7l6yh7o66lw" path="res://glitch_effects.tscn" id="8_hj4mk"]
+[ext_resource type="PackedScene" uid="uid://co7l6yh7o66lw" path="res://cutscenes/glitch_effects.tscn" id="8_hj4mk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sp2uk"]
 texture = ExtResource("2_vrwpo")
@@ -607,6 +607,7 @@ _data = {
 [node name="Engineer_Shop" type="CanvasLayer"]
 script = ExtResource("1_ngsvq")
 next_scene = ExtResource("2_fe3py")
+max_step = 9
 
 [node name="Tileset" type="Node2D" parent="."]
 

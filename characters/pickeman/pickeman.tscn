@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_qnami"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_mlw8g"]
-[ext_resource type="Script" path="res://controllers/hit_box.gd" id="3_xy7vw"]
+[ext_resource type="Script" path="res://components/hit_box.gd" id="3_xy7vw"]
 [ext_resource type="Shader" path="res://blue_to_red.gdshader" id="4_62llk"]
 [ext_resource type="Texture2D" uid="uid://cs076rvdbivw" path="res://assets/ThreeEnemies/Shock Sweeper/slam with VFX.png" id="4_fmdim"]
 [ext_resource type="Texture2D" uid="uid://uepq3xg8psdo" path="res://assets/ThreeEnemies/Shock Sweeper/wake.png" id="4_vche0"]

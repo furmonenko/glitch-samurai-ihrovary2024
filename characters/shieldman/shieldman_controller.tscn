@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://unqj071j3se0"]
+[gd_scene load_steps=10 format=3 uid="uid://unqj071j3se0"]
 
 [ext_resource type="PackedScene" uid="uid://jc4g732lmltx" path="res://characters/shieldman/shieldman.tscn" id="1_hr5cw"]
-[ext_resource type="Script" path="res://controllers/shieldman_controller.gd" id="1_tj5ih"]
+[ext_resource type="Script" path="res://characters/shieldman/shieldman_controller.gd" id="1_tj5ih"]
 [ext_resource type="AnimationLibrary" uid="uid://ikuctx682fxu" path="res://characters/shieldman/shieldman_anim.res" id="3_e6k6w"]
 [ext_resource type="AudioStream" uid="uid://caoioobyllef2" path="res://assets/sounds/Shield 3.wav" id="4_cwrvx"]
-[ext_resource type="Script" path="res://controllers/combat_state_melee.gd" id="4_hkku4"]
+[ext_resource type="Script" path="res://controllers/states/combat_state_melee.gd" id="4_hkku4"]
+[ext_resource type="Script" path="res://controllers/states/death_ai.gd" id="5_3f0yp"]
 [ext_resource type="AudioStream" uid="uid://ri23ee4kbtmg" path="res://assets/sounds/medium-explosion-40472.mp3" id="6_uq8nw"]
 
 [sub_resource type="Animation" id="Animation_qgwk1"]
@@ -39,27 +40,25 @@ _data = {
 "RESET": SubResource("Animation_qgwk1")
 }
 
-[node name="ShieldmanController" type="Node2D" node_paths=PackedStringArray("health_component", "hurt_box_collision", "attack_sound", "hit_sound", "character", "state_machine")]
+[node name="ShieldmanController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "combat_state", "hurt_box_collision", "attack_sound", "hit_sound", "character", "state_machine")]
 position = Vector2(-3, 0)
 script = ExtResource("1_tj5ih")
-shield_cooldown = null
 spot_range = 120.0
 attack_range = 40.0
-cooldown_duration = 2.0
+cooldown_duration = 4.0
 health_component = NodePath("Shieldman/HealthComponent")
+death_state = NodePath("Shieldman/LimboHSM/DeathState")
+patrol_state = NodePath("Shieldman/LimboHSM/Patrol")
+combat_state = NodePath("Shieldman/LimboHSM/Combat")
 hurt_box_collision = NodePath("Shieldman/Hurtbox/CollisionShape2D")
 attack_sound = NodePath("Shieldman/Node2D/Attack")
 hit_sound = NodePath("Shieldman/Node2D/Hurt")
 character = NodePath("Shieldman")
 state_machine = NodePath("Shieldman/LimboHSM")
-speed = null
-jump_force = null
-gravity = null
-acceleration = null
-deceleration = null
-max_speed = null
 
 [node name="Shieldman" parent="." node_paths=PackedStringArray("hitbox") instance=ExtResource("1_hr5cw")]
+position = Vector2(3, 0)
+collision_mask = 9
 hitbox = NodePath("HitBox")
 
 [node name="AnimatedSprite2D" parent="Shieldman" index="1"]
@@ -78,16 +77,26 @@ libraries = {
 "shieldman_anim": ExtResource("3_e6k6w")
 }
 
-[node name="LimboHSM" parent="Shieldman" index="6"]
-state_conditions = {
-"got_hit": "parameters/conditions/got_hit"
-}
+[node name="Patrol" parent="Shieldman/LimboHSM" index="0" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
+controller = NodePath("../../..")
 
-[node name="Combat" parent="Shieldman/LimboHSM" index="1"]
+[node name="Combat" parent="Shieldman/LimboHSM" index="1" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
 script = ExtResource("4_hkku4")
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
+controller = NodePath("../../..")
+acceleration = 30.0
+max_speed = 30.0
+
+[node name="DeathState" parent="Shieldman/LimboHSM" index="2"]
+script = ExtResource("5_3f0yp")
 
 [node name="Hurtbox" parent="Shieldman" index="7"]
-collision_layer = 4
+collision_layer = 128
 
 [node name="HitBox" parent="Shieldman" index="8" node_paths=PackedStringArray("agent", "damage_component")]
 agent = NodePath("..")

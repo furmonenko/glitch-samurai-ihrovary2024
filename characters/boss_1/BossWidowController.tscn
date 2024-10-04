@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://characters/boss_1/boss_widow_controller.gd" id="1_fryqj"]
 [ext_resource type="PackedScene" uid="uid://b8i8qn5fvparo" path="res://characters/boss_1/boss_widow.tscn" id="1_yr50n"]
 [ext_resource type="LabelSettings" uid="uid://b33p2yrnnwkeq" path="res://cutscenes/intuduction.tres" id="2_ob2a1"]
-[ext_resource type="Script" path="res://controllers/death_ai.gd" id="3_i7q1e"]
+[ext_resource type="Script" path="res://controllers/states/death_ai.gd" id="3_i7q1e"]
 [ext_resource type="Script" path="res://characters/boss_1/widow_first_stage_state.gd" id="3_uugga"]
 [ext_resource type="Texture2D" uid="uid://crw0gq2ho1txp" path="res://assets/UI/UI - Borders and HP/red_hp_under.png" id="3_v38p2"]
 [ext_resource type="AnimationLibrary" uid="uid://blb2gfnybvqry" path="res://characters/boss_1/boss_1.res" id="3_xtcwd"]

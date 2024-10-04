@@ -47,7 +47,9 @@ func _ready() -> void:
 		character.hitbox.hit_target.connect(func(damaged_character: Character):
 			%PlayerCamera.start_screen_shake()
 			scene_glitch.glitch.visible = true
+			
 			scene_glitch.animation_player.play("hit_glitch")
+			
 			if damaged_character.is_dead:
 				pass
 				# Helpers.slow_motion_start(0.5)
@@ -114,7 +116,7 @@ func handle_states(delta: float) -> void:
 		
 
 	# Перевірка на атаку (входження в стан AttackState)
-	elif Input.is_action_just_pressed("attack") and cooldown.is_stopped():
+	elif Input.is_action_pressed("attack") and cooldown.is_stopped():
 		var attack_sound_pitch = randf_range(0.9, 1.1)
 		attack_sound.pitch_scale = attack_sound_pitch
 		

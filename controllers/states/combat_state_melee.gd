@@ -26,9 +26,10 @@ func get_random_animation_index():
 func attack():
 	if get_blendspace_animations_count() == 1:
 		state_machine.switch_state("attack")
+		controller.cooldown_timer.start()
 	else:
 		state_machine.switch_state("attack")
-		animation_tree.set("parameters/AttackFirstStage/blend_position", get_random_animation_index())
+		animation_tree.set("parameters/Attack/blend_position", get_random_animation_index())
 		controller.cooldown_timer.start()
 	
 func move_to_enemy(delta):

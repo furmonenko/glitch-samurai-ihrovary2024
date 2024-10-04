@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b7dwmu7r7vqoc"]
 
-[ext_resource type="PackedScene" uid="uid://b6xhp64emqkwx" path="res://controllers/player_controller.tscn" id="1_w6it2"]
+[ext_resource type="PackedScene" uid="uid://b6xhp64emqkwx" path="res://characters/glitch_samurai/player_controller.tscn" id="1_w6it2"]
 [ext_resource type="PackedScene" uid="uid://c4ilsmhyd8try" path="res://characters/boss_1/BossWidowController.tscn" id="2_r7qmv"]
 [ext_resource type="Texture2D" uid="uid://wixa4htefpor" path="res://assets/VIctorianParalax/Parallax/layer 5.png" id="3_h26f3"]
 

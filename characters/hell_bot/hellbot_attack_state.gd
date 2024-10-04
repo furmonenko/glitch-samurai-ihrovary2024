@@ -1,2 +1,0 @@
-extends AttackState
-class_name HellbotAttackState

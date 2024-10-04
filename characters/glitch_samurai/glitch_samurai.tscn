@@ -2,16 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_qqsig"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_g3u8v"]
-[ext_resource type="PackedScene" uid="uid://8dd6ujcqbeo3" path="res://hit_box.tscn" id="2_ygpfr"]
+[ext_resource type="PackedScene" uid="uid://8dd6ujcqbeo3" path="res://components/hit_box.tscn" id="2_ygpfr"]
 [ext_resource type="SpriteFrames" uid="uid://d35ynlov1jxoh" path="res://characters/glitch_samurai/sf_glitch_samurai.tres" id="3_3qiti"]
 [ext_resource type="AnimationLibrary" uid="uid://frlgtji173ra" path="res://animations/Glitch Samurai/Glitch Samurai.res" id="4_0n567"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://7v73u3mnppp7" path="res://characters/glitch_samurai/glitch_samurai_asm.tres" id="5_5brxq"]
 [ext_resource type="Script" path="res://controllers/states/idle_state.gd" id="6_n2i03"]
 [ext_resource type="Script" path="res://controllers/states/run_state.gd" id="7_06roi"]
-[ext_resource type="Script" path="res://controllers/air_state.gd" id="8_4e76a"]
-[ext_resource type="Script" path="res://controllers/attack_state.gd" id="9_h62e8"]
+[ext_resource type="Script" path="res://controllers/states/air_state.gd" id="8_4e76a"]
+[ext_resource type="Script" path="res://controllers/states/attack_state.gd" id="9_h62e8"]
 [ext_resource type="Script" path="res://controllers/states/death_state.gd" id="10_4na0u"]
-[ext_resource type="Script" path="res://characters/glitch_samurai/glitch_state.gd" id="12_htikg"]
+[ext_resource type="Script" path="res://controllers/states/glitch_state.gd" id="12_htikg"]
 [ext_resource type="AudioStream" uid="uid://b3ay1u7aaf5dq" path="res://assets/sounds/Samurai_attack.wav" id="13_daib1"]
 [ext_resource type="AudioStream" uid="uid://xbemcjirjfb3" path="res://assets/sounds/running-1-6846.mp3" id="14_jilq7"]
 [ext_resource type="AudioStream" uid="uid://kpb73wgkuxpf" path="res://assets/sounds/Jump.wav" id="15_wpeqh"]
@@ -90,7 +90,7 @@ disabled = true
 position = Vector2(6, -23)
 sprite_frames = ExtResource("3_3qiti")
 animation = &"Glitch Idle"
-frame = 4
+frame = 5
 metadata/_edit_lock_ = true
 
 [node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("agent")]

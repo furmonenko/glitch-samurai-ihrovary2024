@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://i4dd3g6ng1bf"]
+[gd_scene load_steps=13 format=4 uid="uid://i4dd3g6ng1bf"]
 
 [ext_resource type="Texture2D" uid="uid://cyc6y3aarjcgx" path="res://assets/Basic Assets/Tileset/DARK Edition Tileset with background.png" id="1_gejdq"]
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_obi71"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://bug500hmryx5d" path="res://levels/portals_pair.tscn" id="9_4f378"]
 [ext_resource type="PackedScene" uid="uid://bja6jn57nw1vy" path="res://characters/pickeman/pickeman_controller.tscn" id="9_4v2wy"]
 [ext_resource type="PackedScene" uid="uid://ctg5ppxcodivj" path="res://characters/hell_bot/hellbot_controller.tscn" id="9_u1gjv"]
-[ext_resource type="PackedScene" uid="uid://unqj071j3se0" path="res://characters/shieldman/shieldman_controller.tscn" id="10_yrfil"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6u5f"]
 texture = ExtResource("1_gejdq")
@@ -342,7 +341,10 @@ tile_set = ExtResource("2_lo2p1")
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="PlayerController" parent="Characters" instance=ExtResource("3_045fn")]
-position = Vector2(280, 128)
+position = Vector2(251, 103)
+
+[node name="AnimatedSprite2D" parent="Characters/PlayerController/GlitchSamurai" index="2"]
+frame = 6
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -350,11 +352,7 @@ position = Vector2(280, 128)
 position = Vector2(-43, -80)
 
 [node name="HellbotController" parent="Enemies" instance=ExtResource("9_u1gjv")]
-position = Vector2(-191, -80)
-
-[node name="ShieldmanController" parent="Enemies" instance=ExtResource("10_yrfil")]
-position = Vector2(-13, 128)
-shield_cooldown = 2.0
+position = Vector2(-76, 128)
 
 [node name="LastDoor" type="Area2D" parent="."]
 position = Vector2(304, -863)
@@ -365,3 +363,7 @@ shape = SubResource("RectangleShape2D_gigda")
 [connection signal="body_entered" from="LastDoor" to="." method="_on_last_door_body_entered"]
 
 [editable path="PortalsPair"]
+[editable path="Characters/PlayerController"]
+[editable path="Characters/PlayerController/HUD/SceneGlitch"]
+[editable path="Characters/PlayerController/GlitchSamurai"]
+[editable path="Characters/PlayerController/GlitchSamurai/CollisionShape2D/HitBox"]

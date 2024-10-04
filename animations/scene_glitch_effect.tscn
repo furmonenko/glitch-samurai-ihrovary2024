@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bop2xmo4jtij8"]
 
 [ext_resource type="Shader" path="res://glitch.gdshader" id="1_eqsyw"]
-[ext_resource type="Script" path="res://scene_glitch_effect.gd" id="1_swai0"]
+[ext_resource type="Script" path="res://animations/scene_glitch_effect.gd" id="1_swai0"]
 [ext_resource type="AudioStream" uid="uid://caj5sa63mcbut" path="res://assets/sounds/223312__glitchedtones__glitch-element-18.wav" id="3_507ds"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rb3f8"]

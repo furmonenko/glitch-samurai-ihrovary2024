@@ -35,7 +35,6 @@ func initialize_state():
 	playback = animation_tree["parameters/playback"]
 
 func handle_movement(input_direction: int, delta: float) -> void:
-	
 	# Якщо персонаж змінює напрямок, обнуляємо швидкість
 	if (input_direction > 0 and velocity.x < 0) or (input_direction < 0 and velocity.x > 0):
 		velocity.x = 0
@@ -71,10 +70,7 @@ func handle_movement_patrol(input_direction: int, delta: float) -> void:
 		velocity.x = 0
 
 	# Оброт персонажа на основі напрямку
-	if input_direction != 0:
-		if character is Shieldman:
-			await get_tree().create_timer(0.5).timeout
-			
+	if input_direction != 0:		
 		if input_direction > 0:
 			character.transform.x.x = 1
 		elif input_direction < 0:
@@ -82,9 +78,7 @@ func handle_movement_patrol(input_direction: int, delta: float) -> void:
 
 		# Прискорення при русі
 		velocity.x = move_toward(velocity.x, input_direction * max_speed, acceleration)
-	else:
-		# Децелерація при зупинці
-		velocity.x = move_toward(velocity.x, 0, deceleration)
+
 
 	# Переміщення персонажа і застосування гравітації
 	character.velocity = velocity

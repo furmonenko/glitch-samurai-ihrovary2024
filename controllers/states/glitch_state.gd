@@ -19,7 +19,7 @@ var walls_to_ignore = ["WallType1", "WallType2"]  # Назви типів сті
 
 func _enter() -> void:
 	state_machine.switch_state("glitch")
-	character.set_collision_mask_value(1, true)
+	character.set_collision_mask_value(4, false)
 	
 	scene_glitch.animation_player.play("player_glitched")
 	scene_glitch.glitch.visible = true
@@ -31,7 +31,7 @@ func _enter() -> void:
 
 func _exit() -> void:
 	player_controller.glitch_exited.emit()
-	character.set_collision_mask_value(1, true)
+	character.set_collision_mask_value(4, true)
 	
 	scene_glitch.animation_player.stop()
 	scene_glitch.glitch.visible = false

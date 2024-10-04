@@ -8,7 +8,7 @@
 [ext_resource type="Shader" path="res://blue_to_red.gdshader" id="3_g4eyl"]
 [ext_resource type="Texture2D" uid="uid://tp7c81n1u5xs" path="res://assets/NPC Enemies/Shielder/death.png" id="4_a2w5x"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="5_k3ea7"]
-[ext_resource type="Script" path="res://controllers/hit_box.gd" id="7_4wbpu"]
+[ext_resource type="Script" path="res://components/hit_box.gd" id="7_4wbpu"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://jyyyp1mh6mw3" path="res://characters/hell_bot/default_enemy.tres" id="7_wwucn"]
 [ext_resource type="Script" path="res://characters/boss_1/patrol.gd" id="9_0o7tl"]
 [ext_resource type="Script" path="res://controllers/states/death_state.gd" id="11_4adgq"]
@@ -867,7 +867,6 @@ libraries = {
 tree_root = ExtResource("7_wwucn")
 parameters/conditions/attacking = false
 parameters/conditions/dead = false
-parameters/conditions/got_hit = false
 parameters/conditions/idle = false
 parameters/conditions/running = false
 parameters/conditions/shooting = false

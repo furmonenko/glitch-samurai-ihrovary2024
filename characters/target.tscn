@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b5u0w2acs4euo"]
 
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="1_6v67k"]
-[ext_resource type="Script" path="res://characters/health_component.gd" id="2_rvrkg"]
-[ext_resource type="Script" path="res://characters/damage_component.gd" id="3_pmwpq"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="2_rvrkg"]
+[ext_resource type="Script" path="res://components/damage_component.gd" id="3_pmwpq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r1sx8"]
 size = Vector2(16, 26)
