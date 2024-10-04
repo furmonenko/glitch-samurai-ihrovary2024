@@ -522,12 +522,6 @@ first_stage_state = NodePath("BossWidow/LimboHSM/FirstStage")
 second_stage_state = NodePath("BossWidow/LimboHSM/SecondStage")
 character = NodePath("BossWidow")
 state_machine = NodePath("BossWidow/LimboHSM")
-speed = 30.0
-jump_force = 0.0
-gravity = 0.0
-acceleration = 2.0
-deceleration = 1.0
-max_speed = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -556,11 +550,12 @@ texture_progress = ExtResource("4_jeptp")
 hitbox = NodePath("HitBox")
 
 [node name="Hurtbox" parent="BossWidow/CollisionShape2D" index="0" node_paths=PackedStringArray("agent", "health_component")]
+collision_layer = 128
 agent = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
 
 [node name="AnimatedSprite2D" parent="BossWidow" index="2"]
-frame = 3
+frame = 4
 
 [node name="HealthComponent" parent="BossWidow" index="3" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
@@ -574,6 +569,9 @@ libraries = {
 "": SubResource("AnimationLibrary_qtkhs"),
 "boss_1": ExtResource("3_xtcwd")
 }
+
+[node name="AnimationTree" parent="BossWidow" index="6"]
+parameters/conditions/dead = false
 
 [node name="LimboHSM" parent="BossWidow" index="7" node_paths=PackedStringArray("character", "animation_tree")]
 script = ExtResource("4_35uhd")

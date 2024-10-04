@@ -48,6 +48,7 @@ func _ready() -> void:
 func _process(delta):
 	super(delta)
 	
+	print(state_machine.get_active_state())
 	if is_target_in_range(spot_range + 100.0):
 		canvas_layer.visible = true
 	

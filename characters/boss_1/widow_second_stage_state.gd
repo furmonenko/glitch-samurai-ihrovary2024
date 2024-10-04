@@ -75,7 +75,7 @@ func jump():
 	
 
 func land():
-	character.global_position = controller.target.global_position
+	character.global_position.x = controller.target.global_position.x
 	
 	state_machine.switch_state("landing")
 	

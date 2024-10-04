@@ -642,6 +642,7 @@ _data = {
 
 [node name="LastDemoScene" type="CanvasLayer"]
 script = ExtResource("1_xwjfr")
+max_step = 3
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(106, 29)
@@ -684,28 +685,9 @@ repeat_size = Vector2(400, 0)
 position = Vector2(6, -2)
 texture = ExtResource("6_gyr8j")
 
-[node name="Elevator" type="Area2D" parent="Node2D"]
-position = Vector2(366, 7)
-collision_layer = 7
-collision_mask = 7
-
-[node name="Elevator" type="Sprite2D" parent="Node2D/Elevator"]
+[node name="Elevator3" type="Sprite2D" parent="Node2D"]
+position = Vector2(-66, 34)
 texture = ExtResource("7_hgjum")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/Elevator"]
-polygon = PackedVector2Array(61, -22, 67, -28, 65, -35, -39, -34, -39, -7, -39, 13, -62, 15, -67, 37, -66, 56, -4, 56, -4, 16, 0, -22)
-
-[node name="Elevator2" type="Area2D" parent="Node2D"]
-position = Vector2(719, 7)
-scale = Vector2(-1, 1)
-collision_layer = 7
-collision_mask = 7
-
-[node name="Elevator" type="Sprite2D" parent="Node2D/Elevator2"]
-texture = ExtResource("7_hgjum")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/Elevator2"]
-polygon = PackedVector2Array(61, -22, 67, -28, 65, -35, -39, -34, -39, -7, -39, 13, -62, 15, -67, 37, -66, 56, -4, 56, -4, 16, 0, -22)
 
 [node name="Tree01" type="Sprite2D" parent="Node2D"]
 position = Vector2(131, 29)
@@ -730,17 +712,18 @@ texture = ExtResource("11_h45c3")
 [node name="Tileset" type="Node2D" parent="."]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Tileset"]
+position = Vector2(-1, 22)
 tile_map_data = PackedByteArray("AAD//wYAAAAAAA0AAAACAAYAAAAAAA0AAAAEAAYAAAACAA0AAAAGAAYAAAABAA0AAAAOAAYAAAAAAA0AAAAJAAYAAAABAA0AAAAPAAYAAAAAAA0AAAAQAAYAAAABAA0AAAALAAYAAAAAAA0AAAAMAAYAAAABAA0AAAANAAYAAAACAA0AAAAIAAYAAAAAAA0AAAAKAAYAAAACAA0AAAAFAAYAAAAAAA0AAAAHAAYAAAACAA0AAAADAAYAAAABAA0AAAAAAAYAAAABAA0AAAABAAYAAAACAA0AAAD8/wYAAAAAAA0AAAD9/wYAAAABAA0AAAD+/wYAAAACAA0AAAARAAYAAAACAA0AAAD8/wcAAAACAAoAAAD8/wgAAAACAAoAAAD8/wkAAAACAAoAAAD8/woAAAACAAoAAAD9/wcAAAACAAoAAAD9/wgAAAACAAoAAAD9/wkAAAACAAoAAAD9/woAAAACAAoAAAD+/wcAAAACAAoAAAD+/wgAAAACAAoAAAD+/wkAAAACAAoAAAD+/woAAAACAAoAAAD//wcAAAACAAoAAAD//wgAAAACAAoAAAD//wkAAAACAAoAAAD//woAAAACAAoAAAAAAAcAAAACAAoAAAAAAAgAAAACAAoAAAAAAAkAAAACAAoAAAAAAAoAAAACAAoAAAABAAcAAAACAAoAAAABAAgAAAACAAoAAAABAAkAAAACAAoAAAABAAoAAAACAAoAAAACAAcAAAACAAoAAAACAAgAAAACAAoAAAACAAkAAAACAAoAAAACAAoAAAACAAoAAAADAAcAAAACAAoAAAADAAgAAAACAAoAAAADAAkAAAACAAoAAAADAAoAAAACAAoAAAAEAAcAAAACAAoAAAAEAAgAAAACAAoAAAAEAAkAAAACAAoAAAAEAAoAAAACAAoAAAAFAAcAAAACAAoAAAAFAAgAAAACAAoAAAAFAAkAAAACAAoAAAAFAAoAAAACAAoAAAAGAAcAAAACAAoAAAAGAAgAAAACAAoAAAAGAAkAAAACAAoAAAAGAAoAAAACAAoAAAAHAAcAAAACAAoAAAAHAAgAAAACAAoAAAAHAAkAAAACAAoAAAAHAAoAAAACAAoAAAAIAAcAAAACAAoAAAAIAAgAAAACAAoAAAAIAAkAAAACAAoAAAAIAAoAAAACAAoAAAAJAAcAAAACAAoAAAAJAAgAAAACAAoAAAAJAAkAAAACAAoAAAAJAAoAAAACAAoAAAAKAAcAAAACAAoAAAAKAAgAAAACAAoAAAAKAAkAAAACAAoAAAAKAAoAAAACAAoAAAALAAcAAAACAAoAAAALAAgAAAACAAoAAAALAAkAAAACAAoAAAALAAoAAAACAAoAAAAMAAcAAAACAAoAAAAMAAgAAAACAAoAAAAMAAkAAAACAAoAAAAMAAoAAAACAAoAAAANAAcAAAACAAoAAAANAAgAAAACAAoAAAANAAkAAAACAAoAAAANAAoAAAACAAoAAAAOAAcAAAACAAoAAAAOAAgAAAACAAoAAAAOAAkAAAACAAoAAAAOAAoAAAACAAoAAAAPAAcAAAACAAoAAAAPAAgAAAACAAoAAAAPAAkAAAACAAoAAAAPAAoAAAACAAoAAAAQAAcAAAACAAoAAAAQAAgAAAACAAoAAAAQAAkAAAACAAoAAAAQAAoAAAACAAoAAAARAAcAAAACAAoAAAARAAgAAAACAAoAAAARAAkAAAACAAoAAAARAAoAAAACAAoAAAA=")
 tile_set = SubResource("TileSet_iktmx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(37, 74)
+position = Vector2(95, 7)
 sprite_frames = SubResource("SpriteFrames_o2nok")
 autoplay = "default"
 frame_progress = 0.83224
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(195, 52)
+position = Vector2(194, 76)
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_pls5c")
 autoplay = "default"
@@ -832,82 +815,5 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="EndGame" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="ColorRect" type="ColorRect" parent="EndGame"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.745098)
-
-[node name="Node" type="Control" parent="EndGame"]
-layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-grow_horizontal = 2
-
-[node name="IntroText2" type="Label" parent="EndGame/Node"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -40.0
-offset_top = 10.0
-offset_right = 295.0
-offset_bottom = 83.0
-grow_horizontal = 2
-scale = Vector2(0.274677, 0.288688)
-text = "THANK YOU FOR PLAYING"
-label_settings = ExtResource("5_0wcli")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-uppercase = true
-
-[node name="IntroText3" type="Label" parent="EndGame/Node"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -40.0
-offset_top = 27.0
-offset_right = 291.0
-offset_bottom = 100.0
-grow_horizontal = 2
-scale = Vector2(0.274677, 0.288688)
-text = "Game demo developed for 
-Ihrovary 2024 gamejam"
-label_settings = ExtResource("5_0wcli")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-uppercase = true
-
-[node name="IntroText4" type="Label" parent="EndGame/Node"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -40.0
-offset_top = 80.0
-offset_right = 291.0
-offset_bottom = 172.0
-grow_horizontal = 2
-scale = Vector2(0.274677, 0.288688)
-text = "Developed by:
-Zakharii Furmanets
-Andrian Furmanets
-Assets author:
-Penusbmic"
-label_settings = ExtResource("5_0wcli")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-uppercase = true
 
 [connection signal="timeout" from="TextTimer" to="." method="_on_text_timer_timeout"]
