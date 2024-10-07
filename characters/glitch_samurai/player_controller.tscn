@@ -61,7 +61,7 @@ damage_component = NodePath("../../DamageComponent")
 
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
 position = Vector2(6, -22)
-frame = 1
+frame = 9
 
 [node name="HealthComponent" parent="GlitchSamurai" index="3"]
 max_hp = 1.0
@@ -84,6 +84,9 @@ acceleration = 100.0
 max_speed = 100.0
 
 [node name="Air" parent="GlitchSamurai/LimboHSM" index="2" node_paths=PackedStringArray("state_machine")]
+jump_force = 300.0
+gravity = 25.0
+max_fall_speed = 200.0
 state_machine = NodePath("..")
 
 [node name="Attack" parent="GlitchSamurai/LimboHSM" index="3" node_paths=PackedStringArray("state_machine", "character", "controller")]

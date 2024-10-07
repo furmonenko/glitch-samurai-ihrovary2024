@@ -1,7 +1,9 @@
 extends Cutscene
 
+var given_string: String
+
 func faded_in():
-	next_scene = load("res://levels/base_level.tscn")
+	next_scene = load(given_string)
 	super()
 
 func advance_text(step: int):

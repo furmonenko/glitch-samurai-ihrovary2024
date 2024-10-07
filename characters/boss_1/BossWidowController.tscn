@@ -570,9 +570,6 @@ libraries = {
 "boss_1": ExtResource("3_xtcwd")
 }
 
-[node name="AnimationTree" parent="BossWidow" index="6"]
-parameters/conditions/dead = false
-
 [node name="LimboHSM" parent="BossWidow" index="7" node_paths=PackedStringArray("character", "animation_tree")]
 script = ExtResource("4_35uhd")
 character = NodePath("..")

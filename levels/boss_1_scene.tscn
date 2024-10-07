@@ -320,6 +320,7 @@ size = Vector2(96, 253)
 position = Vector2(122, 52)
 script = ExtResource("1_2i15d")
 cutscene_before_fight = ExtResource("2_p6u6s")
+level_idx = 1
 
 [node name="Paralax" type="Node2D" parent="."]
 
@@ -393,13 +394,13 @@ texture = ExtResource("12_i5a3s")
 position = Vector2(603, 30)
 texture = ExtResource("15_gitxx")
 
-[node name="BossWidowController" parent="." instance=ExtResource("15_saxwb")]
-position = Vector2(562, 63)
-
 [node name="PlayerController" parent="." instance=ExtResource("14_3r7js")]
 
 [node name="AnimatedSprite2D" parent="PlayerController/GlitchSamurai" index="2"]
-frame = 6
+frame = 4
+
+[node name="BossWidowController" parent="." instance=ExtResource("15_saxwb")]
+position = Vector2(562, 63)
 
 [node name="Elevator" type="StaticBody2D" parent="."]
 position = Vector2(366, 7)

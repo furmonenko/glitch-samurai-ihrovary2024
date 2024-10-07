@@ -2,7 +2,7 @@ extends CombatStateMelee
 class_name CombatStateRange
 
 func _update(delta):
-	if controller.is_target_in_range(controller.shoot_range) and !controller.is_target_in_range(controller.attack_range) and controller.cooldown_timer.is_stopped():
+	if controller.is_target_in_range(controller.shoot_range) and !controller.is_target_in_range(controller.attack_range) and controller.cooldown_timer.is_stopped() and animation_tree.get("parameters/playback").get_current_node() == "Idle":
 		shoot()
 	elif controller.is_target_in_range(controller.attack_range) and controller.cooldown_timer.is_stopped() and animation_tree.get("parameters/playback").get_current_node() == "Idle":
 		attack()
@@ -28,6 +28,7 @@ func shoot():
 	if get_blendspace_animations_count() == 1:
 		state_machine.switch_state("shoot")
 		controller.cooldown_timer.start()
+
 	else:
 		state_machine.switch_state("shoot")
 		animation_tree.set("parameters/Shoot/blend_position", get_random_animation_index())

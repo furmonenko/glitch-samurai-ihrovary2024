@@ -22,13 +22,16 @@ signal play_glitch_once
 @onready var cooldown = $GlitchSamurai/Timers/Cooldown
 @onready var combo_reset = $GlitchSamurai/Timers/ComboReset
 
+var current_level
 
 var combo_count: int = 0  # Лічильник комбо-атак
 var max_combo_attacks: int = 3  # Максимальна кількість атак у комбо
 
 @onready var scene_glitch = $HUD/SceneGlitch
 
+
 func _ready() -> void:
+	current_level = $'.'.get_parent()
 	
 	scene_glitch.animation_player.play("scene_glitch")
 	
@@ -41,6 +44,7 @@ func _ready() -> void:
 		if dead_character.is_on_floor() || state_machine.get_active_state() == glitch_state:
 			state_machine.change_active_state(death_state)
 			dead.emit()
+			Helpers.emit_signal("character_died", current_level.level_idx)
 		)
 	
 	if character.hitbox:
@@ -55,7 +59,6 @@ func _ready() -> void:
 				# Helpers.slow_motion_start(0.5)
 			)
 			
-	
 	_init_state_machine()
 	
 

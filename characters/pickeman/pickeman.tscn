@@ -21,7 +21,7 @@ size = Vector2(22, 20)
 size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7cnd"]
-size = Vector2(44, 25)
+size = Vector2(73, 12.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n3f8a"]
 shader = ExtResource("4_62llk")
@@ -333,43 +333,55 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="Animation" id="Animation_2dtcl"]
-length = 0.8
+[sub_resource type="Animation" id="Animation_iy2j4"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Pickeman/AnimatedSprite2D:frame")
+tracks/0/path = NodePath("Pickeman/CollisionShape2D/HitBox/CollisionShape2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11.5, -1.75)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Pickeman/AnimatedSprite2D:animation")
+tracks/1/path = NodePath("Pickeman/CollisionShape2D/HitBox/CollisionShape2D:shape:size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(73, 12.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pickeman/CollisionShape2D/HitBox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["Attack_2"]
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_angbq"]
 _data = {
-"Attack_2": SubResource("Animation_2dtcl")
+"RESET": SubResource("Animation_iy2j4")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8hkib"]
 animation = &"pickeman_anims/Attack"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e1842"]
-animation = &"Attack_2"
+animation = &"pickeman_anims/Attack_2"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_fuwmq"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_8hkib")
@@ -463,7 +475,7 @@ states/Shoot/node = SubResource("AnimationNodeAnimation_lsawd")
 states/Shoot/position = Vector2(609.461, -39.6146)
 states/Start/position = Vector2(-24, -38.0745)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_u7ly2"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_fc6ll"), "Idle", "Shoot", SubResource("AnimationNodeStateMachineTransition_qe7e2"), "Run", "Shoot", SubResource("AnimationNodeStateMachineTransition_qfn61"), "Shoot", "Idle", SubResource("AnimationNodeStateMachineTransition_2wuwm"), "Shoot", "Run", SubResource("AnimationNodeStateMachineTransition_ioucn"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a1yu2"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_j8cq0"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_vcecx"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_h0qak"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_xa2qm"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_0xqq1"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_mbgac"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_hmrvg")]
-graph_offset = Vector2(-226.87, -98.415)
+graph_offset = Vector2(-176.87, 114.585)
 
 [node name="Pickeman" instance=ExtResource("1_qnami")]
 
@@ -491,7 +503,7 @@ agent = NodePath("../..")
 damage_component = NodePath("../../DamageComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/HitBox" index="0"]
-position = Vector2(12, -7.5)
+position = Vector2(11.5, -1.75)
 shape = SubResource("RectangleShape2D_f7cnd")
 disabled = true
 
@@ -500,7 +512,7 @@ material = SubResource("ShaderMaterial_n3f8a")
 position = Vector2(16, -15)
 sprite_frames = SubResource("SpriteFrames_vvi4k")
 animation = &"Idle"
-frame = 1
+frame = 2
 metadata/_edit_lock_ = true
 
 [node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("agent")]
@@ -522,7 +534,7 @@ parameters/conditions/dead = false
 parameters/conditions/idle = false
 parameters/conditions/running = false
 parameters/conditions/shooting = false
-parameters/Attack/blend_position = 0.00186916
+parameters/Attack/blend_position = 0.999213
 
 [node name="LimboHSM" parent="." index="7" node_paths=PackedStringArray("character", "animation_tree")]
 character = NodePath("..")

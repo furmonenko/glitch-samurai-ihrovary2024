@@ -1,4 +1,4 @@
-extends Node2D
+extends Level
 
 @onready var checkpoint = $CheckpointBossFight
 @onready var boss_barier = $Barriers/BossFight/CollisionShape2D
@@ -11,6 +11,8 @@ var instance
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	super()
+	
 	instance = cutscene_before_fight.instantiate()
 	checkpoint.start_event.connect(start_fight)
 	
