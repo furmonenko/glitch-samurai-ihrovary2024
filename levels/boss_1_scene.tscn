@@ -397,7 +397,8 @@ texture = ExtResource("15_gitxx")
 [node name="PlayerController" parent="." instance=ExtResource("14_3r7js")]
 
 [node name="AnimatedSprite2D" parent="PlayerController/GlitchSamurai" index="2"]
-frame = 4
+animation = &"Glitch Idle"
+frame = 2
 
 [node name="BossWidowController" parent="." instance=ExtResource("15_saxwb")]
 position = Vector2(562, 63)
@@ -443,7 +444,7 @@ shape = SubResource("RectangleShape2D_p8fyd")
 disabled = true
 
 [node name="CheckpointBossFight" parent="." instance=ExtResource("16_jl1ku")]
-position = Vector2(396, -40)
+position = Vector2(397, -39)
 scale = Vector2(0.520107, 0.967942)
 
 [node name="PickemanController" parent="." instance=ExtResource("18_ntid4")]

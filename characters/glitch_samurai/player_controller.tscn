@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6xhp64emqkwx"]
+[gd_scene load_steps=9 format=3 uid="uid://b6xhp64emqkwx"]
 
 [ext_resource type="Script" path="res://characters/glitch_samurai/player_controller.gd" id="1_4w8h7"]
 [ext_resource type="Texture2D" uid="uid://dp4h72v4hf3fh" path="res://assets/UI/UI - Borders and HP/glitch_under.png" id="2_2eno6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://controllers/states/player_attack_state.gd" id="3_a7hi3"]
 [ext_resource type="Texture2D" uid="uid://bgli0683ro8ye" path="res://assets/UI/UI - Borders and HP/glitch_progress.png" id="3_eiyp6"]
 [ext_resource type="Script" path="res://characters/glitch_samurai/player_camera.gd" id="4_eijum"]
+[ext_resource type="AudioStream" uid="uid://cdmuslcrekbdx" path="res://assets/sounds/one_step_run.wav" id="7_yaarw"]
 
 [node name="PlayerController" type="Node2D" node_paths=PackedStringArray("character", "state_machine")]
 script = ExtResource("1_4w8h7")
@@ -61,16 +62,18 @@ damage_component = NodePath("../../DamageComponent")
 
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
 position = Vector2(6, -22)
-frame = 9
+frame = 6
 
 [node name="HealthComponent" parent="GlitchSamurai" index="3"]
 max_hp = 1.0
 
 [node name="AnimationTree" parent="GlitchSamurai" index="6"]
+parameters/Air/blend_position = -0.98935
 parameters/Attack/blend_position = 1.32617
 
 [node name="LimboHSM" parent="GlitchSamurai" index="7"]
 state_conditions = {
+"air": "parameters/conditions/jumping",
 "glitch": "parameters/conditions/glitch"
 }
 
@@ -112,10 +115,13 @@ acceleration = 2000.0
 max_speed = 2000.0
 
 [node name="RunSound" parent="GlitchSamurai/Sounds" index="1"]
-volume_db = 0.0
+stream = ExtResource("7_yaarw")
+
+[node name="JumpSound" parent="GlitchSamurai/Sounds" index="2"]
+volume_db = -20.0
 
 [node name="Cooldown" parent="GlitchSamurai/Timers" index="0"]
-wait_time = 0.75
+wait_time = 0.5
 
 [node name="ComboReset" parent="GlitchSamurai/Timers" index="1"]
 wait_time = 4.0

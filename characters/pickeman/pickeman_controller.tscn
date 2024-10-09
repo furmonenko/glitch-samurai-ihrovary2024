@@ -1,13 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bja6jn57nw1vy"]
+[gd_scene load_steps=9 format=3 uid="uid://bja6jn57nw1vy"]
 
 [ext_resource type="Script" path="res://controllers/ai_controller.gd" id="1_wc86j"]
 [ext_resource type="PackedScene" uid="uid://ckxkkjgb4u2yi" path="res://characters/pickeman/pickeman.tscn" id="2_pwd3m"]
 [ext_resource type="Script" path="res://controllers/states/combat_state_melee.gd" id="3_nrvrk"]
 [ext_resource type="Script" path="res://characters/boss_1/patrol.gd" id="4_mqisl"]
 [ext_resource type="AudioStream" uid="uid://blxnlx1q5027h" path="res://assets/sounds/Hurt_v2_wav.wav" id="4_p712c"]
+[ext_resource type="AudioStream" uid="uid://cdmuslcrekbdx" path="res://assets/sounds/one_step_run.wav" id="7_iguml"]
+[ext_resource type="AudioStream" uid="uid://pk6qent6unp6" path="res://assets/sounds/mob_death_2.mp3" id="8_r1m87"]
 [ext_resource type="Script" path="res://controllers/states/death_ai.gd" id="8_trc5y"]
 
-[node name="PickemanController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "combat_state", "hurt_box_collision", "attack_sound", "hit_sound", "character", "state_machine")]
+[node name="PickemanController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "combat_state", "hurt_box_collision", "attack_sound", "hit_sound", "run_sound", "character", "state_machine")]
 script = ExtResource("1_wc86j")
 cooldown_duration = 2.0
 health_component = NodePath("Pickeman/HealthComponent")
@@ -17,6 +19,7 @@ combat_state = NodePath("Pickeman/LimboHSM/CombatStateMelee")
 hurt_box_collision = NodePath("Pickeman/Hurtbox/CollisionShape2D")
 attack_sound = NodePath("Pickeman/Sounds/AttackSound")
 hit_sound = NodePath("Pickeman/Sounds/HitSound")
+run_sound = NodePath("Pickeman/Sounds/RunSound")
 character = NodePath("Pickeman")
 state_machine = NodePath("Pickeman/LimboHSM")
 
@@ -26,9 +29,15 @@ collision_mask = 9
 [node name="Hurtbox" parent="Pickeman" index="0"]
 collision_layer = 4
 
+[node name="CollisionShape2D" parent="Pickeman" index="1"]
+disabled = true
+
 [node name="AnimatedSprite2D" parent="Pickeman" index="2"]
-animation = &"Attack_2"
-frame = 7
+animation = &"Death"
+frame = 0
+
+[node name="DamageComponent" parent="Pickeman" index="4"]
+damage_amount = 0.0
 
 [node name="AnimationTree" parent="Pickeman" index="6"]
 parameters/Attack/blend_position = 0.0
@@ -58,5 +67,17 @@ script = ExtResource("8_trc5y")
 
 [node name="HitSound" parent="Pickeman/Sounds" index="1"]
 stream = ExtResource("4_p712c")
+
+[node name="RunSound" type="AudioStreamPlayer2D" parent="Pickeman/Sounds" index="2"]
+stream = ExtResource("7_iguml")
+volume_db = -20.0
+max_distance = 300.0
+bus = &"SFX"
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="Pickeman/Sounds" index="3"]
+stream = ExtResource("8_r1m87")
+volume_db = -5.0
+max_distance = 300.0
+bus = &"SFX"
 
 [editable path="Pickeman"]

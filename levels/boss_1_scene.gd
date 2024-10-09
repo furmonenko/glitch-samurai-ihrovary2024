@@ -25,6 +25,8 @@ func _process(delta):
 		boss_barier.call_deferred("set_disabled", true)
 
 func start_fight():
-	get_tree().paused = true
-	get_parent().add_child(instance)
-	boss_barier.call_deferred("set_disabled", false)
+	checkpoint.set_deferred("monitorable", false)
+	if checkpoint.monitorable == true:
+		get_tree().paused = true
+		get_parent().add_child(instance)
+		boss_barier.call_deferred("set_disabled", false)

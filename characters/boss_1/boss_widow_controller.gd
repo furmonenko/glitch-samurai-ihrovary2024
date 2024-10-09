@@ -14,6 +14,8 @@ signal hit_glitch
 @export var first_stage_state: WidowFirstStageState
 @export var second_stage_state: WidowSecondStageState
 
+@export var run_sound: AudioStreamPlayer2D
+
 @onready var hurt_box_collision = $BossWidow/CollisionShape2D/Hurtbox/CollisionShape2D
 @onready var hp_bar = $CanvasLayer/VBoxContainer/TextureProgressBar
 @onready var canvas_layer = $CanvasLayer
@@ -66,12 +68,14 @@ var direction_to_enemy: Vector2
 func _on_got_hit(damage_causer) -> void:
 	direction_to_enemy = character.global_position.direction_to(damage_causer.global_position)
 	hit_glitch.emit()
+	%HitSound.play()
 	hp_bar.value = health_component.current_hp
 	character.animated_sprite.material.set_shader_parameter("is_hurt", true)
 	var tween = get_tree().create_tween()
 	tween.tween_property(character.animated_sprite.material, "shader_parameter/is_hurt", false, 0.2)
 
 func character_died():
+	
 	character.is_dead = true
 	hurt_box_collision.disabled = true
 
@@ -96,3 +100,6 @@ func is_target_in_range(range: float) -> bool:
 	if target:
 		return character.global_position.distance_to(target.global_position) <= range
 	return false
+
+func step_sound():
+	run_sound.play()

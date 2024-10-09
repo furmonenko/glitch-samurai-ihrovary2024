@@ -44,6 +44,7 @@ func _ready() -> void:
 		if dead_character.is_on_floor() || state_machine.get_active_state() == glitch_state:
 			state_machine.change_active_state(death_state)
 			dead.emit()
+			await get_tree().create_timer(0.8).timeout
 			Helpers.emit_signal("character_died", current_level.level_idx)
 		)
 	
@@ -77,7 +78,7 @@ func handle_states(delta: float) -> void:
 	
 	if character.is_dead:
 		return
-
+		
 	if state_machine.get_active_state() != run_state:
 		run_sound.stop()
 		
@@ -119,7 +120,7 @@ func handle_states(delta: float) -> void:
 		
 
 	# Перевірка на атаку (входження в стан AttackState)
-	elif Input.is_action_pressed("attack") and cooldown.is_stopped():
+	elif Input.is_action_pressed("attack") and cooldown.is_stopped() and state_machine.get_active_state() != air_state:
 		var attack_sound_pitch = randf_range(0.9, 1.1)
 		attack_sound.pitch_scale = attack_sound_pitch
 		
@@ -140,15 +141,15 @@ func handle_states(delta: float) -> void:
 				state_machine.change_active_state(run_state)
 			elif state_machine.get_active_state() == run_state:
 				run_state.handle_movement(Input.get_axis("move_left", "move_right"), delta)
-		if !run_sound.playing:
-			run_sound.play()
 
 	elif state_machine.get_active_state() == run_state:
 		# Якщо персонаж біжить, але зупинився на краю, переконайтеся, що ми перевіряємо стан підлоги кожного кадру
 		if Input.get_axis("move_left", "move_right") == 0 or not character.is_on_floor():
 			state_machine.change_active_state(idle_state)
-			run_sound.stop()
 		elif !character.is_on_floor():
 			state_machine.change_active_state(air_state)
-			run_sound.stop()
 		
+func step_sound():
+	var step_sound_pitch = randf_range(0.9, 1.1)
+	run_sound.pitch_scale = step_sound_pitch
+	run_sound.play()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4ilsmhyd8try"]
+[gd_scene load_steps=28 format=3 uid="uid://c4ilsmhyd8try"]
 
 [ext_resource type="Script" path="res://characters/boss_1/boss_widow_controller.gd" id="1_fryqj"]
 [ext_resource type="PackedScene" uid="uid://b8i8qn5fvparo" path="res://characters/boss_1/boss_widow.tscn" id="1_yr50n"]
@@ -10,6 +10,13 @@
 [ext_resource type="Script" path="res://characters/boss_1/widow_boss_hsm.gd" id="4_35uhd"]
 [ext_resource type="Script" path="res://characters/boss_1/widow_second_stage_state.gd" id="4_e1el8"]
 [ext_resource type="Texture2D" uid="uid://dm81c8iqomujf" path="res://assets/UI/UI - Borders and HP/red_hp_progress.png" id="4_jeptp"]
+[ext_resource type="AudioStream" uid="uid://b8gg5kdx5r6uu" path="res://assets/sounds/robo_walk.wav" id="11_jgb1t"]
+[ext_resource type="AudioStream" uid="uid://drr44cb6q8mv3" path="res://assets/sounds/robo_attack.wav" id="12_yq3vn"]
+[ext_resource type="AudioStream" uid="uid://b32edx3x5mwea" path="res://assets/sounds/robot_1.mp3" id="13_c46g2"]
+[ext_resource type="AudioStream" uid="uid://ci7jk3qu2um8h" path="res://assets/sounds/robot_3.mp3" id="14_b6vqu"]
+[ext_resource type="AudioStream" uid="uid://ddu0cny7x5q3f" path="res://assets/sounds/robot_4.mp3" id="15_mjcm3"]
+[ext_resource type="AudioStream" uid="uid://28tjv3qq16ww" path="res://assets/sounds/robot_hit.wav" id="16_4udp2"]
+[ext_resource type="AudioStream" uid="uid://dt7g0t3utx41y" path="res://assets/sounds/robot_death.wav" id="17_75kql"]
 
 [sub_resource type="Animation" id="Animation_47ss2"]
 length = 0.001
@@ -160,6 +167,20 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(18.5779, 20)]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sounds/AttackMeleeSound")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_tulnt"]
 length = 1.6
@@ -234,6 +255,20 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sounds/AttackRangeSound")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_bqdcy"]
@@ -327,6 +362,20 @@ tracks/4/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sounds/DeathSound")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_18h4y"]
 length = 0.9
@@ -406,6 +455,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sounds/JumpSound")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_7pwt5"]
 tracks/0/type = "value"
@@ -468,6 +531,20 @@ tracks/4/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sounds/LandingSound")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_ta6nc"]
 length = 1.1
@@ -496,6 +573,23 @@ tracks/1/keys = {
 "update": 1,
 "values": ["move"]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"step_sound"
+}, {
+"args": [],
+"method": &"step_sound"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qtkhs"]
 _data = {
@@ -510,7 +604,7 @@ _data = {
 "move": SubResource("Animation_ta6nc")
 }
 
-[node name="BossWidowController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "first_stage_state", "second_stage_state", "character", "state_machine")]
+[node name="BossWidowController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "first_stage_state", "second_stage_state", "run_sound", "character", "state_machine")]
 script = ExtResource("1_fryqj")
 spot_range = 120.0
 attack_range = 60.0
@@ -520,6 +614,7 @@ death_state = NodePath("BossWidow/LimboHSM/Death")
 patrol_state = NodePath("BossWidow/LimboHSM/Patrol")
 first_stage_state = NodePath("BossWidow/LimboHSM/FirstStage")
 second_stage_state = NodePath("BossWidow/LimboHSM/SecondStage")
+run_sound = NodePath("Sounds/RunSound")
 character = NodePath("BossWidow")
 state_machine = NodePath("BossWidow/LimboHSM")
 
@@ -555,7 +650,7 @@ agent = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
 
 [node name="AnimatedSprite2D" parent="BossWidow" index="2"]
-frame = 4
+animation = &"death"
 
 [node name="HealthComponent" parent="BossWidow" index="3" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
@@ -602,5 +697,49 @@ max_speed = 40.0
 
 [node name="Death" parent="BossWidow/LimboHSM" index="3"]
 script = ExtResource("3_i7q1e")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="RunSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("11_jgb1t")
+volume_db = -5.0
+max_distance = 200.0
+bus = &"SFX"
+
+[node name="AttackMeleeSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("12_yq3vn")
+max_distance = 200.0
+bus = &"SFX"
+
+[node name="AttackRangeSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("13_c46g2")
+volume_db = -5.0
+max_distance = 200.0
+bus = &"SFX"
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("14_b6vqu")
+volume_db = -5.0
+max_distance = 200.0
+bus = &"SFX"
+
+[node name="LandingSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("15_mjcm3")
+volume_db = -5.0
+max_distance = 200.0
+bus = &"SFX"
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource("16_4udp2")
+volume_db = -5.0
+max_distance = 200.0
+bus = &"SFX"
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("17_75kql")
+volume_db = -5.0
+max_distance = 200.0
+bus = &"SFX"
 
 [editable path="BossWidow"]

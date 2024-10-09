@@ -17,6 +17,7 @@ signal hit_glitch
 
 @export var attack_sound: AudioStreamPlayer2D
 @export var hit_sound: AudioStreamPlayer2D
+@export var run_sound: AudioStreamPlayer2D
 
 var target: Character = null  # Ворог, на якого бот націлюється
 var cooldown_timer: Timer = Timer.new()  # Таймер для кулдауна атаки
@@ -79,3 +80,8 @@ func is_target_in_range(range: float) -> bool:
 	if target:
 		return character.global_position.distance_to(target.global_position) <= range
 	return false
+
+func step_sound():
+	var step_sound_pitch = randf_range(1.1, 1.3)
+	run_sound.pitch_scale = step_sound_pitch
+	run_sound.play()

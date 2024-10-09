@@ -10,7 +10,6 @@ class_name AirState
 func _enter() -> void:
 	# Перехід у стан повітря
 	velocity = character.velocity
-	animation_tree.set("parameters/Air/blend_position", -1)
 	state_machine.switch_state("air")
 	
 	# Якщо персонаж тільки стрибає

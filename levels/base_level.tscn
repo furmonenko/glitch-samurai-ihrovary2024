@@ -314,7 +314,7 @@ last_door = NodePath("LastDoor")
 [node name="PlayerController" parent="." instance=ExtResource("3_045fn")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(215, -848)
+position = Vector2(281, 128)
 
 [node name="PortalsPair" parent="." instance=ExtResource("9_4f378")]
 z_index = 30
@@ -350,10 +350,10 @@ tile_set = ExtResource("2_lo2p1")
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="PickemanController" parent="Enemies" instance=ExtResource("9_4v2wy")]
-position = Vector2(-11, 128)
+position = Vector2(-194, 128)
 
 [node name="HellbotController" parent="Enemies" instance=ExtResource("9_u1gjv")]
-position = Vector2(-109, -80)
+position = Vector2(-6, 128)
 
 [node name="ShieldmanController" parent="Enemies" instance=ExtResource("10_yrfil")]
 position = Vector2(-327, 128)

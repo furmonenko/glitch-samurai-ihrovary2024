@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=35 format=3 uid="uid://7v73u3mnppp7"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=36 format=3 uid="uid://7v73u3mnppp7"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_30vbj"]
 animation = &"Glitch Samurai/Glitch Jump"
@@ -6,11 +6,16 @@ animation = &"Glitch Samurai/Glitch Jump"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3xio0"]
 animation = &"Glitch Samurai/Glitch Fall"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ghb3l"]
+animation = &"Glitch Samurai/Glitch Fall"
+
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ufbgd"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_30vbj")
 blend_point_0/pos = 1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_3xio0")
 blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_ghb3l")
+blend_point_2/pos = -1.0
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2hu61"]
@@ -149,9 +154,9 @@ states/End/position = Vector2(866, 53.9772)
 states/Glitch/node = SubResource("AnimationNodeAnimation_joual")
 states/Glitch/position = Vector2(187.569, 346.122)
 "states/Glitch Idle/node" = SubResource("AnimationNodeAnimation_2qolq")
-"states/Glitch Idle/position" = Vector2(391.569, 68.6723)
+"states/Glitch Idle/position" = Vector2(406.569, 55.6677)
 "states/Glitch Run/node" = SubResource("AnimationNodeAnimation_44pnm")
 "states/Glitch Run/position" = Vector2(767.57, -53.4951)
 states/Start/position = Vector2(177.333, 53.3628)
 transitions = ["Glitch Idle", "Glitch Run", SubResource("AnimationNodeStateMachineTransition_dodwu"), "Glitch Run", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_yi4ib"), "Start", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_elv5c"), "Glitch Idle", "Air", SubResource("AnimationNodeStateMachineTransition_oyt8w"), "Air", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_ihl66"), "Glitch Run", "Air", SubResource("AnimationNodeStateMachineTransition_odl3e"), "Air", "Glitch Run", SubResource("AnimationNodeStateMachineTransition_n704i"), "Glitch Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_0ylcr"), "Attack", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_cc3xi"), "Attack", "Glitch Run", SubResource("AnimationNodeStateMachineTransition_xxe1e"), "Glitch Run", "Attack", SubResource("AnimationNodeStateMachineTransition_whu6p"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_jj7n7"), "Glitch Run", "Death", SubResource("AnimationNodeStateMachineTransition_1recr"), "Glitch Idle", "Death", SubResource("AnimationNodeStateMachineTransition_tsaxn"), "Air", "Death", SubResource("AnimationNodeStateMachineTransition_fcn63"), "Attack", "Glitch", SubResource("AnimationNodeStateMachineTransition_78fg3"), "Glitch", "Attack", SubResource("AnimationNodeStateMachineTransition_ugiar"), "Glitch Run", "Glitch", SubResource("AnimationNodeStateMachineTransition_442i4"), "Glitch", "Glitch Run", SubResource("AnimationNodeStateMachineTransition_jm1iq"), "Air", "Glitch", SubResource("AnimationNodeStateMachineTransition_7468l"), "Glitch", "Air", SubResource("AnimationNodeStateMachineTransition_13dql"), "Glitch Idle", "Glitch", SubResource("AnimationNodeStateMachineTransition_0julr"), "Glitch", "Glitch Idle", SubResource("AnimationNodeStateMachineTransition_odp3l")]
-graph_offset = Vector2(-158.018, 128.74)
+graph_offset = Vector2(-115.018, -70.26)

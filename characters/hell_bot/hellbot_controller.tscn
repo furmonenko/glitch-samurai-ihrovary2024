@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctg5ppxcodivj"]
+[gd_scene load_steps=8 format=3 uid="uid://ctg5ppxcodivj"]
 
 [ext_resource type="Script" path="res://characters/hell_bot/hellbot_controller.gd" id="1_ltet1"]
 [ext_resource type="PackedScene" uid="uid://c07cjxqrn0swb" path="res://characters/hell_bot/hell_bot.tscn" id="2_bo1rh"]
 [ext_resource type="Script" path="res://controllers/states/combat_state_range.gd" id="3_tx0s6"]
+[ext_resource type="AudioStream" uid="uid://cdmuslcrekbdx" path="res://assets/sounds/one_step_run.wav" id="5_nuks5"]
+[ext_resource type="AudioStream" uid="uid://dw12nhewe0ya8" path="res://assets/sounds/mob_death_1.mp3" id="6_s5jsq"]
 [ext_resource type="Script" path="res://controllers/states/death_ai.gd" id="7_1qppw"]
+[ext_resource type="AudioStream" uid="uid://b32edx3x5mwea" path="res://assets/sounds/robot_1.mp3" id="7_k3yyg"]
 
-[node name="HellbotController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "combat_state", "hurt_box_collision", "attack_sound", "hit_sound", "character", "state_machine")]
+[node name="HellbotController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "combat_state", "hurt_box_collision", "attack_sound", "hit_sound", "run_sound", "character", "state_machine")]
 script = ExtResource("1_ltet1")
 shoot_range = 70.0
 spot_range = 125.0
@@ -17,6 +20,7 @@ combat_state = NodePath("HellBot/LimboHSM/Combat")
 hurt_box_collision = NodePath("HellBot/Hurtbox/CollisionShape2D")
 attack_sound = NodePath("HellBot/Sounds/AttackSound")
 hit_sound = NodePath("HellBot/Sounds/HitSound")
+run_sound = NodePath("HellBot/Sounds/RunSound")
 character = NodePath("HellBot")
 state_machine = NodePath("HellBot/LimboHSM")
 
@@ -65,5 +69,23 @@ animation_tree = NodePath("../../AnimationTree")
 state_machine = NodePath("..")
 character = NodePath("../..")
 controller = NodePath("../../..")
+
+[node name="RunSound" type="AudioStreamPlayer2D" parent="HellBot/Sounds" index="2"]
+stream = ExtResource("5_nuks5")
+volume_db = -20.0
+max_distance = 200.0
+bus = &"SFX"
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="HellBot/Sounds" index="3"]
+stream = ExtResource("6_s5jsq")
+volume_db = -10.0
+max_distance = 200.0
+bus = &"SFX"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="HellBot/Sounds" index="4"]
+stream = ExtResource("7_k3yyg")
+volume_db = -15.0
+max_distance = 200.0
+bus = &"SFX"
 
 [editable path="HellBot"]
