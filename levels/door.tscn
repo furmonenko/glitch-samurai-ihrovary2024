@@ -113,6 +113,33 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Animation" id="Animation_8k5j4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D/CollisionShape2D2:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_r6xad"]
 length = 1.4
 tracks/0/type = "value"
@@ -176,33 +203,6 @@ tracks/4/keys = {
 "args": [0.0],
 "method": &"play"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_8k5j4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StaticBody2D/CollisionShape2D2:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aadve"]
@@ -286,6 +286,8 @@ volume_db = -10.0
 position = Vector2(82, 15)
 
 [node name="Area2D" type="Area2D" parent="ControlPanel"]
+collision_layer = 0
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ControlPanel/Area2D"]
 position = Vector2(-0.5, -3)
@@ -324,4 +326,5 @@ theme_override_fonts/font = ExtResource("4_j2bkj")
 theme_override_font_sizes/font_size = 16
 text = "Yes - [SPACE]"
 
-[connection signal="on_yes_pressed" from="." to="." method="_on_on_yes_pressed"]
+[connection signal="body_entered" from="ControlPanel/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="ControlPanel/Area2D" to="." method="_on_area_2d_body_exited"]

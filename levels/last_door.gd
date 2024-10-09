@@ -11,7 +11,7 @@ func _ready():
 	
 func _process(delta):
 	if control.process_mode != Node.PROCESS_MODE_DISABLED:
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("activate"):
 			_on_yes_pressed()
 
 

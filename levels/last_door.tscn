@@ -42,7 +42,7 @@ offset_bottom = 46.0
 scale = Vector2(0.4, 0.4)
 theme_override_fonts/font = ExtResource("3_8n0xy")
 theme_override_font_sizes/font_size = 16
-text = "Yes - [SPACE]"
+text = "Yes - [F]"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
