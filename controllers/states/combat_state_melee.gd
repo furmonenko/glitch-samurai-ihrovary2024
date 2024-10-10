@@ -9,7 +9,6 @@ func _update(delta):
 		move_to_enemy(delta)
 	else:
 		state_machine.switch_state("idle")
-		turn_towards_target()
 		
 
 
@@ -24,6 +23,8 @@ func get_random_animation_index():
 	return randi_range(0, get_blendspace_animations_count() - 1)
 
 func attack():
+	turn_towards_target()
+	
 	if get_blendspace_animations_count() == 1:
 		state_machine.switch_state("attack")
 		controller.cooldown_timer.start()

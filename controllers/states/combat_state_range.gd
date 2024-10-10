@@ -6,11 +6,11 @@ func _update(delta):
 		shoot()
 	elif controller.is_target_in_range(controller.attack_range) and controller.cooldown_timer.is_stopped() and animation_tree.get("parameters/playback").get_current_node() == "Idle":
 		attack()
-	elif !controller.is_target_in_range(controller.shoot_range) and !animation_tree.get("parameters/playback").get_current_node() == "Attack":
+	elif !controller.is_target_in_range(controller.shoot_range) and !animation_tree.get("parameters/playback").get_current_node() == "Shoot":
 		move_to_enemy(delta)
 	else:
 		state_machine.switch_state("idle")
-		turn_towards_target()
+		
 		
 
 
@@ -25,6 +25,8 @@ func get_random_animation_index():
 	return randi_range(0, get_blendspace_animations_count() - 1)
 
 func shoot():
+	turn_towards_target()
+	
 	if get_blendspace_animations_count() == 1:
 		state_machine.switch_state("shoot")
 		controller.cooldown_timer.start()
@@ -33,6 +35,8 @@ func shoot():
 		state_machine.switch_state("shoot")
 		animation_tree.set("parameters/Shoot/blend_position", get_random_animation_index())
 		controller.cooldown_timer.start()
+	
+	
 
 func turn_towards_target() -> void:
 	# Порівнюємо позиції персонажа та цілі (героя)

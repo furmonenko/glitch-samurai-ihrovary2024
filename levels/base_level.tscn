@@ -350,38 +350,32 @@ tile_set = ExtResource("2_lo2p1")
 
 [node name="Enemies" type="Node2D" parent="."]
 
+[node name="ShieldmanController" parent="Enemies" instance=ExtResource("10_ii6xi")]
+position = Vector2(-324, -432)
+
 [node name="PickemanController" parent="Enemies" instance=ExtResource("8_dytxm")]
-position = Vector2(-29, 128)
+position = Vector2(-206, -80)
 
 [node name="PickemanController2" parent="Enemies" instance=ExtResource("8_dytxm")]
-position = Vector2(-89, -79)
-
-[node name="PickemanController3" parent="Enemies" instance=ExtResource("8_dytxm")]
-position = Vector2(105, -432)
+position = Vector2(79, 128)
 
 [node name="HellbotController" parent="Enemies" instance=ExtResource("9_b5wn7")]
-position = Vector2(-312, 128)
+position = Vector2(-355, 128)
 
 [node name="HellbotController2" parent="Enemies" instance=ExtResource("9_b5wn7")]
-position = Vector2(44, -224)
+position = Vector2(41, -80)
 
 [node name="HellbotController3" parent="Enemies" instance=ExtResource("9_b5wn7")]
-position = Vector2(-213, -432)
+position = Vector2(37, -224)
 
-[node name="HellbotController4" parent="Enemies" instance=ExtResource("9_b5wn7")]
-position = Vector2(-438, -784)
-
-[node name="Patrol" parent="Enemies/HellbotController4/HellBot/LimboHSM" index="0"]
-patrol_time = 0.0
+[node name="PickemanController3" parent="Enemies" instance=ExtResource("8_dytxm")]
+position = Vector2(111, -432)
 
 [node name="ShieldmanController2" parent="Enemies" instance=ExtResource("10_ii6xi")]
-position = Vector2(-29, -848)
+position = Vector2(-47, -848)
 
 [node name="Door" parent="." instance=ExtResource("8_fx0ss")]
 position = Vector2(-103, 104)
-
-[node name="AnimatedSprite2D" parent="Door" index="0"]
-frame = 0
 
 [node name="ControlPanel" parent="Door" index="4"]
 position = Vector2(59, 126)
@@ -394,6 +388,4 @@ frame_progress = 0.60057
 text = "Yes - [F]"
 
 [editable path="PortalsPair"]
-[editable path="Enemies/HellbotController4"]
-[editable path="Enemies/HellbotController4/HellBot"]
 [editable path="Door"]
