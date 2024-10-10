@@ -70,9 +70,6 @@ animation = &"Death"
 [node name="HealthComponent" parent="Shieldman" index="2"]
 max_hp = 100.0
 
-[node name="DamageComponent" parent="Shieldman" index="3"]
-damage_amount = 0.0
-
 [node name="AnimationPlayer" parent="Shieldman" index="4"]
 libraries = {
 "": SubResource("AnimationLibrary_ssjrk"),

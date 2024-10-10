@@ -1,0 +1,476 @@
+[gd_scene load_steps=24 format=4 uid="uid://jypsbltumul6"]
+
+[ext_resource type="Texture2D" uid="uid://rln47ncyke2m" path="res://assets/VIctorianParalax/Parallax/layer 1.png" id="1_qv4sp"]
+[ext_resource type="Texture2D" uid="uid://bmyahchr6m4st" path="res://assets/VIctorianParalax/Parallax/layer 2.png" id="2_fs8rv"]
+[ext_resource type="Texture2D" uid="uid://i0jg22vv8f44" path="res://assets/VIctorianParalax/Parallax/layer 3.png" id="3_snl45"]
+[ext_resource type="Texture2D" uid="uid://fly7of8ctlcc" path="res://assets/VIctorianParalax/Parallax/layer 4.png" id="4_ovf8e"]
+[ext_resource type="Texture2D" uid="uid://wixa4htefpor" path="res://assets/VIctorianParalax/Parallax/layer 5.png" id="5_i6eeq"]
+[ext_resource type="Texture2D" uid="uid://dpvha1bnc7l2l" path="res://assets/VIctorianParalax/Assets/elevator.png" id="6_80jv6"]
+[ext_resource type="Texture2D" uid="uid://cyc6y3aarjcgx" path="res://assets/Basic Assets/Tileset/DARK Edition Tileset with background.png" id="7_s6aoe"]
+[ext_resource type="Texture2D" uid="uid://wrxlk1daq2l2" path="res://assets/Glitch Samurai/Glitch Samurai-Idle Gltich.png" id="8_18phx"]
+[ext_resource type="LabelSettings" uid="uid://b33p2yrnnwkeq" path="res://cutscenes/intuduction.tres" id="9_eq87n"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_utd7n"]
+texture = ExtResource("7_s6aoe")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+17:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+16:4/0 = 0
+17:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+17:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+17:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+12:7/0 = 0
+13:7/0 = 0
+14:7/0 = 0
+15:7/0 = 0
+16:7/0 = 0
+17:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+11:8/0 = 0
+12:8/0 = 0
+13:8/0 = 0
+14:8/0 = 0
+15:8/0 = 0
+16:8/0 = 0
+17:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+12:9/0 = 0
+13:9/0 = 0
+14:9/0 = 0
+15:9/0 = 0
+16:9/0 = 0
+17:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+4:10/0 = 0
+5:10/0 = 0
+6:10/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+9:10/0 = 0
+10:10/0 = 0
+11:10/0 = 0
+12:10/0 = 0
+13:10/0 = 0
+14:10/0 = 0
+15:10/0 = 0
+16:10/0 = 0
+17:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+4:11/0 = 0
+5:11/0 = 0
+6:11/0 = 0
+7:11/0 = 0
+8:11/0 = 0
+9:11/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+12:11/0 = 0
+13:11/0 = 0
+14:11/0 = 0
+15:11/0 = 0
+16:11/0 = 0
+17:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+5:12/0 = 0
+6:12/0 = 0
+7:12/0 = 0
+8:12/0 = 0
+9:12/0 = 0
+10:12/0 = 0
+11:12/0 = 0
+12:12/0 = 0
+13:12/0 = 0
+14:12/0 = 0
+15:12/0 = 0
+16:12/0 = 0
+17:12/0 = 0
+0:13/0 = 0
+1:13/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+4:13/0 = 0
+5:13/0 = 0
+6:13/0 = 0
+7:13/0 = 0
+8:13/0 = 0
+9:13/0 = 0
+10:13/0 = 0
+11:13/0 = 0
+12:13/0 = 0
+13:13/0 = 0
+14:13/0 = 0
+15:13/0 = 0
+16:13/0 = 0
+17:13/0 = 0
+0:14/0 = 0
+1:14/0 = 0
+2:14/0 = 0
+3:14/0 = 0
+4:14/0 = 0
+5:14/0 = 0
+6:14/0 = 0
+7:14/0 = 0
+8:14/0 = 0
+9:14/0 = 0
+10:14/0 = 0
+11:14/0 = 0
+12:14/0 = 0
+13:14/0 = 0
+14:14/0 = 0
+15:14/0 = 0
+16:14/0 = 0
+17:14/0 = 0
+0:15/0 = 0
+1:15/0 = 0
+2:15/0 = 0
+3:15/0 = 0
+4:15/0 = 0
+5:15/0 = 0
+6:15/0 = 0
+7:15/0 = 0
+8:15/0 = 0
+9:15/0 = 0
+10:15/0 = 0
+11:15/0 = 0
+12:15/0 = 0
+13:15/0 = 0
+14:15/0 = 0
+15:15/0 = 0
+16:15/0 = 0
+17:15/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_tey67"]
+sources/0 = SubResource("TileSetAtlasSource_utd7n")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60vjh"]
+atlas = ExtResource("8_18phx")
+region = Rect2(0, 0, 140, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qt8pg"]
+atlas = ExtResource("8_18phx")
+region = Rect2(140, 0, 140, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dj1kf"]
+atlas = ExtResource("8_18phx")
+region = Rect2(280, 0, 140, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r3k8"]
+atlas = ExtResource("8_18phx")
+region = Rect2(420, 0, 140, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pauso"]
+atlas = ExtResource("8_18phx")
+region = Rect2(560, 0, 140, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvsfr"]
+atlas = ExtResource("8_18phx")
+region = Rect2(700, 0, 140, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twoya"]
+atlas = ExtResource("8_18phx")
+region = Rect2(840, 0, 140, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jj8pr"]
+atlas = ExtResource("8_18phx")
+region = Rect2(980, 0, 140, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l57wh"]
+atlas = ExtResource("8_18phx")
+region = Rect2(1120, 0, 140, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbx5p"]
+atlas = ExtResource("8_18phx")
+region = Rect2(1260, 0, 140, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uq0cc"]
+atlas = ExtResource("8_18phx")
+region = Rect2(1400, 0, 140, 46)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3rx2r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60vjh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qt8pg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dj1kf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r3k8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pauso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvsfr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twoya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jj8pr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l57wh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbx5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uq0cc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="FinalDemo" type="CanvasLayer"]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(107, 89)
+
+[node name="Background" type="Parallax2D" parent="Node2D"]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(400, 192)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Background"]
+texture = ExtResource("1_qv4sp")
+
+[node name="Moon" type="Parallax2D" parent="Node2D"]
+scroll_scale = Vector2(0.001, 0.001)
+autoscroll = Vector2(-10, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Moon"]
+texture = ExtResource("2_fs8rv")
+
+[node name="Fog" type="Parallax2D" parent="Node2D"]
+scroll_scale = Vector2(0.4, 0.4)
+scroll_offset = Vector2(9, 4)
+repeat_size = Vector2(400, 0)
+autoscroll = Vector2(10, 0)
+screen_offset = Vector2(2.705, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Fog"]
+texture = ExtResource("3_snl45")
+
+[node name="FarCity" type="Parallax2D" parent="Node2D"]
+scroll_scale = Vector2(0.7, 0.7)
+scroll_offset = Vector2(-394, -1)
+repeat_size = Vector2(400, 0)
+autoscroll = Vector2(7, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/FarCity"]
+texture = ExtResource("4_ovf8e")
+
+[node name="CloseCity" type="Parallax2D" parent="Node2D"]
+scroll_offset = Vector2(-394, -1)
+repeat_size = Vector2(400, 0)
+autoscroll = Vector2(3, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/CloseCity"]
+position = Vector2(6, -2)
+texture = ExtResource("5_i6eeq")
+
+[node name="Elevator3" type="Sprite2D" parent="Node2D"]
+position = Vector2(-66, 34)
+texture = ExtResource("6_80jv6")
+
+[node name="Tileset" type="Node2D" parent="."]
+position = Vector2(1, 60)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Tileset"]
+position = Vector2(-1, 22)
+tile_map_data = PackedByteArray("AAD//wYAAAAAAA0AAAACAAYAAAAAAA0AAAAEAAYAAAACAA0AAAAGAAYAAAABAA0AAAAOAAYAAAAAAA0AAAAJAAYAAAABAA0AAAAPAAYAAAAAAA0AAAAQAAYAAAABAA0AAAALAAYAAAAAAA0AAAAMAAYAAAABAA0AAAANAAYAAAACAA0AAAAIAAYAAAAAAA0AAAAKAAYAAAACAA0AAAAFAAYAAAAAAA0AAAAHAAYAAAACAA0AAAADAAYAAAABAA0AAAAAAAYAAAABAA0AAAABAAYAAAACAA0AAAD8/wYAAAAAAA0AAAD9/wYAAAABAA0AAAD+/wYAAAACAA0AAAARAAYAAAACAA0AAAD8/wcAAAACAAoAAAD8/wgAAAACAAoAAAD8/wkAAAACAAoAAAD8/woAAAACAAoAAAD9/wcAAAACAAoAAAD9/wgAAAACAAoAAAD9/wkAAAACAAoAAAD9/woAAAACAAoAAAD+/wcAAAACAAoAAAD+/wgAAAACAAoAAAD+/wkAAAACAAoAAAD+/woAAAACAAoAAAD//wcAAAACAAoAAAD//wgAAAACAAoAAAD//wkAAAACAAoAAAD//woAAAACAAoAAAAAAAcAAAACAAoAAAAAAAgAAAACAAoAAAAAAAkAAAACAAoAAAAAAAoAAAACAAoAAAABAAcAAAACAAoAAAABAAgAAAACAAoAAAABAAkAAAACAAoAAAABAAoAAAACAAoAAAACAAcAAAACAAoAAAACAAgAAAACAAoAAAACAAkAAAACAAoAAAACAAoAAAACAAoAAAADAAcAAAACAAoAAAADAAgAAAACAAoAAAADAAkAAAACAAoAAAADAAoAAAACAAoAAAAEAAcAAAACAAoAAAAEAAgAAAACAAoAAAAEAAkAAAACAAoAAAAEAAoAAAACAAoAAAAFAAcAAAACAAoAAAAFAAgAAAACAAoAAAAFAAkAAAACAAoAAAAFAAoAAAACAAoAAAAGAAcAAAACAAoAAAAGAAgAAAACAAoAAAAGAAkAAAACAAoAAAAGAAoAAAACAAoAAAAHAAcAAAACAAoAAAAHAAgAAAACAAoAAAAHAAkAAAACAAoAAAAHAAoAAAACAAoAAAAIAAcAAAACAAoAAAAIAAgAAAACAAoAAAAIAAkAAAACAAoAAAAIAAoAAAACAAoAAAAJAAcAAAACAAoAAAAJAAgAAAACAAoAAAAJAAkAAAACAAoAAAAJAAoAAAACAAoAAAAKAAcAAAACAAoAAAAKAAgAAAACAAoAAAAKAAkAAAACAAoAAAAKAAoAAAACAAoAAAALAAcAAAACAAoAAAALAAgAAAACAAoAAAALAAkAAAACAAoAAAALAAoAAAACAAoAAAAMAAcAAAACAAoAAAAMAAgAAAACAAoAAAAMAAkAAAACAAoAAAAMAAoAAAACAAoAAAANAAcAAAACAAoAAAANAAgAAAACAAoAAAANAAkAAAACAAoAAAANAAoAAAACAAoAAAAOAAcAAAACAAoAAAAOAAgAAAACAAoAAAAOAAkAAAACAAoAAAAOAAoAAAACAAoAAAAPAAcAAAACAAoAAAAPAAgAAAACAAoAAAAPAAkAAAACAAoAAAAPAAoAAAACAAoAAAAQAAcAAAACAAoAAAAQAAgAAAACAAoAAAAQAAkAAAACAAoAAAAQAAoAAAACAAoAAAARAAcAAAACAAoAAAARAAgAAAACAAoAAAARAAkAAAACAAoAAAARAAoAAAACAAoAAAA=")
+tile_set = SubResource("TileSet_tey67")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(81, 66)
+sprite_frames = SubResource("SpriteFrames_3rx2r")
+autoplay = "default"
+
+[node name="Label" type="Label" parent="."]
+offset_top = 5.0
+offset_right = 475.0
+offset_bottom = 40.0
+scale = Vector2(0.505, 0.505)
+text = "Thank you for playing 
+Glitch: Recharging!"
+label_settings = ExtResource("9_eq87n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_top = 103.0
+offset_right = 475.0
+offset_bottom = 138.0
+scale = Vector2(0.505, 0.505)
+text = "Please, support this game on itch.io 
+if you want to see the full version!"
+label_settings = ExtResource("9_eq87n")
+horizontal_alignment = 1
+vertical_alignment = 1

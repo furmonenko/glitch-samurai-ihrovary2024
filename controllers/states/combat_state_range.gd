@@ -33,3 +33,12 @@ func shoot():
 		state_machine.switch_state("shoot")
 		animation_tree.set("parameters/Shoot/blend_position", get_random_animation_index())
 		controller.cooldown_timer.start()
+
+func turn_towards_target() -> void:
+	# Порівнюємо позиції персонажа та цілі (героя)
+	if controller.target.global_position.x < character.global_position.x and (!animation_tree.get("parameters/playback").get_current_node() == "Attack" or !animation_tree.get("parameters/playback").get_current_node() == "Shoot"):
+		 # Якщо ціль ліворуч від персонажа, персонаж повинен дивитися вліво
+		character.transform.x.x = -abs(character.transform.x.x)
+	elif controller.target.global_position.x > character.global_position.x and (!animation_tree.get("parameters/playback").get_current_node() == "Attack" or !animation_tree.get("parameters/playback").get_current_node() == "Shoot"):
+		# Якщо ціль праворуч від персонажа, персонаж повинен дивитися вправо
+		character.transform.x.x = abs(character.transform.x.x)

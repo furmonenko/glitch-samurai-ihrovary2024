@@ -1,12 +1,15 @@
-[gd_scene load_steps=11 format=4 uid="uid://i4dd3g6ng1bf"]
+[gd_scene load_steps=14 format=4 uid="uid://i4dd3g6ng1bf"]
 
 [ext_resource type="Texture2D" uid="uid://cyc6y3aarjcgx" path="res://assets/Basic Assets/Tileset/DARK Edition Tileset with background.png" id="1_gejdq"]
 [ext_resource type="Script" path="res://levels/base_level.gd" id="1_obi71"]
 [ext_resource type="TileSet" uid="uid://dr11iq10t2uak" path="res://levels/tileset.tres" id="2_lo2p1"]
 [ext_resource type="PackedScene" uid="uid://bcdlkfgis848a" path="res://cutscenes/engineer_level.tscn" id="3_6intf"]
 [ext_resource type="PackedScene" uid="uid://b6xhp64emqkwx" path="res://characters/glitch_samurai/player_controller.tscn" id="3_045fn"]
+[ext_resource type="PackedScene" uid="uid://bja6jn57nw1vy" path="res://characters/pickeman/pickeman_controller.tscn" id="8_dytxm"]
 [ext_resource type="PackedScene" uid="uid://boqlw7v44r8bk" path="res://levels/door.tscn" id="8_fx0ss"]
 [ext_resource type="PackedScene" uid="uid://bug500hmryx5d" path="res://levels/portals_pair.tscn" id="9_4f378"]
+[ext_resource type="PackedScene" uid="uid://ctg5ppxcodivj" path="res://characters/hell_bot/hellbot_controller.tscn" id="9_b5wn7"]
+[ext_resource type="PackedScene" uid="uid://unqj071j3se0" path="res://characters/shieldman/shieldman_controller.tscn" id="10_ii6xi"]
 [ext_resource type="PackedScene" uid="uid://damfrs2ck2ugk" path="res://levels/last_door.tscn" id="11_5x7y7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6u5f"]
@@ -347,6 +350,33 @@ tile_set = ExtResource("2_lo2p1")
 
 [node name="Enemies" type="Node2D" parent="."]
 
+[node name="PickemanController" parent="Enemies" instance=ExtResource("8_dytxm")]
+position = Vector2(-29, 128)
+
+[node name="PickemanController2" parent="Enemies" instance=ExtResource("8_dytxm")]
+position = Vector2(-89, -79)
+
+[node name="PickemanController3" parent="Enemies" instance=ExtResource("8_dytxm")]
+position = Vector2(105, -432)
+
+[node name="HellbotController" parent="Enemies" instance=ExtResource("9_b5wn7")]
+position = Vector2(-312, 128)
+
+[node name="HellbotController2" parent="Enemies" instance=ExtResource("9_b5wn7")]
+position = Vector2(44, -224)
+
+[node name="HellbotController3" parent="Enemies" instance=ExtResource("9_b5wn7")]
+position = Vector2(-213, -432)
+
+[node name="HellbotController4" parent="Enemies" instance=ExtResource("9_b5wn7")]
+position = Vector2(-438, -784)
+
+[node name="Patrol" parent="Enemies/HellbotController4/HellBot/LimboHSM" index="0"]
+patrol_time = 0.0
+
+[node name="ShieldmanController2" parent="Enemies" instance=ExtResource("10_ii6xi")]
+position = Vector2(-29, -848)
+
 [node name="Door" parent="." instance=ExtResource("8_fx0ss")]
 position = Vector2(-103, 104)
 
@@ -364,4 +394,6 @@ frame_progress = 0.60057
 text = "Yes - [F]"
 
 [editable path="PortalsPair"]
+[editable path="Enemies/HellbotController4"]
+[editable path="Enemies/HellbotController4/HellBot"]
 [editable path="Door"]

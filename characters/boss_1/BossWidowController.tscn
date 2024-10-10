@@ -650,14 +650,14 @@ agent = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
 
 [node name="AnimatedSprite2D" parent="BossWidow" index="2"]
-animation = &"death"
+frame = 8
 
 [node name="HealthComponent" parent="BossWidow" index="3" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
+max_hp = 1000.0
 
 [node name="DamageComponent" parent="BossWidow" index="4" node_paths=PackedStringArray("damage_causer")]
 damage_causer = NodePath("..")
-damage_amount = 0.0
 
 [node name="AnimationPlayer" parent="BossWidow" index="5"]
 libraries = {

@@ -5,13 +5,16 @@ extends Level
 @onready var boss_widow_controller = $BossWidowController
 @onready var boss_1_scene = $"."
 
-@export var death_scene: PackedScene
 @export var cutscene_before_fight :PackedScene
+@export var boss_controller: BossController
+
 var instance
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super()
+	
+	boss_controller.boss_death.connect(end_fight)
 	
 	instance = cutscene_before_fight.instantiate()
 	checkpoint.start_event.connect(start_fight)
@@ -30,3 +33,9 @@ func start_fight():
 		get_tree().paused = true
 		get_parent().add_child(instance)
 		boss_barier.call_deferred("set_disabled", false)
+
+func end_fight():
+	await get_tree().create_timer(2).timeout
+	var instance = next_scene.instantiate()
+	get_parent().add_child(instance)
+	queue_free()

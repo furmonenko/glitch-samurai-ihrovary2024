@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=4 uid="uid://bq0lq8cswekev"]
+[gd_scene load_steps=23 format=4 uid="uid://bq0lq8cswekev"]
 
 [ext_resource type="Script" path="res://levels/boss_1_scene.gd" id="1_2i15d"]
 [ext_resource type="Texture2D" uid="uid://rln47ncyke2m" path="res://assets/VIctorianParalax/Parallax/layer 1.png" id="1_mtacp"]
 [ext_resource type="Texture2D" uid="uid://bmyahchr6m4st" path="res://assets/VIctorianParalax/Parallax/layer 2.png" id="2_g461n"]
-[ext_resource type="PackedScene" uid="uid://bs62ms5pta6a4" path="res://cutscenes/last_demo_scene.tscn" id="2_p6u6s"]
+[ext_resource type="PackedScene" uid="uid://bs62ms5pta6a4" path="res://cutscenes/boss_cutscene.tscn" id="2_p6u6s"]
+[ext_resource type="PackedScene" uid="uid://sk2miknq0qty" path="res://cutscenes/demo_1_end.tscn" id="3_2mdcd"]
 [ext_resource type="Texture2D" uid="uid://i0jg22vv8f44" path="res://assets/VIctorianParalax/Parallax/layer 3.png" id="3_20bul"]
 [ext_resource type="Texture2D" uid="uid://fly7of8ctlcc" path="res://assets/VIctorianParalax/Parallax/layer 4.png" id="4_vrmr6"]
 [ext_resource type="Texture2D" uid="uid://wixa4htefpor" path="res://assets/VIctorianParalax/Parallax/layer 5.png" id="5_iha3n"]
@@ -316,10 +317,12 @@ sources/0 = SubResource("TileSetAtlasSource_028v2")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8fyd"]
 size = Vector2(96, 253)
 
-[node name="Boss1Scene" type="Node2D"]
+[node name="Boss1Scene" type="Node2D" node_paths=PackedStringArray("boss_controller")]
 position = Vector2(122, 52)
 script = ExtResource("1_2i15d")
 cutscene_before_fight = ExtResource("2_p6u6s")
+boss_controller = NodePath("BossWidowController")
+next_scene = ExtResource("3_2mdcd")
 level_idx = 1
 
 [node name="Paralax" type="Node2D" parent="."]

@@ -2,6 +2,7 @@ extends Controller
 class_name BossController
 
 signal hit_glitch
+signal boss_death
 # Налаштування для бота
 @export var spot_range: float = 100.0  # Дальність, на якій бот бачить ворога
 @export var attack_range: float = 20.0  # Дальність атаки
@@ -40,6 +41,7 @@ func _ready() -> void:
 	character.died.connect(func(character):
 		character_died.call_deferred()
 		state_machine.dispatch(state_machine.CHARACTER_DIED)
+		boss_death.emit()
 		)
 		
 		

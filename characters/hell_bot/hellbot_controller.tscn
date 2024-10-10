@@ -37,9 +37,6 @@ frame = 5
 [node name="HealthComponent" parent="HellBot" index="3" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
 
-[node name="DamageComponent" parent="HellBot" index="4"]
-damage_amount = 0.0
-
 [node name="LimboHSM" parent="HellBot" index="7"]
 state_conditions = {
 "shoot": "parameters/conditions/shooting"
