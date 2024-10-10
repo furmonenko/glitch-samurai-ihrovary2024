@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7dwmu7r7vqoc"]
+
+[ext_resource type="PackedScene" uid="uid://b6xhp64emqkwx" path="res://controllers/player_controller.tscn" id="1_w6it2"]
+[ext_resource type="PackedScene" uid="uid://c4ilsmhyd8try" path="res://characters/boss_1/BossWidowController.tscn" id="2_r7qmv"]
+[ext_resource type="Texture2D" uid="uid://wixa4htefpor" path="res://assets/VIctorianParalax/Parallax/layer 5.png" id="3_h26f3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twiou"]
+size = Vector2(842, 20)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(42, 10)
+shape = SubResource("RectangleShape2D_twiou")
+
+[node name="PlayerController" parent="StaticBody2D" instance=ExtResource("1_w6it2")]
+position = Vector2(63, 0)
+
+[node name="BossWidowController" parent="StaticBody2D" instance=ExtResource("2_r7qmv")]
+position = Vector2(-284, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 10)
+scale = Vector2(2.6305, 0.0916172)
+texture = ExtResource("3_h26f3")

@@ -1,17 +1,15 @@
 extends State
 class_name RunState
 
-@export var speed: float = 150.0
+
 @export var jump_force: float = 400.0
 @export var gravity: float = 50.0
-@export var acceleration: float = 20.0
-@export var deceleration: float = 1.0
-@export var max_speed: float = 200.0
-
-var velocity :Vector2
 
 func _enter() -> void:
 	velocity = character.velocity
+	
+	# Міняємо умови в animation_tree. Переключаємо анімацію.
+	# TODO: зробити з "run" @export var яка відповідатиме за назву умови в animation_tree.
 	state_machine.switch_state("run")
 
 func handle_movement(input_direction: int, delta: float) -> void:

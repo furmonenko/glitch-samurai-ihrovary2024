@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://co7l6yh7o66lw"]
+
+[ext_resource type="Shader" path="res://glitch.gdshader" id="1_iqtnk"]
+[ext_resource type="AudioStream" uid="uid://caj5sa63mcbut" path="res://assets/sounds/223312__glitchedtones__glitch-element-18.wav" id="2_ceww1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xua0i"]
+shader = ExtResource("1_iqtnk")
+shader_parameter/shake_power = 0.01
+shader_parameter/shake_rate = 1.0
+shader_parameter/shake_speed = 20.57
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.0
+
+[node name="GlitchEffects" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_xua0i")
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 135.0
+color = Color(0, 0, 0, 1)
+
+[node name="GlitchSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ceww1")
+volume_db = -35.0
+pitch_scale = 0.6
+bus = &"SFX"

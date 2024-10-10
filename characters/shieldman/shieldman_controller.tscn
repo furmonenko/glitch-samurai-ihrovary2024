@@ -1,0 +1,121 @@
+[gd_scene load_steps=11 format=3 uid="uid://unqj071j3se0"]
+
+[ext_resource type="PackedScene" uid="uid://jc4g732lmltx" path="res://characters/shieldman/shieldman.tscn" id="1_hr5cw"]
+[ext_resource type="Script" path="res://characters/shieldman/shieldman_controller.gd" id="1_tj5ih"]
+[ext_resource type="AnimationLibrary" uid="uid://ikuctx682fxu" path="res://characters/shieldman/shieldman_anim.res" id="3_e6k6w"]
+[ext_resource type="AudioStream" uid="uid://caoioobyllef2" path="res://assets/sounds/Shield 3.wav" id="4_cwrvx"]
+[ext_resource type="Script" path="res://controllers/states/combat_state_melee.gd" id="4_hkku4"]
+[ext_resource type="Script" path="res://controllers/states/death_ai.gd" id="5_3f0yp"]
+[ext_resource type="AudioStream" uid="uid://ri23ee4kbtmg" path="res://assets/sounds/medium-explosion-40472.mp3" id="6_uq8nw"]
+[ext_resource type="AudioStream" uid="uid://cdmuslcrekbdx" path="res://assets/sounds/one_step_run.wav" id="8_gpcom"]
+
+[sub_resource type="Animation" id="Animation_qgwk1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shieldman/AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shieldman/AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Death"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ssjrk"]
+_data = {
+"RESET": SubResource("Animation_qgwk1")
+}
+
+[node name="ShieldmanController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "combat_state", "hurt_box_collision", "attack_sound", "hit_sound", "run_sound", "character", "state_machine")]
+position = Vector2(-3, 0)
+script = ExtResource("1_tj5ih")
+spot_range = 120.0
+attack_range = 40.0
+cooldown_duration = 4.0
+health_component = NodePath("Shieldman/HealthComponent")
+death_state = NodePath("Shieldman/LimboHSM/DeathState")
+patrol_state = NodePath("Shieldman/LimboHSM/Patrol")
+combat_state = NodePath("Shieldman/LimboHSM/Combat")
+hurt_box_collision = NodePath("Shieldman/Hurtbox/CollisionShape2D")
+attack_sound = NodePath("Shieldman/Node2D/Attack")
+hit_sound = NodePath("Shieldman/Node2D/Hurt")
+run_sound = NodePath("Shieldman/Node2D/RunSound")
+character = NodePath("Shieldman")
+state_machine = NodePath("Shieldman/LimboHSM")
+
+[node name="Shieldman" parent="." node_paths=PackedStringArray("hitbox") instance=ExtResource("1_hr5cw")]
+position = Vector2(3, 0)
+collision_mask = 9
+hitbox = NodePath("HitBox")
+
+[node name="AnimatedSprite2D" parent="Shieldman" index="1"]
+position = Vector2(-2, -23)
+animation = &"Death"
+
+[node name="HealthComponent" parent="Shieldman" index="2"]
+max_hp = 100.0
+
+[node name="AnimationPlayer" parent="Shieldman" index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_ssjrk"),
+"shieldman_anim": ExtResource("3_e6k6w")
+}
+
+[node name="Patrol" parent="Shieldman/LimboHSM" index="0" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
+controller = NodePath("../../..")
+
+[node name="Combat" parent="Shieldman/LimboHSM" index="1" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+script = ExtResource("4_hkku4")
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
+controller = NodePath("../../..")
+acceleration = 30.0
+max_speed = 30.0
+
+[node name="DeathState" parent="Shieldman/LimboHSM" index="2"]
+script = ExtResource("5_3f0yp")
+
+[node name="Hurtbox" parent="Shieldman" index="7"]
+collision_layer = 128
+
+[node name="HitBox" parent="Shieldman" index="8" node_paths=PackedStringArray("agent", "damage_component")]
+agent = NodePath("..")
+damage_component = NodePath("../DamageComponent")
+
+[node name="CollisionShape2D" parent="Shieldman/HitBox" index="0"]
+disabled = true
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="Shieldman/Node2D" index="2"]
+stream = ExtResource("4_cwrvx")
+volume_db = -15.0
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Shieldman/Node2D" index="3"]
+stream = ExtResource("6_uq8nw")
+volume_db = -15.0
+
+[node name="RunSound" type="AudioStreamPlayer2D" parent="Shieldman/Node2D" index="4"]
+stream = ExtResource("8_gpcom")
+volume_db = -20.0
+max_distance = 200.0
+bus = &"SFX"
+
+[editable path="Shieldman"]

@@ -2,16 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_qqsig"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="2_g3u8v"]
-[ext_resource type="PackedScene" uid="uid://8dd6ujcqbeo3" path="res://hit_box.tscn" id="2_ygpfr"]
+[ext_resource type="PackedScene" uid="uid://8dd6ujcqbeo3" path="res://components/hit_box.tscn" id="2_ygpfr"]
 [ext_resource type="SpriteFrames" uid="uid://d35ynlov1jxoh" path="res://characters/glitch_samurai/sf_glitch_samurai.tres" id="3_3qiti"]
 [ext_resource type="AnimationLibrary" uid="uid://frlgtji173ra" path="res://animations/Glitch Samurai/Glitch Samurai.res" id="4_0n567"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://7v73u3mnppp7" path="res://characters/glitch_samurai/glitch_samurai_asm.tres" id="5_5brxq"]
 [ext_resource type="Script" path="res://controllers/states/idle_state.gd" id="6_n2i03"]
 [ext_resource type="Script" path="res://controllers/states/run_state.gd" id="7_06roi"]
-[ext_resource type="Script" path="res://controllers/air_state.gd" id="8_4e76a"]
-[ext_resource type="Script" path="res://controllers/attack_state.gd" id="9_h62e8"]
+[ext_resource type="Script" path="res://controllers/states/air_state.gd" id="8_4e76a"]
+[ext_resource type="Script" path="res://controllers/states/attack_state.gd" id="9_h62e8"]
 [ext_resource type="Script" path="res://controllers/states/death_state.gd" id="10_4na0u"]
-[ext_resource type="Script" path="res://characters/glitch_samurai/glitch_state.gd" id="12_htikg"]
+[ext_resource type="Script" path="res://controllers/states/glitch_state.gd" id="12_htikg"]
 [ext_resource type="AudioStream" uid="uid://b3ay1u7aaf5dq" path="res://assets/sounds/Samurai_attack.wav" id="13_daib1"]
 [ext_resource type="AudioStream" uid="uid://xbemcjirjfb3" path="res://assets/sounds/running-1-6846.mp3" id="14_jilq7"]
 [ext_resource type="AudioStream" uid="uid://kpb73wgkuxpf" path="res://assets/sounds/Jump.wav" id="15_wpeqh"]
@@ -51,6 +51,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(20, -7)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GlitchSamurai/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -4)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GlitchSamurai/AnimatedSprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6, -22)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aqjjs"]
 _data = {
@@ -58,6 +82,7 @@ _data = {
 }
 
 [node name="GlitchSamurai" node_paths=PackedStringArray("hitbox") groups=["player"] instance=ExtResource("1_qqsig")]
+collision_layer = 4
 hitbox = NodePath("CollisionShape2D/HitBox")
 
 [node name="Hurtbox" type="Area2D" parent="." index="0" node_paths=PackedStringArray("agent", "health_component")]
@@ -89,7 +114,6 @@ disabled = true
 position = Vector2(6, -23)
 sprite_frames = ExtResource("3_3qiti")
 animation = &"Glitch Idle"
-frame = 6
 metadata/_edit_lock_ = true
 
 [node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("agent")]
@@ -164,5 +188,14 @@ bus = &"SFX"
 stream = ExtResource("15_wpeqh")
 volume_db = -10.0
 bus = &"SFX"
+
+[node name="Timers" type="Node" parent="." index="9"]
+
+[node name="Cooldown" type="Timer" parent="Timers" index="0"]
+one_shot = true
+
+[node name="ComboReset" type="Timer" parent="Timers" index="1"]
+wait_time = 3.0
+one_shot = true
 
 [editable path="CollisionShape2D/HitBox"]

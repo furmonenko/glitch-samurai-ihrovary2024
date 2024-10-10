@@ -1,14 +1,14 @@
 extends Cutscene
 
+signal end_cutscene
+
 @onready var glitch_effects = $GlitchEffects
-@onready var end_game = $EndGame
+@onready var last_demo_scene = $"."
 
 
 func _ready():
 	super()
-	
-	end_game.visible = false
-	
+	last_demo_scene.process_mode = Node.PROCESS_MODE_ALWAYS
 
 func advance_text(step: int):
 	text_timer.start()
@@ -24,9 +24,7 @@ func advance_text(step: int):
 			animation_player.play("fade_in")
 
 func faded_in():
-	intro_text.visible = false
-	how_to_skip_container.visible = false
-	glitch_effects.visible = false
-	end_game.visible = true
+	end_cutscene.emit()
+	queue_free()
 	
 	

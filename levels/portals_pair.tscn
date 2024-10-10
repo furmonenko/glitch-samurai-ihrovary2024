@@ -82,6 +82,7 @@ script = ExtResource("1_5kaqo")
 
 [node name="Portal1" type="Area2D" parent="."]
 collision_layer = 0
+collision_mask = 16
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Portal1"]
 sprite_frames = SubResource("SpriteFrames_nex42")
@@ -98,6 +99,7 @@ position = Vector2(-60, 19)
 [node name="Portal2" type="Area2D" parent="."]
 position = Vector2(98, 0)
 collision_layer = 0
+collision_mask = 16
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Portal2"]
 sprite_frames = SubResource("SpriteFrames_nex42")

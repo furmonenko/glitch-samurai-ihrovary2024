@@ -1,14 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4g3465k1cads"]
+[gd_scene load_steps=6 format=3 uid="uid://b4g3465k1cads"]
 
 [ext_resource type="PackedScene" uid="uid://dyj55qoijhuvi" path="res://cutscenes/intuduction.tscn" id="1_15ovn"]
 [ext_resource type="Script" path="res://main.gd" id="1_hdhc5"]
+[ext_resource type="PackedScene" uid="uid://dk43eaf601nlv" path="res://cutscenes/engineer_shop.tscn" id="2_clgdy"]
 [ext_resource type="PackedScene" uid="uid://cg1tfs1bu3fy3" path="res://cutscenes/pause.tscn" id="2_hxex0"]
 [ext_resource type="AudioStream" uid="uid://ck877k0y67kls" path="res://assets/sounds/Game Over [Full Loop].wav" id="4_peg5x"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_hdhc5")
+level_dict = {
+0: "res://levels/base_level.tscn",
+1: "res://levels/boss_1_scene.tscn"
+}
+death_scene = ExtResource("2_clgdy")
 
-[node name="Intuduction" parent="." instance=ExtResource("1_15ovn")]
+[node name="CurrentScene" type="Node2D" parent="."]
+
+[node name="Intuduction" parent="CurrentScene" instance=ExtResource("1_15ovn")]
 scale = Vector2(1, 1.07528)
 transform = Transform2D(1, 0, 0, 1.07528, 0, 0)
 

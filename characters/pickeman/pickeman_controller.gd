@@ -1,0 +1,2 @@
+extends AIController
+class_name PickemanController

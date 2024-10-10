@@ -1,5 +1,7 @@
 extends Node
 
+signal character_died(level_idx)
+
 func throw_error(error_text :String, caller :String):
 	print(error_text + caller + " script")
 	get_tree().quit()
@@ -19,3 +21,6 @@ func trigger_hitstop(duration: float = 0.1):
 	get_tree().paused = true
 	await get_tree().create_timer(duration).timeout
 	get_tree().paused = false
+
+func on_character_died():
+	pass

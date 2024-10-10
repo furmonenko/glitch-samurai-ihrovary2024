@@ -1,7 +1,9 @@
 extends Cutscene
 
+var given_string: String
+
 func faded_in():
-	next_scene = load("res://levels/base_level.tscn")
+	next_scene = load(given_string)
 	super()
 
 func advance_text(step: int):
@@ -15,7 +17,7 @@ func advance_text(step: int):
 		2:
 			intro_text.text = "Sit tight, I’ll get you patched up. Hopefully, next time you won’t burn through it all like now"
 		3:
-			intro_text.text = "Recharge Stage"
+			intro_text.text = "Recharged!"
 		4:
 			intro_text.text = ""
 			animation_player.play("fade_in")

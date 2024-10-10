@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://jc4g732lmltx"]
+[gd_scene load_steps=87 format=3 uid="uid://jc4g732lmltx"]
 
 [ext_resource type="PackedScene" uid="uid://ti57wti5jlrd" path="res://characters/character.tscn" id="1_lc5of"]
 [ext_resource type="Texture2D" uid="uid://dbpw3oq0ga7e1" path="res://assets/NPC Enemies/Shielder/Shielder 129x46 Sprite Sheet.png" id="2_4ctyn"]
@@ -8,12 +8,9 @@
 [ext_resource type="Shader" path="res://blue_to_red.gdshader" id="3_g4eyl"]
 [ext_resource type="Texture2D" uid="uid://tp7c81n1u5xs" path="res://assets/NPC Enemies/Shielder/death.png" id="4_a2w5x"]
 [ext_resource type="Script" path="res://components/hurt_box.gd" id="5_k3ea7"]
-[ext_resource type="Script" path="res://controllers/hit_box.gd" id="7_4wbpu"]
-[ext_resource type="Script" path="res://controllers/states/idle_state.gd" id="7_d4p12"]
+[ext_resource type="Script" path="res://components/hit_box.gd" id="7_4wbpu"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://jyyyp1mh6mw3" path="res://characters/hell_bot/default_enemy.tres" id="7_wwucn"]
-[ext_resource type="Script" path="res://controllers/states/run_state.gd" id="8_y7tj1"]
-[ext_resource type="Script" path="res://characters/hell_bot/hellbot_attack_state.gd" id="9_a7h6q"]
-[ext_resource type="Script" path="res://characters/hell_bot/hit_state.gd" id="10_trxq2"]
+[ext_resource type="Script" path="res://characters/boss_1/patrol.gd" id="9_0o7tl"]
 [ext_resource type="Script" path="res://controllers/states/death_state.gd" id="11_4adgq"]
 [ext_resource type="AudioStream" uid="uid://blxnlx1q5027h" path="res://assets/sounds/Hurt_v2_wav.wav" id="16_3pxip"]
 [ext_resource type="AudioStream" uid="uid://dmabxjx73dk8t" path="res://assets/sounds/Metal 3.wav" id="17_bmb5k"]
@@ -23,6 +20,7 @@ size = Vector2(12, 12)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_icxjo"]
 shader = ExtResource("3_g4eyl")
+shader_parameter/is_hurt = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kuno7"]
 atlas = ExtResource("2_pe07k")
@@ -470,45 +468,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Animation" id="Animation_q1iko"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Shieldman/HitBox/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Shieldman/AnimatedSprite2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -23)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Shieldman/AnimatedSprite2D:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Idle"]
-}
-
 [sub_resource type="Animation" id="Animation_tlbte"]
 length = 2.0
 tracks/0/type = "value"
@@ -561,7 +520,8 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_62ius"]
-length = 1.6
+length = 2.00001
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -569,10 +529,10 @@ tracks/0/path = NodePath("Shieldman/AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+"values": [0, 1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -581,10 +541,10 @@ tracks/1/path = NodePath("Shieldman/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": ["Death"]
+"values": [&"Hit", "Death"]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -609,6 +569,20 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shieldman/Node2D/Hurt")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_dsp1t"]
@@ -714,6 +688,57 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_q1iko"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shieldman/HitBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shieldman/AnimatedSprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -23)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shieldman/AnimatedSprite2D:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shieldman/AnimatedSprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_r6udu"]
@@ -822,10 +847,8 @@ shape = SubResource("RectangleShape2D_c3g2l")
 
 [node name="AnimatedSprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_icxjo")
-position = Vector2(-2, -23)
 sprite_frames = SubResource("SpriteFrames_4fsq3")
 animation = &"Idle"
-frame = 3
 
 [node name="HealthComponent" parent="." index="2" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
@@ -844,7 +867,6 @@ libraries = {
 tree_root = ExtResource("7_wwucn")
 parameters/conditions/attacking = false
 parameters/conditions/dead = false
-parameters/conditions/got_hit = false
 parameters/conditions/idle = false
 parameters/conditions/running = false
 parameters/conditions/shooting = false
@@ -853,23 +875,12 @@ parameters/conditions/shooting = false
 character = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
 
-[node name="Idle" type="LimboState" parent="LimboHSM" index="0"]
-script = ExtResource("7_d4p12")
+[node name="Patrol" type="LimboState" parent="LimboHSM" index="0"]
+script = ExtResource("9_0o7tl")
 
-[node name="Run" type="LimboState" parent="LimboHSM" index="1"]
-script = ExtResource("8_y7tj1")
-speed = 20.0
-acceleration = 1.0
-max_speed = 30.0
+[node name="Combat" type="LimboState" parent="LimboHSM" index="1"]
 
-[node name="Attack" type="LimboState" parent="LimboHSM" index="2"]
-script = ExtResource("9_a7h6q")
-max_combo_attacks = 1
-
-[node name="Hit" type="LimboState" parent="LimboHSM" index="3"]
-script = ExtResource("10_trxq2")
-
-[node name="Death" type="LimboState" parent="LimboHSM" index="4"]
+[node name="DeathState" type="LimboState" parent="LimboHSM" index="2"]
 script = ExtResource("11_4adgq")
 
 [node name="Hurtbox" type="Area2D" parent="." index="7" node_paths=PackedStringArray("agent", "health_component")]
@@ -894,7 +905,6 @@ script = ExtResource("7_4wbpu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2(20, -16.5)
 shape = SubResource("RectangleShape2D_mligt")
-disabled = true
 
 [node name="Node2D" type="Node2D" parent="." index="9"]
 

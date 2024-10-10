@@ -8,8 +8,10 @@ class_name Cutscene
 @onready var intro_text = $IntroText
 
 @export var next_scene: PackedScene
+@export var max_step :int
 
 var step: int = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,7 +22,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("jump"):
+		if step == max_step:
+			return
 		how_to_skip_container.visible = false
 		step += 1
 		intro_text.visible_characters = 0

@@ -1,0 +1,140 @@
+[gd_scene load_steps=9 format=3 uid="uid://b6xhp64emqkwx"]
+
+[ext_resource type="Script" path="res://characters/glitch_samurai/player_controller.gd" id="1_4w8h7"]
+[ext_resource type="Texture2D" uid="uid://dp4h72v4hf3fh" path="res://assets/UI/UI - Borders and HP/glitch_under.png" id="2_2eno6"]
+[ext_resource type="PackedScene" uid="uid://bop2xmo4jtij8" path="res://animations/scene_glitch_effect.tscn" id="2_i7ffc"]
+[ext_resource type="PackedScene" uid="uid://be6bki722mg1g" path="res://characters/glitch_samurai/glitch_samurai.tscn" id="2_iihpn"]
+[ext_resource type="Script" path="res://controllers/states/player_attack_state.gd" id="3_a7hi3"]
+[ext_resource type="Texture2D" uid="uid://bgli0683ro8ye" path="res://assets/UI/UI - Borders and HP/glitch_progress.png" id="3_eiyp6"]
+[ext_resource type="Script" path="res://characters/glitch_samurai/player_camera.gd" id="4_eijum"]
+[ext_resource type="AudioStream" uid="uid://cdmuslcrekbdx" path="res://assets/sounds/one_step_run.wav" id="7_yaarw"]
+
+[node name="PlayerController" type="Node2D" node_paths=PackedStringArray("character", "state_machine")]
+script = ExtResource("1_4w8h7")
+character = NodePath("GlitchSamurai")
+state_machine = NodePath("GlitchSamurai/LimboHSM")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="SceneGlitch" parent="HUD" instance=ExtResource("2_i7ffc")]
+unique_name_in_owner = true
+
+[node name="Control" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ProgressBar" type="TextureProgressBar" parent="HUD/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 0
+step = 2.0
+value = 100.0
+texture_under = ExtResource("2_2eno6")
+texture_progress = ExtResource("3_eiyp6")
+
+[node name="GlitchSamurai" parent="." instance=ExtResource("2_iihpn")]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 25
+
+[node name="Hurtbox" parent="GlitchSamurai" index="0"]
+collision_layer = 64
+
+[node name="HitBox" parent="GlitchSamurai/CollisionShape2D" index="0" node_paths=PackedStringArray("agent", "damage_component")]
+collision_mask = 128
+agent = NodePath("../..")
+damage_component = NodePath("../../DamageComponent")
+
+[node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
+position = Vector2(6, -22)
+frame = 6
+
+[node name="HealthComponent" parent="GlitchSamurai" index="3"]
+max_hp = 1.0
+
+[node name="AnimationTree" parent="GlitchSamurai" index="6"]
+parameters/Air/blend_position = -0.98935
+parameters/Attack/blend_position = 1.32617
+
+[node name="LimboHSM" parent="GlitchSamurai" index="7"]
+state_conditions = {
+"air": "parameters/conditions/jumping",
+"glitch": "parameters/conditions/glitch"
+}
+
+[node name="Idle" parent="GlitchSamurai/LimboHSM" index="0" node_paths=PackedStringArray("state_machine")]
+state_machine = NodePath("..")
+
+[node name="Run" parent="GlitchSamurai/LimboHSM" index="1" node_paths=PackedStringArray("state_machine")]
+state_machine = NodePath("..")
+speed = 100.0
+acceleration = 100.0
+max_speed = 100.0
+
+[node name="Air" parent="GlitchSamurai/LimboHSM" index="2" node_paths=PackedStringArray("state_machine")]
+jump_force = 300.0
+gravity = 25.0
+max_fall_speed = 200.0
+state_machine = NodePath("..")
+
+[node name="Attack" parent="GlitchSamurai/LimboHSM" index="3" node_paths=PackedStringArray("state_machine", "character", "controller")]
+script = ExtResource("3_a7hi3")
+state_machine = NodePath("..")
+character = NodePath("../..")
+controller = NodePath("../../..")
+
+[node name="Death" parent="GlitchSamurai/LimboHSM" index="4" node_paths=PackedStringArray("player_camera", "state_machine", "character")]
+player_camera = NodePath("../../PlayerCamera")
+state_machine = NodePath("..")
+character = NodePath("../..")
+
+[node name="Glitch" parent="GlitchSamurai/LimboHSM" index="5" node_paths=PackedStringArray("player_controller", "scene_glitch", "animation_tree", "state_machine", "character", "controller")]
+player_controller = NodePath("../../..")
+scene_glitch = NodePath("../../../HUD/SceneGlitch")
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
+controller = NodePath("../../..")
+speed = 2000.0
+acceleration = 2000.0
+max_speed = 2000.0
+
+[node name="RunSound" parent="GlitchSamurai/Sounds" index="1"]
+stream = ExtResource("7_yaarw")
+
+[node name="JumpSound" parent="GlitchSamurai/Sounds" index="2"]
+volume_db = -20.0
+
+[node name="Cooldown" parent="GlitchSamurai/Timers" index="0"]
+wait_time = 0.5
+
+[node name="ComboReset" parent="GlitchSamurai/Timers" index="1"]
+wait_time = 4.0
+
+[node name="PlayerCamera" type="Camera2D" parent="GlitchSamurai"]
+unique_name_in_owner = true
+offset = Vector2(0, -40)
+zoom = Vector2(0.8, 0.8)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+script = ExtResource("4_eijum")
+
+[editable path="HUD/SceneGlitch"]
+[editable path="GlitchSamurai"]
+[editable path="GlitchSamurai/CollisionShape2D/HitBox"]

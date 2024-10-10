@@ -19,7 +19,7 @@ func advance_text(step: int):
 		6:
 			intro_text.text = "Are you ready? It's time to master your new power"
 		7:
-			intro_text.text = "[WASD] - move, [SPACE] - attack, [SHIFT] - jump, [E] - glitch on/off"
+			intro_text.text = "[WASD/ARROWS] - move, [SPACE] - jump, [SHIFT] - attack, [E] - glitch on/off"
 		8:
 			intro_text.text = "Recharging stage."
 		9:
