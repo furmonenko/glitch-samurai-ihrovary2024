@@ -400,7 +400,7 @@ texture = ExtResource("15_gitxx")
 [node name="PlayerController" parent="." instance=ExtResource("14_3r7js")]
 
 [node name="AnimatedSprite2D" parent="PlayerController/GlitchSamurai" index="2"]
-frame = 2
+frame = 9
 
 [node name="BossWidowController" parent="." instance=ExtResource("15_saxwb")]
 position = Vector2(562, 63)
