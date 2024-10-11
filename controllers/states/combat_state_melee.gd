@@ -1,7 +1,11 @@
 extends State
 class_name CombatStateMelee
 
+@export var alert_sign: CPUParticles2D
+@export var alert_nodes: Node2D
+
 func _update(delta):
+	
 	if controller.is_target_in_range(controller.attack_range) and controller.cooldown_timer.is_stopped() and animation_tree.get("parameters/playback").get_current_node() == "Idle":
 		#він чогось першу тичку не наносить, а одразу встає в кулдаун ( бо він одразу з руху заходе в кд без тички )
 		attack()
@@ -24,6 +28,8 @@ func get_random_animation_index():
 
 func attack():
 	turn_towards_target()
+	alert_sign.emitting = true
+	alert_nodes.global_position = character.global_position - Vector2(0, 35)
 	
 	if get_blendspace_animations_count() == 1:
 		state_machine.switch_state("attack")

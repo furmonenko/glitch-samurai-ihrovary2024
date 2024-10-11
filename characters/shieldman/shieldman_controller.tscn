@@ -1,13 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://unqj071j3se0"]
+[gd_scene load_steps=14 format=3 uid="uid://unqj071j3se0"]
 
 [ext_resource type="PackedScene" uid="uid://jc4g732lmltx" path="res://characters/shieldman/shieldman.tscn" id="1_hr5cw"]
 [ext_resource type="Script" path="res://characters/shieldman/shieldman_controller.gd" id="1_tj5ih"]
+[ext_resource type="FontFile" uid="uid://rn2vgoht588t" path="res://assets/lunchtime-doubly-so.regular.ttf" id="2_577wi"]
 [ext_resource type="AnimationLibrary" uid="uid://ikuctx682fxu" path="res://characters/shieldman/shieldman_anim.res" id="3_e6k6w"]
 [ext_resource type="AudioStream" uid="uid://caoioobyllef2" path="res://assets/sounds/Shield 3.wav" id="4_cwrvx"]
 [ext_resource type="Script" path="res://controllers/states/combat_state_melee.gd" id="4_hkku4"]
 [ext_resource type="Script" path="res://controllers/states/death_ai.gd" id="5_3f0yp"]
 [ext_resource type="AudioStream" uid="uid://ri23ee4kbtmg" path="res://assets/sounds/medium-explosion-40472.mp3" id="6_uq8nw"]
 [ext_resource type="AudioStream" uid="uid://cdmuslcrekbdx" path="res://assets/sounds/one_step_run.wav" id="8_gpcom"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u3cho"]
+font = ExtResource("2_577wi")
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_137s1"]
+viewport_path = NodePath("AttackAlert/SubViewport")
 
 [sub_resource type="Animation" id="Animation_qgwk1"]
 length = 0.001
@@ -58,6 +66,29 @@ run_sound = NodePath("Shieldman/Node2D/RunSound")
 character = NodePath("Shieldman")
 state_machine = NodePath("Shieldman/LimboHSM")
 
+[node name="AttackAlert" type="Node2D" parent="."]
+position = Vector2(4, -23)
+
+[node name="SubViewport" type="SubViewport" parent="AttackAlert"]
+process_mode = 3
+transparent_bg = true
+size = Vector2i(16, 16)
+size_2d_override = Vector2i(16, 16)
+render_target_update_mode = 4
+
+[node name="Label" type="Label" parent="AttackAlert/SubViewport"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "!"
+label_settings = SubResource("LabelSettings_u3cho")
+
+[node name="AttackParticle" type="CPUParticles2D" parent="AttackAlert"]
+emitting = false
+amount = 1
+one_shot = true
+texture = SubResource("ViewportTexture_137s1")
+gravity = Vector2(0, -10)
+
 [node name="Shieldman" parent="." node_paths=PackedStringArray("hitbox") instance=ExtResource("1_hr5cw")]
 position = Vector2(3, 0)
 collision_mask = 9
@@ -83,8 +114,10 @@ state_machine = NodePath("..")
 character = NodePath("../..")
 controller = NodePath("../../..")
 
-[node name="Combat" parent="Shieldman/LimboHSM" index="1" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+[node name="Combat" parent="Shieldman/LimboHSM" index="1" node_paths=PackedStringArray("alert_sign", "alert_nodes", "animation_tree", "state_machine", "character", "controller")]
 script = ExtResource("4_hkku4")
+alert_sign = NodePath("../../../AttackAlert/AttackParticle")
+alert_nodes = NodePath("../../../AttackAlert")
 animation_tree = NodePath("../../AnimationTree")
 state_machine = NodePath("..")
 character = NodePath("../..")

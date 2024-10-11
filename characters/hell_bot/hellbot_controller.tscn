@@ -1,12 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctg5ppxcodivj"]
+[gd_scene load_steps=11 format=3 uid="uid://ctg5ppxcodivj"]
 
 [ext_resource type="Script" path="res://characters/hell_bot/hellbot_controller.gd" id="1_ltet1"]
+[ext_resource type="FontFile" uid="uid://rn2vgoht588t" path="res://assets/lunchtime-doubly-so.regular.ttf" id="2_0qyjf"]
 [ext_resource type="PackedScene" uid="uid://c07cjxqrn0swb" path="res://characters/hell_bot/hell_bot.tscn" id="2_bo1rh"]
 [ext_resource type="Script" path="res://controllers/states/combat_state_range.gd" id="3_tx0s6"]
 [ext_resource type="AudioStream" uid="uid://cdmuslcrekbdx" path="res://assets/sounds/one_step_run.wav" id="5_nuks5"]
 [ext_resource type="AudioStream" uid="uid://dw12nhewe0ya8" path="res://assets/sounds/mob_death_1.mp3" id="6_s5jsq"]
 [ext_resource type="Script" path="res://controllers/states/death_ai.gd" id="7_1qppw"]
 [ext_resource type="AudioStream" uid="uid://b32edx3x5mwea" path="res://assets/sounds/robot_1.mp3" id="7_k3yyg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_l44ao"]
+font = ExtResource("2_0qyjf")
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tq77x"]
+viewport_path = NodePath("AttackAlert/SubViewport")
 
 [node name="HellbotController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "combat_state", "hurt_box_collision", "attack_sound", "hit_sound", "run_sound", "character", "state_machine")]
 script = ExtResource("1_ltet1")
@@ -23,6 +31,26 @@ hit_sound = NodePath("HellBot/Sounds/HitSound")
 run_sound = NodePath("HellBot/Sounds/RunSound")
 character = NodePath("HellBot")
 state_machine = NodePath("HellBot/LimboHSM")
+
+[node name="AttackAlert" type="Node2D" parent="."]
+position = Vector2(4, -23)
+
+[node name="SubViewport" type="SubViewport" parent="AttackAlert"]
+transparent_bg = true
+size = Vector2i(16, 16)
+
+[node name="Label" type="Label" parent="AttackAlert/SubViewport"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "!"
+label_settings = SubResource("LabelSettings_l44ao")
+
+[node name="AttackParticle" type="CPUParticles2D" parent="AttackAlert"]
+emitting = false
+amount = 1
+one_shot = true
+texture = SubResource("ViewportTexture_tq77x")
+gravity = Vector2(0, -10)
 
 [node name="HellBot" parent="." instance=ExtResource("2_bo1rh")]
 collision_layer = 0
@@ -51,8 +79,10 @@ controller = NodePath("../../..")
 acceleration = 30.0
 max_speed = 30.0
 
-[node name="Combat" parent="HellBot/LimboHSM" index="1" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+[node name="Combat" parent="HellBot/LimboHSM" index="1" node_paths=PackedStringArray("alert_sign", "alert_nodes", "animation_tree", "state_machine", "character", "controller")]
 script = ExtResource("3_tx0s6")
+alert_sign = NodePath("../../../AttackAlert/AttackParticle")
+alert_nodes = NodePath("../../../AttackAlert")
 animation_tree = NodePath("../../AnimationTree")
 state_machine = NodePath("..")
 character = NodePath("../..")

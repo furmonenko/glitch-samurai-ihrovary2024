@@ -26,6 +26,8 @@ func get_random_animation_index():
 
 func shoot():
 	turn_towards_target()
+	alert_sign.emitting = true
+	alert_nodes.global_position = character.global_position - Vector2(0, 35)
 	
 	if get_blendspace_animations_count() == 1:
 		state_machine.switch_state("shoot")

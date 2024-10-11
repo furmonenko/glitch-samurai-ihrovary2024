@@ -5,6 +5,8 @@ var SWITCH_STAGE: StringName = "switch_stage"
 # Called when the node enters the scene tree for the first time.
 var should_attack: bool = false
 
+@export var alert_sign: CPUParticles2D
+@export var alert_nodes: Node2D
 
 func _update(delta):
 	if controller.health_component.current_hp <= controller.health_component.max_hp * 0.5:
@@ -36,6 +38,10 @@ func get_random_animation_index():
 	return randi_range(0, get_blendspace_animations_count() - 1)
 
 func attack():
+	alert_sign.emitting = true
+	alert_nodes.global_position = character.global_position - Vector2(0, 50)
+	
+	
 	state_machine.switch_state("attack")
 	animation_tree.set("parameters/AttackFirstStage/blend_position", get_random_animation_index())
 	controller.cooldown_timer.start()

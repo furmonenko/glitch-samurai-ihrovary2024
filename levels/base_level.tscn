@@ -315,7 +315,7 @@ last_door = NodePath("LastDoor")
 [node name="PlayerController" parent="." instance=ExtResource("3_045fn")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(281, 128)
+position = Vector2(-140, -432)
 
 [node name="PortalsPair" parent="." instance=ExtResource("9_4f378")]
 z_index = 30

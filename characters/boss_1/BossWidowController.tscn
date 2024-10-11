@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://c4ilsmhyd8try"]
+[gd_scene load_steps=31 format=3 uid="uid://c4ilsmhyd8try"]
 
 [ext_resource type="Script" path="res://characters/boss_1/boss_widow_controller.gd" id="1_fryqj"]
 [ext_resource type="PackedScene" uid="uid://b8i8qn5fvparo" path="res://characters/boss_1/boss_widow.tscn" id="1_yr50n"]
+[ext_resource type="FontFile" uid="uid://rn2vgoht588t" path="res://assets/lunchtime-doubly-so.regular.ttf" id="2_nqmmk"]
 [ext_resource type="LabelSettings" uid="uid://b33p2yrnnwkeq" path="res://cutscenes/intuduction.tres" id="2_ob2a1"]
 [ext_resource type="Script" path="res://controllers/states/death_ai.gd" id="3_i7q1e"]
 [ext_resource type="Script" path="res://characters/boss_1/widow_first_stage_state.gd" id="3_uugga"]
@@ -17,6 +18,13 @@
 [ext_resource type="AudioStream" uid="uid://ddu0cny7x5q3f" path="res://assets/sounds/robot_4.mp3" id="15_mjcm3"]
 [ext_resource type="AudioStream" uid="uid://28tjv3qq16ww" path="res://assets/sounds/robot_hit.wav" id="16_4udp2"]
 [ext_resource type="AudioStream" uid="uid://dt7g0t3utx41y" path="res://assets/sounds/robot_death.wav" id="17_75kql"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qk1kv"]
+font = ExtResource("2_nqmmk")
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1pc8r"]
+viewport_path = NodePath("AttackAlert/SubViewport")
 
 [sub_resource type="Animation" id="Animation_47ss2"]
 length = 0.001
@@ -129,7 +137,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(50, -10)]
+"values": [Vector2(41.5, -10)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -138,7 +146,7 @@ tracks/3/path = NodePath("BossWidow/HitBox/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.366667, 1.03333),
+"times": PackedFloat32Array(0.266667, 0.466667, 1.03333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -165,7 +173,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(18.5779, 20)]
+"values": [Vector2(23.2224, 20)]
 }
 tracks/6/type = "method"
 tracks/6/imported = false
@@ -218,7 +226,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(14.3713, 20)]
+"values": [Vector2(24.944, 20)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -230,7 +238,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(57, -19)]
+"values": [Vector2(37.6507, -19)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -251,10 +259,10 @@ tracks/5/path = NodePath("BossWidow/HitBox/CollisionShape2D:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.3, 0.7),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.233333, 0.433333, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [true, false, true]
 }
 tracks/6/type = "method"
 tracks/6/imported = false
@@ -545,6 +553,42 @@ tracks/5/keys = {
 "method": &"play"
 }]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BossWidow/HitBox/CollisionShape2D:shape:size")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(55.7337, 13)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BossWidow/HitBox/CollisionShape2D:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3.33786e-06, -6.5)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BossWidow/HitBox/CollisionShape2D:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3.66026, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ta6nc"]
 length = 1.1
@@ -618,6 +662,26 @@ run_sound = NodePath("Sounds/RunSound")
 character = NodePath("BossWidow")
 state_machine = NodePath("BossWidow/LimboHSM")
 
+[node name="AttackAlert" type="Node2D" parent="."]
+position = Vector2(4, -23)
+
+[node name="SubViewport" type="SubViewport" parent="AttackAlert"]
+transparent_bg = true
+size = Vector2i(16, 16)
+
+[node name="Label" type="Label" parent="AttackAlert/SubViewport"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "!"
+label_settings = SubResource("LabelSettings_qk1kv")
+
+[node name="AttackParticle" type="CPUParticles2D" parent="AttackAlert"]
+emitting = false
+amount = 1
+one_shot = true
+texture = SubResource("ViewportTexture_1pc8r")
+gravity = Vector2(0, -10)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
@@ -650,11 +714,11 @@ agent = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
 
 [node name="AnimatedSprite2D" parent="BossWidow" index="2"]
-frame = 5
+animation = &"attack_1"
 
 [node name="HealthComponent" parent="BossWidow" index="3" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
-max_hp = 1000.0
+max_hp = 600.0
 
 [node name="DamageComponent" parent="BossWidow" index="4" node_paths=PackedStringArray("damage_causer")]
 damage_causer = NodePath("..")
@@ -680,8 +744,10 @@ controller = NodePath("../../..")
 speed = 10.0
 max_speed = 20.0
 
-[node name="FirstStage" parent="BossWidow/LimboHSM" index="1" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+[node name="FirstStage" parent="BossWidow/LimboHSM" index="1" node_paths=PackedStringArray("alert_sign", "alert_nodes", "animation_tree", "state_machine", "character", "controller")]
 script = ExtResource("3_uugga")
+alert_sign = NodePath("../../../AttackAlert/AttackParticle")
+alert_nodes = NodePath("../../../AttackAlert")
 animation_tree = NodePath("../../AnimationTree")
 state_machine = NodePath("..")
 character = NodePath("../..")
@@ -689,8 +755,10 @@ controller = NodePath("../../..")
 speed = 20.0
 max_speed = 35.0
 
-[node name="SecondStage" parent="BossWidow/LimboHSM" index="2" node_paths=PackedStringArray("controller")]
+[node name="SecondStage" parent="BossWidow/LimboHSM" index="2" node_paths=PackedStringArray("alert_sign", "alert_nodes", "controller")]
 script = ExtResource("4_e1el8")
+alert_sign = NodePath("../../../AttackAlert/AttackParticle")
+alert_nodes = NodePath("../../../AttackAlert")
 controller = NodePath("../../..")
 speed = 25.0
 max_speed = 40.0
