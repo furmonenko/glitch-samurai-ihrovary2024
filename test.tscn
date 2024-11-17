@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7dwmu7r7vqoc"]
+[gd_scene load_steps=4 format=3 uid="uid://b7dwmu7r7vqoc"]
 
 [ext_resource type="PackedScene" uid="uid://b6xhp64emqkwx" path="res://characters/glitch_samurai/player_controller.tscn" id="1_w6it2"]
-[ext_resource type="PackedScene" uid="uid://c4ilsmhyd8try" path="res://characters/boss_1/BossWidowController.tscn" id="2_r7qmv"]
 [ext_resource type="Texture2D" uid="uid://wixa4htefpor" path="res://assets/VIctorianParalax/Parallax/layer 5.png" id="3_h26f3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twiou"]
@@ -19,13 +18,16 @@ shape = SubResource("RectangleShape2D_twiou")
 position = Vector2(63, 0)
 
 [node name="AnimatedSprite2D" parent="StaticBody2D/PlayerController/GlitchSamurai" index="2"]
-frame = 6
+frame = 8
 
-[node name="BossWidowController" parent="StaticBody2D" instance=ExtResource("2_r7qmv")]
-position = Vector2(-284, 0)
+[node name="LimboHSM" parent="StaticBody2D/PlayerController/GlitchSamurai" index="7"]
+state_conditions = {
+"air": "parameters/conditions/jumping",
+"glitch": "parameters/conditions/glitch"
+}
 
-[node name="AnimatedSprite2D" parent="StaticBody2D/BossWidowController/BossWidow" index="2"]
-frame = 0
+[node name="Attack" parent="StaticBody2D/PlayerController/GlitchSamurai/LimboHSM" index="3"]
+max_combo_attacks = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 10)
@@ -33,7 +35,6 @@ scale = Vector2(2.6305, 0.0916172)
 texture = ExtResource("3_h26f3")
 
 [editable path="StaticBody2D/PlayerController"]
+[editable path="StaticBody2D/PlayerController/HUD/SceneGlitch"]
 [editable path="StaticBody2D/PlayerController/GlitchSamurai"]
 [editable path="StaticBody2D/PlayerController/GlitchSamurai/CollisionShape2D/HitBox"]
-[editable path="StaticBody2D/BossWidowController"]
-[editable path="StaticBody2D/BossWidowController/BossWidow"]

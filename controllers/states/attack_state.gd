@@ -1,4 +1,4 @@
-extends State
+extends PlayerState
 class_name AttackState
 
 @export var max_combo_attacks: int = 6
@@ -7,10 +7,6 @@ var attack_count: int = 0
 var current_animation: String = ""  # Поточна анімація
 
 var is_attack_finished :bool
-
-func initialize_state():
-	super()
-	animation_tree.animation_finished.connect(_on_animation_finished)
 
 func _enter() -> void:
 	# Перехід у стан атаки
@@ -21,5 +17,3 @@ func _enter() -> void:
 func attack(combo_count: int = 0):
 	is_attack_finished = false
 	
-func _on_animation_finished(animation_name: String) -> void:
-	is_attack_finished = true

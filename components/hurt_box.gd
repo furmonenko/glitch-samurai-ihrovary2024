@@ -1,6 +1,8 @@
 extends Area2D
 class_name Hurtbox
 
+signal reduce_energy(damage_amount)
+
 @export var agent: Node2D
 @export var health_component: HealthComponent
 
@@ -9,7 +11,6 @@ func _ready() -> void:
 	connect("area_exited", on_hurtbox_exited)
 
 func on_hurtbox_entered(area: Area2D):
-	print(area)
 	if area is HitBox:
 		var enemy_hitbox: HitBox = area
 		
@@ -27,6 +28,7 @@ func on_hurtbox_entered(area: Area2D):
 				return  # Атака заблокована щитом, не застосовуємо пошкодження
 
 		# Якщо перевірка пройдена, застосовуємо пошкодження
+		reduce_energy.emit(enemy_hitbox.damage_component.damage_amount)
 		health_component.apply_damage(enemy_damage_component)
 
 func on_hurtbox_exited(area: Area2D):

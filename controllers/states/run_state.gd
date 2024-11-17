@@ -1,9 +1,6 @@
-extends State
+extends PlayerState
 class_name RunState
 
-
-@export var jump_force: float = 400.0
-@export var gravity: float = 50.0
 
 func _enter() -> void:
 	velocity = character.velocity
@@ -14,7 +11,6 @@ func _enter() -> void:
 
 func handle_movement(input_direction: int, delta: float) -> void:
 	# Додаємо гравітацію
-	velocity.y += gravity * delta
 	
 	# Якщо персонаж змінює напрямок, обнуляємо швидкість
 	if (input_direction > 0 and velocity.x < 0) or (input_direction < 0 and velocity.x > 0):
@@ -31,10 +27,10 @@ func handle_movement(input_direction: int, delta: float) -> void:
 			character.transform.x.x = -1
 
 		# Прискорення при русі
-		velocity.x = move_toward(velocity.x, input_direction * max_speed, acceleration)
+		velocity.x = move_toward(velocity.x, input_direction * character.stats_resource.max_speed, character.stats_resource.acceleration)
 	else:
 		# Децелерація при зупинці
-		velocity.x = move_toward(velocity.x, 0, deceleration)
+		velocity.x = move_toward(velocity.x, 0, character.stats_resource.deceleration)
 
 	# Якщо швидкість близька до нуля, вважаємо, що персонаж зупинився
 	if abs(velocity.x) < 0.1:

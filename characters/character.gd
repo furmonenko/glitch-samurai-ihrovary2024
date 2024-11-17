@@ -5,6 +5,8 @@ class_name Character
 
 
 @export var hitbox: HitBox
+@export var stats_resource: PlayerStatsResource
+
 var is_glitched :bool = false
 
 signal died(character :Character)

@@ -1,4 +1,4 @@
-extends State
+extends PlayerState
 class_name DeathState
 
 @export var player_camera :Camera2D

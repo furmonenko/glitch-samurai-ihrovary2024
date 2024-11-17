@@ -64,7 +64,7 @@ damage_component = NodePath("../../DamageComponent")
 
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
 position = Vector2(6, -22)
-frame = 3
+frame = 8
 
 [node name="AnimationTree" parent="GlitchSamurai" index="6"]
 parameters/Air/blend_position = -0.98935
@@ -84,6 +84,7 @@ character = NodePath("../..")
 
 [node name="Attack" parent="GlitchSamurai/LimboHSM" index="3" node_paths=PackedStringArray("state_machine", "character", "controller")]
 script = ExtResource("3_a7hi3")
+max_combo_attacks = null
 state_machine = NodePath("..")
 character = NodePath("../..")
 controller = NodePath("../../..")

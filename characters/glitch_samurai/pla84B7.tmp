@@ -64,7 +64,7 @@ damage_component = NodePath("../../DamageComponent")
 
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
 position = Vector2(6, -22)
-frame = 3
+frame = 10
 
 [node name="AnimationTree" parent="GlitchSamurai" index="6"]
 parameters/Air/blend_position = -0.98935

@@ -6,6 +6,10 @@ func _enter() -> void:
 	print(controller.combo_count)
 	start_attack(controller.combo_count) 
 
+func initialize_state():
+	super()
+	animation_tree.animation_finished.connect(_on_animation_finished)
+
 func start_attack(_combo_count: int) -> void:
 		
 	state_machine.switch_state("attack")
@@ -13,6 +17,7 @@ func start_attack(_combo_count: int) -> void:
 
 
 func _on_animation_finished(animation_name: String) -> void:
+	is_attack_finished = true
 	dispatch(EVENT_FINISHED)
 
 func get_blendspace_animations_count():

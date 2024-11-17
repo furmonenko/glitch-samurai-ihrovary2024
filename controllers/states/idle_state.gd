@@ -1,4 +1,4 @@
-extends State
+extends PlayerState
 class_name IdleState
 
 @export var air_state: AirState

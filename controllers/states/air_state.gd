@@ -1,11 +1,7 @@
-extends State
+extends PlayerState
 class_name AirState
 
 # Параметри для контролю руху
-@export var jump_force: float = 600.0
-@export var gravity: float = 50.0
-@export var max_air_speed: float = 150.0
-
 
 func _enter() -> void:
 	# Перехід у стан повітря
@@ -14,12 +10,10 @@ func _enter() -> void:
 	
 	# Якщо персонаж тільки стрибає
 	if character.is_on_floor():
-		velocity.y = -jump_force
+		velocity.y = -character.stats_resource.jump_force
 
 func _update(delta: float) -> void:
 	handle_air_movement(delta)
-
-@export var max_fall_speed: float = 300.0  # Максимальна швидкість падіння
 
 func handle_air_movement(delta: float) -> void:
 	# Рух по горизонталі в повітрі
@@ -39,14 +33,14 @@ func handle_air_movement(delta: float) -> void:
 			character.transform.x.x = -1
 
 		# Максимальна швидкість у повітрі
-		velocity.x = input_direction * max_air_speed
+		velocity.x = input_direction * character.stats_resource.max_air_speed
 
 	# Гравітація
-	velocity.y += gravity
+	velocity.y += character.stats_resource.gravity
 
 	# Обмеження швидкості падіння
-	if velocity.y > max_fall_speed:
-		velocity.y = max_fall_speed
+	if velocity.y > character.stats_resource.max_fall_speed:
+		velocity.y = character.stats_resource.max_fall_speed
 
 	# Задаємо параметр blend_position для падіння або стрибка
 	if velocity.y > 0:

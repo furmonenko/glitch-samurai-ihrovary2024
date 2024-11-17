@@ -1,14 +1,10 @@
-extends State
+extends PlayerState
 class_name GlitchState
 
 @export var player_controller: PlayerController
 @onready var idle_state: IdleState = %Idle
-
-var move_speed: float = 500.0  # Максимальна швидкість пересування
-var glitch_time: float = 0.4  # Час до наступного ривка
-var glitch_pause_time: float = 0.1  # Тривалість паузи між ривками
-var glitch_duration: float = 0.2  # Тривалість самого ривка
-var glitch_active: bool = false  # Чи активний зараз глітч
+@onready var glitch_time: float = 0.2
+@onready var glitch_active: bool = false  # Чи активний зараз глітч
 
 @export var scene_glitch: GlitchEffect
 
@@ -48,11 +44,11 @@ func handle_glitch_movement(delta: float) -> void:
 		if glitch_active:
 			# Якщо був активний ривок, переходимо в паузу
 			glitch_active = false
-			glitch_time = glitch_pause_time
+			glitch_time = character.stats_resource.glitch_pause_time
 		else:
 			# Якщо був період паузи, робимо ривок
 			glitch_active = true
-			glitch_time = glitch_duration
+			glitch_time = character.stats_resource.glitch_duration
 
 	# Тільки під час активного ривка рухаємо персонажа
 	if glitch_active:
@@ -63,10 +59,10 @@ func handle_glitch_movement(delta: float) -> void:
 
 		if input_vector != Vector2.ZERO:
 			# Під час ривка збільшуємо швидкість різко
-			velocity = velocity.move_toward(input_vector * move_speed, acceleration * delta)
+			velocity = velocity.move_toward(input_vector * character.stats_resource.glitch_move_speed, character.stats_resource.glitch_acceleration * delta)
 		else:
 			# Якщо гравець не рухається, зменшуємо швидкість
-			velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
+			velocity = velocity.move_toward(Vector2.ZERO, character.stats_resource.glitch_deceleration * delta)
 	else:
 		# Під час паузи швидкість падає до нуля
 		velocity = Vector2.ZERO

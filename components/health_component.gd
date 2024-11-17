@@ -4,9 +4,16 @@ class_name HealthComponent
 signal got_hit(enemy: Character)
 
 @export var agent :Character
-@export var max_hp :float = 100.0
 
-@onready var current_hp = max_hp
+var max_hp :float
+
+var current_hp = max_hp
+
+func _ready():
+	if agent.stats_resource:
+		max_hp = agent.stats_resource.max_hp
+		
+	current_hp = max_hp
 
 func apply_damage(damage_component :DamageComponent):
 	var damage =  damage_component.get_damage_amount()

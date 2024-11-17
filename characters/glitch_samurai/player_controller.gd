@@ -14,8 +14,8 @@ signal play_glitch_once
 @onready var run_sound = $GlitchSamurai/Sounds/RunSound
 @onready var jump_sound = $GlitchSamurai/Sounds/JumpSound
 
-@export var energy: float = 400.0  # Максимальна енергія
-@export var energy_decrease_rate: float = 20.0  # Скільки енергії зменшувати за секунду
+var energy: float
+var energy_decrease_rate: float
 
 @onready var attack_sound = $GlitchSamurai/Sounds/AttackSound
 @onready var glitch_bar = $HUD/Control/ProgressBar
@@ -28,16 +28,27 @@ var combo_count: int = 0  # Лічильник комбо-атак
 var max_combo_attacks: int = 3  # Максимальна кількість атак у комбо
 
 @onready var scene_glitch = $HUD/SceneGlitch
-
+@onready var health_component = $GlitchSamurai/HealthComponent
+@onready var hurtbox = $GlitchSamurai/Hurtbox
 
 func _ready() -> void:
 	current_level = $'.'.get_parent()
+	
+	energy = health_component.max_hp
 	
 	scene_glitch.animation_player.play("scene_glitch")
 	
 	glitch_bar.max_value = energy
 	glitch_bar.value = energy
-	glitch_bar.step = energy_decrease_rate
+	glitch_bar.step = 20.0
+	
+	hurtbox.reduce_energy.connect(func(damage_amount):
+		%PlayerCamera.start_screen_shake()
+		scene_glitch.glitch.visible = true
+		scene_glitch.animation_player.play("hit_glitch")
+		
+		glitch_bar.value -= damage_amount
+		)
 	
 	character.died.connect(func(dead_character: Character):
 		dead_character.is_dead = true
@@ -73,8 +84,10 @@ func _init_state_machine() -> void:
 	state_machine.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
 	state_machine.add_transition(air_state, death_state, &"die_after_falling")
 
+
 func handle_states(delta: float) -> void:
 	super(delta)
+	
 	
 	if character.is_dead:
 		return
@@ -96,6 +109,7 @@ func handle_states(delta: float) -> void:
 		# Зменшуємо енергію, поки персонаж у глітч-стані
 		energy -= energy_decrease_rate * delta
 		glitch_bar.value = energy
+		health_component.current_hp = energy
 
 		# Якщо енергія закінчилася, виходимо з глітч-стану
 		if energy <= 0:

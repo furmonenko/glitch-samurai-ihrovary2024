@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="PlayerStatsResource" load_steps=2 format=3 uid="uid://ce5mjiyomptv8"]
+
+[ext_resource type="Script" path="res://characters/glitch_samurai/player_stats_res.gd" id="1_5qwcq"]
+
+[resource]
+script = ExtResource("1_5qwcq")
+max_hp = 100.0
+attack_speed = 0.5
+damage = 20.0
+crit_chance = 0.0
+crit_multiplier = 0.0
+max_speed = 100.0
+acceleration = 20.0
+deceleration = 100.0
+jump_force = 600.0
+gravity = 50.0
+max_air_speed = 150.0
+glitch_move_speed = 500.0
+glitch_time = 0.4
+glitch_pause_time = 0.1
+glitch_duration = 0.2
+glitch_active = false
+glitch_acceleration = 50.0
+glitch_deceleration = 100.0
