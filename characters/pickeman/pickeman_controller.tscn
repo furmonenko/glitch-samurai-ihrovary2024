@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bja6jn57nw1vy"]
+[gd_scene load_steps=15 format=3 uid="uid://bja6jn57nw1vy"]
 
 [ext_resource type="Script" path="res://controllers/ai_controller.gd" id="1_wc86j"]
 [ext_resource type="FontFile" uid="uid://rn2vgoht588t" path="res://assets/lunchtime-doubly-so.regular.ttf" id="2_etbhj"]
 [ext_resource type="PackedScene" uid="uid://ckxkkjgb4u2yi" path="res://characters/pickeman/pickeman.tscn" id="2_pwd3m"]
 [ext_resource type="Script" path="res://controllers/states/combat_state_melee.gd" id="3_nrvrk"]
+[ext_resource type="Script" path="res://characters/ai_character.gd" id="4_b1la3"]
 [ext_resource type="Script" path="res://characters/boss_1/patrol.gd" id="4_mqisl"]
 [ext_resource type="AudioStream" uid="uid://blxnlx1q5027h" path="res://assets/sounds/Hurt_v2_wav.wav" id="4_p712c"]
+[ext_resource type="Script" path="res://characters/ai_stats_res.gd" id="5_4d61t"]
 [ext_resource type="AudioStream" uid="uid://cdmuslcrekbdx" path="res://assets/sounds/one_step_run.wav" id="7_iguml"]
 [ext_resource type="AudioStream" uid="uid://pk6qent6unp6" path="res://assets/sounds/mob_death_2.mp3" id="8_r1m87"]
 [ext_resource type="Script" path="res://controllers/states/death_ai.gd" id="8_trc5y"]
@@ -17,9 +19,19 @@ font_color = Color(1, 0, 0, 1)
 [sub_resource type="ViewportTexture" id="ViewportTexture_3ve0n"]
 viewport_path = NodePath("AttackAlert/SubViewport")
 
+[sub_resource type="Resource" id="Resource_0euhw"]
+script = ExtResource("5_4d61t")
+max_hp = 20.0
+spot_range = 100.0
+attack_range = 20.0
+shoot_range = 50.0
+attack_speed = 2.0
+damage = 10.0
+crit_chance = 0.0
+crit_multiplier = 0.0
+
 [node name="PickemanController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "combat_state", "hurt_box_collision", "attack_sound", "hit_sound", "run_sound", "character", "state_machine")]
 script = ExtResource("1_wc86j")
-cooldown_duration = 2.0
 health_component = NodePath("Pickeman/HealthComponent")
 death_state = NodePath("Pickeman/LimboHSM/DeathState")
 patrol_state = NodePath("Pickeman/LimboHSM/PatrolState")
@@ -53,6 +65,8 @@ gravity = Vector2(0, -10)
 
 [node name="Pickeman" parent="." instance=ExtResource("2_pwd3m")]
 collision_mask = 9
+script = ExtResource("4_b1la3")
+stats_resource = SubResource("Resource_0euhw")
 
 [node name="Hurtbox" parent="Pickeman" index="0"]
 collision_layer = 4
@@ -73,8 +87,6 @@ animation_tree = NodePath("../../AnimationTree")
 state_machine = NodePath("..")
 character = NodePath("../..")
 controller = NodePath("../../..")
-speed = 20.0
-acceleration = 20.0
 max_speed = 20.0
 
 [node name="CombatStateMelee" type="LimboState" parent="Pickeman/LimboHSM" index="1" node_paths=PackedStringArray("alert_sign", "alert_nodes", "animation_tree", "state_machine", "character", "controller")]

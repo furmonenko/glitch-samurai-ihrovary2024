@@ -48,6 +48,7 @@ func _ready() -> void:
 		scene_glitch.animation_player.play("hit_glitch")
 		
 		glitch_bar.value -= damage_amount
+		
 		)
 	
 	character.died.connect(func(dead_character: Character):
@@ -59,17 +60,20 @@ func _ready() -> void:
 			Helpers.emit_signal("character_died", current_level.level_idx)
 		)
 	
-	if character.hitbox:
-		character.hitbox.hit_target.connect(func(damaged_character: Character):
-			%PlayerCamera.start_screen_shake()
-			scene_glitch.glitch.visible = true
+	character.hitbox.hit_target.connect(func(damaged_character: Character):
+		%PlayerCamera.start_screen_shake()
+		scene_glitch.glitch.visible = true
 			
-			scene_glitch.animation_player.play("hit_glitch")
+		scene_glitch.animation_player.play("hit_glitch")
 			
-			if damaged_character.is_dead:
-				pass
-				# Helpers.slow_motion_start(0.5)
-			)
+		%DamageNumbers.global_position.x = damaged_character.global_position.x
+		%DamageNumbers.damage_amount.text = str(character.stats_resource.damage)
+		%DamageNumbers.damage_particle.emitting = true
+			
+		if damaged_character.is_dead:
+			pass
+			# Helpers.slow_motion_start(0.5)
+		)
 			
 	_init_state_machine()
 	
@@ -107,9 +111,11 @@ func handle_states(delta: float) -> void:
 		
 	if state_machine.get_active_state() == glitch_state:
 		# Зменшуємо енергію, поки персонаж у глітч-стані
-		energy -= energy_decrease_rate * delta
-		glitch_bar.value = energy
+		
+		energy -= character.stats_resource.hp_decrease_rate * delta
 		health_component.current_hp = energy
+		glitch_bar.value = energy
+		
 
 		# Якщо енергія закінчилася, виходимо з глітч-стану
 		if energy <= 0:

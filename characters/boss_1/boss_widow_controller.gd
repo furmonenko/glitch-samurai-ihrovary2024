@@ -4,9 +4,9 @@ class_name BossController
 signal hit_glitch
 signal boss_death
 # Налаштування для бота
-@export var spot_range: float = 100.0  # Дальність, на якій бот бачить ворога
-@export var attack_range: float = 20.0  # Дальність атаки
-@export var cooldown_duration: float = 0.5  # Кулдаун атаки
+var spot_range: float = 100.0  # Дальність, на якій бот бачить ворога
+var attack_range: float = 20.0  # Дальність атаки
+var cooldown_duration: float = 0.5  # Кулдаун атаки
 
 @export var health_component: HealthComponent
 
@@ -29,6 +29,8 @@ var last_state: State = null  # Останній стан перед отрим�
 signal character_is_behind
 
 func _ready() -> void:
+	init_stats()
+	
 	hp_bar.max_value = health_component.max_hp
 	hp_bar.value = health_component.max_hp
 	
@@ -105,3 +107,8 @@ func is_target_in_range(range: float) -> bool:
 
 func step_sound():
 	run_sound.play()
+
+func init_stats():
+	spot_range = character.stats_resource.spot_range
+	attack_range = character.stats_resource.attack_range
+	cooldown_duration = character.stats_resource.attack_speed

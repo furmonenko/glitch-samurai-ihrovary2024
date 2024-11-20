@@ -3,9 +3,9 @@ class_name AIController
 
 signal hit_glitch
 # Налаштування для бота
-@export var spot_range: float = 100.0  # Дальність, на якій бот бачить ворога
-@export var attack_range: float = 20.0  # Дальність атаки
-@export var cooldown_duration: float = 0.5  # Кулдаун ата
+var spot_range
+var attack_range
+var cooldown_duration
 
 @export var health_component: HealthComponent
 
@@ -25,6 +25,8 @@ var last_state: State = null  # Останній стан перед отрим�
 var direction_to_enemy: Vector2
 
 func _ready() -> void:
+	
+	init_stats()
 	# Додаємо таймер для кулдауна атаки
 	add_child(cooldown_timer)
 	cooldown_timer.one_shot = true
@@ -85,3 +87,8 @@ func step_sound():
 	var step_sound_pitch = randf_range(1.1, 1.3)
 	run_sound.pitch_scale = step_sound_pitch
 	run_sound.play()
+
+func init_stats():
+	spot_range = character.stats_resource.spot_range
+	attack_range = character.stats_resource.attack_range
+	cooldown_duration = character.stats_resource.attack_speed

@@ -2,7 +2,8 @@ extends Node
 class_name DamageComponent
 
 @export var damage_causer :Node2D
-@export var damage_amount :float = 20.0
+
+var damage_amount
 
 func _ready():
 	if damage_causer.stats_resource:

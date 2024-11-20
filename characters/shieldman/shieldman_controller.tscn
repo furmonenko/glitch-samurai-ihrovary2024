@@ -1,12 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://unqj071j3se0"]
+[gd_scene load_steps=17 format=3 uid="uid://unqj071j3se0"]
 
 [ext_resource type="PackedScene" uid="uid://jc4g732lmltx" path="res://characters/shieldman/shieldman.tscn" id="1_hr5cw"]
 [ext_resource type="Script" path="res://characters/shieldman/shieldman_controller.gd" id="1_tj5ih"]
 [ext_resource type="FontFile" uid="uid://rn2vgoht588t" path="res://assets/lunchtime-doubly-so.regular.ttf" id="2_577wi"]
 [ext_resource type="AnimationLibrary" uid="uid://ikuctx682fxu" path="res://characters/shieldman/shieldman_anim.res" id="3_e6k6w"]
 [ext_resource type="AudioStream" uid="uid://caoioobyllef2" path="res://assets/sounds/Shield 3.wav" id="4_cwrvx"]
+[ext_resource type="Script" path="res://characters/ai_character.gd" id="4_d0ttu"]
 [ext_resource type="Script" path="res://controllers/states/combat_state_melee.gd" id="4_hkku4"]
 [ext_resource type="Script" path="res://controllers/states/death_ai.gd" id="5_3f0yp"]
+[ext_resource type="Script" path="res://characters/ai_stats_res.gd" id="5_lsh1q"]
 [ext_resource type="AudioStream" uid="uid://ri23ee4kbtmg" path="res://assets/sounds/medium-explosion-40472.mp3" id="6_uq8nw"]
 [ext_resource type="AudioStream" uid="uid://cdmuslcrekbdx" path="res://assets/sounds/one_step_run.wav" id="8_gpcom"]
 
@@ -16,6 +18,17 @@ font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_137s1"]
 viewport_path = NodePath("AttackAlert/SubViewport")
+
+[sub_resource type="Resource" id="Resource_li1au"]
+script = ExtResource("5_lsh1q")
+max_hp = 50.0
+spot_range = 100.0
+attack_range = 20.0
+shoot_range = 50.0
+attack_speed = 2.0
+damage = 20.0
+crit_chance = 0.0
+crit_multiplier = 0.0
 
 [sub_resource type="Animation" id="Animation_qgwk1"]
 length = 0.001
@@ -52,9 +65,6 @@ _data = {
 [node name="ShieldmanController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "combat_state", "hurt_box_collision", "attack_sound", "hit_sound", "run_sound", "character", "state_machine")]
 position = Vector2(-3, 0)
 script = ExtResource("1_tj5ih")
-spot_range = 120.0
-attack_range = 40.0
-cooldown_duration = 4.0
 health_component = NodePath("Shieldman/HealthComponent")
 death_state = NodePath("Shieldman/LimboHSM/DeathState")
 patrol_state = NodePath("Shieldman/LimboHSM/Patrol")
@@ -89,17 +99,15 @@ one_shot = true
 texture = SubResource("ViewportTexture_137s1")
 gravity = Vector2(0, -10)
 
-[node name="Shieldman" parent="." node_paths=PackedStringArray("hitbox") instance=ExtResource("1_hr5cw")]
+[node name="Shieldman" parent="." instance=ExtResource("1_hr5cw")]
 position = Vector2(3, 0)
 collision_mask = 9
-hitbox = NodePath("HitBox")
+script = ExtResource("4_d0ttu")
+stats_resource = SubResource("Resource_li1au")
 
 [node name="AnimatedSprite2D" parent="Shieldman" index="1"]
 position = Vector2(-2, -23)
 animation = &"Death"
-
-[node name="HealthComponent" parent="Shieldman" index="2"]
-max_hp = 100.0
 
 [node name="AnimationPlayer" parent="Shieldman" index="4"]
 libraries = {
@@ -122,11 +130,14 @@ animation_tree = NodePath("../../AnimationTree")
 state_machine = NodePath("..")
 character = NodePath("../..")
 controller = NodePath("../../..")
-acceleration = 30.0
 max_speed = 30.0
 
 [node name="DeathState" parent="Shieldman/LimboHSM" index="2"]
 script = ExtResource("5_3f0yp")
+speed = 30.0
+acceleration = 1.0
+deceleration = 1.0
+max_speed = 50.0
 
 [node name="Hurtbox" parent="Shieldman" index="7"]
 collision_layer = 128

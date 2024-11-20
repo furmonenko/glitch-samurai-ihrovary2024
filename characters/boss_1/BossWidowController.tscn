@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c4ilsmhyd8try"]
+[gd_scene load_steps=34 format=3 uid="uid://c4ilsmhyd8try"]
 
 [ext_resource type="Script" path="res://characters/boss_1/boss_widow_controller.gd" id="1_fryqj"]
 [ext_resource type="PackedScene" uid="uid://b8i8qn5fvparo" path="res://characters/boss_1/boss_widow.tscn" id="1_yr50n"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://characters/boss_1/widow_boss_hsm.gd" id="4_35uhd"]
 [ext_resource type="Script" path="res://characters/boss_1/widow_second_stage_state.gd" id="4_e1el8"]
 [ext_resource type="Texture2D" uid="uid://dm81c8iqomujf" path="res://assets/UI/UI - Borders and HP/red_hp_progress.png" id="4_jeptp"]
+[ext_resource type="Script" path="res://characters/ai_character.gd" id="7_80pgm"]
+[ext_resource type="Script" path="res://characters/ai_stats_res.gd" id="8_fn7j0"]
 [ext_resource type="AudioStream" uid="uid://b8gg5kdx5r6uu" path="res://assets/sounds/robo_walk.wav" id="11_jgb1t"]
 [ext_resource type="AudioStream" uid="uid://drr44cb6q8mv3" path="res://assets/sounds/robo_attack.wav" id="12_yq3vn"]
 [ext_resource type="AudioStream" uid="uid://b32edx3x5mwea" path="res://assets/sounds/robot_1.mp3" id="13_c46g2"]
@@ -25,6 +27,17 @@ font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_1pc8r"]
 viewport_path = NodePath("AttackAlert/SubViewport")
+
+[sub_resource type="Resource" id="Resource_ymkac"]
+script = ExtResource("8_fn7j0")
+max_hp = 100.0
+spot_range = 100.0
+attack_range = 20.0
+shoot_range = 50.0
+attack_speed = 2.0
+damage = 20.0
+crit_chance = 0.0
+crit_multiplier = 0.0
 
 [sub_resource type="Animation" id="Animation_47ss2"]
 length = 0.001
@@ -650,9 +663,6 @@ _data = {
 
 [node name="BossWidowController" type="Node2D" node_paths=PackedStringArray("health_component", "death_state", "patrol_state", "first_stage_state", "second_stage_state", "run_sound", "character", "state_machine")]
 script = ExtResource("1_fryqj")
-spot_range = 120.0
-attack_range = 60.0
-cooldown_duration = 2.0
 health_component = NodePath("BossWidow/HealthComponent")
 death_state = NodePath("BossWidow/LimboHSM/Death")
 patrol_state = NodePath("BossWidow/LimboHSM/Patrol")
@@ -705,8 +715,9 @@ size_flags_horizontal = 4
 texture_under = ExtResource("3_v38p2")
 texture_progress = ExtResource("4_jeptp")
 
-[node name="BossWidow" parent="." node_paths=PackedStringArray("hitbox") instance=ExtResource("1_yr50n")]
-hitbox = NodePath("HitBox")
+[node name="BossWidow" parent="." instance=ExtResource("1_yr50n")]
+script = ExtResource("7_80pgm")
+stats_resource = SubResource("Resource_ymkac")
 
 [node name="Hurtbox" parent="BossWidow/CollisionShape2D" index="0" node_paths=PackedStringArray("agent", "health_component")]
 collision_layer = 128
@@ -714,11 +725,10 @@ agent = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
 
 [node name="AnimatedSprite2D" parent="BossWidow" index="2"]
-animation = &"attack_1"
+frame = 8
 
 [node name="HealthComponent" parent="BossWidow" index="3" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
-max_hp = 600.0
 
 [node name="DamageComponent" parent="BossWidow" index="4" node_paths=PackedStringArray("damage_causer")]
 damage_causer = NodePath("..")
@@ -741,7 +751,6 @@ state_conditions = {
 
 [node name="Patrol" parent="BossWidow/LimboHSM" index="0" node_paths=PackedStringArray("controller")]
 controller = NodePath("../../..")
-speed = 10.0
 max_speed = 20.0
 
 [node name="FirstStage" parent="BossWidow/LimboHSM" index="1" node_paths=PackedStringArray("alert_sign", "alert_nodes", "animation_tree", "state_machine", "character", "controller")]
@@ -752,7 +761,6 @@ animation_tree = NodePath("../../AnimationTree")
 state_machine = NodePath("..")
 character = NodePath("../..")
 controller = NodePath("../../..")
-speed = 20.0
 max_speed = 35.0
 
 [node name="SecondStage" parent="BossWidow/LimboHSM" index="2" node_paths=PackedStringArray("alert_sign", "alert_nodes", "controller")]
@@ -760,7 +768,6 @@ script = ExtResource("4_e1el8")
 alert_sign = NodePath("../../../AttackAlert/AttackParticle")
 alert_nodes = NodePath("../../../AttackAlert")
 controller = NodePath("../../..")
-speed = 25.0
 max_speed = 40.0
 
 [node name="Death" parent="BossWidow/LimboHSM" index="3"]

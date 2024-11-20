@@ -13,7 +13,7 @@ func _ready() -> void:
 func on_hurtbox_entered(area: Area2D):
 	if area is HitBox:
 		var enemy_hitbox: HitBox = area
-		
+		area.hit_target.emit(agent)
 		# Agent that got hit
 		var hit_agent = enemy_hitbox.agent
 		

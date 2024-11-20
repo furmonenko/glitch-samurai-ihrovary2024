@@ -1,19 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6xhp64emqkwx"]
+[gd_scene load_steps=12 format=3 uid="uid://b6xhp64emqkwx"]
 
 [ext_resource type="Script" path="res://characters/glitch_samurai/player_controller.gd" id="1_4w8h7"]
 [ext_resource type="Texture2D" uid="uid://dp4h72v4hf3fh" path="res://assets/UI/UI - Borders and HP/glitch_under.png" id="2_2eno6"]
+[ext_resource type="PackedScene" uid="uid://b265aw75d8c08" path="res://animations/damage_numbers.tscn" id="2_5u0k5"]
 [ext_resource type="Resource" uid="uid://ce5mjiyomptv8" path="res://characters/glitch_samurai/player_stats.tres" id="2_ahbp5"]
 [ext_resource type="PackedScene" uid="uid://bop2xmo4jtij8" path="res://animations/scene_glitch_effect.tscn" id="2_i7ffc"]
 [ext_resource type="PackedScene" uid="uid://be6bki722mg1g" path="res://characters/glitch_samurai/glitch_samurai.tscn" id="2_iihpn"]
 [ext_resource type="Script" path="res://controllers/states/player_attack_state.gd" id="3_a7hi3"]
 [ext_resource type="Texture2D" uid="uid://bgli0683ro8ye" path="res://assets/UI/UI - Borders and HP/glitch_progress.png" id="3_eiyp6"]
 [ext_resource type="Script" path="res://characters/glitch_samurai/player_camera.gd" id="4_eijum"]
+[ext_resource type="Script" path="res://characters/glitch_samurai/player_character.gd" id="6_0fgea"]
 [ext_resource type="AudioStream" uid="uid://cdmuslcrekbdx" path="res://assets/sounds/one_step_run.wav" id="7_yaarw"]
 
 [node name="PlayerController" type="Node2D" node_paths=PackedStringArray("character", "state_machine")]
 script = ExtResource("1_4w8h7")
 character = NodePath("GlitchSamurai")
 state_machine = NodePath("GlitchSamurai/LimboHSM")
+
+[node name="DamageNumbers" parent="." instance=ExtResource("2_5u0k5")]
+unique_name_in_owner = true
+z_as_relative = false
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -52,6 +58,7 @@ texture_progress = ExtResource("3_eiyp6")
 unique_name_in_owner = true
 collision_layer = 16
 collision_mask = 25
+script = ExtResource("6_0fgea")
 stats_resource = ExtResource("2_ahbp5")
 
 [node name="Hurtbox" parent="GlitchSamurai" index="0"]
@@ -64,11 +71,17 @@ damage_component = NodePath("../../DamageComponent")
 
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
 position = Vector2(6, -22)
-frame = 3
+frame = 6
 
 [node name="AnimationTree" parent="GlitchSamurai" index="6"]
 parameters/Air/blend_position = -0.98935
 parameters/Attack/blend_position = 1.32617
+
+[node name="LimboHSM" parent="GlitchSamurai" index="7"]
+state_conditions = {
+"air": "parameters/conditions/jumping",
+"glitch": "parameters/conditions/glitch"
+}
 
 [node name="Idle" parent="GlitchSamurai/LimboHSM" index="0" node_paths=PackedStringArray("state_machine", "character")]
 state_machine = NodePath("..")

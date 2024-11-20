@@ -8,7 +8,6 @@ class_name State
 
 @onready var playback :AnimationNodeStateMachinePlayback
 
-@export_category("Move Stats")
 @export var speed: float = 30.0
 @export var acceleration: float = 1.0
 @export var deceleration: float = 1.0

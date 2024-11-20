@@ -18,13 +18,7 @@ shape = SubResource("RectangleShape2D_twiou")
 position = Vector2(63, 0)
 
 [node name="AnimatedSprite2D" parent="StaticBody2D/PlayerController/GlitchSamurai" index="2"]
-frame = 8
-
-[node name="LimboHSM" parent="StaticBody2D/PlayerController/GlitchSamurai" index="7"]
-state_conditions = {
-"air": "parameters/conditions/jumping",
-"glitch": "parameters/conditions/glitch"
-}
+frame = 7
 
 [node name="Attack" parent="StaticBody2D/PlayerController/GlitchSamurai/LimboHSM" index="3"]
 max_combo_attacks = 3
