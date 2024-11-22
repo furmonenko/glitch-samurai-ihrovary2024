@@ -72,8 +72,8 @@ stats_resource = SubResource("Resource_0euhw")
 collision_layer = 4
 
 [node name="AnimatedSprite2D" parent="Pickeman" index="3"]
-animation = &"Attack"
-frame = 8
+animation = &"Idle"
+frame = 4
 
 [node name="AnimationTree" parent="Pickeman" index="7"]
 parameters/Attack/blend_position = 0.0

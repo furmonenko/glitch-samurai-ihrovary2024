@@ -17,6 +17,8 @@ signal play_glitch_once
 @onready var glitch_bar = $HUD/Control/ProgressBar
 @onready var cooldown = $GlitchSamurai/Timers/Cooldown
 @onready var combo_reset = $GlitchSamurai/Timers/ComboReset
+@onready var damage_component = $GlitchSamurai/DamageComponent
+
 
 var current_level
 
@@ -134,15 +136,26 @@ func handle_states(delta: float) -> void:
 		var attack_sound_pitch = randf_range(0.9, 1.1)
 		attack_sound.pitch_scale = attack_sound_pitch
 		
+		damage_component.damage_amount = character.stats_resource.damage
+		
+		var random_crit_value = randi() % 100
+		if random_crit_value < character.stats_resource.crit_chance * 100:
+			damage_component.damage_amount *= character.stats_resource.crit_multiplier
+			
+		
+		
 		if state_machine.get_active_state() != attack_state and character.is_on_floor():
 			state_machine.change_active_state(attack_state)
 			cooldown.start()
 			attack_sound.play()
 			combo_count += 1
 			
+			
 			if attack_state.get_blendspace_animations_count() <= combo_count:
 				combo_count = 0
-
+		
+		
+		
 	# Перевірка на переміщення (входження в стан MoveState)
 	elif Input.get_axis("move_left", "move_right") != 0 and state_machine.get_active_state() != air_state and state_machine.get_active_state() != attack_state:
 		# Переходимо в стан руху, тільки якщо персонаж не в повітрі
@@ -174,5 +187,5 @@ func spawn_damage_text(damaged_character: Character):
 	var damage_numbers_inst = damage_numbers.instantiate()
 	add_child(damage_numbers_inst)
 	damage_numbers_inst.global_position = damaged_character.alert_point.global_position
-	damage_numbers_inst.damage_amount.text = str(character.stats_resource.damage)
+	damage_numbers_inst.damage_amount.text = str(damage_component.damage_amount)
 	damage_numbers_inst.damage_particle.emitting = true
