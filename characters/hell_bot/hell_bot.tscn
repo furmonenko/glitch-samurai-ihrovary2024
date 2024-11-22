@@ -532,7 +532,10 @@ position = Vector2(42.6875, -10)
 shape = SubResource("RectangleShape2D_brass")
 disabled = true
 
-[node name="AnimatedSprite2D" parent="." index="2"]
+[node name="AlertPoint" parent="." index="2"]
+position = Vector2(0, -33)
+
+[node name="AnimatedSprite2D" parent="." index="3"]
 material = SubResource("ShaderMaterial_hiecp")
 position = Vector2(27, -17)
 sprite_frames = SubResource("SpriteFrames_ayjfh")
@@ -540,16 +543,16 @@ animation = &"Idle"
 frame = 3
 metadata/_edit_lock_ = true
 
-[node name="DamageComponent" parent="." index="4" node_paths=PackedStringArray("damage_causer")]
+[node name="DamageComponent" parent="." index="5" node_paths=PackedStringArray("damage_causer")]
 damage_causer = NodePath("..")
 
-[node name="AnimationPlayer" parent="." index="5"]
+[node name="AnimationPlayer" parent="." index="6"]
 libraries = {
 "": SubResource("AnimationLibrary_n4hjx"),
 "hell_bot_anims": ExtResource("8_drwa7")
 }
 
-[node name="AnimationTree" parent="." index="6"]
+[node name="AnimationTree" parent="." index="7"]
 tree_root = SubResource("AnimationNodeStateMachine_7bety")
 parameters/conditions/attacking = false
 parameters/conditions/dead = false
@@ -557,7 +560,20 @@ parameters/conditions/idle = false
 parameters/conditions/running = false
 parameters/conditions/shooting = false
 
-[node name="LimboHSM" parent="." index="7" node_paths=PackedStringArray("character", "animation_tree")]
+[node name="Sounds" type="Node2D" parent="." index="8"]
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
+stream = ExtResource("17_y8wag")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+stream = ExtResource("18_3bjv4")
+volume_db = -20.0
+pitch_scale = 0.7
+bus = &"SFX"
+
+[node name="LimboHSM" parent="." index="9" node_paths=PackedStringArray("character", "animation_tree")]
 character = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
 state_conditions = {
@@ -572,16 +588,3 @@ script = ExtResource("14_brrxc")
 
 [node name="Death" type="LimboState" parent="LimboHSM" index="2"]
 script = ExtResource("15_ddfut")
-
-[node name="Sounds" type="Node2D" parent="." index="8"]
-
-[node name="AttackSound" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
-stream = ExtResource("17_y8wag")
-volume_db = -10.0
-bus = &"SFX"
-
-[node name="HitSound" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
-stream = ExtResource("18_3bjv4")
-volume_db = -20.0
-pitch_scale = 0.7
-bus = &"SFX"

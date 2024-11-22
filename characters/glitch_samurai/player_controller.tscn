@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6xhp64emqkwx"]
+[gd_scene load_steps=13 format=3 uid="uid://b6xhp64emqkwx"]
 
 [ext_resource type="Script" path="res://characters/glitch_samurai/player_controller.gd" id="1_4w8h7"]
 [ext_resource type="Texture2D" uid="uid://dp4h72v4hf3fh" path="res://assets/UI/UI - Borders and HP/glitch_under.png" id="2_2eno6"]
@@ -11,15 +11,13 @@
 [ext_resource type="Script" path="res://characters/glitch_samurai/player_camera.gd" id="4_eijum"]
 [ext_resource type="Script" path="res://characters/glitch_samurai/player_character.gd" id="6_0fgea"]
 [ext_resource type="AudioStream" uid="uid://cdmuslcrekbdx" path="res://assets/sounds/one_step_run.wav" id="7_yaarw"]
+[ext_resource type="Script" path="res://components/damage_component.gd" id="9_c57gt"]
 
 [node name="PlayerController" type="Node2D" node_paths=PackedStringArray("character", "state_machine")]
 script = ExtResource("1_4w8h7")
+damage_numbers = ExtResource("2_5u0k5")
 character = NodePath("GlitchSamurai")
 state_machine = NodePath("GlitchSamurai/LimboHSM")
-
-[node name="DamageNumbers" parent="." instance=ExtResource("2_5u0k5")]
-unique_name_in_owner = true
-z_as_relative = false
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -69,15 +67,35 @@ collision_mask = 128
 agent = NodePath("../..")
 damage_component = NodePath("../../DamageComponent")
 
-[node name="AnimatedSprite2D" parent="GlitchSamurai" index="2"]
+[node name="AlertPoint" parent="GlitchSamurai" index="2"]
+position = Vector2(0, -30)
+
+[node name="AnimatedSprite2D" parent="GlitchSamurai" index="3"]
+unique_name_in_owner = false
 position = Vector2(6, -22)
 frame = 6
 
-[node name="AnimationTree" parent="GlitchSamurai" index="6"]
+[node name="DamageComponent" parent="GlitchSamurai" index="5"]
+script = ExtResource("9_c57gt")
+
+[node name="AnimationPlayer" parent="GlitchSamurai" index="6"]
+script = null
+
+[node name="AnimationTree" parent="GlitchSamurai" index="7"]
+root_node = NodePath("%AnimationTree/../..")
 parameters/Air/blend_position = -0.98935
 parameters/Attack/blend_position = 1.32617
 
-[node name="LimboHSM" parent="GlitchSamurai" index="7"]
+[node name="RunSound" parent="GlitchSamurai/Sounds" index="1"]
+stream = ExtResource("7_yaarw")
+
+[node name="JumpSound" parent="GlitchSamurai/Sounds" index="2"]
+volume_db = -20.0
+
+[node name="ComboReset" parent="GlitchSamurai/Timers" index="1"]
+wait_time = 4.0
+
+[node name="LimboHSM" parent="GlitchSamurai" index="10"]
 state_conditions = {
 "air": "parameters/conditions/jumping",
 "glitch": "parameters/conditions/glitch"
@@ -113,18 +131,6 @@ animation_tree = NodePath("../../AnimationTree")
 state_machine = NodePath("..")
 character = NodePath("../..")
 controller = NodePath("../../..")
-
-[node name="RunSound" parent="GlitchSamurai/Sounds" index="1"]
-stream = ExtResource("7_yaarw")
-
-[node name="JumpSound" parent="GlitchSamurai/Sounds" index="2"]
-volume_db = -20.0
-
-[node name="Cooldown" parent="GlitchSamurai/Timers" index="0"]
-wait_time = 0.5
-
-[node name="ComboReset" parent="GlitchSamurai/Timers" index="1"]
-wait_time = 4.0
 
 [node name="PlayerCamera" type="Camera2D" parent="GlitchSamurai"]
 unique_name_in_owner = true

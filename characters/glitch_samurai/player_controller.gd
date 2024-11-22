@@ -13,10 +13,6 @@ signal play_glitch_once
 @onready var glitch_state: GlitchState = $GlitchSamurai/LimboHSM/Glitch
 @onready var run_sound = $GlitchSamurai/Sounds/RunSound
 @onready var jump_sound = $GlitchSamurai/Sounds/JumpSound
-
-var energy: float
-var energy_decrease_rate: float
-
 @onready var attack_sound = $GlitchSamurai/Sounds/AttackSound
 @onready var glitch_bar = $HUD/Control/ProgressBar
 @onready var cooldown = $GlitchSamurai/Timers/Cooldown
@@ -31,16 +27,14 @@ var max_combo_attacks: int = 3  # Максимальна кількість ат
 @onready var health_component = $GlitchSamurai/HealthComponent
 @onready var hurtbox = $GlitchSamurai/Hurtbox
 
+@export var damage_numbers: PackedScene
+
 func _ready() -> void:
 	current_level = $'.'.get_parent()
 	
-	energy = health_component.max_hp
+	init_stats()
 	
 	scene_glitch.animation_player.play("scene_glitch")
-	
-	glitch_bar.max_value = energy
-	glitch_bar.value = energy
-	glitch_bar.step = 20.0
 	
 	hurtbox.reduce_energy.connect(func(damage_amount):
 		%PlayerCamera.start_screen_shake()
@@ -65,11 +59,7 @@ func _ready() -> void:
 		scene_glitch.glitch.visible = true
 			
 		scene_glitch.animation_player.play("hit_glitch")
-			
-		%DamageNumbers.global_position.x = damaged_character.global_position.x
-		%DamageNumbers.damage_amount.text = str(character.stats_resource.damage)
-		%DamageNumbers.damage_particle.emitting = true
-			
+		spawn_damage_text(damaged_character)
 		if damaged_character.is_dead:
 			pass
 			# Helpers.slow_motion_start(0.5)
@@ -111,14 +101,12 @@ func handle_states(delta: float) -> void:
 		
 	if state_machine.get_active_state() == glitch_state:
 		# Зменшуємо енергію, поки персонаж у глітч-стані
-		
-		energy -= character.stats_resource.hp_decrease_rate * delta
-		health_component.current_hp = energy
-		glitch_bar.value = energy
+		health_component.current_hp -= character.stats_resource.hp_decrease_rate * delta
+		glitch_bar.value = health_component.current_hp 
 		
 
 		# Якщо енергія закінчилася, виходимо з глітч-стану
-		if energy <= 0:
+		if health_component.current_hp <= 0:
 			dead.emit()
 			glitch_state._exit()
 			state_machine.change_active_state(idle_state)
@@ -138,9 +126,11 @@ func handle_states(delta: float) -> void:
 		state_machine.change_active_state(air_state)
 		jump_sound.play()
 		
+	if Input.is_action_pressed("attack") and state_machine.get_active_state() == air_state and character.is_on_floor():
+		state_machine.change_active_state(idle_state)
 
 	# Перевірка на атаку (входження в стан AttackState)
-	elif Input.is_action_pressed("attack") and cooldown.is_stopped() and state_machine.get_active_state() != air_state:
+	if Input.is_action_pressed("attack") and cooldown.is_stopped() and state_machine.get_active_state() != air_state:
 		var attack_sound_pitch = randf_range(0.9, 1.1)
 		attack_sound.pitch_scale = attack_sound_pitch
 		
@@ -173,3 +163,16 @@ func step_sound():
 	var step_sound_pitch = randf_range(0.9, 1.1)
 	run_sound.pitch_scale = step_sound_pitch
 	run_sound.play()
+
+func init_stats():
+	cooldown.wait_time = character.stats_resource.attack_speed
+	glitch_bar.max_value = health_component.max_hp
+	glitch_bar.value = health_component.max_hp
+	glitch_bar.step = 2.0
+
+func spawn_damage_text(damaged_character: Character):
+	var damage_numbers_inst = damage_numbers.instantiate()
+	add_child(damage_numbers_inst)
+	damage_numbers_inst.global_position = damaged_character.alert_point.global_position
+	damage_numbers_inst.damage_amount.text = str(character.stats_resource.damage)
+	damage_numbers_inst.damage_particle.emitting = true

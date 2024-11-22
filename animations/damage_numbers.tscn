@@ -18,6 +18,7 @@ offset_bottom = -20.0
 script = ExtResource("1_b5jrb")
 
 [node name="SubViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
 process_mode = 3
 transparent_bg = true
 size = Vector2i(20, 20)
@@ -26,7 +27,7 @@ render_target_update_mode = 4
 [node name="DamageAmount" type="Label" parent="SubViewport"]
 offset_right = 40.0
 offset_bottom = 23.0
-text = "
+text = "144
 "
 label_settings = SubResource("LabelSettings_ghg3s")
 
@@ -35,7 +36,6 @@ z_index = 1000
 z_as_relative = false
 emitting = false
 amount = 1
-lifetime = 0.2
 one_shot = true
 texture = SubResource("ViewportTexture_g4ika")
 gravity = Vector2(0, -100)

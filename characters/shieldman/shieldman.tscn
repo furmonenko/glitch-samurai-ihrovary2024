@@ -845,43 +845,32 @@ script = ExtResource("2_nalbb")
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_c3g2l")
 
-[node name="AnimatedSprite2D" parent="." index="1"]
+[node name="AlertPoint" parent="." index="1"]
+position = Vector2(0, -34)
+
+[node name="AnimatedSprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_icxjo")
 sprite_frames = SubResource("SpriteFrames_4fsq3")
 animation = &"Idle"
 
-[node name="HealthComponent" parent="." index="2" node_paths=PackedStringArray("agent")]
+[node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
-max_hp = 20.0
 
-[node name="DamageComponent" parent="." index="3" node_paths=PackedStringArray("damage_causer")]
+[node name="DamageComponent" parent="." index="4" node_paths=PackedStringArray("damage_causer")]
 damage_causer = NodePath("..")
-damage_amount = 50.0
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" parent="." index="5"]
 libraries = {
 "": SubResource("AnimationLibrary_xaye0")
 }
 
-[node name="AnimationTree" parent="." index="5"]
+[node name="AnimationTree" parent="." index="6"]
 tree_root = ExtResource("7_wwucn")
 parameters/conditions/attacking = false
 parameters/conditions/dead = false
 parameters/conditions/idle = false
 parameters/conditions/running = false
 parameters/conditions/shooting = false
-
-[node name="LimboHSM" parent="." index="6" node_paths=PackedStringArray("character", "animation_tree")]
-character = NodePath("..")
-animation_tree = NodePath("../AnimationTree")
-
-[node name="Patrol" type="LimboState" parent="LimboHSM" index="0"]
-script = ExtResource("9_0o7tl")
-
-[node name="Combat" type="LimboState" parent="LimboHSM" index="1"]
-
-[node name="DeathState" type="LimboState" parent="LimboHSM" index="2"]
-script = ExtResource("11_4adgq")
 
 [node name="Hurtbox" type="Area2D" parent="." index="7" node_paths=PackedStringArray("agent", "health_component")]
 collision_layer = 0
@@ -917,3 +906,15 @@ pitch_scale = 0.72
 stream = ExtResource("17_bmb5k")
 volume_db = -20.0
 pitch_scale = 0.5
+
+[node name="LimboHSM" parent="." index="10" node_paths=PackedStringArray("character", "animation_tree")]
+character = NodePath("..")
+animation_tree = NodePath("../AnimationTree")
+
+[node name="Patrol" type="LimboState" parent="LimboHSM" index="0"]
+script = ExtResource("9_0o7tl")
+
+[node name="Combat" type="LimboState" parent="LimboHSM" index="1"]
+
+[node name="DeathState" type="LimboState" parent="LimboHSM" index="2"]
+script = ExtResource("11_4adgq")

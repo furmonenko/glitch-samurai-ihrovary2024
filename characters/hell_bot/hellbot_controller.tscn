@@ -72,13 +72,28 @@ stats_resource = SubResource("Resource_fedev")
 [node name="HitBox" parent="HellBot/CollisionShape2D" index="0"]
 position = Vector2(1, -1)
 
-[node name="AnimatedSprite2D" parent="HellBot" index="2"]
-frame = 5
-
-[node name="HealthComponent" parent="HellBot" index="3" node_paths=PackedStringArray("agent")]
+[node name="HealthComponent" parent="HellBot" index="4" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
 
-[node name="LimboHSM" parent="HellBot" index="7"]
+[node name="RunSound" type="AudioStreamPlayer2D" parent="HellBot/Sounds" index="2"]
+stream = ExtResource("5_nuks5")
+volume_db = -20.0
+max_distance = 200.0
+bus = &"SFX"
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="HellBot/Sounds" index="3"]
+stream = ExtResource("6_s5jsq")
+volume_db = -10.0
+max_distance = 200.0
+bus = &"SFX"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="HellBot/Sounds" index="4"]
+stream = ExtResource("7_k3yyg")
+volume_db = -15.0
+max_distance = 200.0
+bus = &"SFX"
+
+[node name="LimboHSM" parent="HellBot" index="9"]
 state_conditions = {
 "shoot": "parameters/conditions/shooting"
 }
@@ -111,23 +126,5 @@ speed = 30.0
 acceleration = 1.0
 deceleration = 1.0
 max_speed = 50.0
-
-[node name="RunSound" type="AudioStreamPlayer2D" parent="HellBot/Sounds" index="2"]
-stream = ExtResource("5_nuks5")
-volume_db = -20.0
-max_distance = 200.0
-bus = &"SFX"
-
-[node name="DeathSound" type="AudioStreamPlayer2D" parent="HellBot/Sounds" index="3"]
-stream = ExtResource("6_s5jsq")
-volume_db = -10.0
-max_distance = 200.0
-bus = &"SFX"
-
-[node name="ShootSound" type="AudioStreamPlayer2D" parent="HellBot/Sounds" index="4"]
-stream = ExtResource("7_k3yyg")
-volume_db = -15.0
-max_distance = 200.0
-bus = &"SFX"
 
 [editable path="HellBot"]

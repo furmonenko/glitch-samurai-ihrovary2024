@@ -30,12 +30,12 @@ viewport_path = NodePath("AttackAlert/SubViewport")
 
 [sub_resource type="Resource" id="Resource_ymkac"]
 script = ExtResource("8_fn7j0")
-max_hp = 100.0
+max_hp = 1000.0
 spot_range = 100.0
 attack_range = 20.0
 shoot_range = 50.0
 attack_speed = 2.0
-damage = 20.0
+damage = 40.0
 crit_chance = 0.0
 crit_multiplier = 0.0
 
@@ -724,22 +724,25 @@ collision_layer = 128
 agent = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
 
-[node name="AnimatedSprite2D" parent="BossWidow" index="2"]
-frame = 8
+[node name="AlertPoint" parent="BossWidow" index="2"]
+position = Vector2(0, -51)
 
-[node name="HealthComponent" parent="BossWidow" index="3" node_paths=PackedStringArray("agent")]
+[node name="AnimatedSprite2D" parent="BossWidow" index="3"]
+frame = 2
+
+[node name="HealthComponent" parent="BossWidow" index="4" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
 
-[node name="DamageComponent" parent="BossWidow" index="4" node_paths=PackedStringArray("damage_causer")]
+[node name="DamageComponent" parent="BossWidow" index="5" node_paths=PackedStringArray("damage_causer")]
 damage_causer = NodePath("..")
 
-[node name="AnimationPlayer" parent="BossWidow" index="5"]
+[node name="AnimationPlayer" parent="BossWidow" index="6"]
 libraries = {
 "": SubResource("AnimationLibrary_qtkhs"),
 "boss_1": ExtResource("3_xtcwd")
 }
 
-[node name="LimboHSM" parent="BossWidow" index="7" node_paths=PackedStringArray("character", "animation_tree")]
+[node name="LimboHSM" parent="BossWidow" index="8" node_paths=PackedStringArray("character", "animation_tree")]
 script = ExtResource("4_35uhd")
 character = NodePath("..")
 animation_tree = NodePath("../AnimationTree")

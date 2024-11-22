@@ -507,27 +507,30 @@ position = Vector2(11.5, -1.75)
 shape = SubResource("RectangleShape2D_f7cnd")
 disabled = true
 
-[node name="AnimatedSprite2D" parent="." index="2"]
+[node name="AlertPoint" parent="." index="2"]
+position = Vector2(0, -23)
+
+[node name="AnimatedSprite2D" parent="." index="3"]
 material = SubResource("ShaderMaterial_n3f8a")
 position = Vector2(16, -15)
 sprite_frames = SubResource("SpriteFrames_vvi4k")
-animation = &"Idle"
-frame = 3
+animation = &"Attack_2"
+frame = 7
 metadata/_edit_lock_ = true
 
-[node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("agent")]
+[node name="HealthComponent" parent="." index="4" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
 
-[node name="DamageComponent" parent="." index="4" node_paths=PackedStringArray("damage_causer")]
+[node name="DamageComponent" parent="." index="5" node_paths=PackedStringArray("damage_causer")]
 damage_causer = NodePath("..")
 
-[node name="AnimationPlayer" parent="." index="5"]
+[node name="AnimationPlayer" parent="." index="6"]
 libraries = {
 "": SubResource("AnimationLibrary_angbq"),
 "pickeman_anims": ExtResource("9_q01do")
 }
 
-[node name="AnimationTree" parent="." index="6"]
+[node name="AnimationTree" parent="." index="7"]
 tree_root = SubResource("AnimationNodeStateMachine_7bety")
 parameters/conditions/attacking = false
 parameters/conditions/dead = false
@@ -535,13 +538,6 @@ parameters/conditions/idle = false
 parameters/conditions/running = false
 parameters/conditions/shooting = false
 parameters/Attack/blend_position = 0.999213
-
-[node name="LimboHSM" parent="." index="7" node_paths=PackedStringArray("character", "animation_tree")]
-character = NodePath("..")
-animation_tree = NodePath("../AnimationTree")
-state_conditions = {
-"got_hit": "parameters/conditions/got_hit"
-}
 
 [node name="Sounds" type="Node2D" parent="." index="8"]
 
@@ -555,3 +551,10 @@ stream = ExtResource("17_jdjmv")
 volume_db = -20.0
 pitch_scale = 0.7
 bus = &"SFX"
+
+[node name="LimboHSM" parent="." index="9" node_paths=PackedStringArray("character", "animation_tree")]
+character = NodePath("..")
+animation_tree = NodePath("../AnimationTree")
+state_conditions = {
+"got_hit": "parameters/conditions/got_hit"
+}

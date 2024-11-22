@@ -105,39 +105,15 @@ collision_mask = 9
 script = ExtResource("4_d0ttu")
 stats_resource = SubResource("Resource_li1au")
 
-[node name="AnimatedSprite2D" parent="Shieldman" index="1"]
+[node name="AnimatedSprite2D" parent="Shieldman" index="2"]
 position = Vector2(-2, -23)
 animation = &"Death"
 
-[node name="AnimationPlayer" parent="Shieldman" index="4"]
+[node name="AnimationPlayer" parent="Shieldman" index="5"]
 libraries = {
 "": SubResource("AnimationLibrary_ssjrk"),
 "shieldman_anim": ExtResource("3_e6k6w")
 }
-
-[node name="Patrol" parent="Shieldman/LimboHSM" index="0" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
-patrol_time = 1.0
-animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
-controller = NodePath("../../..")
-
-[node name="Combat" parent="Shieldman/LimboHSM" index="1" node_paths=PackedStringArray("alert_sign", "alert_nodes", "animation_tree", "state_machine", "character", "controller")]
-script = ExtResource("4_hkku4")
-alert_sign = NodePath("../../../AttackAlert/AttackParticle")
-alert_nodes = NodePath("../../../AttackAlert")
-animation_tree = NodePath("../../AnimationTree")
-state_machine = NodePath("..")
-character = NodePath("../..")
-controller = NodePath("../../..")
-max_speed = 30.0
-
-[node name="DeathState" parent="Shieldman/LimboHSM" index="2"]
-script = ExtResource("5_3f0yp")
-speed = 30.0
-acceleration = 1.0
-deceleration = 1.0
-max_speed = 50.0
 
 [node name="Hurtbox" parent="Shieldman" index="7"]
 collision_layer = 128
@@ -162,5 +138,29 @@ stream = ExtResource("8_gpcom")
 volume_db = -20.0
 max_distance = 200.0
 bus = &"SFX"
+
+[node name="Patrol" parent="Shieldman/LimboHSM" index="0" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]
+patrol_time = 1.0
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
+controller = NodePath("../../..")
+
+[node name="Combat" parent="Shieldman/LimboHSM" index="1" node_paths=PackedStringArray("alert_sign", "alert_nodes", "animation_tree", "state_machine", "character", "controller")]
+script = ExtResource("4_hkku4")
+alert_sign = NodePath("../../../AttackAlert/AttackParticle")
+alert_nodes = NodePath("../../../AttackAlert")
+animation_tree = NodePath("../../AnimationTree")
+state_machine = NodePath("..")
+character = NodePath("../..")
+controller = NodePath("../../..")
+max_speed = 30.0
+
+[node name="DeathState" parent="Shieldman/LimboHSM" index="2"]
+script = ExtResource("5_3f0yp")
+speed = 30.0
+acceleration = 1.0
+deceleration = 1.0
+max_speed = 50.0
 
 [editable path="Shieldman"]

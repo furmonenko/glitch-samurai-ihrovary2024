@@ -11,6 +11,11 @@
 collision_layer = 0
 script = ExtResource("1_xnkm2")
 
+[node name="AlertPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -30)
+gizmo_extents = 0.0
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -23)
 sprite_frames = SubResource("SpriteFrames_so42g")

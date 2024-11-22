@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Character
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var alert_point = %AlertPoint
 
 
 @export var hitbox: HitBox

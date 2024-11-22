@@ -1471,19 +1471,19 @@ shape = SubResource("RectangleShape2D_yjjpi")
 disabled = true
 debug_color = Color(0, 0.645105, 0.267229, 0.42)
 
-[node name="AnimatedSprite2D" parent="." index="2"]
+[node name="AnimatedSprite2D" parent="." index="3"]
 material = SubResource("ShaderMaterial_gn3hk")
 position = Vector2(4, -45)
 sprite_frames = SubResource("SpriteFrames_1h5p2")
 animation = &"idle"
 
-[node name="AnimationPlayer" parent="." index="5"]
+[node name="AnimationPlayer" parent="." index="6"]
 libraries = {
 "": SubResource("AnimationLibrary_elilq"),
 "boss_1": ExtResource("2_yly0j")
 }
 
-[node name="AnimationTree" parent="." index="6"]
+[node name="AnimationTree" parent="." index="7"]
 tree_root = SubResource("AnimationNodeStateMachine_75luo")
 parameters/conditions/attacking = false
 parameters/conditions/buff = false

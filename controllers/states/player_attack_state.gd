@@ -3,7 +3,6 @@ class_name PlayerAttackState
 
 
 func _enter() -> void:
-	print(controller.combo_count)
 	start_attack(controller.combo_count) 
 
 func initialize_state():
