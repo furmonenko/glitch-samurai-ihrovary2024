@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6xhp64emqkwx"]
+[gd_scene load_steps=14 format=3 uid="uid://b6xhp64emqkwx"]
 
 [ext_resource type="Script" path="res://characters/glitch_samurai/player_controller.gd" id="1_4w8h7"]
 [ext_resource type="Texture2D" uid="uid://dp4h72v4hf3fh" path="res://assets/UI/UI - Borders and HP/glitch_under.png" id="2_2eno6"]
@@ -10,8 +10,12 @@
 [ext_resource type="Texture2D" uid="uid://bgli0683ro8ye" path="res://assets/UI/UI - Borders and HP/glitch_progress.png" id="3_eiyp6"]
 [ext_resource type="Script" path="res://characters/glitch_samurai/player_camera.gd" id="4_eijum"]
 [ext_resource type="Script" path="res://characters/glitch_samurai/player_character.gd" id="6_0fgea"]
+[ext_resource type="FontFile" uid="uid://rn2vgoht588t" path="res://assets/lunchtime-doubly-so.regular.ttf" id="6_qw6jv"]
 [ext_resource type="AudioStream" uid="uid://cdmuslcrekbdx" path="res://assets/sounds/one_step_run.wav" id="7_yaarw"]
-[ext_resource type="Script" path="res://components/damage_component.gd" id="9_c57gt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_w20s7"]
+font = ExtResource("6_qw6jv")
+font_size = 4
 
 [node name="PlayerController" type="Node2D" node_paths=PackedStringArray("character", "state_machine")]
 script = ExtResource("1_4w8h7")
@@ -23,6 +27,7 @@ state_machine = NodePath("GlitchSamurai/LimboHSM")
 
 [node name="SceneGlitch" parent="HUD" instance=ExtResource("2_i7ffc")]
 unique_name_in_owner = true
+visible = false
 
 [node name="Control" type="Control" parent="HUD"]
 layout_mode = 3
@@ -52,6 +57,68 @@ value = 100.0
 texture_under = ExtResource("2_2eno6")
 texture_progress = ExtResource("3_eiyp6")
 
+[node name="StatsShowcase" type="GridContainer" parent="HUD"]
+offset_left = 13.0
+offset_top = 85.0
+offset_right = 53.0
+offset_bottom = 126.0
+columns = 2
+
+[node name="MaxHPLabel" type="Label" parent="HUD/StatsShowcase"]
+layout_mode = 2
+text = "Max HP:"
+label_settings = SubResource("LabelSettings_w20s7")
+
+[node name="MaxHPAmount" type="Label" parent="HUD/StatsShowcase"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "None"
+label_settings = SubResource("LabelSettings_w20s7")
+
+[node name="CurrentHPLabel" type="Label" parent="HUD/StatsShowcase"]
+layout_mode = 2
+text = "Current HP:"
+label_settings = SubResource("LabelSettings_w20s7")
+
+[node name="CurrentHPAmount" type="Label" parent="HUD/StatsShowcase"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "None"
+label_settings = SubResource("LabelSettings_w20s7")
+
+[node name="DamageLabel" type="Label" parent="HUD/StatsShowcase"]
+layout_mode = 2
+text = "Damage:"
+label_settings = SubResource("LabelSettings_w20s7")
+
+[node name="DamageAmount" type="Label" parent="HUD/StatsShowcase"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "None"
+label_settings = SubResource("LabelSettings_w20s7")
+
+[node name="CritChanceLabel" type="Label" parent="HUD/StatsShowcase"]
+layout_mode = 2
+text = "Crit Chance:"
+label_settings = SubResource("LabelSettings_w20s7")
+
+[node name="CritChanceAmount" type="Label" parent="HUD/StatsShowcase"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "None"
+label_settings = SubResource("LabelSettings_w20s7")
+
+[node name="CritMultLabel" type="Label" parent="HUD/StatsShowcase"]
+layout_mode = 2
+text = "Crit Mult:"
+label_settings = SubResource("LabelSettings_w20s7")
+
+[node name="CritMultAmount" type="Label" parent="HUD/StatsShowcase"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "None"
+label_settings = SubResource("LabelSettings_w20s7")
+
 [node name="GlitchSamurai" parent="." instance=ExtResource("2_iihpn")]
 unique_name_in_owner = true
 collision_layer = 16
@@ -67,22 +134,10 @@ collision_mask = 128
 agent = NodePath("../..")
 damage_component = NodePath("../../DamageComponent")
 
-[node name="AlertPoint" parent="GlitchSamurai" index="2"]
-position = Vector2(0, -30)
-
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="3"]
-unique_name_in_owner = false
 position = Vector2(6, -22)
-frame = 6
-
-[node name="DamageComponent" parent="GlitchSamurai" index="5"]
-script = ExtResource("9_c57gt")
-
-[node name="AnimationPlayer" parent="GlitchSamurai" index="6"]
-script = null
 
 [node name="AnimationTree" parent="GlitchSamurai" index="7"]
-root_node = NodePath("%AnimationTree/../..")
 parameters/Air/blend_position = -0.98935
 parameters/Attack/blend_position = 1.32617
 

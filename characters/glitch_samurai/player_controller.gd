@@ -80,7 +80,18 @@ func _init_state_machine() -> void:
 	state_machine.add_transition(attack_state, idle_state, attack_state.EVENT_FINISHED)
 	state_machine.add_transition(air_state, death_state, &"die_after_falling")
 
-
+func _process(delta):
+	super(delta)
+	
+	%MaxHPAmount.text = str(character.stats_resource.max_hp)
+	%CurrentHPAmount.text = str(health_component.current_hp)
+	%DamageAmount.text = str(character.stats_resource.damage)
+	%CritChanceAmount.text = str(character.stats_resource.crit_chance)
+	%CritMultAmount.text = str(character.stats_resource.crit_multiplier)
+	
+	if Input.is_action_just_pressed("interact"):
+		character.stats_resource.crit_multiplier += 10
+	
 func handle_states(delta: float) -> void:
 	super(delta)
 	
@@ -189,3 +200,5 @@ func spawn_damage_text(damaged_character: Character):
 	damage_numbers_inst.global_position = damaged_character.alert_point.global_position
 	damage_numbers_inst.damage_amount.text = str(damage_component.damage_amount)
 	damage_numbers_inst.damage_particle.emitting = true
+
+	

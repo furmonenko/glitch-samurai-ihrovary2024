@@ -73,7 +73,7 @@ collision_layer = 4
 
 [node name="AnimatedSprite2D" parent="Pickeman" index="3"]
 animation = &"Idle"
-frame = 4
+frame = 0
 
 [node name="AnimationTree" parent="Pickeman" index="7"]
 parameters/Attack/blend_position = 0.0
