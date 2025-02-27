@@ -17,11 +17,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljkjx"]
 size = Vector2(22, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c2uf8"]
+resource_local_to_scene = true
+size = Vector2(73, 12.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yn8ym"]
 size = Vector2(10, 10)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f7cnd"]
-size = Vector2(73, 12.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n3f8a"]
 shader = ExtResource("4_62llk")
@@ -338,7 +339,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Pickeman/CollisionShape2D/HitBox/CollisionShape2D:position")
+tracks/0/path = NodePath("Pickeman/HitBox/CollisionShape2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -350,7 +351,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Pickeman/CollisionShape2D/HitBox/CollisionShape2D:shape:size")
+tracks/1/path = NodePath("Pickeman/HitBox/CollisionShape2D:shape:size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -362,7 +363,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Pickeman/CollisionShape2D/HitBox/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Pickeman/HitBox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -491,46 +492,47 @@ position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_ljkjx")
 debug_color = Color(6.73831e-07, 0.633822, 0.436113, 0.42)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="HitBox" type="Area2D" parent="." index="1" node_paths=PackedStringArray("agent", "damage_component")]
 position = Vector2(0, -5)
-shape = SubResource("RectangleShape2D_yn8ym")
-
-[node name="HitBox" type="Area2D" parent="CollisionShape2D" index="0" node_paths=PackedStringArray("agent", "damage_component")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("3_xy7vw")
-agent = NodePath("../..")
-damage_component = NodePath("../../DamageComponent")
+agent = NodePath("..")
+damage_component = NodePath("../DamageComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/HitBox" index="0"]
-position = Vector2(11.5, -1.75)
-shape = SubResource("RectangleShape2D_f7cnd")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(16, -7)
+shape = SubResource("RectangleShape2D_c2uf8")
 disabled = true
 
-[node name="AlertPoint" parent="." index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_yn8ym")
+
+[node name="AlertPoint" parent="." index="3"]
 position = Vector2(0, -23)
 
-[node name="AnimatedSprite2D" parent="." index="3"]
+[node name="AnimatedSprite2D" parent="." index="4"]
 material = SubResource("ShaderMaterial_n3f8a")
 position = Vector2(16, -15)
 sprite_frames = SubResource("SpriteFrames_vvi4k")
-animation = &"Attack_2"
-frame = 7
+animation = &"Attack"
+frame = 1
 metadata/_edit_lock_ = true
 
-[node name="HealthComponent" parent="." index="4" node_paths=PackedStringArray("agent")]
+[node name="HealthComponent" parent="." index="5" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
 
-[node name="DamageComponent" parent="." index="5" node_paths=PackedStringArray("damage_causer")]
+[node name="DamageComponent" parent="." index="6" node_paths=PackedStringArray("damage_causer")]
 damage_causer = NodePath("..")
 
-[node name="AnimationPlayer" parent="." index="6"]
+[node name="AnimationPlayer" parent="." index="7"]
 libraries = {
 "": SubResource("AnimationLibrary_angbq"),
 "pickeman_anims": ExtResource("9_q01do")
 }
 
-[node name="AnimationTree" parent="." index="7"]
+[node name="AnimationTree" parent="." index="8"]
 tree_root = SubResource("AnimationNodeStateMachine_7bety")
 parameters/conditions/attacking = false
 parameters/conditions/dead = false
@@ -539,7 +541,7 @@ parameters/conditions/running = false
 parameters/conditions/shooting = false
 parameters/Attack/blend_position = 0.999213
 
-[node name="Sounds" type="Node2D" parent="." index="8"]
+[node name="Sounds" type="Node2D" parent="." index="9"]
 
 [node name="AttackSound" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
 stream = ExtResource("16_0htuf")
@@ -552,7 +554,7 @@ volume_db = -20.0
 pitch_scale = 0.7
 bus = &"SFX"
 
-[node name="LimboHSM" parent="." index="9" node_paths=PackedStringArray("character", "animation_tree")]
+[node name="LimboHSM" parent="." index="10" node_paths=PackedStringArray("character", "animation_tree")]
 character = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
 state_conditions = {

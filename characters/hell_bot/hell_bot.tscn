@@ -24,6 +24,7 @@ size = Vector2(31, 31)
 size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brass"]
+resource_local_to_scene = true
 size = Vector2(11.625, 22)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hiecp"]
@@ -540,7 +541,7 @@ material = SubResource("ShaderMaterial_hiecp")
 position = Vector2(27, -17)
 sprite_frames = SubResource("SpriteFrames_ayjfh")
 animation = &"Idle"
-frame = 3
+frame = 2
 metadata/_edit_lock_ = true
 
 [node name="DamageComponent" parent="." index="5" node_paths=PackedStringArray("damage_causer")]

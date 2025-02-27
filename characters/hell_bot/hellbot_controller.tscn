@@ -72,6 +72,9 @@ stats_resource = SubResource("Resource_fedev")
 [node name="HitBox" parent="HellBot/CollisionShape2D" index="0"]
 position = Vector2(1, -1)
 
+[node name="AnimatedSprite2D" parent="HellBot" index="3"]
+frame = 5
+
 [node name="HealthComponent" parent="HellBot" index="4" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
 

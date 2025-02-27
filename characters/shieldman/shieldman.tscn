@@ -836,6 +836,7 @@ _data = {
 size = Vector2(24.4931, 38.0039)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mligt"]
+resource_local_to_scene = true
 size = Vector2(34, 33)
 
 [node name="Shieldman" instance=ExtResource("1_lc5of")]

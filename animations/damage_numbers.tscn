@@ -5,6 +5,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_ghg3s"]
 font = ExtResource("1_s1chp")
+font_size = 12
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_g4ika"]
 viewport_path = NodePath("SubViewport")

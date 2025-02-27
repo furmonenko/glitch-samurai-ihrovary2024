@@ -110,25 +110,25 @@ position = Vector2(20, -7)
 shape = SubResource("RectangleShape2D_x6g5g")
 disabled = true
 
-[node name="AnimatedSprite2D" parent="." index="2"]
+[node name="AnimatedSprite2D" parent="." index="3"]
 position = Vector2(6, -23)
 sprite_frames = ExtResource("3_3qiti")
 animation = &"Glitch Idle"
 metadata/_edit_lock_ = true
 
-[node name="HealthComponent" parent="." index="3" node_paths=PackedStringArray("agent")]
+[node name="HealthComponent" parent="." index="4" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")
 
-[node name="DamageComponent" parent="." index="4" node_paths=PackedStringArray("damage_causer")]
+[node name="DamageComponent" parent="." index="5" node_paths=PackedStringArray("damage_causer")]
 damage_causer = NodePath("..")
 
-[node name="AnimationPlayer" parent="." index="5"]
+[node name="AnimationPlayer" parent="." index="6"]
 libraries = {
 "": SubResource("AnimationLibrary_aqjjs"),
 "Glitch Samurai": ExtResource("4_0n567")
 }
 
-[node name="AnimationTree" parent="." index="6"]
+[node name="AnimationTree" parent="." index="7"]
 tree_root = ExtResource("5_5brxq")
 parameters/conditions/attacking = false
 parameters/conditions/dead = false
@@ -139,7 +139,33 @@ parameters/conditions/running = false
 parameters/Air/blend_position = 0
 parameters/Attack/blend_position = 1.25962
 
-[node name="LimboHSM" parent="." index="7" node_paths=PackedStringArray("character", "animation_tree")]
+[node name="Sounds" type="Node2D" parent="." index="8"]
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
+stream = ExtResource("13_daib1")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="RunSound" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+stream = ExtResource("14_jilq7")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="Sounds" index="2"]
+stream = ExtResource("15_wpeqh")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="Timers" type="Node" parent="." index="9"]
+
+[node name="Cooldown" type="Timer" parent="Timers" index="0"]
+one_shot = true
+
+[node name="ComboReset" type="Timer" parent="Timers" index="1"]
+wait_time = 3.0
+one_shot = true
+
+[node name="LimboHSM" parent="." index="10" node_paths=PackedStringArray("character", "animation_tree")]
 character = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
 
@@ -171,31 +197,5 @@ animation_tree = NodePath("../../AnimationTree")
 
 [node name="Glitch" type="LimboState" parent="LimboHSM" index="5"]
 script = ExtResource("12_htikg")
-
-[node name="Sounds" type="Node2D" parent="." index="8"]
-
-[node name="AttackSound" type="AudioStreamPlayer2D" parent="Sounds" index="0"]
-stream = ExtResource("13_daib1")
-volume_db = -10.0
-bus = &"SFX"
-
-[node name="RunSound" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
-stream = ExtResource("14_jilq7")
-volume_db = -10.0
-bus = &"SFX"
-
-[node name="JumpSound" type="AudioStreamPlayer2D" parent="Sounds" index="2"]
-stream = ExtResource("15_wpeqh")
-volume_db = -10.0
-bus = &"SFX"
-
-[node name="Timers" type="Node" parent="." index="9"]
-
-[node name="Cooldown" type="Timer" parent="Timers" index="0"]
-one_shot = true
-
-[node name="ComboReset" type="Timer" parent="Timers" index="1"]
-wait_time = 3.0
-one_shot = true
 
 [editable path="CollisionShape2D/HitBox"]

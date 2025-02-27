@@ -89,9 +89,6 @@ func _process(delta):
 	%CritChanceAmount.text = str(character.stats_resource.crit_chance)
 	%CritMultAmount.text = str(character.stats_resource.crit_multiplier)
 	
-	if Input.is_action_just_pressed("interact"):
-		character.stats_resource.crit_multiplier += 10
-	
 func handle_states(delta: float) -> void:
 	super(delta)
 	

@@ -35,7 +35,7 @@ spot_range = 100.0
 attack_range = 20.0
 shoot_range = 50.0
 attack_speed = 2.0
-damage = 40.0
+damage = 10.0
 crit_chance = 0.0
 crit_multiplier = 0.0
 
@@ -728,7 +728,7 @@ health_component = NodePath("../../HealthComponent")
 position = Vector2(0, -51)
 
 [node name="AnimatedSprite2D" parent="BossWidow" index="3"]
-frame = 2
+frame = 7
 
 [node name="HealthComponent" parent="BossWidow" index="4" node_paths=PackedStringArray("agent")]
 agent = NodePath("..")

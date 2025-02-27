@@ -15,7 +15,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_w20s7"]
 font = ExtResource("6_qw6jv")
-font_size = 4
+font_size = 3
 
 [node name="PlayerController" type="Node2D" node_paths=PackedStringArray("character", "state_machine")]
 script = ExtResource("1_4w8h7")
@@ -58,10 +58,10 @@ texture_under = ExtResource("2_2eno6")
 texture_progress = ExtResource("3_eiyp6")
 
 [node name="StatsShowcase" type="GridContainer" parent="HUD"]
-offset_left = 13.0
-offset_top = 85.0
-offset_right = 53.0
-offset_bottom = 126.0
+offset_left = 3.0
+offset_top = 90.0
+offset_right = 43.0
+offset_bottom = 131.0
 columns = 2
 
 [node name="MaxHPLabel" type="Label" parent="HUD/StatsShowcase"]
@@ -136,6 +136,7 @@ damage_component = NodePath("../../DamageComponent")
 
 [node name="AnimatedSprite2D" parent="GlitchSamurai" index="3"]
 position = Vector2(6, -22)
+frame = 1
 
 [node name="AnimationTree" parent="GlitchSamurai" index="7"]
 parameters/Air/blend_position = -0.98935

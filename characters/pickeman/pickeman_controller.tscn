@@ -71,11 +71,7 @@ stats_resource = SubResource("Resource_0euhw")
 [node name="Hurtbox" parent="Pickeman" index="0"]
 collision_layer = 4
 
-[node name="AnimatedSprite2D" parent="Pickeman" index="3"]
-animation = &"Idle"
-frame = 0
-
-[node name="AnimationTree" parent="Pickeman" index="7"]
+[node name="AnimationTree" parent="Pickeman" index="8"]
 parameters/Attack/blend_position = 0.0
 
 [node name="HitSound" parent="Pickeman/Sounds" index="1"]
@@ -93,7 +89,7 @@ volume_db = -5.0
 max_distance = 300.0
 bus = &"SFX"
 
-[node name="LimboHSM" parent="Pickeman" index="9"]
+[node name="LimboHSM" parent="Pickeman" index="10"]
 state_conditions = {}
 
 [node name="PatrolState" type="LimboState" parent="Pickeman/LimboHSM" index="0" node_paths=PackedStringArray("animation_tree", "state_machine", "character", "controller")]

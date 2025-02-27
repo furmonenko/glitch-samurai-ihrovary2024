@@ -576,42 +576,22 @@ max_step = 3
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(106, 29)
 
-[node name="Background" type="Parallax2D" parent="Node2D"]
-scroll_scale = Vector2(0.1, 0.1)
-repeat_size = Vector2(400, 192)
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Background"]
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
 texture = ExtResource("3_pdlfk")
 
-[node name="Moon" type="Parallax2D" parent="Node2D"]
-scroll_scale = Vector2(0.001, 0.001)
-autoscroll = Vector2(-10, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Moon"]
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D"]
 texture = ExtResource("4_kl7a3")
 
-[node name="Fog" type="Parallax2D" parent="Node2D"]
-scroll_scale = Vector2(0.4, 0.4)
-scroll_offset = Vector2(9, 4)
-repeat_size = Vector2(400, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Fog"]
+[node name="Sprite2D3" type="Sprite2D" parent="Node2D"]
+position = Vector2(-2, 9)
 texture = ExtResource("5_17x1u")
 
-[node name="FarCity" type="Parallax2D" parent="Node2D"]
-scroll_scale = Vector2(0.7, 0.7)
-scroll_offset = Vector2(-394, -1)
-repeat_size = Vector2(400, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/FarCity"]
+[node name="Sprite2D4" type="Sprite2D" parent="Node2D"]
+position = Vector2(-5, 4)
 texture = ExtResource("6_ahv2w")
 
-[node name="CloseCity" type="Parallax2D" parent="Node2D"]
-scroll_offset = Vector2(-394, -1)
-repeat_size = Vector2(400, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/CloseCity"]
-position = Vector2(6, -2)
+[node name="Sprite2D5" type="Sprite2D" parent="Node2D"]
+position = Vector2(1, 2)
 texture = ExtResource("7_kwcuy")
 
 [node name="Elevator3" type="Sprite2D" parent="Node2D"]
